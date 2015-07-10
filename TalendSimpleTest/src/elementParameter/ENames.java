@@ -1,5 +1,5 @@
 package elementParameter;
 
-public class ENames {
-
+public enum ENames {
+	DUMMYNAME;
 }
