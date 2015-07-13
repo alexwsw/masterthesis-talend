@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 @XmlRootElement (name="elementParameter")
+@XmlSeeAlso(ElementParameterTable.class)
 public class ElementParameter implements IElementParameter{
 	
 	private EFieldTypes type;

@@ -28,7 +28,14 @@ public class Main {
 		a.addElementValue(ElementValue.getInstance(EValueTypes.TRACE_COLUMN, "Hello Fans"));
 		System.out.println(a);
 		System.out.println("**************************************");
-		JAXBContext jb = JAXBContext.newInstance(ElementParameterTable.class);
+		
+		ElementParameter b = new ElementParameter(EFieldTypes.DUMMYTYPE, ENames.DUMMYNAME, "23");
+		System.out.println(b);
+		
+		
+		
+		//Marshalling
+		JAXBContext jb = JAXBContext.newInstance(ElementParameter.class);
 		Marshaller marshaller = jb.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		marshaller.marshal(a, System.out);

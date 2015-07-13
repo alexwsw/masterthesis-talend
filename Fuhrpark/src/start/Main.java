@@ -25,9 +25,10 @@ public class Main {
 		park.addAuto(man);
 		park.addAuto(mini);
 		
+		System.out.println(park.getAuto(miniC));
 		System.out.println(miniC);
 		
-		JAXBContext jc = JAXBContext.newInstance(Fuhrpark.class, Kleinwagen.class);
+		JAXBContext jc = JAXBContext.newInstance(Fuhrpark.class);
 		Marshaller marsh = jc.createMarshaller();
 		marsh.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		marsh.marshal(park, System.out);

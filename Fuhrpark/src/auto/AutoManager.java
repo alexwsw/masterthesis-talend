@@ -4,19 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 import start.AutoDTO;
+import start.KleinwagenDTO;
 
 public class AutoManager {
 	
-	private Map <Integer,Auto> autos;
+	private Map <Integer, Auto> autos;
 	private Integer anzahl = new Integer(1);
 	
 	public AutoManager() {
-		this.autos = new HashMap<Integer,Auto>();
+		this.autos = new HashMap<Integer, Auto>();
 	}
 	
 	public void addAuto(AutoDTO auto) {
 		Auto objAuto = new Auto(auto.marke, auto.typ);
 		autos.put(anzahl, objAuto);
+		anzahl++;
+	}
+	
+	public void addAuto(KleinwagenDTO wagen) {
+		Kleinwagen kwagen = new Kleinwagen(wagen.marke, wagen.typ, wagen.hubraum);
+		autos.put(anzahl, kwagen);
 		anzahl++;
 	}
 	

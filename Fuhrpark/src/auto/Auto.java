@@ -32,6 +32,10 @@ public class Auto {
 		this.typ = typ;
 	}
 	
+	public String toString(){
+		return String.format("marke: %s, typ: %s ", this.getMarke(), this.getTyp());
+	}
+	
 	
 
 }

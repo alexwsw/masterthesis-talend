@@ -33,8 +33,7 @@ public class ElementParameterTable extends ElementParameter {
 	}
 	
 	public String toString(){
-		String a = null;
-		a = super.toString();
+		String a = super.toString();
 		for (int i = 0; i<elementValues.size(); i++) {
 			a += String.format("%s %n ", elementValues.get(i).toString());
 		}

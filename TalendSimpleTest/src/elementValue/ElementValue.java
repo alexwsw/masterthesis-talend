@@ -32,8 +32,8 @@ public class ElementValue {
 	}
 
 	@XmlAttribute(name = "elementRef")
-	public EValueTypes getElementRef() {
-		return elementRef;
+	public String getElementRef() {
+		return elementRef.getName();
 	}
 
 	public void setElementRef(EValueTypes elementRef) {
@@ -41,8 +41,8 @@ public class ElementValue {
 	}
 
 	@XmlAttribute(name = "value")
-	public Object getValue() {
-		return value;
+	public String getValue() {
+		return value.toString();
 	}
 
 	public void setValue(String value) {

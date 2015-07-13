@@ -10,6 +10,9 @@ public class Kleinwagen extends Auto{
 		super(marke, typ);
 		this.hubraum = hubraum;
 	}
+	public Kleinwagen(String marke, String typ){
+		super(marke, typ);
+	}
 	
 	@XmlElement (name="Hubraum", required=true)
 	public double getHubraum() {
