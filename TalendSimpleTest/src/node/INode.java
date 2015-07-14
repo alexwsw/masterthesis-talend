@@ -1,5 +1,7 @@
 package node;
 
-public interface INode {
+import element.IElement;
+
+public interface INode extends IElement{
 
 }

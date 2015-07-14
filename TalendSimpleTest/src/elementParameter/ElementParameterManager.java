@@ -12,10 +12,15 @@ public class ElementParameterManager {
 		parameters = new ArrayList<ElementParameter>();
 	}
 	
-	public static synchronized void getInstance() {
+	public static synchronized ElementParameterManager getInstance() {
 		if(EPManager == null) {
 			EPManager = new ElementParameterManager(); 
 		}
+		return EPManager;
+	}
+	
+	public void createElementParameter(){
+		
 	}
 
 }
