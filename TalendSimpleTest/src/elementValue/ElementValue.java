@@ -1,8 +1,26 @@
 package elementValue;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-public class ElementValue {
+public class ElementValue implements IElementValue{
+
+	//for mapping using the IElementValue interface
+	public static class Adapter extends XmlAdapter<ElementValue, IElementValue> {
+
+		@Override
+		public ElementValue marshal(IElementValue v) throws Exception {
+			// TODO Auto-generated method stub
+			return (ElementValue) v;
+		}
+
+		@Override
+		public IElementValue unmarshal(ElementValue v) throws Exception {
+			// TODO Auto-generated method stub
+			return v;
+		}
+
+	}
 
 	private EValueTypes elementRef;
 	private Object value;

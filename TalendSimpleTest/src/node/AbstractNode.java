@@ -13,4 +13,16 @@ public abstract class AbstractNode implements INode {
 	protected List <? extends IMetadata> metadata;
 	
 
+	public List<? extends IElementParameter> getElementParameters() {
+
+		return this.parameters;
+	}
+
+	public void setElementParameters(
+			List<? extends IElementParameter> parameters) {
+		this.parameters = parameters;
+
+	}
+	
+
 }

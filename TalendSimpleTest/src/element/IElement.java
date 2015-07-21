@@ -6,6 +6,6 @@ import elementParameter.IElementParameter;
 public interface IElement {
 	
 	public List <? extends IElementParameter> getElementParameters();
-	public void setElementParameter(List <? extends IElementParameter> parameters);
+	public void setElementParameters(List <? extends IElementParameter> parameters);
 
 }

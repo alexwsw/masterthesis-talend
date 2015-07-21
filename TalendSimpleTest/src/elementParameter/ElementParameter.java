@@ -3,11 +3,28 @@ package elementParameter;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-@XmlRootElement (name="elementParameter")
+@XmlRootElement(name="elementParameter")
 @XmlSeeAlso(ElementParameterTable.class)
 public class ElementParameter implements IElementParameter{
 	
+	public static class Adapter extends XmlAdapter<ElementParameter, IElementParameter>{
+
+		@Override
+		public ElementParameter marshal(IElementParameter v) throws Exception {
+			// TODO Auto-generated method stub
+			return (ElementParameter) v;
+		}
+
+		@Override
+		public IElementParameter unmarshal(ElementParameter v) throws Exception {
+			// TODO Auto-generated method stub
+			return v;
+		}
+
+	}
+
 	private EFieldTypes type;
 	private ENames name;
 	private String value;

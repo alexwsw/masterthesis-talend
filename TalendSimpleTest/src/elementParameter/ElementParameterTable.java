@@ -7,20 +7,21 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import elementValue.ElementValue;
+import elementValue.IElementValue;
 @XmlRootElement(name="elementParameter")
 public class ElementParameterTable extends ElementParameter {
 	
-	private List<ElementValue> elementValues;
+	private List<? extends IElementValue> elementValues;
 	
 	public ElementParameterTable(){
-		elementValues = new ArrayList<ElementValue>();
+		this.elementValues = new ArrayList<IElementValue>();
 	}
 	public ElementParameterTable(EFieldTypes type, ENames name){
 		super(type, name);
-		elementValues = new ArrayList<ElementValue>();
+		elementValues = new ArrayList<IElementValue>();
 	}
 	@XmlElement(name="elementValue", required=true)
-	public List<ElementValue> getElementValues() {
+	public List<? extends IElementValue> getElementValues() {
 		return elementValues;
 	}
 
@@ -28,8 +29,8 @@ public class ElementParameterTable extends ElementParameter {
 		this.elementValues = elementValues;
 	}
 	
-	public void addElementValue(ElementValue elementValue){
-		elementValues.add(elementValue);
+	public <T extends IElementValue> void addElementValue(T elementValue){
+		((List<T>)elementValues).add(elementValue);
 	}
 	
 	public String toString(){
@@ -39,5 +40,4 @@ public class ElementParameterTable extends ElementParameter {
 		}
 		return String.format("%s %n ", a);
 	}
-
 }

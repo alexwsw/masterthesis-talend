@@ -5,6 +5,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import subjob.Subjob;
 import elementParameter.EFieldTypes;
 import elementParameter.ENames;
 import elementParameter.ElementParameter;
@@ -31,13 +32,18 @@ public class Main {
 		
 		ElementParameter b = new ElementParameter(EFieldTypes.DUMMYTYPE, ENames.DUMMYNAME, "23");
 		System.out.println(b);
+		System.out.println("========================================");
+		Subjob c = new Subjob();
+		c.addElementParameter(a);
+		c.addElementParameter(b);
+		System.out.println(c);
 		
 		
 		
 		//Marshalling
-		JAXBContext jb = JAXBContext.newInstance(ElementParameter.class);
+		JAXBContext jb = JAXBContext.newInstance(Subjob.class);
 		Marshaller marshaller = jb.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		marshaller.marshal(a, System.out);
+		marshaller.marshal(c, System.out);
 	}
 }
