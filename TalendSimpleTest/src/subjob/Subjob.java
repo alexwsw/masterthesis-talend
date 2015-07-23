@@ -17,11 +17,11 @@ public class Subjob implements IElement {
 		this.elementParameters = new ArrayList<IElementParameter>();
 	}
 	@XmlElement(name ="elementParameter", required = true)
-	public List<? extends IElementParameter> getElementParameters() {
+	public List<? extends IElementParameter> getParameters() {
 		return elementParameters;
 	}
 
-	public void setElementParameters(
+	public void setParameters(
 			List<? extends IElementParameter> parameters) {
 		this.elementParameters = parameters;
 
@@ -38,5 +38,6 @@ public class Subjob implements IElement {
 		}
 		return a;
 	}
+
 
 }

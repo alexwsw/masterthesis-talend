@@ -1,10 +1,15 @@
 package main;
 
+import java.io.File;
+
 import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import node.AbstractNode;
+import node.INode;
+import node.tMSSqlConnection;
 import subjob.Subjob;
 import elementParameter.EFieldTypes;
 import elementParameter.ENames;
@@ -15,6 +20,9 @@ import elementValue.*;
 public class Main {
 	
 	public static void main(String[] args) throws JAXBException {
+		
+		//path for the test xml file if required
+		String path = "C:\\Users\\becher\\Desktop\\testfile.item";
 		
 	
 		System.out.println(ElementValue.getInstance(EValueTypes.DELETE_KEY, true));
@@ -38,12 +46,16 @@ public class Main {
 		c.addElementParameter(b);
 		System.out.println(c);
 		
+		INode node = new tMSSqlConnection();
+		
+		System.out.println(node);
+		
 		
 		
 		//Marshalling
-		JAXBContext jb = JAXBContext.newInstance(Subjob.class);
+		JAXBContext jb = JAXBContext.newInstance(AbstractNode.class);
 		Marshaller marshaller = jb.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		marshaller.marshal(c, System.out);
+		marshaller.marshal(node, System.out);
 	}
 }
