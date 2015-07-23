@@ -18,7 +18,7 @@ import elementValue.IElementValue;
 @XmlTransient
 @XmlSeeAlso(tMSSqlConnection.class)
 public abstract class AbstractNode implements INode {
-	protected String pathi = "C:\\Users\\becher\\Desktop\\TOS\\TOS_DI-Win32-20141207_1530-V5.6.1\\configuration\\lib\\java";
+	protected static String pathi = "C:\\Users\\becher\\Desktop\\TOS\\TOS_DI-Win32-20141207_1530-V5.6.1\\configuration\\lib\\java";
 	protected String componentName;
 	protected String componentVersion = "0.102";
 	protected int offsetLabelX = 0;
@@ -30,7 +30,7 @@ public abstract class AbstractNode implements INode {
 	
 	public AbstractNode() {
 		parameters = new ArrayList<IElementParameter>();
-		IElementParameter path = new ElementParameter(EFieldTypes.DIRECTORY, ENames.JAVA_LIBRARY_PATH, this.pathi);
+		IElementParameter path = new ElementParameter(EFieldTypes.DIRECTORY, ENames.JAVA_LIBRARY_PATH, pathi);
 		addElementParameter(path);
 	}
 	
@@ -47,7 +47,7 @@ public abstract class AbstractNode implements INode {
 		this.parameters = parameters;
 
 	}
-
+	@XmlTransient
 	public String getJavaPath() {
 		return pathi;
 	}
