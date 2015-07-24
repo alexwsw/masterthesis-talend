@@ -8,17 +8,33 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 
+
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+
 import metadata.IMetadata;
-import elementParameter.EFieldTypes;
-import elementParameter.ENames;
-import elementParameter.ElementParameter;
-import elementParameter.IElementParameter;
-import elementValue.IElementValue;
+import elementParameter.*;
 
 @XmlTransient
-@XmlSeeAlso(tMSSqlConnection.class)
+@XmlSeeAlso({tMSSqlConnection.class, tPreJob.class})
 public abstract class AbstractNode implements INode {
-	protected static String pathi = "C:\\Users\\becher\\Desktop\\TOS\\TOS_DI-Win32-20141207_1530-V5.6.1\\configuration\\lib\\java";
+	
+	public static class Adapter extends XmlAdapter<AbstractNode, INode> {
+
+		@Override
+		public AbstractNode marshal(INode v) throws Exception {
+			// TODO Auto-generated method stub
+			return (AbstractNode) v;
+		}
+
+		@Override
+		public INode unmarshal(AbstractNode v) throws Exception {
+			// TODO Auto-generated method stub
+			return v;
+		}
+
+	}
+
+	protected static String javaPath = "C:\\Users\\becher\\Desktop\\TOS\\TOS_DI-Win32-20141207_1530-V5.6.1\\configuration\\lib\\java";
 	protected String componentName;
 	protected String componentVersion = "0.102";
 	protected int offsetLabelX = 0;
@@ -30,12 +46,12 @@ public abstract class AbstractNode implements INode {
 	
 	public AbstractNode() {
 		parameters = new ArrayList<IElementParameter>();
-		IElementParameter path = new ElementParameter(EFieldTypes.DIRECTORY, ENames.JAVA_LIBRARY_PATH, pathi);
+		IElementParameter path = new ElementParameter(EFieldTypes.DIRECTORY, ENames.JAVA_LIBRARY_PATH, javaPath);
 		addElementParameter(path);
 	}
 	
 	public abstract String makeUniqueName();
-	
+
 	@XmlElement (name="elementParameter", required = true)
 	public List<? extends IElementParameter> getParameters() {
 
@@ -49,11 +65,11 @@ public abstract class AbstractNode implements INode {
 	}
 	@XmlTransient
 	public String getJavaPath() {
-		return pathi;
+		return javaPath;
 	}
 
 	public void setJavaPath(String javaPath) {
-		this.pathi = javaPath;
+		this.javaPath = javaPath;
 	}
 	@XmlAttribute(name="componentName", required = true)
 	public String getComponentName() {
@@ -116,7 +132,7 @@ public abstract class AbstractNode implements INode {
 	}
 	
 	public static String makeQuot(String phrase) {
-		return String.format("&quot;%s&quot;", phrase);
+		return String.format("\"%s\"", phrase);
 	}
 	@XmlAttribute(name="offsetLabelY", required=true)
 	public int getOffsetLabelY() {

@@ -6,7 +6,7 @@ public enum ENames {
 	HOST("HOST"),
 	TYPE("TYPE"),
 	PORT("PORT"),
-	SCHEMA_DB("SCHEMA_DB"),
+	DB_SCHEMA("DB_SCHEMA"),
 	DBNAME("DBNAME"),
 	USER("USER"),
 	PASS("PASS"),

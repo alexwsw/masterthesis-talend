@@ -3,10 +3,13 @@ package elementParameter;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 @XmlRootElement(name="elementParameter")
 @XmlSeeAlso(ElementParameterTable.class)
+//specifying the order of the attributes in ElementParameter
+@XmlType(propOrder={"type", "name", "value"})
 public class ElementParameter implements IElementParameter{
 	
 	public static class Adapter extends XmlAdapter<ElementParameter, IElementParameter>{

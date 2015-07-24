@@ -10,7 +10,9 @@ import javax.xml.bind.Marshaller;
 import node.AbstractNode;
 import node.INode;
 import node.tMSSqlConnection;
+import node.tPreJob;
 import subjob.Subjob;
+import talendFile.ProcessType;
 import elementParameter.EFieldTypes;
 import elementParameter.ENames;
 import elementParameter.ElementParameter;
@@ -37,7 +39,7 @@ public class Main {
 		a.addElementValue(ElementValue.getInstance(EValueTypes.TRACE_COLUMN, "Hello Fans"));
 		System.out.println(a);
 		System.out.println("**************************************");
-		
+	
 		ElementParameter b = new ElementParameter(EFieldTypes.DUMMYTYPE, ENames.DUMMYNAME, "23");
 		System.out.println(b);
 		System.out.println("========================================");
@@ -47,15 +49,31 @@ public class Main {
 		System.out.println(c);
 		
 		INode node = new tMSSqlConnection();
+		INode node2 = new tMSSqlConnection();
+		INode pre = new tPreJob();
+		
+		ProcessType type = new ProcessType();
+		type.addNode(node);
+		type.addNode(node2);
+		type.addNode(pre);
 		
 		System.out.println(node);
 		
 		
 		
 		//Marshalling
-		JAXBContext jb = JAXBContext.newInstance(AbstractNode.class);
+		JAXBContext jb = JAXBContext.newInstance(ProcessType.class, AbstractNode.class);
 		Marshaller marshaller = jb.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		marshaller.marshal(node, System.out);
+		marshaller.marshal(type, System.out);
+		
+		System.out.println();
+		
+		/*Marshalling subjob
+		jb = JAXBContext.newInstance(Subjob.class);
+		Marshaller m2 = jb.createMarshaller();
+		m2.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		m2.marshal(c, System.out);
+		*/
 	}
 }

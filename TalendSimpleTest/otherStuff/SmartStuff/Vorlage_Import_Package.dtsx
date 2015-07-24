@@ -1,0 +1,1500 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/3/2011 3:43:09 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="initions AG"
+  DTS:CreatorName="initions AG"
+  DTS:Description="Import Package"
+  DTS:DTSID="{21FFD88A-FD5C-49ED-8848-61BB89BDCFF3}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.2344.23"
+  DTS:LocaleID="1031"
+  DTS:ObjectName="Vorlage_Import_Package_SRC"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="304"
+  DTS:VersionGUID="{D9C64FFF-CE86-42B3-B2D4-2ADA9E70B86B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ACHTUNG!!!!_CN_KUNDENSYSTEM]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D9BD5017-23A6-43D4-B16D-9C0ED9BE8249}"
+      DTS:ObjectName="ACHTUNG!!!!_CN_KUNDENSYSTEM">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;User ID=sa;Initial Catalog=054_SQL_Kundensystem;Provider=SQLNCLI11.1;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"></DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CN_CONFIG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{055CF53F-B9BF-4E0F-83AF-9C8ABD7D7CB6}"
+      DTS:ObjectName="CN_CONFIG">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=NB-032-DW;Initial Catalog=051_SQL_DWH;Provider=SQLNCLI11.1;Integrated Security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CN_OLE_DWH_SRC]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{68E59DEE-17AA-46A0-A151-74BEA4163093}"
+      DTS:ObjectName="CN_OLE_DWH_SRC">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=NB-032-DW;User ID=isETL_User;Initial Catalog=053_SQL_SRC;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"></DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="\\127.0.0.1\initions$\SSIS_CONFIGURATION\CN_CONFIG.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{B46DCF56-39B3-4E3A-85B7-0BBFB38FFC20}"
+      DTS:ObjectName="CN_CONFIG" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CN_CONFIG&quot;;&quot;[isETL].[SSIS_Config]&quot;;&quot;CN_OLE_DWH_SRC&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{1FB60665-84C4-4ADE-8E50-30A18E58DF1F}"
+      DTS:ObjectName="CN_OLE_DWH_SRC" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CN_CONFIG&quot;;&quot;[isETL].[SSIS_Config]&quot;;&quot;ACHTUNG!!!!_CN_KUNDENSYSTEM&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{9AE8E94B-815E-4511-AE75-914A18186491}"
+      DTS:ObjectName="ACHTUNG!!!!_CN_KUNDENSYSTEM" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Import pkg_AS400_MWALZCH"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{F540FB95-5D24-4CB5-96CC-1B1F17D2014C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Import pkg_AS400_MWALZCH">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequenzcontainer"
+          DTS:DTSID="{649470AA-D14F-45CA-8E8C-B3263A7C34B0}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SEQC Template">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{484E8AF3-B197-475C-8975-C2000D4B87C4}"
+              DTS:EvaluateAsExpression="True"
+              DTS:Expression="&quot;SELECT [KAKNR], [KABEZ] from dbo.MKA0P WHERE KAKNR != 0 &quot;"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL_SET"
+              DTS:ObjectName="SEQC_DFT_SRC_strSQL">
+              <DTS:VariableValue
+                DTS:DataType="8">SELECT [KAKNR], [KABEZ] from dbo.MKA0P WHERE KAKNR != 0 </DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{DD994B29-78DE-41C8-B893-1B742BA51299}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL_SET"
+              DTS:ObjectName="SEQC_Sourcetable">
+              <DTS:VariableValue
+                DTS:DataType="8">tblsrc_AS400_MWALZCH_MKA0P</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT"
+              DTS:CreationName="Microsoft.Pipeline"
+              DTS:Description="Datenflusstask"
+              DTS:DTSID="{742F6567-8D6D-4A53-80E4-50CCBEFA3E8F}"
+              DTS:ExecutableType="Microsoft.Pipeline"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="DFT"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST"
+                      componentClassID="Microsoft.OLEDBDestination"
+                      contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB-Ziel"
+                      name="OLE_DST"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert '0' zeigt einen unendlichen Timeoutwert an."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                          name="OpenRowset">[dbo].[tblsrc_AS400_MWALZCH_MKA0P]</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                          name="OpenRowsetVariable">isETL_SET::SEQC_Sourcetable</property>
+                        <property
+                          dataType="System.String"
+                          description="Der auszuführende SQL-Befehl."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                          name="AccessMode"
+                          typeConverter="AccessMode">4</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei 'False' werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei 'False' werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt die für die Option 'Schnelles Laden' zu verwendenden Optionen an. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert '0' gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[CN_OLE_DWH_SRC]"
+                          connectionManagerRefId="Package.ConnectionManagers[CN_OLE_DWH_SRC]"
+                          description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels]"
+                          errorOrTruncationOperation="Einfügen"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="Eingabe des OLE DB-Ziels">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].Columns[KAKNR]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="KAKNR"
+                              externalMetadataColumnId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[KAKNR]"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[KAKNR]" />
+                            <inputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].Columns[KABEZ]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="KABEZ"
+                              externalMetadataColumnId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[KABEZ]"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[KABEZ]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_ID]"
+                              dataType="i4"
+                              name="isETL_ID" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_isPKNULL]"
+                              dataType="bool"
+                              name="isETL_isPKNULL" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_isMultiple]"
+                              dataType="bool"
+                              name="isETL_isMultiple" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_isValid]"
+                              dataType="bool"
+                              name="isETL_isValid" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_DCR]"
+                              dataType="dbTimeStamp"
+                              name="isETL_DCR" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[KAKNR]"
+                              dataType="wstr"
+                              length="255"
+                              name="KAKNR" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[KABEZ]"
+                              dataType="wstr"
+                              length="255"
+                              name="KABEZ" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Test]"
+                              dataType="wstr"
+                              length="255"
+                              name="Test" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Fehlerausgabe des OLE DB-Ziels"
+                          synchronousInputId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC"
+                      componentClassID="Microsoft.OLEDBSource"
+                      contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+                      description="OLE DB-Quelle"
+                      name="OLE_SRC"
+                      usesDispositions="true"
+                      version="7">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert '0' zeigt einen unendlichen Timeoutwert an."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                          name="OpenRowset">[dbo].[KUNDEN_CH]</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="Der auszuführende SQL-Befehl."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [KAKNR], [KABEZ] from dbo.MKA0P WHERE KAKNR != 0</property>
+                        <property
+                          dataType="System.String"
+                          description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                          name="SqlCommandVariable">isETL_SET::SEQC_DFT_SRC_strSQL</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.String"
+                          description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                          name="ParameterMapping"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[ACHTUNG!!!!_CN_KUNDENSYSTEM]"
+                          connectionManagerRefId="Package.ConnectionManagers[ACHTUNG!!!!_CN_KUNDENSYSTEM]"
+                          description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                          name="OleDbConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle]"
+                          name="Ausgabe der OLE DB-Quelle">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[KAKNR]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Konvertierung"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[KAKNR]"
+                              length="255"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[KAKNR]"
+                              name="KAKNR"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[KABEZ]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Konvertierung"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[KABEZ]"
+                              length="255"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[KABEZ]"
+                              name="KABEZ"
+                              truncationRowDisposition="FailComponent" />
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[KAKNR]"
+                              dataType="wstr"
+                              length="255"
+                              name="KAKNR" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[KABEZ]"
+                              dataType="wstr"
+                              length="255"
+                              name="KABEZ" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                          isErrorOut="true"
+                          name="Fehlerausgabe der OLE DB-Quelle">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[KAKNR]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[KAKNR]"
+                              name="KAKNR" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[KABEZ]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[KABEZ]"
+                              name="KABEZ" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT.Paths[Ausgabe der OLE DB-Quelle]"
+                      endId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels]"
+                      name="Ausgabe der OLE DB-Quelle"
+                      startId="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template\SQL Truncate Sourcetable"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="SQL Truncate tblsrc_AS400_MWALZCH_MKA0P"
+              DTS:DTSID="{012E0AD0-47CE-4C82-89C2-D1C848DEB2DC}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="SQL Truncate Sourcetable"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{68E59DEE-17AA-46A0-A151-74BEA4163093}"
+                  SQLTask:SqlStatementSource="EXEC isETL.spTruncateSourceobject '?'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="isETL_SET::SEQC_Sourcetable"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{16A212AB-1755-4762-96EF-DDCF6ABC7762}"
+              DTS:From="Package\Import pkg_AS400_MWALZCH\SEQC Template\SQL Truncate Sourcetable"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequenzcontainer"
+          DTS:DTSID="{C57E8BFD-6A8A-4083-B3DB-0A4483F53E69}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SEQC Template Mutationdate">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{18CFB615-7D45-4992-BBBD-64175DD88DD9}"
+              DTS:EvaluateAsExpression="True"
+              DTS:Expression="&quot;SELECT [BAKNR], [BAKAUF], [BAMJMT]&#xA;FROM [dbo].[MBA0P]&#xA;WHERE [BAMJMT] &gt;= &quot; + @[isETL::SEQC_FromMutationdate] + &quot; AND [BAMJMT] &lt;=&quot; + @[isETL::SEQC_ToMutationdate]"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL_SET"
+              DTS:ObjectName="SEQC_DFT_SRC_strSQL">
+              <DTS:VariableValue
+                DTS:DataType="8">SELECT [BAKNR], [BAKAUF], [BAMJMT]
+FROM [dbo].[MBA0P]
+WHERE [BAMJMT] &gt;= 20100101 AND [BAMJMT] &lt;=20991231</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{C09509FF-10AC-400E-BAF9-BA484C2FE404}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL"
+              DTS:ObjectName="SEQC_FromMutationdate">
+              <DTS:VariableValue
+                DTS:DataType="8">20100101</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{667523A7-312C-4B07-A55E-EFBB6D07C780}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL"
+              DTS:ObjectName="SEQC_NewFromMutationdate">
+              <DTS:VariableValue
+                DTS:DataType="8"
+                xml:space="preserve"></DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{00062380-0AC7-4BFD-8DA9-0173F407CB7E}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL_SET"
+              DTS:ObjectName="SEQC_Sourcetable">
+              <DTS:VariableValue
+                DTS:DataType="8">tblsrc_AS400_MWALZCH_MBA0P</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{97F456C2-D1BD-49DB-82E0-795FDBD338B1}"
+              DTS:EvaluateAsExpression="True"
+              DTS:Expression="&quot;SELECT TOP 1 CAST(FROM_Mutationdate as nvarchar(8)) as FROM_Mutationdate,  CAST(TO_Mutationdate as nvarchar(8)) as TO_Mutationdate&#xA;FROM isETL.tblSourcetablemutationdate&#xA;WHERE Sourcetablename = '&quot; +  @[isETL_SET::SEQC_Sourcetable]  + &quot;'&#xA;ORDER BY ID DESC&quot;"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL"
+              DTS:ObjectName="SEQC_SQL_GetFromToMutationdate_strSQL">
+              <DTS:VariableValue
+                DTS:DataType="8">SELECT TOP 1 CAST(FROM_Mutationdate as nvarchar(8)) as FROM_Mutationdate,  CAST(TO_Mutationdate as nvarchar(8)) as TO_Mutationdate
+FROM isETL.tblSourcetablemutationdate
+WHERE Sourcetablename = 'tblsrc_AS400_MWALZCH_MBA0P'
+ORDER BY ID DESC</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{0A5BEABF-618B-42CC-A516-AB95535D00F4}"
+              DTS:EvaluateAsExpression="True"
+              DTS:Expression="&quot;SELECT MAX([BAMJMT]) AS NewMutationdate&#xA;FROM &quot; + @[isETL_SET::SEQC_Sourcetable] &#xA;"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL_SET"
+              DTS:ObjectName="SEQC_SQL_GetNewFromMutationdate_strSQL">
+              <DTS:VariableValue
+                DTS:DataType="8">SELECT MAX([BAMJMT]) AS NewMutationdate
+FROM tblsrc_AS400_MWALZCH_MBA0P</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{A4B27DC5-4332-4468-8FEB-4C449CAE9250}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL"
+              DTS:ObjectName="SEQC_ToMutationdate">
+              <DTS:VariableValue
+                DTS:DataType="8">20991231</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT"
+              DTS:CreationName="Microsoft.Pipeline"
+              DTS:Description="Datenflusstask"
+              DTS:DTSID="{993FC971-38BF-45DD-A501-16D242E0AE5B}"
+              DTS:ExecutableType="Microsoft.Pipeline"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="DFT"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST"
+                      componentClassID="Microsoft.OLEDBDestination"
+                      contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB-Ziel"
+                      name="OLE_DST"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert '0' zeigt einen unendlichen Timeoutwert an."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                          name="OpenRowset">[dbo].[tblsrc_AS400_MWALZCH_MBA0P]</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                          name="OpenRowsetVariable">isETL_SET::SEQC_Sourcetable</property>
+                        <property
+                          dataType="System.String"
+                          description="Der auszuführende SQL-Befehl."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                          name="AccessMode"
+                          typeConverter="AccessMode">4</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei 'False' werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei 'False' werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt die für die Option 'Schnelles Laden' zu verwendenden Optionen an. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert '0' gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[CN_OLE_DWH_SRC]"
+                          connectionManagerRefId="Package.ConnectionManagers[CN_OLE_DWH_SRC]"
+                          description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels]"
+                          errorOrTruncationOperation="Einfügen"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="Eingabe des OLE DB-Ziels">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].Columns[BAKNR]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="BAKNR"
+                              externalMetadataColumnId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[BAKNR]"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[BAKNR]" />
+                            <inputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].Columns[BAKAUF]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="BAKAUF"
+                              externalMetadataColumnId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[BAKAUF]"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[BAKAUF]" />
+                            <inputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].Columns[BAMJMT]"
+                              cachedDataType="i4"
+                              cachedName="BAMJMT"
+                              externalMetadataColumnId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[BAMJMT]"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[BAMJMT]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_ID]"
+                              dataType="i4"
+                              name="isETL_ID" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_isPKNULL]"
+                              dataType="bool"
+                              name="isETL_isPKNULL" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_isMultiple]"
+                              dataType="bool"
+                              name="isETL_isMultiple" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_isValid]"
+                              dataType="bool"
+                              name="isETL_isValid" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_DCR]"
+                              dataType="dbTimeStamp"
+                              name="isETL_DCR" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[BAKNR]"
+                              dataType="wstr"
+                              length="255"
+                              name="BAKNR" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[BAKAUF]"
+                              dataType="wstr"
+                              length="255"
+                              name="BAKAUF" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[BAMJMT]"
+                              dataType="i4"
+                              name="BAMJMT" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Test]"
+                              dataType="wstr"
+                              length="255"
+                              name="Test" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Fehlerausgabe des OLE DB-Ziels"
+                          synchronousInputId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC"
+                      componentClassID="Microsoft.OLEDBSource"
+                      contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+                      description="OLE DB-Quelle"
+                      name="OLE_SRC"
+                      usesDispositions="true"
+                      version="7">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert '0' zeigt einen unendlichen Timeoutwert an."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                          name="OpenRowset">[dbo].[KUNDENKATEGORIE]</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="Der auszuführende SQL-Befehl."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * 
+FROM [dbo].BESTELLKOPF_CH
+WHERE MUTATIONSDATUM &gt;= '"+  @[isETL::SEQC_Mutationdate] + "'</property>
+                        <property
+                          dataType="System.String"
+                          description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                          name="SqlCommandVariable">isETL_SET::SEQC_DFT_SRC_strSQL</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.String"
+                          description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                          name="ParameterMapping"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[ACHTUNG!!!!_CN_KUNDENSYSTEM]"
+                          connectionManagerRefId="Package.ConnectionManagers[ACHTUNG!!!!_CN_KUNDENSYSTEM]"
+                          description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                          name="OleDbConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle]"
+                          name="Ausgabe der OLE DB-Quelle">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[BAKNR]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Konvertierung"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[BAKNR]"
+                              length="255"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[BAKNR]"
+                              name="BAKNR"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[BAKAUF]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Konvertierung"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[BAKAUF]"
+                              length="255"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[BAKAUF]"
+                              name="BAKAUF"
+                              truncationRowDisposition="FailComponent" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[BAMJMT]"
+                              dataType="i4"
+                              errorOrTruncationOperation="Konvertierung"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[BAMJMT]"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[BAMJMT]"
+                              name="BAMJMT"
+                              truncationRowDisposition="FailComponent" />
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[BAKNR]"
+                              dataType="wstr"
+                              length="255"
+                              name="BAKNR" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[BAKAUF]"
+                              dataType="wstr"
+                              length="255"
+                              name="BAKAUF" />
+                            <externalMetadataColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[BAMJMT]"
+                              dataType="i4"
+                              name="BAMJMT" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                          isErrorOut="true"
+                          name="Fehlerausgabe der OLE DB-Quelle">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[BAKNR]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[BAKNR]"
+                              name="BAKNR" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[BAKAUF]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[BAKAUF]"
+                              name="BAKAUF" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[BAMJMT]"
+                              dataType="i4"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[BAMJMT]"
+                              name="BAMJMT" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT.Paths[Ausgabe der OLE DB-Quelle]"
+                      endId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels]"
+                      name="Ausgabe der OLE DB-Quelle"
+                      startId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Get LAST Mutationdate"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Get Mutationdate"
+              DTS:DTSID="{A9CBDC40-7863-461F-8D3A-FF353CFFFFBA}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="SQL Get LAST Mutationdate"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{68E59DEE-17AA-46A0-A151-74BEA4163093}"
+                  SQLTask:SqlStmtSourceType="Variable"
+                  SQLTask:SqlStatementSource="isETL::SEQC_SQL_GetFromToMutationdate_strSQL"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="From_Mutationdate"
+                    SQLTask:DtsVariableName="isETL::SEQC_FromMutationdate" />
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="To_Mutationdate"
+                    SQLTask:DtsVariableName="isETL::SEQC_ToMutationdate" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Get NEW Mutationdate"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Retrieve new Mutationdate from newly imported source"
+              DTS:DTSID="{52F2D5CC-9EEC-4278-861F-12909364809C}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="SQL Get NEW Mutationdate"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{68E59DEE-17AA-46A0-A151-74BEA4163093}"
+                  SQLTask:SqlStmtSourceType="Variable"
+                  SQLTask:SqlStatementSource="isETL_SET::SEQC_SQL_GetNewFromMutationdate_strSQL"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="NewMutationdate"
+                    SQLTask:DtsVariableName="isETL::SEQC_NewFromMutationdate" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Set TMP Mutationdate"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Set temp Mutationdate to DWH_SRC"
+              DTS:DTSID="{35C6463B-872F-4D49-B798-C559218E37B4}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="SQL Set TMP Mutationdate"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{68E59DEE-17AA-46A0-A151-74BEA4163093}"
+                  SQLTask:SqlStatementSource="INSERT INTO [isETL].[tblSourcetablemutationdate_tmp]&#xA;(Sourcetablename, FROM_Mutationdate, TO_Mutationdate)&#xA;VALUES (?, ?,?)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="isETL::SEQC_NewFromMutationdate"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="isETL_SET::SEQC_Sourcetable"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="isETL::SEQC_ToMutationdate"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Truncate Sourcetable"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="SQL Truncate tblsrc_AS400_MWALZCH_MBA0P"
+              DTS:DTSID="{C1517531-20B7-408F-AF19-6732C49A22B2}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="SQL Truncate Sourcetable"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{68E59DEE-17AA-46A0-A151-74BEA4163093}"
+                  SQLTask:SqlStatementSource="EXEC isETL.spTruncateSourceobject '?'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="isETL_SET::SEQC_Sourcetable"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate.PrecedenceConstraints[Einschränkung]"
+              DTS:CreationName=""
+              DTS:DTSID="{CF1BAEEF-15D9-4495-B4A0-547E3DAC9787}"
+              DTS:From="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Truncate Sourcetable"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Einschränkung"
+              DTS:To="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Get LAST Mutationdate" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate.PrecedenceConstraints[Einschränkung 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{806EC925-E362-4C33-B34E-DA0C2E806EC2}"
+              DTS:From="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Get LAST Mutationdate"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Einschränkung 1"
+              DTS:To="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate.PrecedenceConstraints[Einschränkung 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{CCE0DF49-47D8-4CF9-8833-AC7BD2202587}"
+              DTS:From="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Einschränkung 2"
+              DTS:To="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Get NEW Mutationdate" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate.PrecedenceConstraints[Einschränkung 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{439BDF31-4A30-4218-901F-FAA7FAE13958}"
+              DTS:From="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Get NEW Mutationdate"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Einschränkung 3"
+              DTS:To="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Set TMP Mutationdate" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LOG Import Begin"
+      DTS:CreationName="Isag.Log.LOG, Isag.LOG3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a4e053840a8eff7"
+      DTS:Description="LOG2"
+      DTS:DTSID="{B173ED4E-2FA2-4861-833A-7B8BA1D71F61}"
+      DTS:ExecutableType="Isag.Log.LOG, Isag.LOG3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a4e053840a8eff7"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LOG Import Begin"
+      DTS:TaskContact="initions AG"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <InnerObject>
+          <ComponentType
+            Type="3"
+            Value="5" />
+          <MessageText
+            Type="8"
+            Value="Import der Quelle wird gestartet" />
+        </InnerObject>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LOG Import End"
+      DTS:CreationName="Isag.Log.LOG, Isag.LOG3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a4e053840a8eff7"
+      DTS:Description="LOG2"
+      DTS:DTSID="{B883F401-8D20-4B92-84D1-4927E3568231}"
+      DTS:ExecutableType="Isag.Log.LOG, Isag.LOG3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a4e053840a8eff7"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LOG Import End"
+      DTS:TaskContact="initions AG"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <InnerObject>
+          <ComponentType
+            Type="3"
+            Value="6" />
+          <MessageText
+            Type="8"
+            Value="Import der Quelle wurde beendet&#xA;&#xA;" />
+        </InnerObject>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Einschränkung]"
+      DTS:CreationName=""
+      DTS:DTSID="{CA146B9D-4837-4907-80C2-928B1081051A}"
+      DTS:From="Package\Import pkg_AS400_MWALZCH"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Einschränkung"
+      DTS:To="Package\LOG Import End" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Einschränkung 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{AA93EF5E-F310-4789-88FA-9674B9E740A6}"
+      DTS:From="Package\LOG Import Begin"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Einschränkung 1"
+      DTS:To="Package\Import pkg_AS400_MWALZCH" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="100,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT"
+          TopLeft="80.5,107.5" />
+        <NodeLayout
+          Size="203,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template\SQL Truncate Sourcetable"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template.PrecedenceConstraints[Constraint]"
+          TopLeft="107,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="23.5,60"
+              Start="0,0"
+              End="23.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="4,30" />
+                  <mssgle:LineSegment
+                    End="19.5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.5,30"
+                    Point2="23.5,30"
+                    Point3="23.5,34" />
+                  <mssgle:LineSegment
+                    End="23.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="314,205"
+          Size="314,248"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template"
+          TopLeft="380.5,158.5" />
+        <NodeLayout
+          Size="100,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT"
+          TopLeft="80.5,209.5" />
+        <NodeLayout
+          Size="212,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Get LAST Mutationdate"
+          TopLeft="51,107.5" />
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Get NEW Mutationdate"
+          TopLeft="51.5,311.5" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Set TMP Mutationdate"
+          TopLeft="53.5000000000001,413.5" />
+        <NodeLayout
+          Size="203,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\SQL Truncate Sourcetable"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate.PrecedenceConstraints[Einschränkung]"
+          TopLeft="107,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50,60"
+              Start="0,0"
+              End="50,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="4,30" />
+                  <mssgle:LineSegment
+                    End="46,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="46,30"
+                    Point2="50,30"
+                    Point3="50,34" />
+                  <mssgle:LineSegment
+                    End="50,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate.PrecedenceConstraints[Einschränkung 1]"
+          TopLeft="157,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-26.5,60"
+              Start="0,0"
+              End="-26.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-22.5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,30"
+                    Point2="-26.5,30"
+                    Point3="-26.5,34" />
+                  <mssgle:LineSegment
+                    End="-26.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate.PrecedenceConstraints[Einschränkung 2]"
+          TopLeft="130.5,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="26.5,60"
+              Start="0,0"
+              End="26.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="4,30" />
+                  <mssgle:LineSegment
+                    End="22.5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="22.5,30"
+                    Point2="26.5,30"
+                    Point3="26.5,34" />
+                  <mssgle:LineSegment
+                    End="26.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate.PrecedenceConstraints[Einschränkung 3]"
+          TopLeft="157,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="314,511"
+          Size="314,554"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="700,615"
+          Size="700,658"
+          Id="Package\Import pkg_AS400_MWALZCH"
+          TopLeft="5.50000000000011,106.5" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\LOG Import Begin"
+          TopLeft="272.5,5.5" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\LOG Import End"
+          TopLeft="276.5,825.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Einschränkung]"
+          TopLeft="355.5,764.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61"
+              Start="0,0"
+              End="0,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Einschränkung 1]"
+          TopLeft="355.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST"
+          TopLeft="5.50000000000003,107.5" />
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC"
+          TopLeft="67,5.5" />
+        <EdgeLayout
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="129.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-61.5,60"
+              Start="0,0"
+              End="-61.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-57.5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-57.5,30"
+                    Point2="-61.5,30"
+                    Point3="-61.5,34" />
+                  <mssgle:LineSegment
+                    End="-61.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_DST">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import pkg_AS400_MWALZCH\SEQC Template\DFT\OLE_SRC">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_SRC"
+          TopLeft="48.5,5.5" />
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST"
+          TopLeft="5.50000000000003,107.5" />
+        <EdgeLayout
+          Id="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="111,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-43,60"
+              Start="0,0"
+              End="-43,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-39,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-39,30"
+                    Point2="-43,30"
+                    Point3="-43,34" />
+                  <mssgle:LineSegment
+                    End="-43,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Import pkg_AS400_MWALZCH\SEQC Template Mutationdate\DFT\OLE_DST">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
