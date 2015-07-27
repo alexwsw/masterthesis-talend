@@ -97,7 +97,8 @@
     <routinesParameter id="_9gmKMNeqEeSlQZubuySunA" name="TalendDate"/>
     <routinesParameter id="_9gmKNNeqEeSlQZubuySunA" name="TalendString"/>
   </parameters>
-  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="288">
+  <!--id attribute added-->
+  <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="320" posY="288" id = "a5">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_1"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
