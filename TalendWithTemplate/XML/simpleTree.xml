@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<ProcessType>
+		<JobStarter>
+			<uniqueName>tPrejob_1</uniqueName>
+			<name>tPrejob</name>
+		</JobStarter>
+		<JobFinisher>
+			<uniqueName>tPostjob_1</uniqueName>
+			<name>tPostjob</name>
+		</JobFinisher>
+	</ProcessType>
