@@ -33,18 +33,18 @@ public class TurnTalendIntoDOM {
 		Node node = (Node)xPath.compile(expression).evaluate(document, XPathConstants.NODE);
 		Node child = node.getLastChild();
 		System.out.println(node.getNodeName());
-		System.out.println(child.getTextContent());
+		System.out.println(child.getNodeName());
 		
-		String exp2 = "//label[text()=\'JobFinisher\']";
+		String exp2 = "//label[text()='JobFinisher']";
 		Node n2 = (Node)xPath.compile(exp2).evaluate(document, XPathConstants.NODE);
 		if(n2==null){
 			System.out.println(true);
 		} else {
 			System.out.println(false);
 		}
-		//System.out.println(n2.getNodeName());
-		//Node parent = n2.getParentNode();
-//		System.out.println(parent.getNodeName());
+		System.out.println(n2.getNodeName());
+		Node parent = n2.getParentNode();
+		System.out.println(parent.getNodeName());
 		
 		
 		

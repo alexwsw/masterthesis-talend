@@ -3,9 +3,11 @@
 		<JobStarter>
 			<uniqueName>tPrejob_1</uniqueName>
 			<name>tPrejob</name>
+			<label>JobStarter</label>
 		</JobStarter>
 		<JobFinisher>
 			<uniqueName>tPostjob_1</uniqueName>
 			<name>tPostjob</name>
+			<label>JobFinisher</label>
 		</JobFinisher>
 	</ProcessType>
