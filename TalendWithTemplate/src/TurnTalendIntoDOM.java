@@ -46,6 +46,9 @@ public class TurnTalendIntoDOM {
 		Node parent = n2.getParentNode();
 		System.out.println(parent.getNodeName());
 		
+		Node n3 = TurnTalendIntoDOM.getNodeByLabel(document, "JobStarter");
+		System.out.println(n3.getNodeName());
+		
 		
 		
 		
@@ -68,5 +71,19 @@ public class TurnTalendIntoDOM {
 		}
 		*/
 
+	}
+	
+	//identify Node in DOM at its label
+	static Node getNodeByLabel(Document document, String label) {
+		Node node = null;
+		XPath xPath = XPathFactory.newInstance().newXPath();
+		String expression = String.format("//label[text()='%s']", label);
+		try {
+			node = (Node)xPath.compile(expression).evaluate(document, XPathConstants.NODE);
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return node.getParentNode();
 	}
 }
