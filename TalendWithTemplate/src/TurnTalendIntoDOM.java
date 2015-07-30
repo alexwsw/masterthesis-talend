@@ -1,7 +1,10 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -11,6 +14,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 public class TurnTalendIntoDOM {
 
@@ -21,12 +25,29 @@ public class TurnTalendIntoDOM {
 		try {
 			builder = dbf.newDocumentBuilder();
 			document = builder.parse(new File(
-					".\\XML\\SimpleTree.xml"));
-		} catch (Exception e) {
-			System.err.println("Ooooops");
+					".\\XML\\simpleTree.xml"));
+		} catch (IOException e) {
+			System.err.println("Ooooops must be trying this on a mac");
+			try {
+				builder = dbf.newDocumentBuilder();
+				document = builder.parse(new File(
+						"./XML/simpleTree.xml"));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+		Element root = document.getDocumentElement();
+			} catch (SAXException s) {
+				s.printStackTrace();
+			} catch (ParserConfigurationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Element root = document.getDocumentElement();
 		
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		String expression = "//JobStarter";
