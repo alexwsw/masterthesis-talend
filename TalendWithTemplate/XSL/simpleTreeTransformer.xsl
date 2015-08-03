@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-	<xsl:output method="xml"/>
+	<xsl:output method="xml" indent="yes"/>
 	<xsl:template match="/">
+	<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
+  	<context confirmationNeeded="false" name="Default">
+  	</context>
 		<parameters>
 		    <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
 		    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
@@ -93,21 +96,116 @@
   		</parameters>
 		<xsl:apply-templates select="/ProcessType/JobStarter"/>
 		<xsl:apply-templates select="/ProcessType/JobFinisher"/>
+		<xsl:apply-templates select="/ProcessType/DBase"/>
+		<xsl:apply-templates select="/ProcessType/DBCommit"/>
+		<xsl:apply-templates select="/connection"/>
+		</talendfile:ProcessType>
 	</xsl:template>
-	<xsl:template match="JobStarter">
-		<node>
-			<xsl:attribute name="componentName">
-				<xsl:value-of select="name"/>
-			</xsl:attribute>
-			<elementParameter>
-				<xsl:attribute name="field">TEXT</xsl:attribute>
-				<xsl:attribute name="name">UNIQUE_NAME</xsl:attribute>
+	
+	<xsl:template match="JobStarter|JobFinisher">
+		<xsl:for-each select=".">
+		<node componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="96">
+			<xsl:call-template name="doBasicStuff"/>
+		</node>	
+		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template match="DBase">
+		<node componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="64">
+			<xsl:call-template name="doBasicStuff"/>
+   			 <elementParameter field="TEXT" name="TYPE" value="MSSQL" show="false"/>
+   			 <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;" show="false"/>
+			<elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+		    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
+		    <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
+		    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value="" show="false"/>
+		    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+		    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+		    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
+		    <elementParameter field="CHECK" name="AUTO_COMMIT" value="false"/>
+		    <elementParameter field="CHECK" name="SHARE_IDENTITY_SETTING" value="false"/>
+			<elementParameter field="TEXT" name="HOST">
 				<xsl:attribute name="value">
-					<xsl:value-of select="uniqueName"/>"
+					<xsl:value-of select="host"/>
 				</xsl:attribute>
 			</elementParameter>
-			 <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-   			 <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+			<elementParameter field="TEXT" name="PORT">
+				<xsl:attribute name="value">
+					<xsl:value-of select="port"/>
+				</xsl:attribute>
+			</elementParameter>
+			<elementParameter field="TEXT" name="SCHEMA_DB">
+				<xsl:attribute name="value">
+					<xsl:value-of select="schema_db"/>
+				</xsl:attribute>
+			</elementParameter>
+			<elementParameter field="TEXT" name="USER">
+				<xsl:attribute name="value">
+					<xsl:value-of select="user"/>
+				</xsl:attribute>
+			</elementParameter>
+			<elementParameter field="PASSWORD" name="PASS">
+				<xsl:attribute name="value">
+					<xsl:value-of select="pass"/>
+				</xsl:attribute>
+			</elementParameter>
 		</node>
 	</xsl:template>
+		
+	<xsl:template match="DBCommit">
+		<node componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="96">
+			<xsl:call-template name="doBasicStuff"/>
+			<elementParameter field="CHECK" name="CLOSE" value="true"/>
+			<elementParameter field="COMPONENT_LIST" name="CONNECTION">
+				<xsl:attribute name="value">
+					<xsl:value-of select="dataBase"/>
+				</xsl:attribute>
+			</elementParameter>
+			<xsl:call-template name="addMetadata"/>
+		</node>
+	</xsl:template>
+	
+	<!-- Template(Method) for adding metadata to the given node -->
+	<xsl:template name="addMetadata">
+		<xsl:for-each select="./metadata">
+			<metadata>
+				<xsl:attribute name="connector">
+					<xsl:value-of select="./type"/>
+				</xsl:attribute>
+				<xsl:attribute name="name">
+					<xsl:value-of select="./connectorName"/>
+				</xsl:attribute>
+			</metadata>
+			</xsl:for-each>
+	</xsl:template>
+	
+	<!-- needs to be made suitable for any possible attributes in column!!!!!!! -->
+	<xsl:template name="addColumnsToMetadata">
+		<xsl:if test="column">
+			<xsl:for-each select="./metadata/column">
+			
+			</xsl:for-each>
+		</xsl:if>
+	</xsl:template>
+	
+	<!-- Add Attributes valid for each Node in the Document -->
+	<xsl:template name="doBasicStuff">
+			<xsl:attribute name="componentName">
+				<xsl:value-of select="./name"/>
+			</xsl:attribute>
+			<elementParameter field="TEXT" name="UNIQUE_NAME">
+				<xsl:attribute name="value">
+					<xsl:value-of select="./uniqueName"/>
+				</xsl:attribute>
+			</elementParameter>
+			<!--  -->
+			 <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
+   			 <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+   			 <elementParameter field="TEXT" name="LABEL">
+				<xsl:attribute name="value">
+					<xsl:value-of select="./label"/>
+				</xsl:attribute>
+			</elementParameter>
+	</xsl:template>
+	
 </xsl:stylesheet>

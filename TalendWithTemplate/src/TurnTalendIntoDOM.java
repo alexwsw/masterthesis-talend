@@ -1,10 +1,16 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -13,12 +19,19 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class TurnTalendIntoDOM {
 
 	public static void main(String[] args) throws XPathExpressionException {
+		//raw template
+		String xml = ".\\XML\\simpleTree.xml";
+		//XSLT transformation file
+		String xslt = ".\\XSL\\simpleTreeTransformer.xsl";
+		//file path to the processed talend XML
+		String target = ".\\Output\\TalendXML.item";
+		//file path to our XML
+		String DOMTree = ".\\Output\\OurXML.xml";
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
 		Document document = null;
@@ -70,7 +83,25 @@ public class TurnTalendIntoDOM {
 		Node n3 = TurnTalendIntoDOM.getNodeByLabel(document, "JobStarter");
 		System.out.println(n3.getNodeName());
 		
+		//add a metadata node
+		Node metadata = document.createElement("metadata");
+		Node type = document.createElement("type");
+		type.setTextContent("reject");
+		Node name = document.createElement("connectorName");
+		name.setTextContent("tMSSQLCommit_1");
+		metadata.appendChild(type);
+		metadata.appendChild(name);
+		Node n4 = TurnTalendIntoDOM.getNodeByLabel(document, "MyCommit");
+		n4.appendChild(metadata);
 		
+		//select the child we want to remove
+		Node toRemove = TurnTalendIntoDOM.getNodeByLabel(document, "MyConnection");
+		System.out.println(toRemove.getNodeName());
+		//get the Dad and remove the child
+		toRemove.getParentNode().removeChild(toRemove);
+		
+		TurnTalendIntoDOM.saveDOM(document, DOMTree);
+		TurnTalendIntoDOM.transformDocument(document, xslt, target);
 		
 		
 		
@@ -107,4 +138,63 @@ public class TurnTalendIntoDOM {
 		}
 		return node.getParentNode();
 	}
+	
+	//Transform our unprocessed XML tree into Talend XML
+		static void transformXML(String xml, String xsl, String target) {
+			TransformerFactory tFactory = TransformerFactory.newInstance();
+			Transformer transformer = null;
+			try {
+				transformer = tFactory.newTransformer(new StreamSource(xsl));
+			} catch (TransformerConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				transformer.transform(new StreamSource(xml), new StreamResult(
+						target));
+			} catch (TransformerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		//Transform the processed DOM Tree into Talend XML
+		static void transformDocument(Document document, String xsl, String target) {
+			TransformerFactory tFactory = TransformerFactory.newInstance();
+			Transformer transformer = null;
+			DOMSource source = new DOMSource(document);
+			try {
+				transformer = tFactory.newTransformer(new StreamSource(xsl));
+			} catch (TransformerConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				transformer.transform(source, new StreamResult(
+						target));
+			} catch (TransformerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		//save the given DOM Tree to our XML File w/o transformation
+		static void saveDOM(Document document, String path) {
+			TransformerFactory tFactory = TransformerFactory.newInstance();
+			Transformer transformer = null;
+			DOMSource source = new DOMSource(document);
+			try {
+				transformer = tFactory.newTransformer();
+			} catch (TransformerConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				transformer.transform(source, new StreamResult(
+						path));
+			} catch (TransformerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 }
