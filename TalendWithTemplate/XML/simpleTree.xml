@@ -33,6 +33,7 @@
 		<connection>
 			<source>tPrejob_1</source>
 			<target>tMSSQLConnection_1</target>
+			<type>3</type>
 			<connectorName>Component_OK</connectorName>
 			<metaname>tPrejob_1</metaname>
 			<uniqueName>OnComponentOk_1</uniqueName>
@@ -40,6 +41,7 @@
 		<connection>
 			<source>tPostjob_1</source>
 			<target>tMSSQLCommit_1</target>
+			<type>3</type>
 			<connectorName>Component_OK</connectorName>
 			<metaname>tPostjob_1</metaname>
 			<uniqueName>onComponentOK22</uniqueName>
