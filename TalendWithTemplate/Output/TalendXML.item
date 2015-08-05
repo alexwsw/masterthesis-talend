@@ -108,7 +108,13 @@
 <elementParameter field="TEXT" name="LABEL" value="MyCommit"/>
 <elementParameter field="CHECK" name="CLOSE" value="true"/>
 <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSQLConnection_1"/>
-<metadata connector="flow" name="tMSSQLCommit_1"/>
-<metadata connector="reject" name="tMSSQLCommit_1"/>
+<metadata connector="flow" name="tMSSQLCommit_1">
+<column key="true" length="10" name="bla" nullable="false" sourceType="INT"/>
+<column key="false" length="30" name="HelloWorld"/>
+<column key="false" length="50" name="heyja"/>
+</metadata>
+<metadata connector="reject" name="tMSSQLCommit_1">
+<column key="false" name="blalala"/>
+</metadata>
 </node>
 </talendfile:ProcessType>

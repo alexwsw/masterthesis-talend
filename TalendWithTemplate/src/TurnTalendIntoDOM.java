@@ -83,7 +83,7 @@ public class TurnTalendIntoDOM {
 		Node n3 = TurnTalendIntoDOM.getNodeByLabel(document, "JobStarter");
 		System.out.println(n3.getNodeName());
 		
-		//add a metadata node
+		//add a reject metadata to a node
 		Node metadata = document.createElement("metadata");
 		Node type = document.createElement("type");
 		type.setTextContent("reject");
@@ -93,6 +93,15 @@ public class TurnTalendIntoDOM {
 		metadata.appendChild(name);
 		Node n4 = TurnTalendIntoDOM.getNodeByLabel(document, "MyCommit");
 		n4.appendChild(metadata);
+		
+		Node column = document.createElement("column");
+		Node key = document.createElement("key");
+		key.setTextContent("false");
+		Node nomen = document.createElement("name");
+		nomen.setTextContent("blalala");
+		column.appendChild(key);
+		column.appendChild(nomen);
+		metadata.appendChild(column);
 		
 		//select the child we want to remove
 		Node toRemove = TurnTalendIntoDOM.getNodeByLabel(document, "MyConnection");
@@ -184,6 +193,7 @@ public class TurnTalendIntoDOM {
 			Transformer transformer = null;
 			DOMSource source = new DOMSource(document);
 			try {
+				//Transformer w/o XSL file (there's nothing to transform)
 				transformer = tFactory.newTransformer();
 			} catch (TransformerConfigurationException e) {
 				// TODO Auto-generated catch block

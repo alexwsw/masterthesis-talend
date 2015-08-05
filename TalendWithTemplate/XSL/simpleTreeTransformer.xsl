@@ -175,17 +175,24 @@
 				<xsl:attribute name="name">
 					<xsl:value-of select="./connectorName"/>
 				</xsl:attribute>
+				<xsl:call-template name="addColumnsToMetadata"/>
 			</metadata>
 			</xsl:for-each>
 	</xsl:template>
 	
-	<!-- needs to be made suitable for any possible attributes in column!!!!!!! -->
+	<!-- Iteration successful, precise specification of all possible attributes required -->
 	<xsl:template name="addColumnsToMetadata">
-		<xsl:if test="column">
-			<xsl:for-each select="./metadata/column">
-			
+		<!-- for each column - element -->
+		<xsl:for-each select="./column">
+			<column>
+			<!-- for each child of the column element -->
+			<xsl:for-each select="./*">
+				<xsl:attribute name="{name()}">
+					<xsl:value-of select="text()"/>
+				</xsl:attribute>
 			</xsl:for-each>
-		</xsl:if>
+			</column>
+		</xsl:for-each>
 	</xsl:template>
 	
 	<!-- Add Attributes valid for each Node in the Document -->

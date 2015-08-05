@@ -18,11 +18,29 @@
 			<metadata>
 				<type>flow</type>
 				<connectorName>tMSSQLCommit_1</connectorName>
+				<column>
+					<key>true</key>
+					<length>10</length>
+					<name>bla</name>
+					<nullable>false</nullable>
+					<sourceType>INT</sourceType>
+				</column>
+				<column>
+					<key>false</key>
+					<length>30</length>
+					<name>HelloWorld</name>
+				</column>
+				<column>
+					<key>false</key>
+					<length>50</length>
+					<name>heyja</name>
+				</column>
 			</metadata>
-		<metadata><type>reject</type><connectorName>tMSSQLCommit_1</connectorName></metadata></DBCommit>
+		<metadata><type>reject</type><connectorName>tMSSQLCommit_1</connectorName><column><key>false</key><name>blalala</name></column></metadata></DBCommit>
 		<connection>
 			<source>tPrejob_1</source>
 			<target>tMSSQLConnection_1</target>
+			<type>3</type>
 			<connectorName>Component_OK</connectorName>
 			<metaname>tPrejob_1</metaname>
 			<uniqueName>OnComponentOk_1</uniqueName>
@@ -30,6 +48,7 @@
 		<connection>
 			<source>tPostjob_1</source>
 			<target>tMSSQLCommit_1</target>
+			<type>3</type>
 			<connectorName>Component_OK</connectorName>
 			<metaname>tPostjob_1</metaname>
 			<uniqueName>onComponentOK22</uniqueName>

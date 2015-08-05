@@ -28,6 +28,23 @@
 			<metadata>
 				<type>flow</type>
 				<connectorName>tMSSQLCommit_1</connectorName>
+				<column>
+					<key>true</key>
+					<length>10</length>
+					<name>bla</name>
+					<nullable>false</nullable>
+					<sourceType>INT</sourceType>
+				</column>
+				<column>
+					<key>false</key>
+					<length>30</length>
+					<name>HelloWorld</name>
+				</column>
+				<column>
+					<key>false</key>
+					<length>50</length>
+					<name>heyja</name>
+				</column>
 			</metadata>
 		</DBCommit>
 		<connection>
