@@ -103,11 +103,7 @@ public class TurnTalendIntoDOM {
 		column.appendChild(nomen);
 		metadata.appendChild(column);
 		
-		//select the child we want to remove
-		Node toRemove = TurnTalendIntoDOM.getNodeByLabel(document, "MyConnection");
-		System.out.println(toRemove.getNodeName());
-		//get the Dad and remove the child
-		toRemove.getParentNode().removeChild(toRemove);
+
 		
 		TurnTalendIntoDOM.saveDOM(document, DOMTree);
 		TurnTalendIntoDOM.transformDocument(document, xslt, target);
@@ -132,6 +128,14 @@ public class TurnTalendIntoDOM {
 		}
 		*/
 
+	}
+	
+	static void removeNode(Document document, String label) {
+		//select the child we want to remove
+		Node toRemove = TurnTalendIntoDOM.getNodeByLabel(document, label);
+		System.out.println(toRemove.getNodeName());
+		//get the Dad and remove the child
+		toRemove.getParentNode().removeChild(toRemove);
 	}
 	
 	//identify Node in DOM at its label

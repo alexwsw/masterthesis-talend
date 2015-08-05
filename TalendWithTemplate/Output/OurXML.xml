@@ -9,7 +9,16 @@
 			<name>tPostjob</name>
 			<label>JobFinisher</label>
 		</JobFinisher>
-		
+		<DBase>
+			<uniqueName>tMSSQLConnection_1</uniqueName>
+			<name>tMSSqlConnection</name>
+			<label>MyConnection</label>
+			<host>""</host>
+			<port>1433</port>
+			<schema_db>""</schema_db>
+			<user>""</user>
+			<pass>""</pass>		
+		</DBase>
 		<DBCommit>
 			<uniqueName>tMSSQLCommit_1</uniqueName>
 			<name>tMSSqlCommit</name>
@@ -41,16 +50,20 @@
 			<source>tPrejob_1</source>
 			<target>tMSSQLConnection_1</target>
 			<type>3</type>
-			<connectorName>Component_OK</connectorName>
+			<connectorName>COMPONENT_OK</connectorName>
 			<metaname>tPrejob_1</metaname>
 			<uniqueName>OnComponentOk_1</uniqueName>
 		</connection>
 		<connection>
 			<source>tPostjob_1</source>
 			<target>tMSSQLCommit_1</target>
-			<type>3</type>
+			<type>0</type>
 			<connectorName>Component_OK</connectorName>
 			<metaname>tPostjob_1</metaname>
-			<uniqueName>onComponentOK22</uniqueName>
+			<uniqueName>onComponentOK2</uniqueName>
+			<data>
+				<value>ID</value>
+				<value>Name</value>
+			</data>
 		</connection>
 	</ProcessType>

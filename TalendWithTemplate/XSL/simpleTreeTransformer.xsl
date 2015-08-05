@@ -98,16 +98,14 @@
 		<xsl:apply-templates select="/ProcessType/JobFinisher"/>
 		<xsl:apply-templates select="/ProcessType/DBase"/>
 		<xsl:apply-templates select="/ProcessType/DBCommit"/>
-		<xsl:apply-templates select="/connection"/>
+		<xsl:apply-templates select="/ProcessType/connection"/>
 		</talendfile:ProcessType>
 	</xsl:template>
 	
 	<xsl:template match="JobStarter|JobFinisher">
-		<xsl:for-each select=".">
 		<node componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="96">
 			<xsl:call-template name="doBasicStuff"/>
 		</node>	
-		</xsl:for-each>
 	</xsl:template>
 	
 	<xsl:template match="DBase">
@@ -213,6 +211,52 @@
 					<xsl:value-of select="./label"/>
 				</xsl:attribute>
 			</elementParameter>
+	</xsl:template>
+	
+	<xsl:template match="connection">
+		<connection offsetLabelX="0" offsetLabelY="0">
+		<xsl:attribute name="source">
+			<xsl:value-of select="./source"/>
+		</xsl:attribute>
+		<xsl:attribute name="target">
+			<xsl:value-of select="./target"/>
+		</xsl:attribute>
+		<xsl:attribute name="connectorName">
+			<xsl:value-of select="./connectorName"/>
+		</xsl:attribute>
+		<xsl:attribute name="label">
+			<xsl:value-of select="./label"/>
+		</xsl:attribute>
+		<xsl:attribute name="lineStyle">
+			<xsl:value-of select="./type"/>
+		</xsl:attribute>
+		<xsl:attribute name="metaname">
+			<xsl:value-of select="./metaname"/>
+		</xsl:attribute>
+		<elementParameter field="TEXT" name="UNIQUE_NAME">
+				<xsl:attribute name="value">
+					<xsl:value-of select="./uniqueName"/>
+				</xsl:attribute>
+			</elementParameter>
+		<!-- add the monitoring option if the connection is a main type -->
+		<xsl:if test="./type/text() = 0">
+			<elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+		</xsl:if>
+		<!-- add transferable columns if the element possess any -->
+		<xsl:if test="./data">
+			<elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+				<xsl:for-each select="./data/*">
+					<elementValue elementRef="TRACE_COLUMN">
+						<xsl:attribute name="value">
+							<xsl:value-of select="text()"/>
+						</xsl:attribute>
+      				</elementValue>
+						<elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      					<elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+				</xsl:for-each>
+			</elementParameter>
+		</xsl:if>
+		</connection>
 	</xsl:template>
 	
 </xsl:stylesheet>
