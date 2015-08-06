@@ -47,6 +47,24 @@
 				</column>
 			</metadata>
 		</DBCommit>
+		
+		
+		
+		<SqlInput>
+			<uniqueName>tMSSQLInput_1</uniqueName>
+			<name>tMSSqlCommit</name>
+			<label>MyInput</label>
+			<dataBase>tMSSQLConnection_1</dataBase>
+			<SQL>select * from kinput</SQL>
+			<trim/>
+			<metadata>
+				<type>flow</type>
+				<connectorName>tMSSQLInput_2</connectorName>
+		</SqlInput>
+		
+		
+		
+		
 		<connection>
 			<source>tPrejob_1</source>
 			<target>tMSSQLConnection_1</target>

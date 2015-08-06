@@ -99,6 +99,7 @@
 		<xsl:apply-templates select="/ProcessType/DBase"/>
 		<xsl:apply-templates select="/ProcessType/DBCommit"/>
 		<xsl:apply-templates select="/ProcessType/connection"/>
+		<xsl:apply-templates select="/ProcessType/SqlInput"/>
 		</talendfile:ProcessType>
 	</xsl:template>
 	
@@ -163,6 +164,43 @@
 		</node>
 	</xsl:template>
 	
+	<xsl:template match="SqlInput">
+		<node componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="96">
+		<xsl:call-template name="doBasicStuff"/>
+		 <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+		 <elementParameter field="COMPONENT_LIST" name="CONNECTION">
+		 	<xsl:attribute name="value">
+		 		<xsl:value-of select="dataBase"/>
+		 	</xsl:attribute>
+		 </elementParameter>
+		  <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+	    <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
+	    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+	    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;&quot;"/>
+	    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+	    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+	    <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
+	    <elementParameter field="DBTABLE" name="TABLE" value=""/>
+	    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+	    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+	    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+	    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
+	    <elementParemeter field="MEMO_SQL" name="QUERY">
+	    	<xsl:attribute name="value">
+	    		<xsl:value-of select="SQL"/>
+	    	</xsl:attribute>
+	    </elementParemeter>
+	    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
+	    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
+	    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+	    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+	    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
+	    <elementParameter field="TABLE" name="TRIM_COLUMN">
+	    	<xsl:call-template name="addTrimValues"/>
+		<xsl:call-template name="addMetadata"/>
+		</node>
+	</xsl:template>
+	
 	<!-- Template(Method) for adding metadata to the given node -->
 	<xsl:template name="addMetadata">
 		<xsl:for-each select="./metadata">
@@ -211,6 +249,22 @@
 					<xsl:value-of select="./label"/>
 				</xsl:attribute>
 			</elementParameter>
+	</xsl:template>
+	
+	<!-- Revision and test required!!!! -->
+	<xsl:template name="addTrimValues">
+		<xsl:if test="./trim/*">
+			<elementParameter field="TABLE" name="TRIM_COLUMN">
+				<xsl:for-each select="./trim/*">
+					<elementValue elementRef="SCHEMA_COLUMN">
+						<xsl:attribute name="value">
+							<xsl:value-of select="text()"/> 
+						</xsl:attribute>
+					</elementValue>
+					 <elementValue elementRef="TRIM" value="false"/>
+				</xsl:for-each>
+			</elementParameter>
+		</xsl:if>
 	</xsl:template>
 	
 	<xsl:template match="connection">
