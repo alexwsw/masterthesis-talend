@@ -387,4 +387,30 @@
 		</connection>
 	</xsl:template>
 	
+	<xsl:template name="addNodedata">
+		<nodeData xsi:type="MapperData">
+			<uiProperties shellMaximized="true"/>
+			<xsl:apply-templates select="./nodedata/VarTables"/>
+			<xsl:apply-templates select="./nodedata/outputTables"/>
+			<xsl:apply-templates select="./nodedata/inputTables"/>
+		</nodeData>
+	</xsl:template>
+	
+	<xsl:template match="varTables">
+		<varTables sizeState="INTERMEDIATE" minimized="true">
+			<xsl:attribute name="name">
+				<xsl:value-of select="./name"/>
+			</xsl:attribute>
+		</varTables>
+	
+	</xsl:template>
+	
+	<xsl:template match="outputTables">
+	
+	</xsl:template>
+	
+	<xsl:template match="inputTables">
+	
+	</xsl:template>
+	
 </xsl:stylesheet>
