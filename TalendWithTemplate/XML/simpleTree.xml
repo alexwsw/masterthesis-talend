@@ -180,6 +180,10 @@
 			<nodedata>
 				<varTables>
 					<name>Var</name>
+					<data>
+						<column expression="DF_Input1.TRID" type="id_Integer">TRID</column>
+						<column expression="DF_Input1.KDNR" type="id_Integer">KDNR</column>
+					</data>
 				</varTables>
 				<outputTables>
 					<name>Output</name>

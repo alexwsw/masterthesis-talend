@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
 	<xsl:output method="xml" indent="yes"/>
 	<xsl:template match="/">
 	<talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
@@ -271,7 +271,7 @@
     	<elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
     	<elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
     	<xsl:call-template name="addMetadata"/>
-    	<!-- <xsl:call-template name="addNodedata"/> -->
+    	<xsl:call-template name="addNodedata"/>
 		</node>
 	</xsl:template>
 	
@@ -390,27 +390,61 @@
 	<xsl:template name="addNodedata">
 		<nodeData xsi:type="MapperData">
 			<uiProperties shellMaximized="true"/>
-			<xsl:apply-templates select="./nodedata/VarTables"/>
+			<xsl:apply-templates select="./nodedata/varTables"/>
 			<xsl:apply-templates select="./nodedata/outputTables"/>
 			<xsl:apply-templates select="./nodedata/inputTables"/>
 		</nodeData>
 	</xsl:template>
 	
 	<xsl:template match="varTables">
-		<varTables sizeState="INTERMEDIATE" minimized="true">
+		<varTables sizeState="INTERMEDIATE">
 			<xsl:attribute name="name">
 				<xsl:value-of select="./name"/>
 			</xsl:attribute>
+			<xsl:apply-templates select="./data/column"/>
 		</varTables>
 	
 	</xsl:template>
 	
 	<xsl:template match="outputTables">
-	
+		<outputTables sizeState="INTERMEDIATE">
+			<xsl:attribute name="name">
+				<xsl:value-of select="./name"/>
+			</xsl:attribute>
+			<xsl:apply-templates select="./data/column"/>
+		</outputTables>
+		<xsl:apply-templates select="./data/column"/>
 	</xsl:template>
 	
 	<xsl:template match="inputTables">
+		<inputTables sizeState="INTERMEDIATE" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
+			<xsl:attribute name="name">
+				<xsl:value-of select="./name"/>
+			</xsl:attribute>
+			<xsl:if test="./innerJoin">
+				<xsl:attribute name="innerJoin">
+					<xsl:value-of select="./innerJoin"/>
+				</xsl:attribute>
+			</xsl:if>
+			<xsl:apply-templates select="./data/column"/>
+		</inputTables>
+		<xsl:apply-templates select="./data/column"/>
+	</xsl:template>
 	
+	<xsl:template match="column">
+		<mapperTableEntries>
+			<xsl:attribute name="name">
+				<xsl:value-of select="text()"/>
+			</xsl:attribute>
+			<xsl:if test="@expression">
+			<xsl:attribute name="expression">
+				<xsl:value-of select="@expression"/>
+			</xsl:attribute>
+			</xsl:if>
+			<xsl:attribute name="type">
+				<xsl:value-of select="@type"/>
+			</xsl:attribute>
+		</mapperTableEntries>
 	</xsl:template>
 	
 </xsl:stylesheet>
