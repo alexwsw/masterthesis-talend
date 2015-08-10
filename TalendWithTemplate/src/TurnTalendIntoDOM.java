@@ -84,7 +84,8 @@ public class TurnTalendIntoDOM {
 		System.out.println(n3.getNodeName());
 		
 		//add a reject metadata to a node
-		Node metadata = document.createElement("metadata");
+	
+	/*	Node metadata = document.createElement("metadata");
 		Node type = document.createElement("type");
 		type.setTextContent("reject");
 		Node name = document.createElement("connectorName");
@@ -102,6 +103,7 @@ public class TurnTalendIntoDOM {
 		column.appendChild(key);
 		column.appendChild(nomen);
 		metadata.appendChild(column);
+		*/
 		
 
 		

@@ -100,6 +100,8 @@
 		<xsl:apply-templates select="/ProcessType/DBCommit"/>
 		<xsl:apply-templates select="/ProcessType/connection"/>
 		<xsl:apply-templates select="/ProcessType/SqlInput"/>
+		<xsl:apply-templates select="/ProcessType/SqlOutput"/>
+		<xsl:apply-templates select="/ProcessType/Transformer"/>
 		</talendfile:ProcessType>
 	</xsl:template>
 	
@@ -123,6 +125,11 @@
 		    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
 		    <elementParameter field="CHECK" name="AUTO_COMMIT" value="false"/>
 		    <elementParameter field="CHECK" name="SHARE_IDENTITY_SETTING" value="false"/>
+		    <elementParameter field="TEXT" name="DBNAME">
+		    	<xsl:attribute name="value">
+		    		<xsl:value-of select="DBName"/>
+		    	</xsl:attribute>
+		    </elementParameter> 
 			<elementParameter field="TEXT" name="HOST">
 				<xsl:attribute name="value">
 					<xsl:value-of select="host"/>
@@ -185,11 +192,11 @@
 	    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
 	    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
 	    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-	    <elementParemeter field="MEMO_SQL" name="QUERY">
+	    <elementParameter field="MEMO_SQL" name="QUERY">
 	    	<xsl:attribute name="value">
 	    		<xsl:value-of select="SQL"/>
 	    	</xsl:attribute>
-	    </elementParemeter>
+	    </elementParameter>
 	    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
 	    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
 	    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -197,7 +204,74 @@
 	    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
 	    <elementParameter field="TABLE" name="TRIM_COLUMN">
 	    	<xsl:call-template name="addTrimValues"/>
+		</elementParameter>
 		<xsl:call-template name="addMetadata"/>
+		</node>
+	</xsl:template>
+		
+	<xsl:template match="SqlOutput">
+		<node componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="96">
+		<xsl:call-template name="doBasicStuff"/>	
+		<elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+		 <elementParameter field="COMPONENT_LIST" name="CONNECTION">
+		 	<xsl:attribute name="value">
+		 		<xsl:value-of select="dataBase"/>
+		 	</xsl:attribute>
+		 </elementParameter>
+		<elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+	    <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
+	    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+	    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;&quot;"/>
+	    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+	    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+	    <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
+	    <elementParameter field="DBTABLE" name="TABLE" value="">
+	    	<xsl:attribute name="value">
+	    		<xsl:value-of select="table"/>
+	    	</xsl:attribute>
+	    </elementParameter>
+	    <elementParameter field="CLOSED_LIST" name="DATA_ACTION">
+	    	<xsl:attribute name="value">
+	    		<xsl:value-of select="action"/>
+	    	</xsl:attribute>
+	    </elementParameter>
+	    <elementParameter field="LABEL" name="NOTE" value="NOTE: batch size must be less than or equal to total number of parameter markers divided by number of columns" show="false"/>
+	    <elementParameter field="CHECK" name="SPECIFY_IDENTITY_FIELD" value="false" show="false"/>
+	    <elementParameter field="COLUMN_LIST" name="IDENTITY_FIELD" value="" show="false"/>
+	    <elementParameter field="TEXT" name="START_VALUE" value="1" show="false"/>
+	    <elementParameter field="TEXT" name="STEP" value="1" show="false"/>
+	    <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
+	    <elementParameter field="CHECK" name="SPECIFY_DATASOURCE_ALIAS" value="false"/>
+	    <elementParameter field="TEXT" name="DATASOURCE_ALIAS" value="&quot;&quot;" show="false"/>
+	    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+	    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL" show="false"/>
+	    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
+	    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;" show="false"/>
+	    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+	    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+	    <elementParameter field="TABLE" name="ADD_COLS"/>
+	    <elementParameter field="CHECK" name="USE_FIELD_OPTIONS" value="false"/>
+	    <elementParameter field="TABLE" name="FIELD_OPTIONS" show="false"/>
+	    <elementParameter field="CHECK" name="IGNORE_DATE_OUTOF_RANGE" value="false"/>
+	    <elementParameter field="CHECK" name="ENABLE_DEBUG_MODE" value="false"/>
+	    <elementParameter field="CHECK" name="SUPPORT_NULL_WHERE" value="false"/>
+	    <elementParameter field="CHECK" name="USE_BATCH_SIZE" value="true"/>
+	    <xsl:call-template name="addMetadata"/>
+		</node>
+	</xsl:template>
+	
+	<xsl:template match="Transformer">
+		<node componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="96">
+		<xsl:call-template name="doBasicStuff"/>
+    	<elementParameter field="EXTERNAL" name="MAP" value=""/>
+   		<elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
+    	<elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
+    	<elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
+    	<elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
+    	<elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
+    	<elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
+    	<xsl:call-template name="addMetadata"/>
+    	<!-- <xsl:call-template name="addNodedata"/> -->
 		</node>
 	</xsl:template>
 	
@@ -293,7 +367,7 @@
 				</xsl:attribute>
 			</elementParameter>
 		<!-- add the monitoring option if the connection is a main type -->
-		<xsl:if test="./type/text() = 0">
+		<xsl:if test="./type/text() = 0 or ./type/text() = 8">
 			<elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
 		</xsl:if>
 		<!-- add transferable columns if the element possess any -->

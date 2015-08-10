@@ -13,11 +13,12 @@
 			<uniqueName>tMSSQLConnection_1</uniqueName>
 			<name>tMSSqlConnection</name>
 			<label>MyConnection</label>
-			<host>""</host>
-			<port>1433</port>
-			<schema_db>""</schema_db>
-			<user>""</user>
-			<pass>""</pass>		
+			<DBName>"TALEND_TEST"</DBName>
+			<host>"172.21.100.77"</host>
+			<port>"1433"</port>
+			<schema_db>"dbo"</schema_db>
+			<user>"isETL_User"</user>
+			<pass>"hTgAoqXDCdLnPZDSDy6ojQ=="</pass>		
 		</DBase>
 		<DBCommit>
 			<uniqueName>tMSSQLCommit_1</uniqueName>
@@ -27,25 +28,134 @@
 			<metadata>
 				<type>flow</type>
 				<connectorName>tMSSQLCommit_1</connectorName>
+			</metadata>
+		</DBCommit>
+		<SqlInput>
+			<uniqueName>tMSSQLInput_1</uniqueName>
+			<name>tMSSqlInput</name>
+			<label>MyInput</label>
+			<dataBase>tMSSQLConnection_1</dataBase>
+			<SQL>select * from kinput</SQL>
+			<trim/>
+			<metadata>
+				<type>FLOW</type>
+				<connectorName>tMSSQLInput_1</connectorName>
 				<column>
+					<name>TRID</name>
 					<key>true</key>
-					<length>10</length>
-					<name>bla</name>
 					<nullable>false</nullable>
-					<sourceType>INT</sourceType>
+					<length>10</length>
+					<precision>0</precision>
+					<type>id_Integer</type>
+					<usefulColumn>true</usefulColumn>
 				</column>
 				<column>
+					<name>KDNR</name>
 					<key>false</key>
-					<length>30</length>
-					<name>HelloWorld</name>
+					<nullable>false</nullable>
+					<length>10</length>
+					<precision>0</precision>
+					<type>id_Integer</type>
+					<usefulColumn>true</usefulColumn>
 				</column>
 				<column>
+					<name>Name</name>
 					<key>false</key>
-					<length>50</length>
-					<name>heyja</name>
+					<nullable>false</nullable>
+					<length>20</length>
+					<precision>0</precision>
+					<type>id_String</type>
+					<usefulColumn>true</usefulColumn>
+				</column>
+				<column>
+					<name>Vorname</name>
+					<key>false</key>
+					<nullable>false</nullable>
+					<length>20</length>
+					<precision>0</precision>
+					<type>id_String</type>
+					<usefulColumn>true</usefulColumn>
 				</column>
 			</metadata>
-		<metadata><type>reject</type><connectorName>tMSSQLCommit_1</connectorName><column><key>false</key><name>blalala</name></column></metadata></DBCommit>
+		</SqlInput>
+		
+		<!--Lookup-->
+		<SqlInput>
+			<uniqueName>tMSSQLInput_2</uniqueName>
+			<name>tMSSqlInput</name>
+			<label>MyLookup</label>
+			<dataBase>tMSSQLConnection_1</dataBase>
+			<SQL>select * from test_kunde</SQL>
+			<trim/>
+			<metadata>
+				<type>FLOW</type>
+				<connectorName>tMSSQLInput_2</connectorName>
+				<column>
+					<name>KDNR</name>
+					<key>true</key>
+					<nullable>false</nullable>
+					<length>10</length>
+					<precision>0</precision>
+					<type>id_Integer</type>
+					<usefulColumn>true</usefulColumn>
+				</column>
+				<column>	
+					<name>Business_key</name>
+					<key>false</key>
+					<nullable>false</nullable>
+					<length>10</length>
+					<precision>0</precision>
+					<type>id_Integer</type>
+					<usefulColumn>true</usefulColumn>
+				</column>
+				<column>
+					<name>Name</name>
+					<key>false</key>
+					<nullable>false</nullable>
+					<length>20</length>
+					<precision>0</precision>
+					<type>id_String</type>
+					<usefulColumn>true</usefulColumn>
+				</column>
+				<column>
+					<name>Vorname</name>
+					<key>false</key>
+					<nullable>false</nullable>
+					<length>20</length>
+					<precision>0</precision>
+					<type>id_String</type>
+					<usefulColumn>true</usefulColumn>
+				</column>
+			</metadata>
+		</SqlInput>
+		<SqlOutput>
+			<uniqueName>tMSSQLOutput_1</uniqueName>
+			<name>tMSSqlOutput</name>
+			<label>MyOutput</label>
+			<dataBase>tMSSQLConnection_1</dataBase>
+			<table>koutput</table>
+			<action>INSERT</action>
+			<metadata>
+				<type>FLOW</type>
+				<connectorName>tMSSQLOutput_1</connectorName>
+			</metadata>
+		</SqlOutput>
+		
+		<Transformer>
+			<uniqueName>tMap_1</uniqueName>
+			<name>tMap</name>
+			<label>MyTransformer</label>
+			<metadata>
+				<type>FLOW</type>
+				<connectorName>Output</connectorName>
+			</metadata>
+			<nodedata>
+				<varTables/>
+				<outputTables/>
+				<inputTables/>
+			</nodedata>
+		</Transformer>
+		
 		<connection>
 			<source>tPrejob_1</source>
 			<target>tMSSQLConnection_1</target>
@@ -53,17 +163,54 @@
 			<connectorName>COMPONENT_OK</connectorName>
 			<metaname>tPrejob_1</metaname>
 			<uniqueName>OnComponentOk_1</uniqueName>
+			<label>OnComponentOK</label>
 		</connection>
 		<connection>
 			<source>tPostjob_1</source>
 			<target>tMSSQLCommit_1</target>
-			<type>0</type>
-			<connectorName>Component_OK</connectorName>
+			<type>3</type>
+			<connectorName>COMPONENT_OK</connectorName>
 			<metaname>tPostjob_1</metaname>
 			<uniqueName>onComponentOK2</uniqueName>
+			<label>OnComponentOK</label>
+		</connection>
+		<connection>
+			<source>tMSSQLInput_1</source>
+			<target>tMap_1</target>
+			<type>0</type>
+			<connectorName>FLOW</connectorName>
+			<metaname>tMSSQLInput_1</metaname>
+			<uniqueName>DF_Input1</uniqueName>
+			<label>DF_Input</label>
 			<data>
-				<value>ID</value>
-				<value>Name</value>
-			</data>
+				<column>TRID</column>
+				<column>KDNR</column>
+				<column>Name</column>
+				<column>Vorname</column>
+			</data>		
+		</connection>
+		<connection>
+			<source>tMSSQLInput_2</source>
+			<target>tMap_1</target>
+			<type>8</type>
+			<connectorName>FLOW</connectorName>
+			<metaname>tMSSQLInput_1</metaname>
+			<uniqueName>DF_Lookup1</uniqueName>
+			<label>DF_Lookup</label>
+			<data>
+				<column>KDNR</column>
+				<column>Business_key</column>
+				<column>Name</column>
+				<column>Vorname</column>
+			</data>				
+		</connection>
+		<connection>
+			<source>tMap_1</source>
+			<target>tMSSQLOutput_1</target>
+			<type>0</type>
+			<connectorName>FLOW</connectorName>
+			<metaname>Output</metaname>
+			<uniqueName>MyOutput1</uniqueName>
+			<label>MyOutput</label>		
 		</connection>
 	</ProcessType>
