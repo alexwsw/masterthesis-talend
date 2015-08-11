@@ -38,7 +38,7 @@ public class TurnTalendIntoDOM {
 		try {
 			builder = dbf.newDocumentBuilder();
 			document = builder.parse(new File(
-					".\\XML\\simpleTree.xml"));
+					".\\XML\\simpleTreeNoData.xml"));
 		} catch (IOException e) {
 			System.err.println("Ooooops must be trying this on a mac");
 			try {

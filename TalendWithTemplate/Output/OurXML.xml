@@ -13,12 +13,11 @@
 			<uniqueName>tMSSQLConnection_1</uniqueName>
 			<name>tMSSqlConnection</name>
 			<label>MyConnection</label>
-			<DBName>"TALEND_TEST"</DBName>
-			<host>"172.21.100.77"</host>
-			<port>"1433"</port>
-			<schema_db>"dbo"</schema_db>
-			<user>"isETL_User"</user>
-			<pass>"hTgAoqXDCdLnPZDSDy6ojQ=="</pass>		
+			<host>""</host>
+			<port>1433</port>
+			<schema_db>""</schema_db>
+			<user>""</user>
+			<pass>""</pass>		
 		</DBase>
 		<DBCommit>
 			<uniqueName>tMSSQLCommit_1</uniqueName>
@@ -40,42 +39,6 @@
 			<metadata>
 				<type>FLOW</type>
 				<connectorName>tMSSQLInput_1</connectorName>
-				<column>
-					<name>TRID</name>
-					<key>true</key>
-					<nullable>false</nullable>
-					<length>10</length>
-					<precision>0</precision>
-					<type>id_Integer</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
-				<column>
-					<name>KDNR</name>
-					<key>false</key>
-					<nullable>false</nullable>
-					<length>10</length>
-					<precision>0</precision>
-					<type>id_Integer</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
-				<column>
-					<name>Name</name>
-					<key>false</key>
-					<nullable>false</nullable>
-					<length>20</length>
-					<precision>0</precision>
-					<type>id_String</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
-				<column>
-					<name>Vorname</name>
-					<key>false</key>
-					<nullable>false</nullable>
-					<length>20</length>
-					<precision>0</precision>
-					<type>id_String</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
 			</metadata>
 		</SqlInput>
 		
@@ -85,47 +48,11 @@
 			<name>tMSSqlInput</name>
 			<label>MyLookup</label>
 			<dataBase>tMSSQLConnection_1</dataBase>
-			<SQL>select * from test_kunde</SQL>
+			<SQL>"select * from test_kunde"</SQL>
 			<trim/>
 			<metadata>
 				<type>FLOW</type>
 				<connectorName>tMSSQLInput_2</connectorName>
-				<column>
-					<name>KDNR</name>
-					<key>true</key>
-					<nullable>false</nullable>
-					<length>10</length>
-					<precision>0</precision>
-					<type>id_Integer</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
-				<column>	
-					<name>Business_key</name>
-					<key>false</key>
-					<nullable>false</nullable>
-					<length>10</length>
-					<precision>0</precision>
-					<type>id_Integer</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
-				<column>
-					<name>Name</name>
-					<key>false</key>
-					<nullable>false</nullable>
-					<length>20</length>
-					<precision>0</precision>
-					<type>id_String</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
-				<column>
-					<name>Vorname</name>
-					<key>false</key>
-					<nullable>false</nullable>
-					<length>20</length>
-					<precision>0</precision>
-					<type>id_String</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
 			</metadata>
 		</SqlInput>
 		<SqlOutput>
@@ -148,69 +75,11 @@
 			<metadata>
 				<type>FLOW</type>
 				<connectorName>Output</connectorName>
-				<column>
-					<name>TRID</name>
-					<key>true</key>
-					<nullable>false</nullable>
-					<length>10</length>
-					<precision>0</precision>
-					<type>id_Integer</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
-				<column>
-					<name>KDNR</name>
-					<key>false</key>
-					<nullable>false</nullable>
-					<length>10</length>
-					<precision>0</precision>
-					<type>id_Integer</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
-				<column>
-					<name>Vollname</name>
-					<key>false</key>
-					<nullable>false</nullable>
-					<length>20</length>
-					<precision>0</precision>
-					<type>id_String</type>
-					<usefulColumn>true</usefulColumn>
-				</column>
 			</metadata>
 			<nodedata>
-				<varTables>
-					<name>Var</name>
-					<data>
-						<column expression="DF_Input.TRID" type="id_Integer">TRID</column>
-						<column expression="DF_Input.KDNR" type="id_Integer">KDNR</column>
-					</data>
-				</varTables>
-				<outputTables>
-					<name>Output</name>
-					<data>
-						<column expression="DF_Input.TRID" type="id_Integer">TRID</column>
-						<column expression="DF_Input.KDNR" type="id_Integer">KDNR</column>
-						<column expression="DF_Input.Name + &quot; &quot; + DF_Input.Vorname" type="id_String">Vollname</column>
-					</data>
-				</outputTables>
-				<inputTables>
-					<name>DF_Input</name>
-					<data>
-						<column type="id_Integer">TRID</column>
-						<column type="id_Integer">KDNR</column>
-						<column type="id_String">Name</column>
-						<column type="id_String">Vorname</column>
-					</data>
-				</inputTables>
-				<inputTables>
-					<name>DF_Lookup</name>
-					<innerJoin>true</innerJoin>
-					<data>
-					<column expression="DF_Input.KDNR" operator="=" type="id_Integer">KDNR</column>
-					<column type="id_Integer">Business_key</column>
-					<column type="id_String">Name</column>
-					<column type="id_String">Vorname</column>
-					</data>
-				</inputTables>
+				<varTables/>
+				<outputTables/>
+				<inputTables/>
 			</nodedata>
 		</Transformer>
 		
@@ -239,13 +108,7 @@
 			<connectorName>FLOW</connectorName>
 			<metaname>tMSSQLInput_1</metaname>
 			<uniqueName>DF_Input1</uniqueName>
-			<label>DF_Input</label>
-			<data>
-				<column>TRID</column>
-				<column>KDNR</column>
-				<column>Name</column>
-				<column>Vorname</column>
-			</data>		
+			<label>DF_Input</label>		
 		</connection>
 		<connection>
 			<source>tMSSQLInput_2</source>
@@ -254,13 +117,7 @@
 			<connectorName>FLOW</connectorName>
 			<metaname>tMSSQLInput_1</metaname>
 			<uniqueName>DF_Lookup1</uniqueName>
-			<label>DF_Lookup</label>
-			<data>
-				<column>KDNR</column>
-				<column>Business_key</column>
-				<column>Name</column>
-				<column>Vorname</column>
-			</data>				
+			<label>DF_Lookup</label>		
 		</connection>
 		<connection>
 			<source>tMap_1</source>
