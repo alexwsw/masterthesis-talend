@@ -14,15 +14,25 @@ public class Navigator {
 		
 		Node node = null;
 		XPath xpath = XPathFactory.newInstance().newXPath();
-		String expression = String.format("/talendfile:ProcessType/*[name()='node']/*[name()='elementParameter'][@value='%s']", label);
-		System.out.println(expression);
+		String expression = String.format("//*[@value='%s']", label);
+		System.out.printf("XPath expression: %s%n", expression);
 		try {
 			node = (Node)xpath.compile(expression).evaluate(document, XPathConstants.NODE);
 		} catch (XPathExpressionException e) {
 			System.out.println("XPathExpression occured");
 			e.printStackTrace();
 		}	
-		return node;
+		return node.getParentNode();
+	}
+	
+	public static void getNodeElement(Node node, String name){
+		
+	}
+	
+	public static void setNodeData(Document document, String label, String name, String value) {
+		
+		Node node = getElementByLabel(document, label);
+		
 	}
 
 }
