@@ -25,7 +25,7 @@ public class TurnTalendIntoDOM {
 
 	public static void main(String[] args) throws XPathExpressionException {
 		//raw template
-		String xml = ".\\XML\\simpleTree.xml";
+		String xml = ".\\XML\\simpleTreeNoData.xml";
 		//XSLT transformation file
 		String xslt = ".\\XSL\\simpleTreeTransformer.xsl";
 		//file path to the processed talend XML
@@ -80,7 +80,7 @@ public class TurnTalendIntoDOM {
 		Node parent = n2.getParentNode();
 		System.out.println(parent.getNodeName());
 		
-		Node n3 = TurnTalendIntoDOM.getNodeByLabel(document, "JobStarter");
+		Node n3 = TurnTalendIntoDOM.getNodeByLabel(document, "MyConnection");
 		System.out.println(n3.getNodeName());
 		
 		//add a reject metadata to a node

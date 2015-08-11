@@ -180,20 +180,20 @@
 				<varTables>
 					<name>Var</name>
 					<data>
-						<column expression="DF_Input1.TRID" type="id_Integer">TRID</column>
-						<column expression="DF_Input1.KDNR" type="id_Integer">KDNR</column>
+						<column expression="DF_Input.TRID" type="id_Integer">TRID</column>
+						<column expression="DF_Input.KDNR" type="id_Integer">KDNR</column>
 					</data>
 				</varTables>
 				<outputTables>
 					<name>Output</name>
 					<data>
-						<column expression="DF_Input1.TRID" type="id_Integer">TRID</column>
-						<column expression="DF_Input1.KDNR" type="id_Integer">KDNR</column>
-						<column expression="DF_Input1.Name + &quot; &quot; + DF_Input1.Vorname" type="id_String">Vollname</column>
+						<column expression="DF_Input.TRID" type="id_Integer">TRID</column>
+						<column expression="DF_Input.KDNR" type="id_Integer">KDNR</column>
+						<column expression="DF_Input.Name + &quot; &quot; + DF_Input.Vorname" type="id_String">Vollname</column>
 					</data>
 				</outputTables>
 				<inputTables>
-					<name>DF_Input1</name>
+					<name>DF_Input</name>
 					<data>
 						<column type="id_Integer">TRID</column>
 						<column type="id_Integer">KDNR</column>
@@ -202,10 +202,10 @@
 					</data>
 				</inputTables>
 				<inputTables>
-					<name>DF_Lookup1</name>
+					<name>DF_Lookup</name>
 					<innerJoin>true</innerJoin>
 					<data>
-					<column type="id_Integer">KDNR</column>
+					<column expression="DF_Input.KDNR" operator="=" type="id_Integer">KDNR</column>
 					<column type="id_Integer">Business_key</column>
 					<column type="id_String">Name</column>
 					<column type="id_String">Vorname</column>

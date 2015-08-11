@@ -304,18 +304,18 @@
 <nodeData xsi:type="MapperData">
 <uiProperties shellMaximized="true"/>
 <varTables sizeState="INTERMEDIATE" name="Var">
-<mapperTableEntries name="TRID" expression="DF_Input1.TRID" type="id_Integer"/>
-<mapperTableEntries name="KDNR" expression="DF_Input1.KDNR" type="id_Integer"/>
+<mapperTableEntries name="TRID" expression="DF_Input.TRID" type="id_Integer"/>
+<mapperTableEntries name="KDNR" expression="DF_Input.KDNR" type="id_Integer"/>
 </varTables>
 <outputTables sizeState="INTERMEDIATE" name="Output">
-<mapperTableEntries name="TRID" expression="DF_Input1.TRID" type="id_Integer"/>
-<mapperTableEntries name="KDNR" expression="DF_Input1.KDNR" type="id_Integer"/>
-<mapperTableEntries name="Vollname" expression="DF_Input1.Name + &quot; &quot; + DF_Input1.Vorname" type="id_String"/>
+<mapperTableEntries name="TRID" expression="DF_Input.TRID" type="id_Integer"/>
+<mapperTableEntries name="KDNR" expression="DF_Input.KDNR" type="id_Integer"/>
+<mapperTableEntries name="Vollname" expression="DF_Input.Name + &quot; &quot; + DF_Input.Vorname" type="id_String"/>
 </outputTables>
-<mapperTableEntries name="TRID" expression="DF_Input1.TRID" type="id_Integer"/>
-<mapperTableEntries name="KDNR" expression="DF_Input1.KDNR" type="id_Integer"/>
-<mapperTableEntries name="Vollname" expression="DF_Input1.Name + &quot; &quot; + DF_Input1.Vorname" type="id_String"/>
-<inputTables sizeState="INTERMEDIATE" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE" name="DF_Input1">
+<mapperTableEntries name="TRID" expression="DF_Input.TRID" type="id_Integer"/>
+<mapperTableEntries name="KDNR" expression="DF_Input.KDNR" type="id_Integer"/>
+<mapperTableEntries name="Vollname" expression="DF_Input.Name + &quot; &quot; + DF_Input.Vorname" type="id_String"/>
+<inputTables sizeState="INTERMEDIATE" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE" name="DF_Input">
 <mapperTableEntries name="TRID" type="id_Integer"/>
 <mapperTableEntries name="KDNR" type="id_Integer"/>
 <mapperTableEntries name="Name" type="id_String"/>
@@ -325,13 +325,13 @@
 <mapperTableEntries name="KDNR" type="id_Integer"/>
 <mapperTableEntries name="Name" type="id_String"/>
 <mapperTableEntries name="Vorname" type="id_String"/>
-<inputTables sizeState="INTERMEDIATE" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE" name="DF_Lookup1" innerJoin="true">
-<mapperTableEntries name="KDNR" type="id_Integer"/>
+<inputTables sizeState="INTERMEDIATE" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE" name="DF_Lookup" innerJoin="true">
+<mapperTableEntries name="KDNR" expression="DF_Input.KDNR" type="id_Integer" operator="="/>
 <mapperTableEntries name="Business_key" type="id_Integer"/>
 <mapperTableEntries name="Name" type="id_String"/>
 <mapperTableEntries name="Vorname" type="id_String"/>
 </inputTables>
-<mapperTableEntries name="KDNR" type="id_Integer"/>
+<mapperTableEntries name="KDNR" expression="DF_Input.KDNR" type="id_Integer" operator="="/>
 <mapperTableEntries name="Business_key" type="id_Integer"/>
 <mapperTableEntries name="Name" type="id_String"/>
 <mapperTableEntries name="Vorname" type="id_String"/>

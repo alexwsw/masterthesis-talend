@@ -444,6 +444,11 @@
 			<xsl:attribute name="type">
 				<xsl:value-of select="@type"/>
 			</xsl:attribute>
+			<xsl:if test="@operator">
+				<xsl:attribute name="operator">
+					<xsl:value-of select="@operator"/>
+				</xsl:attribute>
+			</xsl:if>
 		</mapperTableEntries>
 	</xsl:template>
 	
