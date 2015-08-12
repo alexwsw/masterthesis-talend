@@ -6,6 +6,9 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import abstractElement.AbstractElement;
+import database.tMSSqlConnection;
+
 public class Start {
 
 	public static void main(String[] args) {
@@ -23,11 +26,17 @@ public class Start {
 		String schema= "dbo";
 		String database= "TALEND_TEST";
 		String user = "isETL_User";
+		//de-/encryptor required (look in the talend source code for implementation)
 		String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
 		
-		NodeBuilder.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
+		tMSSqlConnection.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
+		
+		Element n = (Element) Navigator.getElementByName(Navigator.getElementByValue(document, "MyCommit"), "CONNECTION");
+		n.setAttribute("value", tMSSqlConnection.getUniqueName(document, "MyConnection"));
 		
 		
+		System.err.println("Family: " + tMSSqlConnection.getComponentName(document, "MyCommit"));
+		System.out.println("unique Name: " + AbstractElement.getUniqueName(document, "MyCommit"));
 		
 		DocumentCreator.SaveDOMFile(document, output);
 
