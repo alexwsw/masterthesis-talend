@@ -19,7 +19,13 @@ public class Start {
 		Document document = DocumentCreator.buildDocument(template);
 		DocumentCreator.SaveDOMFile(document, output);
 		Node node = Navigator.getElementByValue(document, "MyConnection");
-		Node n2 = Navigator.getElementByName(node, "HOST");
+		Node node2 = Navigator.getElementByValue(document, "JobStarter");
+		Navigator.findConnection(document, node2, node);
+		
+		Navigator.findConnection(document, "JobStarter", "MyConnection");
+		//Node n2 = Navigator.getElementByName(node, "HOST");
+		
+		System.err.println("Guck, die Methode funzt:" + AbstractElement.getNodesUniqueName(document, node));
 		
 		String host = "172.21.100.77";
 		String port = "1433";
