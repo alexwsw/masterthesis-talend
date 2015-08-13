@@ -43,6 +43,7 @@ public class Start {
 		
 		System.err.println("Family: " + tMSSqlConnection.getComponentName(document, "MyCommit"));
 		System.out.println("unique Name: " + AbstractElement.getUniqueName(document, "MyCommit"));
+		Navigator.createConnection(document, node2, node);
 		
 		DocumentCreator.SaveDOMFile(document, output);
 
