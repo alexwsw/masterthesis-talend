@@ -6,12 +6,13 @@ import org.w3c.dom.NodeList;
 
 import abstractNode.AbstractNode;
 import start.*;
+import xPath.XPathExpressions;
 
 public class tMSSqlConnection extends AbstractNode {
 	
 	public static int counter = 0;
 	
-	public static int countInstance(Document document) {
+	public static int countInstance(Document document) { 
 		int i = Navigator.getNumberOfNodes(document, tMSSqlConnection.class.getSimpleName());
 		counter = i++;
 		return counter;

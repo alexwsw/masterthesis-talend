@@ -23,8 +23,7 @@ public class Navigator {
 		Node node = null;
 		try {
 			node = (Node) xpath.compile(String.format(expression.getExpression(),  values)).evaluate(obj, XPathConstants.NODE);
-			//System.out.println(String.format(expression.getExpression(), values));
-			System.out.println("Aufruf des xPath-Navigators");
+			System.out.println(String.format(expression.getExpression(), values));
 		} catch (XPathExpressionException e) {
 			System.out.println("XPathExpression occured");
 			e.printStackTrace();
@@ -48,7 +47,7 @@ public class Navigator {
 
 	// get a child element within the node according to given name (also
 	// applicable for metadata)
-	// NOTE metadata's name is identic with Node's unique_name
+	// NOTE metadata's name is identical with Node's unique_name
 	public static Node getElementByName(Node n, String name) {
 
 		Node node = null;

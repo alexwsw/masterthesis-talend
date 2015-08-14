@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 
 import start.DocumentCreator;
 import start.Navigator;
+import start.NodeBuilder;
 import xPath.XPathExpressions;
 import abstractNode.AbstractNode;
 
@@ -18,7 +19,12 @@ public class Connection {
 		String tgt = AbstractNode.getNodesUniqueName(document, target);
 		connection = Navigator.processXPathQuery(document, XPathExpressions.getConnection, src, tgt);
 		System.out.println(DocumentCreator.getStringFromDocument(connection));
+		if(connection == null) {
+			System.out.println("No connection found!!!");
+			return null;
+		} else {
 		return connection;
+		}
 	}
 
 	//find connection according to Labels of the Nodes
@@ -28,7 +34,12 @@ public class Connection {
 		String trgt = AbstractNode.getUniqueName(document, labelTarget);
 		connection = Navigator.processXPathQuery(document, XPathExpressions.getConnection, src, trgt);
 		System.out.println(DocumentCreator.getStringFromDocument(connection)); 
+		if(connection == null) {
+			System.out.println("No connection found!!!");
+			return null;
+		} else {
 		return connection;
+		}
 	}
 
 	//in Progress
@@ -53,12 +64,15 @@ public class Connection {
 	}
 
 	public static void deleteConnection(Document document, Node connection) {
-		connection.getParentNode().removeChild(connection);
+		NodeBuilder.removeNode(document, connection);
+		
+		//connection.getParentNode().removeChild(connection);
 	}
 
 	public static void deleteConnection(Document document, Node source, Node target){
 		Node conn = findConnection(document, source, target);
-		conn.getParentNode().removeChild(conn);
+		NodeBuilder.removeNode(document, conn);
+		//conn.getParentNode().removeChild(conn);
 	}
 
 }

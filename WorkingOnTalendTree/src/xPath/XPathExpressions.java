@@ -5,9 +5,11 @@ public enum XPathExpressions {
 	//Any "value" attribute e.g. elementParameter elements
 	getByChildValue("//*[@value='%s']"),
 	//Any "name attribute" e.g. name of the metadata or "UNIQUE_NAME"
-	getNodeByUniqueName("./*[@name='%s']"),
+	getByNameAttribute("./*[@name='%s']"),
 	//for connections
-	getConnection("//*[@source='%s'and @target='%s']");
+	getConnection("//*[@source='%s'and @target='%s']"),
+	//metadata of a certain type (e.g. "FLOW") (type can be stored in an enum)
+	getMetadata("./*[@connector='%s' and @name='%s']");
 	
 	
 	private final String expression;

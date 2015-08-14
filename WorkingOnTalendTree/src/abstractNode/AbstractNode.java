@@ -1,16 +1,24 @@
 package abstractNode;
 
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import start.Navigator;
+import start.NodeBuilder;
 import xPath.XPathExpressions;
 
 public abstract class AbstractNode {
+	
+	
+	//INCOMPLETE (just removing a node would cause a program crash)
+	//before removing connections must be checked, main connections adjusted and updated, non main nodes must be removed!!!!!
+	public static void removeNode(Document document, Node node){
+		NodeBuilder.removeNode(document, node);
+	}
+	public static void removeNode(Document document, String label){
+		NodeBuilder.removeNode(document, label);
+	}
 
 	// Get Node's unique Name (for references) (could be suitable for abstract
 	// class)
@@ -29,12 +37,24 @@ public abstract class AbstractNode {
 	// also testing of xpath query processor
 	public static String getNodesUniqueName(Document document, Node node) {
 		Element e = (Element) Navigator.processXPathQuery(node,
-				XPathExpressions.getNodeByUniqueName, "UNIQUE_NAME");
+				XPathExpressions.getByNameAttribute, "UNIQUE_NAME");
 
 		return e.getAttribute("value");
 
 	}
+	
+	public static Node getMetadata(Document document, Node node, String type) {
+		String uniqueName = AbstractNode.getNodesUniqueName(document, node);
+		return Navigator.processXPathQuery(node, XPathExpressions.getMetadata, type, uniqueName);
+	}
+	
+	public static Node getMetadata(Document document, String label, String type) {
+		Node node = AbstractNode.getElementByValue(document, label);
+		String uniqueName = AbstractNode.getNodesUniqueName(document, node);
+		return Navigator.processXPathQuery(node, XPathExpressions.getMetadata, type, uniqueName);
+	}
 
+	//the label String must be an ID or unique
 	public static Node getElementByValue(Document document, String label) {
 		Element e = (Element) Navigator.processXPathQuery(document,
 				XPathExpressions.getByChildValue, label);
