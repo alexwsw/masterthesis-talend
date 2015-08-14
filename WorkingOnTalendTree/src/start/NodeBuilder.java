@@ -4,6 +4,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import abstractNode.AbstractNode;
+
 public class NodeBuilder {
 	
 
@@ -15,7 +17,7 @@ public class NodeBuilder {
 	}
 	
 	public static void removeNode(Document document, String label) {
-		Node n = Navigator.getElementByValue(document, label);
+		Node n = AbstractNode.getElementByValue(document, label);
 		if (n == null) {
 			System.err.println("Nothing to remove the node doesn't exist");
 		} else {

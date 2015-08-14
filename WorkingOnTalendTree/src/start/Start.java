@@ -6,7 +6,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import abstractElement.AbstractElement;
+import connection.Connection;
+import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
 
 public class Start {
@@ -18,14 +19,16 @@ public class Start {
 
 		Document document = DocumentCreator.buildDocument(template);
 		DocumentCreator.SaveDOMFile(document, output);
-		Node node = Navigator.getElementByValue(document, "MyConnection");
-		Node node2 = Navigator.getElementByValue(document, "JobStarter");
-		Navigator.findConnection(document, node2, node);
+		Node node = AbstractNode.getElementByValue(document, "MyConnection");
+		Node node2 = AbstractNode.getElementByValue(document, "JobStarter");
+		Node node3 = AbstractNode.getElementByValue(document, "JobFinisher");
+		System.err.println(DocumentCreator.getStringFromDocument(node3));
+		Connection.findConnection(document, node2, node);
 		
-		Navigator.findConnection(document, "JobStarter", "MyConnection");
+		Connection.findConnection(document, "JobStarter", "MyConnection");
 		//Node n2 = Navigator.getElementByName(node, "HOST");
 		
-		System.err.println("Guck, die Methode funzt:" + AbstractElement.getNodesUniqueName(document, node));
+		System.err.println("Guck, die Methode funzt:" + AbstractNode.getNodesUniqueName(document, node));
 		
 		String host = "172.21.100.77";
 		String port = "1433";
@@ -37,13 +40,13 @@ public class Start {
 		
 		tMSSqlConnection.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
 		
-		Element n = (Element) Navigator.getElementByName(Navigator.getElementByValue(document, "MyCommit"), "CONNECTION");
+		Element n = (Element) Navigator.getElementByName(AbstractNode.getElementByValue(document, "MyCommit"), "CONNECTION");
 		n.setAttribute("value", tMSSqlConnection.getUniqueName(document, "MyConnection"));
 		
 		
 		System.err.println("Family: " + tMSSqlConnection.getComponentName(document, "MyCommit"));
-		System.out.println("unique Name: " + AbstractElement.getUniqueName(document, "MyCommit"));
-		Navigator.createConnection(document, node2, node);
+		System.out.println("unique Name: " + AbstractNode.getUniqueName(document, "MyCommit"));
+		Connection.createConnection(document, node2, node);
 		
 		DocumentCreator.SaveDOMFile(document, output);
 

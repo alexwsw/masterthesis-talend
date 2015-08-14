@@ -4,10 +4,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import abstractElement.AbstractElement;
+import abstractNode.AbstractNode;
 import start.*;
 
-public class tMSSqlConnection extends AbstractElement {
+public class tMSSqlConnection extends AbstractNode {
 	
 	public static int counter = 0;
 	
@@ -32,7 +32,7 @@ public class tMSSqlConnection extends AbstractElement {
 	
 
 	public static void setDBConnection (Document document, String label, String host, String port, String schema, String database, String user, String password) {
-		Node dbNode = Navigator.getElementByValue(document, label);
+		Node dbNode = AbstractNode.getElementByValue(document, label);
 		Element element = (Element) Navigator.getElementByName(dbNode, "HOST");
 		element.setAttribute("value", host);
 		element = (Element) Navigator.getElementByName(dbNode, "PORT");

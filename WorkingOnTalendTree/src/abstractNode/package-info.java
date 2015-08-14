@@ -5,4 +5,4 @@
  * @author becher
  *
  */
-package abstractElement;
+package abstractNode;
