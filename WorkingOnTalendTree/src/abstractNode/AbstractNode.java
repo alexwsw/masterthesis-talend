@@ -3,6 +3,7 @@ package abstractNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import start.Navigator;
 import start.NodeBuilder;
@@ -36,7 +37,7 @@ public abstract class AbstractNode {
 	// be found first)
 	// also testing of xpath query processor
 	public static String getNodesUniqueName(Document document, Node node) {
-		Element e = (Element) Navigator.processXPathQuery(node,
+		Element e = (Element) Navigator.processXPathQueryNode(node,
 				XPathExpressions.getByNameAttribute, "UNIQUE_NAME");
 
 		return e.getAttribute("value");
@@ -45,18 +46,23 @@ public abstract class AbstractNode {
 	
 	public static Node getMetadata(Document document, Node node, String type) {
 		String uniqueName = AbstractNode.getNodesUniqueName(document, node);
-		return Navigator.processXPathQuery(node, XPathExpressions.getMetadata, type, uniqueName);
+		return Navigator.processXPathQueryNode(node, XPathExpressions.getMetadata, type, uniqueName);
 	}
 	
 	public static Node getMetadata(Document document, String label, String type) {
 		Node node = AbstractNode.getElementByValue(document, label);
 		String uniqueName = AbstractNode.getNodesUniqueName(document, node);
-		return Navigator.processXPathQuery(node, XPathExpressions.getMetadata, type, uniqueName);
+		return Navigator.processXPathQueryNode(node, XPathExpressions.getMetadata, type, uniqueName);
+	}
+	
+	//columns from the metadata(needs to be tested)
+	public static NodeList getMetadataColumns(Node metadata) {
+		return metadata.getChildNodes();
 	}
 
 	//the label String must be an ID or unique
 	public static Node getElementByValue(Document document, String label) {
-		Element e = (Element) Navigator.processXPathQuery(document,
+		Element e = (Element) Navigator.processXPathQueryNode(document,
 				XPathExpressions.getByChildValue, label);
 		if (e != null) {
 			return e.getParentNode();

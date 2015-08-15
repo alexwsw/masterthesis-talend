@@ -17,7 +17,7 @@ public class Connection {
 		Node connection = null;
 		String src = AbstractNode.getNodesUniqueName(document, source);
 		String tgt = AbstractNode.getNodesUniqueName(document, target);
-		connection = Navigator.processXPathQuery(document, XPathExpressions.getConnection, src, tgt);
+		connection = Navigator.processXPathQueryNode(document, XPathExpressions.getConnection, src, tgt);
 		System.out.println(DocumentCreator.getStringFromDocument(connection));
 		if(connection == null) {
 			System.out.println("No connection found!!!");
@@ -32,7 +32,7 @@ public class Connection {
 		Node connection = null;
 		String src = AbstractNode.getUniqueName(document, labelSource);
 		String trgt = AbstractNode.getUniqueName(document, labelTarget);
-		connection = Navigator.processXPathQuery(document, XPathExpressions.getConnection, src, trgt);
+		connection = Navigator.processXPathQueryNode(document, XPathExpressions.getConnection, src, trgt);
 		System.out.println(DocumentCreator.getStringFromDocument(connection)); 
 		if(connection == null) {
 			System.out.println("No connection found!!!");

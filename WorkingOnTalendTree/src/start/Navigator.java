@@ -19,7 +19,7 @@ public class Navigator {
 	//Obj is a given context (like Document or Node)
 	//Expressions are prepared Strings, stored in an enum
 	//values is a vararg in order to keep the number of arguments variable
-	public static Node processXPathQuery(Object obj, XPathExpressions expression, String... values) {
+	public static Node processXPathQueryNode(Object obj, XPathExpressions expression, String... values) {
 		Node node = null;
 		try {
 			node = (Node) xpath.compile(String.format(expression.getExpression(),  values)).evaluate(obj, XPathConstants.NODE);
@@ -29,6 +29,19 @@ public class Navigator {
 			e.printStackTrace();
 		}
 		return node;
+	}
+	
+	//do we really need nodelists???
+	public static NodeList processXpathQueryNodeList(Object obj, XPathExpressions expression, String... values) {
+		NodeList nodes = null;
+		try {
+			nodes = (NodeList) xpath.compile(String.format(expression.getExpression(),  values)).evaluate(obj, XPathConstants.NODESET);
+			System.out.println(String.format(expression.getExpression(), values));
+		} catch (XPathExpressionException e) {
+			System.out.println("XPathExpression occured");
+			e.printStackTrace();
+		}	
+		return nodes;
 	}
 	
 	// get the List of Nodes of the same type (necessary?)
