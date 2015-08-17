@@ -52,6 +52,9 @@ public class Start {
 		Node mdata = AbstractNode.getMetadata(document, input, "FLOW");
 		AbstractNode.setMetadataColumnsTest(document, mdata, values);
 		
+		//Connection
+		Connection.updateConnection(document, AbstractNode.getElementByValue(document, "MyInput"), AbstractNode.getElementByValue(document, "MyTransformer"));
+		
 		//export File
 		DocumentCreator.SaveDOMFile(document, output);
 		

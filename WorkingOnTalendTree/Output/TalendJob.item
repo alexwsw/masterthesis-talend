@@ -318,19 +318,19 @@
   </connection>
   <connection connectorName="FLOW" label="DF_Input" lineStyle="0" metaname="tMSSQLInput_1" offsetLabelX="0" offsetLabelY="0" source="tMSSQLInput_1" target="tMap_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="TRID"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="KDNR"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Name"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="Vorname"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
+<elementValue elementRef="TRACE_COLUMN" value="ID"/>
+<elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+<elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+<elementValue elementRef="TRACE_COLUMN" value="Name"/>
+<elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+<elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+<elementValue elementRef="TRACE_COLUMN" value="Vorname"/>
+<elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+<elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+<elementValue elementRef="TRACE_COLUMN" value="Alter"/>
+<elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+<elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+</elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="DF_Input"/>
   </connection>

@@ -69,6 +69,31 @@ public class Connection {
 		Node conn = findConnection(document, source, target);
 		NodeList connectionColumns=Connection.getConnectionColumns(conn).getChildNodes();
 		NodeList columns = AbstractNode.getMetadataColumns(AbstractNode.getMetadata(document, source, "FLOW"));
+		int k = 0;
+		
+		
+		for (int a = 0; a < columns.getLength(); a++) {
+			if (columns.item(a).getNodeType() == Node.TEXT_NODE) {
+				NodeBuilder.removeNode(document, columns.item(a));
+			}
+		}
+		
+		for (int a = 0; a < connectionColumns.getLength(); a++) {
+			if (connectionColumns.item(a).getNodeType() == Node.TEXT_NODE) {
+				NodeBuilder.removeNode(document, connectionColumns.item(a));
+			}
+		}
+		for (int i = 0; i<connectionColumns.getLength(); i++) {
+			Element e = (Element) connectionColumns.item(i);
+			Element c = (Element) columns.item(k);
+			if(!(e.getAttribute("elementRef").equals("TRACE_COLUMN"))) {
+				continue;
+			} else {
+				e.setAttribute("value", c.getAttribute("name"));
+				System.out.println("Input performed");
+				k++;
+			}
+		}
 	}
 
 	public static void deleteConnection(Document document, Node connection) {
