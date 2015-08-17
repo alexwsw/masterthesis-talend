@@ -31,7 +31,7 @@ public class Navigator {
 		return node;
 	}
 	
-	//do we really need nodelists???
+	//do we really need nodelists (DOM method getChildNodes could be a better solution)???
 	public static NodeList processXpathQueryNodeList(Object obj, XPathExpressions expression, String... values) {
 		NodeList nodes = null;
 		try {

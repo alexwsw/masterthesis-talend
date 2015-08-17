@@ -3,6 +3,7 @@ package connection;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import start.DocumentCreator;
 import start.Navigator;
@@ -41,6 +42,12 @@ public class Connection {
 		return connection;
 		}
 	}
+	
+	public static Node getConnectionColumns(Node node) {
+		Node a = null;
+		a = Navigator.processXPathQueryNode(node, XPathExpressions.getByNameAttribute, "TRACES_CONNECTION_FILTER");		
+		return a;
+	}
 
 	//in Progress
 	public static void createConnection(Document document, Node source, Node target){
@@ -60,7 +67,8 @@ public class Connection {
 
 	public static void updateConnection(Document document, Node source, Node target) {
 		Node conn = findConnection(document, source, target);
-		
+		NodeList connectionColumns=Connection.getConnectionColumns(conn).getChildNodes();
+		NodeList columns = AbstractNode.getMetadataColumns(AbstractNode.getMetadata(document, source, "FLOW"));
 	}
 
 	public static void deleteConnection(Document document, Node connection) {

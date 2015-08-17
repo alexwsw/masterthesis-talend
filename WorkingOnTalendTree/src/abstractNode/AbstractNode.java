@@ -5,19 +5,21 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import start.DocumentCreator;
 import start.Navigator;
 import start.NodeBuilder;
 import xPath.XPathExpressions;
 
 public abstract class AbstractNode {
-	
-	
-	//INCOMPLETE (just removing a node would cause a program crash)
-	//before removing connections must be checked, main connections adjusted and updated, non main nodes must be removed!!!!!
-	public static void removeNode(Document document, Node node){
+
+	// INCOMPLETE (just removing a node would cause a program crash)
+	// before removing connections must be checked, main connections adjusted
+	// and updated, non main nodes must be removed!!!!!
+	public static void removeNode(Document document, Node node) {
 		NodeBuilder.removeNode(document, node);
 	}
-	public static void removeNode(Document document, String label){
+
+	public static void removeNode(Document document, String label) {
 		NodeBuilder.removeNode(document, label);
 	}
 
@@ -43,24 +45,26 @@ public abstract class AbstractNode {
 		return e.getAttribute("value");
 
 	}
-	
+
 	public static Node getMetadata(Document document, Node node, String type) {
 		String uniqueName = AbstractNode.getNodesUniqueName(document, node);
-		return Navigator.processXPathQueryNode(node, XPathExpressions.getMetadata, type, uniqueName);
+		return Navigator.processXPathQueryNode(node,
+				XPathExpressions.getMetadata, type, uniqueName);
 	}
-	
+
 	public static Node getMetadata(Document document, String label, String type) {
 		Node node = AbstractNode.getElementByValue(document, label);
 		String uniqueName = AbstractNode.getNodesUniqueName(document, node);
-		return Navigator.processXPathQueryNode(node, XPathExpressions.getMetadata, type, uniqueName);
+		return Navigator.processXPathQueryNode(node,
+				XPathExpressions.getMetadata, type, uniqueName);
 	}
-	
-	//columns from the metadata(needs to be tested)
+
+	// columns from the metadata(needs to be tested)
 	public static NodeList getMetadataColumns(Node metadata) {
 		return metadata.getChildNodes();
 	}
 
-	//the label String must be an ID or unique
+	// the label String must be an ID or unique
 	public static Node getElementByValue(Document document, String label) {
 		Element e = (Element) Navigator.processXPathQueryNode(document,
 				XPathExpressions.getByChildValue, label);
@@ -71,4 +75,34 @@ public abstract class AbstractNode {
 		}
 	}
 
+	public static void setMetadataColumnsTest(Document document, Node metadata,
+			String[] values) {
+		NodeList columns = AbstractNode.getMetadataColumns(metadata);
+		for (int a = 0; a < columns.getLength(); a++) {
+			if (columns.item(a).getNodeType() == Node.TEXT_NODE) {
+				NodeBuilder.removeNode(document, columns.item(a));
+			}
+		}
+		for (int i = 0; i < values.length; i++) {
+			Element e = (Element) columns.item(i);
+			e.setAttribute("name", values[i]);
+			System.out.println(DocumentCreator.getStringFromDocument(columns
+					.item(i)));
+
+		}
+	}
+
+	// test setter
+	public static void setAttribute(Object obj, String attribute, String value) {
+		Element e = (Element) Navigator.processXPathQueryNode(obj,
+				XPathExpressions.getByNameAttribute, attribute);
+		e.setAttribute("value", value);
+	}
+
+	// test getter
+	public static String getAttribute(Object obj, String attribute) {
+		Element e = (Element) Navigator.processXPathQueryNode(obj,
+				XPathExpressions.getByNameAttribute, attribute);
+		return e.getAttribute("value");
+	}
 }

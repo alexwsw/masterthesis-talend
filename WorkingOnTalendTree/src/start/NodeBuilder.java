@@ -14,6 +14,10 @@ public class NodeBuilder {
 		root.appendChild(element);
 	}
 	
+	public static void appendElementToContext(Node node, Element element) {
+		node.appendChild(element);
+	}
+	
 	//remove Node if the Label is known
 	public static void removeNode(Document document, String label) {
 		Node n = AbstractNode.getElementByValue(document, label);

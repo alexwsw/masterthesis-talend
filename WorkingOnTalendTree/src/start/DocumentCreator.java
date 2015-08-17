@@ -24,6 +24,7 @@ public class DocumentCreator {
 		Document document = null;
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setNamespaceAware(true);
+		dbf.setIgnoringElementContentWhitespace(true);
 		try {
 			DocumentBuilder builder = dbf.newDocumentBuilder();
 			document = builder.parse(new File(path));

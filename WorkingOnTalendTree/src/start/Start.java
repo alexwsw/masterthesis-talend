@@ -15,8 +15,34 @@ public class Start {
 		String output = ".//Output//TalendJob.item";
 		//parse xml
 		Document document = DocumentCreator.buildDocument(template);
+		
+		String host = "172.21.100.77";
+		String port = "1433";
+		String schema= "dbo";
+		String database= "TALEND_TEST";
+		String user = "isETL_User";
+		//de-/encryptor required (look in the talend source code for implementation)
+		String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
+		
+		String [] values = {"ID", "Name", "Vorname", "Alter"};
+		String tableName = "dummyKunde";
+		//let's keep it simple
+		String sql = "select * from %s";
+		
+		tMSSqlConnection.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
+		
+		Node input = AbstractNode.getElementByValue(document, "MyInput");
+		AbstractNode.setAttribute(input, "TABLE", tableName);
+		AbstractNode.setAttribute(input, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
+		AbstractNode.setAttribute(input, "QUERY", String.format(sql.toString(), tableName));
+		Node mdata = AbstractNode.getMetadata(document, input, "FLOW");
+		AbstractNode.setMetadataColumnsTest(document, mdata, values);
+		
 		DocumentCreator.SaveDOMFile(document, output);
 		
+		
+		
+		/*
 		//test Nodes
 		Node node = AbstractNode.getElementByValue(document, "MyConnection");
 		Node node2 = AbstractNode.getElementByValue(document, "JobStarter");
@@ -24,9 +50,17 @@ public class Start {
 		System.err.println(DocumentCreator.getStringFromDocument(node3));
 		Connection.findConnection(document, node2, node);
 		
+		Element e = document.createElementNS("http://www.talend.org/mapper", "metatest");
+		System.out.println(DocumentCreator.getStringFromDocument(e));
+		
 		Node test = AbstractNode.getElementByValue(document, "MyLookup");
 		Node mdata = AbstractNode.getMetadata(document, test, "FLOW");
 		System.err.println(DocumentCreator.getStringFromDocument(mdata));
+		
+		AbstractNode.setMetadataColumnsTest(document, mdata, values);
+		System.err.println(DocumentCreator.getStringFromDocument(mdata));
+		//test finding connection
+		Connection.findConnection(document, "MyConnection", "MyCommit");
 		//Node n2 = Navigator.getElementByName(node, "HOST");
 		
 		//System.err.println("Guck, die Methode funzt:" + AbstractNode.getNodesUniqueName(document, node));
