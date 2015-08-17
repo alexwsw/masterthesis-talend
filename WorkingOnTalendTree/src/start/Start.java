@@ -26,11 +26,25 @@ public class Start {
 		
 		String [] values = {"ID", "Name", "Vorname", "Alter"};
 		String tableName = "dummyKunde";
-		//let's keep it simple
+		String outputName = "outputKunde";
+		String outputAction = "UPDATE";
+		//let's keep it simple (the star must be replaced by column names in the final version)
 		String sql = "select * from %s";
 		
+		//Connection
 		tMSSqlConnection.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
 		
+		//Commit
+		Node commit = AbstractNode.getElementByValue(document, "MyCommit");
+		AbstractNode.setAttribute(commit, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
+		
+		//Output
+		Node out = AbstractNode.getElementByValue(document, "MyOutput");
+		AbstractNode.setAttribute(out, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
+		AbstractNode.setAttribute(out, "TABLE", outputName);
+		AbstractNode.setAttribute(out, "DATA_ACTION", outputAction);
+		
+		//Input
 		Node input = AbstractNode.getElementByValue(document, "MyInput");
 		AbstractNode.setAttribute(input, "TABLE", tableName);
 		AbstractNode.setAttribute(input, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
@@ -38,6 +52,7 @@ public class Start {
 		Node mdata = AbstractNode.getMetadata(document, input, "FLOW");
 		AbstractNode.setMetadataColumnsTest(document, mdata, values);
 		
+		//export File
 		DocumentCreator.SaveDOMFile(document, output);
 		
 		
