@@ -9,7 +9,11 @@ public enum XPathExpressions {
 	//for connections
 	getConnection("//*[@source='%s'and @target='%s']"),
 	//metadata of a certain type (e.g. "FLOW") (type can be stored in an enum)
-	getMetadata("./*[@connector='%s' and @name='%s']");
+	getMetadata("./*[@connector='%s' and @name='%s']"),
+	
+	//test
+	getIncommingConnections("./*[@target='%s']"),
+	getOutgoingConnections("./*[@source='%s']");
 	
 	
 	private final String expression;

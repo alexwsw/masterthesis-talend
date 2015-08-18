@@ -65,6 +65,7 @@ public class Connection {
 		
 	}
 
+	//suited for a special case, badly needs to be redesigned
 	public static void updateConnection(Document document, Node source, Node target) {
 		Node conn = findConnection(document, source, target);
 		NodeList connectionColumns=Connection.getConnectionColumns(conn).getChildNodes();

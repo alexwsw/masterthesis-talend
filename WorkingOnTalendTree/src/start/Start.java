@@ -3,6 +3,8 @@ package start;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import connection.Connection;
 import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
@@ -54,6 +56,13 @@ public class Start {
 		
 		//Connection
 		Connection.updateConnection(document, AbstractNode.getElementByValue(document, "MyInput"), AbstractNode.getElementByValue(document, "MyTransformer"));
+		
+		Node transformer = AbstractNode.getElementByValue(document, "MyTransformer");
+		AbstractNode.removeNode(document, transformer);
+		NodeList incConns = AbstractNode.getIncomingConnections(document, transformer);
+		for (int i = 0; i<incConns.getLength(); i++){
+			System.err.println(DocumentCreator.getStringFromDocument(incConns.item(i)));
+		}
 		
 		//export File
 		DocumentCreator.SaveDOMFile(document, output);
