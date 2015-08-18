@@ -39,8 +39,10 @@ public abstract class AbstractNode {
 			String target = e.getAttribute("target");
 			System.out.println(target);
 			Element connection = (Element) Connection.findConnection(document, AbstractNode.getElementByValue(document, source), node);
+			//update connection
 			connection.setAttribute("target", target);
 			System.err.println(DocumentCreator.getStringFromDocument(connection));
+			//remove old connection
 			NodeBuilder.removeNode(document, e);
 		}
 		
