@@ -107,13 +107,13 @@
   <node componentName="tMSSqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSQLConnection_1"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="TEXT" name="HOST" value="172.21.100.77"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;172.21.100.77&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="1433"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="dbo"/>
-    <elementParameter field="TEXT" name="DBNAME" value="TALEND_TEST"/>
-    <elementParameter field="TEXT" name="USER" value="isETL_User"/>
-    <elementParameter field="PASSWORD" name="PASS" value="hTgAoqXDCdLnPZDSDy6ojQ=="/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;dbo&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;TALEND_TEST&quot;"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;isETL_User&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="v8+RGusCeE5g7aN7EnZnUA=="/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
@@ -147,12 +147,12 @@
     <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="dummyKunde"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;dummyKunde&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="select * from dummyKunde"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select * from dummyKunde&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -173,9 +173,9 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSQLInput_1">
 <column key="true" length="10" name="ID" nullable="false" precision="0" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Name" nullable="false" precision="0" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Alter" nullable="false" precision="0" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="20" name="Vorname" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="20" name="Alter" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="false" length="20" name="Name" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
   </node>
   
@@ -191,10 +191,10 @@
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="outputKunde"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;outputKunde&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CHECK" name="IDENTITY_INSERT" value="false"/>
-    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="UPDATE"/>
+    <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_OR_UPDATE"/>
     <elementParameter field="LABEL" name="NOTE" value="This option only applies when deploying and running in the Talend Runtime"/>
     <elementParameter field="CHECK" name="SPECIFY_IDENTITY_FIELD" value="false"/>
     <elementParameter field="COLUMN_LIST" name="IDENTITY_FIELD" value=""/>
@@ -236,13 +236,13 @@
 <elementValue elementRef="TRACE_COLUMN" value="ID"/>
 <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
 <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-<elementValue elementRef="TRACE_COLUMN" value="Name"/>
+<elementValue elementRef="TRACE_COLUMN" value="Alter"/>
 <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
 <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
 <elementValue elementRef="TRACE_COLUMN" value="Vorname"/>
 <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
 <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-<elementValue elementRef="TRACE_COLUMN" value="Alter"/>
+<elementValue elementRef="TRACE_COLUMN" value="Name"/>
 <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
 <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
 </elementParameter>
@@ -255,7 +255,7 @@
   <subjob>
     <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPrejob_1"/>
-    <elemen tParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="230;100;0"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="255;220;180"/>
   </subjob>
   <subjob>

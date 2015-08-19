@@ -1,13 +1,20 @@
 package start;
 
+import java.util.HashMap;
+
+import javax.crypto.BadPaddingException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import secretService.PasswordDecryptor;
+import secretService.YetAnotherPasswordMaker;
 import connection.Connection;
 import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
+
 
 public class Start {
 
@@ -24,12 +31,13 @@ public class Start {
 		String database= "TALEND_TEST";
 		String user = "isETL_User";
 		//de-/encryptor required (look in the talend source code for implementation)
-		String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
+		//String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
+		String password = "v8+RGusCeE5g7aN7EnZnUA==";
 		
-		String [] values = {"ID", "Name", "Vorname", "Alter"};
+		String [] values = {"ID", "Alter", "Vorname", "Name"};
 		String tableName = "dummyKunde";
 		String outputName = "outputKunde";
-		String outputAction = "UPDATE";
+		String outputAction = "INSERT_OR_UPDATE";
 		//let's keep it simple (the star must be replaced by column names in the final version)
 		String sql = "select * from %s";
 		
@@ -43,14 +51,14 @@ public class Start {
 		//Output
 		Node out = AbstractNode.getElementByValue(document, "MyOutput");
 		AbstractNode.setAttribute(out, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
-		AbstractNode.setAttribute(out, "TABLE", outputName);
+		AbstractNode.setAttribute(out, "TABLE", String.format("\"%s\"", outputName));
 		AbstractNode.setAttribute(out, "DATA_ACTION", outputAction);
 		
 		//Input
 		Node input = AbstractNode.getElementByValue(document, "MyInput");
-		AbstractNode.setAttribute(input, "TABLE", tableName);
+		AbstractNode.setAttribute(input, "TABLE", String.format("\"%s\"", tableName));
 		AbstractNode.setAttribute(input, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
-		AbstractNode.setAttribute(input, "QUERY", String.format(sql.toString(), tableName));
+		AbstractNode.setAttribute(input, "QUERY", String.format(String.format("\"%s\"",sql.toString()), tableName));
 		Node mdata = AbstractNode.getMetadata(document, input, "FLOW");
 		AbstractNode.setMetadataColumnsTest(document, mdata, values);
 		
@@ -66,7 +74,6 @@ public class Start {
 		
 		//export File
 		DocumentCreator.SaveDOMFile(document, output);
-		
 		
 		
 		/*

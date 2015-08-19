@@ -5,6 +5,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import abstractNode.AbstractNode;
+import secretService.PasswordDecryptor;
 import start.*;
 import xPath.XPathExpressions;
 
@@ -35,18 +36,19 @@ public class tMSSqlConnection extends AbstractNode {
 	public static void setDBConnection (Document document, String label, String host, String port, String schema, String database, String user, String password) {
 		Node dbNode = AbstractNode.getElementByValue(document, label);
 		Element element = (Element) Navigator.getElementByName(dbNode, "HOST");
-		element.setAttribute("value", host);
+		element.setAttribute("value", String.format("\"%s\"",host));
 		element = (Element) Navigator.getElementByName(dbNode, "PORT");
-		element.setAttribute("value", port);
+		element.setAttribute("value", String.format("\"%s\"",port));
 		element = (Element) Navigator.getElementByName(dbNode, "SCHEMA_DB");
-		element.setAttribute("value", schema);
+		element.setAttribute("value", String.format("\"%s\"",schema));
 		element = (Element) Navigator.getElementByName(dbNode, "DBNAME");
-		element.setAttribute("value", database);
+		element.setAttribute("value", String.format("\"%s\"",database));
 		element = (Element) Navigator.getElementByName(dbNode, "USER");
-		element.setAttribute("value", user);
+		element.setAttribute("value", String.format("\"%s\"",user));
 		element = (Element) Navigator.getElementByName(dbNode, "PASS");
 		element.setAttribute("value", password);
+		} 
 	}
 	
 	//evtl. getter/setter for all important attributes (host, port etc.)
-}
+
