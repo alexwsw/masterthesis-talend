@@ -77,7 +77,7 @@ public class Navigator {
 		return node;
 	}
 
-	// get the number of already existing Nodes of the given type
+	// get the number of already existing Nodes of the given type (necessary?)
 	public static int getNumberOfNodes(Document document, String typ) {
 		int i = 0;
 		NodeList n = getElementsByComponentName(document, typ);

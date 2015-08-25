@@ -45,6 +45,7 @@ public class tMSSqlConnection extends AbstractNode {
 		element.setAttribute("value", String.format("\"%s\"",database));
 		element = (Element) Navigator.getElementByName(dbNode, "USER");
 		element.setAttribute("value", String.format("\"%s\"",user));
+		//this one is tricky due to the encryption
 		element = (Element) Navigator.getElementByName(dbNode, "PASS");
 		element.setAttribute("value", password);
 		} 

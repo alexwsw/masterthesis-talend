@@ -21,7 +21,9 @@ public abstract class AbstractNode {
 		String source = null;
 		for (int i = 0; i<inc.getLength(); i++) {
 			Element e = (Element) inc.item(i);
+			//"look around" and get the lookups
 			if (e.getAttribute("lineStyle").equals("8")){
+				//get the lookup node
 				Node lookupNode = AbstractNode.getElementByValue(document, e.getAttribute("source"));
 				//remove lookup node
 				NodeBuilder.removeNode(document, lookupNode);
@@ -133,6 +135,7 @@ public abstract class AbstractNode {
 	// test incoming/outgoing connections finder
 	public static NodeList getIncomingConnections(Document document, Node node){
 		NodeList conns = null;
+		//connections are children of the root elmt.
 		Node root = document.getDocumentElement();
 		String uName = AbstractNode.getNodesUniqueName(document, node);
 		conns = Navigator.processXpathQueryNodeList(root, XPathExpressions.getIncommingConnections, uName);

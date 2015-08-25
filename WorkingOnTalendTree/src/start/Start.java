@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javax.crypto.BadPaddingException;
 
+import org.apache.commons.codec.binary.Base64;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -34,12 +35,12 @@ public class Start {
 		//String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
 		String password = "v8+RGusCeE5g7aN7EnZnUA==";
 		
-		String [] values = {"ID", "Alter", "Vorname", "Name"};
-		String tableName = "dummyKunde";
-		String outputName = "outputKunde";
-		String outputAction = "INSERT_OR_UPDATE";
+		String [] sourceTableColumns = {"ID", "Alter", "Vorname", "Name"};
+		String sourceTableName = "dummyKunde";
+		String destinationTableName = "outputKunde";
+		String packageDBCommand = "INSERT_OR_UPDATE";
 		//let's keep it simple (the star must be replaced by column names in the final version)
-		String sql = "select * from %s";
+		String sourceTableSQL = "select * from %s";
 		
 		//Connection
 		tMSSqlConnection.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
@@ -49,18 +50,18 @@ public class Start {
 		AbstractNode.setAttribute(commit, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
 		
 		//Output
-		Node out = AbstractNode.getElementByValue(document, "MyOutput");
-		AbstractNode.setAttribute(out, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
-		AbstractNode.setAttribute(out, "TABLE", String.format("\"%s\"", outputName));
-		AbstractNode.setAttribute(out, "DATA_ACTION", outputAction);
+		Node destination = AbstractNode.getElementByValue(document, "MyOutput");
+		AbstractNode.setAttribute(destination, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
+		AbstractNode.setAttribute(destination, "TABLE", String.format("\"%s\"", destinationTableName));
+		AbstractNode.setAttribute(destination, "DATA_ACTION", packageDBCommand);
 		
 		//Input
-		Node input = AbstractNode.getElementByValue(document, "MyInput");
-		AbstractNode.setAttribute(input, "TABLE", String.format("\"%s\"", tableName));
-		AbstractNode.setAttribute(input, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
-		AbstractNode.setAttribute(input, "QUERY", String.format(String.format("\"%s\"",sql.toString()), tableName));
-		Node mdata = AbstractNode.getMetadata(document, input, "FLOW");
-		AbstractNode.setMetadataColumnsTest(document, mdata, values);
+		Node source = AbstractNode.getElementByValue(document, "MyInput");
+		AbstractNode.setAttribute(source, "TABLE", String.format("\"%s\"", sourceTableName));
+		AbstractNode.setAttribute(source, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
+		AbstractNode.setAttribute(source, "QUERY", String.format(String.format("\"%s\"",sourceTableSQL.toString()), sourceTableName));
+		Node metadataFlow = AbstractNode.getMetadata(document, source, "FLOW");
+		AbstractNode.setMetadataColumnsTest(document, metadataFlow, sourceTableColumns);
 		
 		//Connection
 		Connection.updateConnection(document, AbstractNode.getElementByValue(document, "MyInput"), AbstractNode.getElementByValue(document, "MyTransformer"));
@@ -74,6 +75,9 @@ public class Start {
 		
 		//export File
 		DocumentCreator.SaveDOMFile(document, output);
+		
+		
+		String pass2 = "10Runsql";
 		
 		
 		/*
