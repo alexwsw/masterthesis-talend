@@ -35,7 +35,11 @@ public class Start {
 		//String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
 		String password = "v8+RGusCeE5g7aN7EnZnUA==";
 		
-		String [] sourceTableColumns = {"ID", "Alter", "Vorname", "Name"};
+		String [][] sourceTableColumns = {{"true", "10", "ID", "false", "10", "INT", "id_Integer", "true"}, 
+											{"false", "10", "Alter", "false", "10", "INT", "id_Integer", "true"}, 
+											{"false", "20", "Vorname", "false", "0", "VARCHAR", "id_String", "true"}, 
+											{"false", "20", "Name", "false", "0", "VARCHAR", "id_String", "true"}};
+		
 		String sourceTableName = "dummyKunde";
 		String destinationTableName = "outputKunde";
 		String packageDBCommand = "INSERT_OR_UPDATE";

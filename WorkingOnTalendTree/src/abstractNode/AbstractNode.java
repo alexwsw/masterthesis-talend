@@ -104,18 +104,20 @@ public abstract class AbstractNode {
 		}
 	}
 
-	public static void setMetadataColumnsTest(Document document, Node metadata, String[] values) {
+	public static void setMetadataColumnsTest(Document document, Node metadata, String[][] tableColumns) {
 		NodeList columns = AbstractNode.getMetadataColumns(metadata);
 		for (int a = 0; a < columns.getLength(); a++) {
 			if (columns.item(a).getNodeType() == Node.TEXT_NODE) {
 				NodeBuilder.removeNode(document, columns.item(a));
 			}
 		}
-		for (int i = 0; i < values.length; i++) {
+		for (int i = 0; i < tableColumns.length; i++) {
 			Element e = (Element) columns.item(i);
-			e.setAttribute("name", values[i]);
+			for(int k = 0; k < tableColumns[i].length; k++) {
+			e.setAttribute("name", tableColumns[i][k]);
 			System.out.println(DocumentCreator.getStringFromDocument(columns.item(i)));
 
+		}
 		}
 	}
 
