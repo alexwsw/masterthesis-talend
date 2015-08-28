@@ -104,12 +104,12 @@ public abstract class AbstractNode {
 			return null;
 		}
 	}
-	//in case the node is a DB output
+	//in case the node is a DB input
 	public static void setMetadataColumnsTest(Document document, Node metadata, String[][] tableColumns) {
 		//NodeList columns = AbstractNode.getMetadataColumns(metadata);
 		Node start = metadata.getFirstChild();
 		Node dummy = null;
-		//remove text nodes
+		//get the first non-text node (when the first element-node is found the loop ends)
 			while(start.getNodeType()==Node.TEXT_NODE) {
 				start = start.getNextSibling();
 			}
@@ -192,12 +192,5 @@ public abstract class AbstractNode {
 		String uName = AbstractNode.getNodesUniqueName(document, node);
 		conns = Navigator.processXpathQueryNodeList(root, XPathExpressions.getOutgoingConnections, uName);
 		return conns;
-	}
-
-	// test getNextMainNode
-	public Node getNextMainNode(NodeList connections) {
-		Node next = null;
-
-		return next;
 	}
 }
