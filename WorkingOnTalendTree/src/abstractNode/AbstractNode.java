@@ -2,6 +2,7 @@ package abstractNode;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -19,36 +20,36 @@ public abstract class AbstractNode {
 	public static void removeNode(Document document, Node node) {
 		NodeList inc = AbstractNode.getIncomingConnections(document, node);
 		String source = null;
-		for (int i = 0; i<inc.getLength(); i++) {
+		for (int i = 0; i < inc.getLength(); i++) {
 			Element e = (Element) inc.item(i);
-			//"look around" and get the lookups
-			if (e.getAttribute("lineStyle").equals("8")){
-				//get the lookup node
+			// "look around" and get the lookups
+			if (e.getAttribute("lineStyle").equals("8")) {
+				// get the lookup node
 				Node lookupNode = AbstractNode.getElementByValue(document, e.getAttribute("source"));
-				//remove lookup node
+				// remove lookup node
 				NodeBuilder.removeNode(document, lookupNode);
-				//remove lookup connection
+				// remove lookup connection
 				NodeBuilder.removeNode(document, e);
 			}
-			if (e.getAttribute("lineStyle").equals("0")){
+			if (e.getAttribute("lineStyle").equals("0")) {
 				source = e.getAttribute("source");
 				System.err.println(source);
 			}
 		}
 		NodeList outg = AbstractNode.getOutgoingConnections(document, node);
-		for (int i = 0; i<outg.getLength(); i++) {
+		for (int i = 0; i < outg.getLength(); i++) {
 			Element e = (Element) outg.item(i);
 			String target = e.getAttribute("target");
 			System.out.println(target);
-			Element connection = (Element) Connection.findConnection(document, AbstractNode.getElementByValue(document, source), node);
-			//update connection
+			Element connection = (Element) Connection.findConnection(document,
+					AbstractNode.getElementByValue(document, source), node);
+			// update connection
 			connection.setAttribute("target", target);
 			System.err.println(DocumentCreator.getStringFromDocument(connection));
-			//remove old connection
+			// remove old connection
 			NodeBuilder.removeNode(document, e);
 		}
-		
-		
+
 		NodeBuilder.removeNode(document, node);
 	}
 
@@ -103,21 +104,62 @@ public abstract class AbstractNode {
 			return null;
 		}
 	}
-
+	//in case the node is a DB output
 	public static void setMetadataColumnsTest(Document document, Node metadata, String[][] tableColumns) {
-		NodeList columns = AbstractNode.getMetadataColumns(metadata);
-		for (int a = 0; a < columns.getLength(); a++) {
-			if (columns.item(a).getNodeType() == Node.TEXT_NODE) {
-				NodeBuilder.removeNode(document, columns.item(a));
+		//NodeList columns = AbstractNode.getMetadataColumns(metadata);
+		Node start = metadata.getFirstChild();
+		Node dummy = null;
+		//remove text nodes
+			while(start.getNodeType()==Node.TEXT_NODE) {
+				start = start.getNextSibling();
 			}
+		//clone the first non-text node
+		dummy = start.cloneNode(true);
+		//get its attributes
+		NamedNodeMap attributes = dummy.getAttributes();
+		//remove the rest (perhaps it's better outsourcing this)
+		while (metadata.getFirstChild()!=null){
+			System.out.println(DocumentCreator.getStringFromDocument(metadata.getFirstChild()));
+			NodeBuilder.removeNode(document, metadata.getFirstChild());
 		}
 		for (int i = 0; i < tableColumns.length; i++) {
-			Element e = (Element) columns.item(i);
-			for(int k = 0; k < tableColumns[i].length; k++) {
-			e.setAttribute("name", tableColumns[i][k]);
-			System.out.println(DocumentCreator.getStringFromDocument(columns.item(i)));
-
+			//clone the dummy
+			Element e = (Element) dummy.cloneNode(true);
+			for (int k = 0; k < tableColumns[i].length; k++) {
+				//get the values to the attributes
+				e.setAttribute(attributes.item(k).getNodeName(), tableColumns[i][k]);
+			}
+			//append the newly cloned node
+			NodeBuilder.appendElementToContext(metadata, e);
 		}
+	}
+	
+	//in case you get the metadata from an another node
+	public static void setMetaDataColumnsTest(Document document, Node node){
+		Node targetMetadata = AbstractNode.getMetadata(document, node, "FLOW");
+		Element connection = (Element)Connection.findMainConnection(document, node);
+		Node source = AbstractNode.getElementByValue(document, connection.getAttribute("source"));
+		Node sourceMetadata = AbstractNode.getMetadata(document, source, "FLOW");
+		//delete targetMetadata
+		Node startTargetMetadata = targetMetadata.getFirstChild();
+		while(startTargetMetadata!=null){
+			startTargetMetadata=startTargetMetadata.getNextSibling();
+			NodeBuilder.removeNode(document, startTargetMetadata.getPreviousSibling());
+		}
+		Node startConnection = Connection.getConnectionColumns(connection).getFirstChild();
+		while(startConnection.getNextSibling()!=null) {
+			if(startConnection.getNodeType()==node.TEXT_NODE){
+				startConnection=startConnection.getNextSibling();
+				continue;
+			}
+			Element e = (Element)startConnection;
+			if(!(e.getAttribute("elementRef").equals("TRACE_COLUMN"))) {
+				startConnection= startConnection.getNextSibling();
+				continue;
+			}
+			Element e1 = (Element)Navigator.processXPathQueryNode(sourceMetadata, XPathExpressions.getByNameAttribute, e.getAttribute("value")).cloneNode(true);
+			NodeBuilder.appendElementToContext(targetMetadata, e1);
+			startConnection=startConnection.getNextSibling();
 		}
 	}
 
@@ -129,22 +171,21 @@ public abstract class AbstractNode {
 
 	// test getter
 	public static String getAttribute(Object obj, String attribute) {
-		Element e = (Element) Navigator.processXPathQueryNode(obj,
-				XPathExpressions.getByNameAttribute, attribute);
+		Element e = (Element) Navigator.processXPathQueryNode(obj, XPathExpressions.getByNameAttribute, attribute);
 		return e.getAttribute("value");
 	}
 
 	// test incoming/outgoing connections finder
-	public static NodeList getIncomingConnections(Document document, Node node){
+	public static NodeList getIncomingConnections(Document document, Node node) {
 		NodeList conns = null;
-		//connections are children of the root elmt.
+		// connections are children of the root elmt.
 		Node root = document.getDocumentElement();
 		String uName = AbstractNode.getNodesUniqueName(document, node);
 		conns = Navigator.processXpathQueryNodeList(root, XPathExpressions.getIncommingConnections, uName);
-		
+
 		return conns;
 	}
-	
+
 	public static NodeList getOutgoingConnections(Document document, Node node) {
 		NodeList conns = null;
 		Node root = document.getDocumentElement();
@@ -152,11 +193,11 @@ public abstract class AbstractNode {
 		conns = Navigator.processXpathQueryNodeList(root, XPathExpressions.getOutgoingConnections, uName);
 		return conns;
 	}
-	
-	//test getNextMainNode
-	public Node getNextMainNode(NodeList connections){
+
+	// test getNextMainNode
+	public Node getNextMainNode(NodeList connections) {
 		Node next = null;
-		
+
 		return next;
 	}
 }

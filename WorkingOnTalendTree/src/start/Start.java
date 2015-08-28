@@ -35,10 +35,10 @@ public class Start {
 		//String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
 		String password = "v8+RGusCeE5g7aN7EnZnUA==";
 		
-		String [][] sourceTableColumns = {{"true", "10", "ID", "false", "10", "INT", "id_Integer", "true"}, 
-											{"false", "10", "Alter", "false", "10", "INT", "id_Integer", "true"}, 
-											{"false", "20", "Vorname", "false", "0", "VARCHAR", "id_String", "true"}, 
-											{"false", "20", "Name", "false", "0", "VARCHAR", "id_String", "true"}};
+		String [][] sourceTableColumns = {{"true", "10", "ID", "false", "10", "id_Integer", "true"}, 
+											{"false", "10", "Alter", "false", "10", "id_Integer", "true"}, 
+											{"false", "20", "Vorname", "false", "0", "id_String", "true"}, 
+											{"false", "20", "Name", "false", "0", "id_String", "true"}};
 		
 		String sourceTableName = "dummyKunde";
 		String destinationTableName = "outputKunde";
@@ -76,6 +76,7 @@ public class Start {
 		for (int i = 0; i<incConns.getLength(); i++){
 			System.err.println(DocumentCreator.getStringFromDocument(incConns.item(i)));
 		}
+		AbstractNode.setMetaDataColumnsTest(document, destination);
 		
 		//export File
 		DocumentCreator.SaveDOMFile(document, output);

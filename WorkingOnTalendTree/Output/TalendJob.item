@@ -172,10 +172,9 @@
     <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSQLInput_1">
-<column key="true" length="10" name="ID" nullable="false" precision="0" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Alter" nullable="false" precision="0" type="id_Integer" usefulColumn="true"/>
+<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Alter" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="20" name="Vorname" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="20" name="Name" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
   </node>
   
@@ -217,7 +216,11 @@
     <elementParameter field="TEXT" name="LABEL" value="MyOutput"/>
     <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="tMSSQLOutput_1"/>
+    <metadata connector="FLOW" name="tMSSQLOutput_1">
+<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Alter" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="20" name="Vorname" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+</metadata>
     <metadata connector="REJECT" name="REJECT">
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -233,16 +236,13 @@
   </connection>
   <connection connectorName="FLOW" label="DF_Input" lineStyle="0" metaname="tMSSQLInput_1" offsetLabelX="0" offsetLabelY="0" source="tMSSQLInput_1" target="tMSSQLOutput_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-<elementValue elementRef="TRACE_COLUMN" value="ID"/>
+    <elementValue elementRef="TRACE_COLUMN" value="ID"/>
 <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
 <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
 <elementValue elementRef="TRACE_COLUMN" value="Alter"/>
 <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
 <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
 <elementValue elementRef="TRACE_COLUMN" value="Vorname"/>
-<elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-<elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-<elementValue elementRef="TRACE_COLUMN" value="Name"/>
 <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
 <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
 </elementParameter>
