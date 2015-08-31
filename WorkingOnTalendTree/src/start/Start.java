@@ -4,6 +4,9 @@ import java.util.HashMap;
 
 import javax.crypto.BadPaddingException;
 
+import jdbc.DBConnectionBuilder;
+import jdbc.SQLQueryPerformer;
+
 import org.apache.commons.codec.binary.Base64;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -37,8 +40,7 @@ public class Start {
 		
 		String [][] sourceTableColumns = {{"true", "10", "ID", "false", "10", "id_Integer", "true"}, 
 											{"false", "10", "Alter", "false", "10", "id_Integer", "true"}, 
-											{"false", "20", "Vorname", "false", "0", "id_String", "true"}, 
-											{"false", "20", "Name", "false", "0", "id_String", "true"}};
+											};
 		
 		String sourceTableName = "dummyKunde";
 		String destinationTableName = "outputKunde";
@@ -83,6 +85,16 @@ public class Start {
 		
 		
 		String pass2 = "10Runsql";
+		
+		
+		//JDBC stuff
+		String connURL = String.format("jdbc:sqlserver://%s;databaseName=%s;schema=%s", host, database, schema);
+		DBConnectionBuilder connection = new DBConnectionBuilder();
+		SQLQueryPerformer performer = new SQLQueryPerformer(connection.getConnection(connURL, user, pass2));
+		performer.executeQuery(sourceTableName);
+		//connection.getConnection(connURL, user, pass2);
+		performer.executePreparedStatement(destinationTableName);
+		connection.closeConnection();
 		
 		
 		/*

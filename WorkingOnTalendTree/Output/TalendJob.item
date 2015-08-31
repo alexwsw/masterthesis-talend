@@ -174,8 +174,6 @@
     <metadata connector="FLOW" name="tMSSQLInput_1">
 <column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Alter" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="20" name="Vorname" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="20" name="Name" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
   </node>
   
@@ -220,8 +218,6 @@
     <metadata connector="FLOW" name="tMSSQLOutput_1">
 <column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Alter" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="20" name="Vorname" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="20" name="Name" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -242,12 +238,6 @@
 <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
 <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
 <elementValue elementRef="TRACE_COLUMN" value="Alter"/>
-<elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-<elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-<elementValue elementRef="TRACE_COLUMN" value="Vorname"/>
-<elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-<elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-<elementValue elementRef="TRACE_COLUMN" value="Name"/>
 <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
 <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
 </elementParameter>
