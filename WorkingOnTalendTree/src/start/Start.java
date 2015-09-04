@@ -84,6 +84,7 @@ public class Start {
 		DocumentCreator.SaveDOMFile(document, output);
 		
 		
+		AbstractNode.updateJavaLibraryPath(document);
 		String pass2 = "10Runsql";
 		
 		
@@ -95,6 +96,7 @@ public class Start {
 		//connection.getConnection(connURL, user, pass2);
 		performer.executePreparedStatement(destinationTableName);
 		connection.closeConnection();
+		
 		
 		
 		/*

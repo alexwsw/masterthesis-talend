@@ -1,5 +1,8 @@
 package abstractNode;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -192,5 +195,29 @@ public abstract class AbstractNode {
 		String uName = AbstractNode.getNodesUniqueName(document, node);
 		conns = Navigator.processXpathQueryNodeList(root, XPathExpressions.getOutgoingConnections, uName);
 		return conns;
+	}
+	
+	public static void updateJavaLibraryPath(Document document) {
+		String path = ".//java";
+		File f = new File(path);
+		String absPath = null;
+		try {
+			absPath = f.getCanonicalPath();
+			System.out.println(absPath);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		NodeList nodes = document.getDocumentElement().getChildNodes();
+		for (int i = 0; i<nodes.getLength(); i++) {
+			if(nodes.item(i).getNodeType() == Node.TEXT_NODE || !(nodes.item(i).getNodeName().equals("node"))){
+				continue;
+			}
+			else {
+				System.out.println(nodes.item(i).getNodeName());
+				AbstractNode.setAttribute(nodes.item(i), "JAVA_LIBRARY_PATH", absPath);
+				System.out.println("succeess");
+			}
+		}
 	}
 }
