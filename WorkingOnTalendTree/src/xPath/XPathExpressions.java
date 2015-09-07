@@ -15,8 +15,16 @@ public enum XPathExpressions {
 	
 	//test
 	getIncommingConnections("./*[@target='%s']"),
-	getOutgoingConnections("./*[@source='%s']");
+	getOutgoingConnections("./*[@source='%s']"),
 	
+	//type verification
+	getComponentName("./*[@componentName='%s']"),
+	
+	//get NodeData
+	getNodeData("./*[name()='nodeData']"),
+	
+	//get Nodes
+	getNodes("./*[name()='node']");
 	
 	private final String expression;
 	

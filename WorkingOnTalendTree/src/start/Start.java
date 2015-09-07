@@ -15,6 +15,7 @@ import org.w3c.dom.NodeList;
 
 import secretService.PasswordDecryptor;
 import secretService.YetAnotherPasswordMaker;
+import transformer.tMap;
 import connection.Connection;
 import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
@@ -73,6 +74,8 @@ public class Start {
 		Connection.updateConnection(document, AbstractNode.getElementByValue(document, "MyInput"), AbstractNode.getElementByValue(document, "MyTransformer"));
 		
 		Node transformer = AbstractNode.getElementByValue(document, "MyTransformer");
+		System.out.println(AbstractNode.verifyNodeType(transformer));
+		tMap.getNodeData(transformer);
 		AbstractNode.removeNode(document, transformer);
 		NodeList incConns = AbstractNode.getIncomingConnections(document, transformer);
 		for (int i = 0; i<incConns.getLength(); i++){
@@ -80,11 +83,12 @@ public class Start {
 		}
 		AbstractNode.setMetaDataColumnsTest(document, destination);
 		
+		//update java_library_path in all nodes
+		AbstractNode.updateJavaLibraryPath(document);
 		//export File
 		DocumentCreator.SaveDOMFile(document, output);
 		
 		
-		AbstractNode.updateJavaLibraryPath(document);
 		String pass2 = "10Runsql";
 		
 		

@@ -208,9 +208,9 @@ public abstract class AbstractNode {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		NodeList nodes = document.getDocumentElement().getChildNodes();
+		NodeList nodes = Navigator.processXpathQueryNodeList(document.getDocumentElement(), XPathExpressions.getNodes, null);
 		for (int i = 0; i<nodes.getLength(); i++) {
-			if(nodes.item(i).getNodeType() == Node.TEXT_NODE || !(nodes.item(i).getNodeName().equals("node"))){
+			if(nodes.item(i).getNodeType() == Node.TEXT_NODE){
 				continue;
 			}
 			else {
@@ -219,5 +219,12 @@ public abstract class AbstractNode {
 				System.out.println("succeess");
 			}
 		}
+	}
+	
+	public static String verifyNodeType(Node node) {
+		String type = null;
+		Element e = (Element) node;
+		type = e.getAttribute("componentName");		
+		return type;
 	}
 }
