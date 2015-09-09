@@ -10,10 +10,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import connection.Connection;
+import enums.XPathExpressions;
 import start.DocumentCreator;
 import start.Navigator;
 import start.NodeBuilder;
-import xPath.XPathExpressions;
 
 public abstract class AbstractNode {
 

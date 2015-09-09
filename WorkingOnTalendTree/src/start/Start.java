@@ -19,11 +19,13 @@ import transformer.tMap;
 import connection.Connection;
 import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
+import exception.WrongNodeException;
 
 
 public class Start {
-
-	public static void main(String[] args) {
+	
+	//
+	public static void main(String[] args) throws WrongNodeException {
 
 		String template = ".//Template//TalendXML.item";
 		String output = ".//Output//TalendJob.item";

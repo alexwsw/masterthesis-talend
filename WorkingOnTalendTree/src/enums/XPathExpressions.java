@@ -1,4 +1,4 @@
-package xPath;
+package enums;
 
 public enum XPathExpressions {
 	

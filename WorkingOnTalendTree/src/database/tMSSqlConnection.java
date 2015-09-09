@@ -4,10 +4,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import enums.XPathExpressions;
+import exception.WrongNodeException;
 import abstractNode.AbstractNode;
 import secretService.PasswordDecryptor;
 import start.*;
-import xPath.XPathExpressions;
 
 public class tMSSqlConnection extends AbstractNode {
 	
@@ -33,8 +34,13 @@ public class tMSSqlConnection extends AbstractNode {
 	}
 	
 
-	public static void setDBConnection (Document document, String label, String host, String port, String schema, String database, String user, String password) {
+	public static void setDBConnection (Document document, String label, String host, String port, String schema, String database, String user, String password) throws WrongNodeException {
 		Node dbNode = AbstractNode.getElementByValue(document, label);
+		String requiredType = "tMSSqlConnection";
+		String nodeType = AbstractNode.verifyNodeType(dbNode);
+		if (!(nodeType.equals(requiredType))){
+			throw new WrongNodeException(requiredType, nodeType);
+		}
 		Element element = (Element) Navigator.getElementByName(dbNode, "HOST");
 		element.setAttribute("value", String.format("\"%s\"",host));
 		element = (Element) Navigator.getElementByName(dbNode, "PORT");
