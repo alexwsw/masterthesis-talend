@@ -18,6 +18,6 @@ public class tMap extends AbstractNode {
 			System.out.println(DocumentCreator.getStringFromDocument(a));
 			return a;
 		}
-	}
+	} 
 
 }
