@@ -7,9 +7,11 @@ public class tMapDTO {
 	private String prefix;
 	//need to get the proper data type for that
 	private Collection <? extends ColumnDTO> packageColumns;
+	private Collection <? extends ColumnDTO> lookupTable_Retuncolumns;
 	private String lookupTable;
 	private String lookupColumn;
 	private String packageOutputColumn_MatchColumn;
+	//add an attribute for mapping stuff
 	
 	public tMapDTO(String prefix,
 			Collection<? extends ColumnDTO> packageColumns, String lookupTable,
