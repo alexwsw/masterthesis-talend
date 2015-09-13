@@ -151,11 +151,7 @@ public abstract class AbstractNode {
 		Node source = AbstractNode.getElementByValue(document, connection.getAttribute("source"));
 		Node sourceMetadata = AbstractNode.getMetadata(document, source, "FLOW");
 		//delete targetMetadata
-		Node startTargetMetadata = targetMetadata.getFirstChild();
-		while(startTargetMetadata!=null){
-			startTargetMetadata=startTargetMetadata.getNextSibling();
-			NodeBuilder.removeNode(startTargetMetadata.getPreviousSibling());
-		}
+		NodeBuilder.removeAllChildNodes(targetMetadata);
 		Node startConnection = Connection.getConnectionColumns(connection).getFirstChild();
 		while(startConnection.getNextSibling()!=null) {
 			if(startConnection.getNodeType()==node.TEXT_NODE){

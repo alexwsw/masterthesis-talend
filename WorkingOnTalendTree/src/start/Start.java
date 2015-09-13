@@ -9,6 +9,7 @@ import connection.Connection;
 import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
 import database.tMSSqlInput;
+import database.tMSSqlOutput;
 import exception.WrongNodeException;
 
 
@@ -76,6 +77,7 @@ public class Start {
 		AbstractNode.setMetaDataColumnsTest(document, destination);
 		Node test = tMSSqlInput.newInstance(document, "MyLog");
 		Node tst = tMSSqlInput.newInstance(document, "MyTest");
+		Node outTest = tMSSqlOutput.newInstance(document, "TestOutput");
 		
 		//update java_library_path in all nodes
 		AbstractNode.updateJavaLibraryPath(document);

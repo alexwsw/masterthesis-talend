@@ -29,7 +29,6 @@ public class DocumentCreator {
 		try {
 			DocumentBuilder builder = dbf.newDocumentBuilder();
 			document = builder.parse(new File(path));
-			NodeBuilder.removeTextNodes(document);
 		} catch (ParserConfigurationException e) {
 			System.out.println("ParserConfigurationException occured");
 			e.printStackTrace();
