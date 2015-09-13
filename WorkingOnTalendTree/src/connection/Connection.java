@@ -85,7 +85,7 @@ public class Connection {
 		while (startConn.getNextSibling()!=null) {
 			if(startConn.getNodeType()==Node.TEXT_NODE) {
 				startConn=startConn.getNextSibling();
-				NodeBuilder.removeNode(document, startConn.getPreviousSibling());
+				NodeBuilder.removeNode(startConn.getPreviousSibling());
 				continue;
 			}
 			Element e = (Element) startConn;
@@ -99,7 +99,7 @@ public class Connection {
 			if (tColumnCond == null && e.getAttribute("elementRef").equals("TRACE_COLUMN_CONDITION")) {
 				tColumnCond = e.cloneNode(true);
 			}
-			NodeBuilder.removeNode(document, startConn.getPreviousSibling());
+			NodeBuilder.removeNode(startConn.getPreviousSibling());
 		}
 		/*
 		// remove text nodes from metadata
@@ -163,14 +163,14 @@ public class Connection {
 	}
 
 	public static void deleteConnection(Document document, Node connection) {
-		NodeBuilder.removeNode(document, connection);
+		NodeBuilder.removeNode(connection);
 
 		// connection.getParentNode().removeChild(connection);
 	}
 
 	public static void deleteConnection(Document document, Node source, Node target) {
 		Node conn = findConnection(document, source, target);
-		NodeBuilder.removeNode(document, conn);
+		NodeBuilder.removeNode(conn);
 		// conn.getParentNode().removeChild(conn);
 	}
 

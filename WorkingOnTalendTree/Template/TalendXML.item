@@ -172,10 +172,7 @@
     <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSQLInput_1">
-      <column key="true" length="10" name="TRID" nullable="false" precision="0" type="id_Integer" usefulColumn="true"/>
-      <column key="false" length="10" name="KDNR" nullable="false" precision="0" type="id_Integer" usefulColumn="true"/>
-      <column key="false" length="20" name="Name" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-      <column key="false" length="20" name="Vorname" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+      <column key="" length="" name="dummy" nullable="" precision="" type="" usefulColumn=""/>
     </metadata>
   </node>
   <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="576" posY="192">

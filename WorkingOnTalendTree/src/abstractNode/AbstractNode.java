@@ -30,9 +30,9 @@ public abstract class AbstractNode {
 				// get the lookup node
 				Node lookupNode = AbstractNode.getElementByValue(document, e.getAttribute("source"));
 				// remove lookup node
-				NodeBuilder.removeNode(document, lookupNode);
+				NodeBuilder.removeNode(lookupNode);
 				// remove lookup connection
-				NodeBuilder.removeNode(document, e);
+				NodeBuilder.removeNode(e);
 			}
 			if (e.getAttribute("lineStyle").equals("0")) {
 				source = e.getAttribute("source");
@@ -50,10 +50,10 @@ public abstract class AbstractNode {
 			connection.setAttribute("target", target);
 			System.err.println(DocumentCreator.getStringFromDocument(connection));
 			// remove old connection
-			NodeBuilder.removeNode(document, e);
+			NodeBuilder.removeNode(e);
 		}
 
-		NodeBuilder.removeNode(document, node);
+		NodeBuilder.removeNode(node);
 	}
 
 	public static void removeNode(Document document, String label) {
@@ -86,6 +86,10 @@ public abstract class AbstractNode {
 		String uniqueName = AbstractNode.getNodesUniqueName(document, node);
 		return Navigator.processXPathQueryNode(node, XPathExpressions.getMetadata, type, uniqueName);
 	}
+	
+	public static Node getMetadata(Document document, Node node) {
+		return Navigator.processXPathQueryNode(node, XPathExpressions.getMetadataByType, "metadata");
+	}
 
 	public static Node getMetadata(Document document, String label, String type) {
 		Node node = AbstractNode.getElementByValue(document, label);
@@ -108,23 +112,26 @@ public abstract class AbstractNode {
 		}
 	}
 	//in case the node is a DB input
+	//String array must be replaced by an DTO Object
 	public static void setMetadataColumnsTest(Document document, Node metadata, String[][] tableColumns) {
 		//NodeList columns = AbstractNode.getMetadataColumns(metadata);
-		Node start = metadata.getFirstChild();
-		Node dummy = null;
-		//get the first non-text node (when the first element-node is found the loop ends)
+		Node dummy = AbstractNode.getDummy(metadata);
+		Node start = dummy.cloneNode(true);
+		NodeBuilder.removeNode(dummy);
+		NamedNodeMap attributes = start.getAttributes();
+		/*get the first non-text node (when the first element-node is found the loop ends)
 			while(start.getNodeType()==Node.TEXT_NODE) {
 				start = start.getNextSibling();
 			}
 		//clone the first non-text node
-		dummy = start.cloneNode(true);
+		//dummy = start.cloneNode(true);
 		//get its attributes
-		NamedNodeMap attributes = dummy.getAttributes();
 		//remove the rest (perhaps it's better outsourcing this)
 		while (metadata.getFirstChild()!=null){
 			System.out.println(DocumentCreator.getStringFromDocument(metadata.getFirstChild()));
 			NodeBuilder.removeNode(document, metadata.getFirstChild());
 		}
+		*/
 		for (int i = 0; i < tableColumns.length; i++) {
 			//clone the dummy
 			Element e = (Element) dummy.cloneNode(true);
@@ -147,7 +154,7 @@ public abstract class AbstractNode {
 		Node startTargetMetadata = targetMetadata.getFirstChild();
 		while(startTargetMetadata!=null){
 			startTargetMetadata=startTargetMetadata.getNextSibling();
-			NodeBuilder.removeNode(document, startTargetMetadata.getPreviousSibling());
+			NodeBuilder.removeNode(startTargetMetadata.getPreviousSibling());
 		}
 		Node startConnection = Connection.getConnectionColumns(connection).getFirstChild();
 		while(startConnection.getNextSibling()!=null) {
@@ -216,7 +223,7 @@ public abstract class AbstractNode {
 			else {
 				System.out.println(nodes.item(i).getNodeName());
 				AbstractNode.setAttribute(nodes.item(i), "JAVA_LIBRARY_PATH", absPath);
-				System.out.println("succeess");
+				System.out.println("success");
 			}
 		}
 	}
@@ -226,5 +233,9 @@ public abstract class AbstractNode {
 		Element e = (Element) node;
 		type = e.getAttribute("componentName");		
 		return type;
+	}
+	
+	public static Node getDummy(Node node) {
+		return Navigator.getElementByName(node, "dummy");
 	}
 }

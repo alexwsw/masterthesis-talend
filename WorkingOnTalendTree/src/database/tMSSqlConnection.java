@@ -4,20 +4,17 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import enums.XPathExpressions;
 import exception.WrongNodeException;
 import abstractNode.AbstractNode;
-import secretService.PasswordDecryptor;
 import start.*;
 
 public class tMSSqlConnection extends AbstractNode {
 	
-	public static int counter = 0;
+	//public static int counter = 0;
 	
 	public static int countInstance(Document document) { 
 		int i = Navigator.getNumberOfNodes(document, tMSSqlConnection.class.getSimpleName());
-		counter = i++;
-		return counter;
+		return i++;
 	}
 
 	public static Element newInstance (Document document, String name) {

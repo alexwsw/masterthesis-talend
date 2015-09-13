@@ -12,6 +12,7 @@ public enum XPathExpressions {
 	getIncomingMainConnection("//*[@target='%s' and @lineStyle='0']"),
 	//metadata of a certain type (e.g. "FLOW") (type can be stored in an enum)
 	getMetadata("./*[@connector='%s' and @name='%s']"),
+	getMetadataByType("./*[name()='metadata']"),
 	
 	//test
 	getIncommingConnections("./*[@target='%s']"),
@@ -24,8 +25,12 @@ public enum XPathExpressions {
 	getNodeData("./*[name()='nodeData']"),
 	
 	//get Nodes
-	getNodes("./*[name()='node']");
+	getNodes("./*[name()='node']"),
 	
+	
+	//removing text nodes
+	normalizeSpace("//text()[normalize-space(.) = '']");
+		
 	private final String expression;
 	
 	

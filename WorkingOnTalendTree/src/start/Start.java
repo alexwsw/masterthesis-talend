@@ -1,24 +1,14 @@
 package start;
 
-import java.util.HashMap;
-
-import javax.crypto.BadPaddingException;
-
-import jdbc.DBConnectionBuilder;
-import jdbc.SQLQueryPerformer;
-
-import org.apache.commons.codec.binary.Base64;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import secretService.PasswordDecryptor;
-import secretService.YetAnotherPasswordMaker;
 import transformer.tMap;
 import connection.Connection;
 import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
+import database.tMSSqlInput;
 import exception.WrongNodeException;
 
 
@@ -84,6 +74,8 @@ public class Start {
 			System.err.println(DocumentCreator.getStringFromDocument(incConns.item(i)));
 		}
 		AbstractNode.setMetaDataColumnsTest(document, destination);
+		Node test = tMSSqlInput.newInstance(document, "MyLog");
+		Node tst = tMSSqlInput.newInstance(document, "MyTest");
 		
 		//update java_library_path in all nodes
 		AbstractNode.updateJavaLibraryPath(document);
@@ -94,6 +86,7 @@ public class Start {
 		String pass2 = "10Runsql";
 		
 		
+		/*
 		//JDBC stuff
 		String connURL = String.format("jdbc:sqlserver://%s;databaseName=%s;schema=%s", host, database, schema);
 		DBConnectionBuilder connection = new DBConnectionBuilder();
@@ -105,7 +98,6 @@ public class Start {
 		
 		
 		
-		/*
 		//test Nodes
 		Node node = AbstractNode.getElementByValue(document, "MyConnection");
 		Node node2 = AbstractNode.getElementByValue(document, "JobStarter");
