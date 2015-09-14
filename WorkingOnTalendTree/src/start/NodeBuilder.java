@@ -51,6 +51,7 @@ public class NodeBuilder {
 		}
 	}
 	
+	//the result is rejected (error) by talend!!!!
 	public static void removeTextNodes(Document document) {
 		NodeList emptyTextNodes = Navigator.processXpathQueryNodeList(document, XPathExpressions.normalizeSpace, null);
 			// Remove each empty text node from document.

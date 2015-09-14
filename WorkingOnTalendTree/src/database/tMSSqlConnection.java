@@ -4,6 +4,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import enums.XPathExpressions;
 import exception.WrongNodeException;
 import abstractNode.AbstractNode;
 import start.*;
@@ -18,14 +19,14 @@ public class tMSSqlConnection extends AbstractNode {
 	}
 
 	public static Element newInstance (Document document, String name) {
-		NodeList list = Navigator.getElementsByComponentName(document, tMSSqlConnection.class.getSimpleName());
+		NodeList list = Navigator.processXpathQueryNodeList(document, XPathExpressions.getComponentsByComponentName, tMSSqlConnection.class.getSimpleName());
 		//get the first node from the list
 		Node n = list.item(0);
 		//true = all child elements are copied as well
 		Element copy = (Element) n.cloneNode(true);
-		Element label = (Element) Navigator.getElementByName(copy, "LABEL");
+		Element label = (Element) Navigator.processXPathQueryNode(copy, XPathExpressions.getByNameAttribute, "LABEL");
 		label.setAttribute("value", name);
-		Element uniqueName = (Element) Navigator.getElementByName(copy, "UNIQUE_NAME");
+		Element uniqueName = (Element) Navigator.processXPathQueryNode(copy, XPathExpressions.getByNameAttribute, "UNIQUE_NAME");
 		uniqueName.setAttribute("value", tMSSqlConnection.class.getSimpleName() + "_" + countInstance(document));
 		return copy;
 	}
@@ -38,18 +39,18 @@ public class tMSSqlConnection extends AbstractNode {
 		if (!(nodeType.equals(requiredType))){
 			throw new WrongNodeException(requiredType, nodeType);
 		}
-		Element element = (Element) Navigator.getElementByName(dbNode, "HOST");
+		Element element = (Element) Navigator.processXPathQueryNode(dbNode, XPathExpressions.getByNameAttribute, "HOST");
 		element.setAttribute("value", String.format("\"%s\"",host));
-		element = (Element) Navigator.getElementByName(dbNode, "PORT");
+		element = (Element) Navigator.processXPathQueryNode(dbNode, XPathExpressions.getByNameAttribute, "PORT");
 		element.setAttribute("value", String.format("\"%s\"",port));
-		element = (Element) Navigator.getElementByName(dbNode, "SCHEMA_DB");
+		element = (Element) Navigator.processXPathQueryNode(dbNode, XPathExpressions.getByNameAttribute, "SCHEMA_DB");
 		element.setAttribute("value", String.format("\"%s\"",schema));
-		element = (Element) Navigator.getElementByName(dbNode, "DBNAME");
+		element = (Element) Navigator.processXPathQueryNode(dbNode, XPathExpressions.getByNameAttribute, "DBNAME");
 		element.setAttribute("value", String.format("\"%s\"",database));
-		element = (Element) Navigator.getElementByName(dbNode, "USER");
+		element = (Element) Navigator.processXPathQueryNode(dbNode, XPathExpressions.getByNameAttribute, "USER");
 		element.setAttribute("value", String.format("\"%s\"",user));
 		//this one is tricky due to the encryption
-		element = (Element) Navigator.getElementByName(dbNode, "PASS");
+		element = (Element) Navigator.processXPathQueryNode(dbNode, XPathExpressions.getByNameAttribute, "PASS");
 		element.setAttribute("value", password);
 		} 
 	}

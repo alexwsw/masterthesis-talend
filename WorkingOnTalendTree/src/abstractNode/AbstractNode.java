@@ -10,7 +10,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import connection.Connection;
+import dto.tMapDTO;
 import enums.XPathExpressions;
+import exception.DummyNotFoundException;
 import start.DocumentCreator;
 import start.Navigator;
 import start.NodeBuilder;
@@ -113,7 +115,7 @@ public abstract class AbstractNode {
 	}
 	//in case the node is a DB input
 	//String array must be replaced by an DTO Object
-	public static void setMetadataColumnsTest(Document document, Node metadata, String[][] tableColumns) {
+	public static void setMetadataColumnsTest(Document document, Node metadata, String[][] tableColumns) throws DummyNotFoundException{
 		//NodeList columns = AbstractNode.getMetadataColumns(metadata);
 		Node dummy = AbstractNode.getDummy(metadata);
 		Node start = dummy.cloneNode(true);
@@ -134,7 +136,7 @@ public abstract class AbstractNode {
 		*/
 		for (int i = 0; i < tableColumns.length; i++) {
 			//clone the dummy
-			Element e = (Element) dummy.cloneNode(true);
+			Element e = (Element) start.cloneNode(true);
 			for (int k = 0; k < tableColumns[i].length; k++) {
 				//get the values to the attributes
 				e.setAttribute(attributes.item(k).getNodeName(), tableColumns[i][k]);
@@ -142,6 +144,44 @@ public abstract class AbstractNode {
 			//append the newly cloned node
 			NodeBuilder.appendElementToContext(metadata, e);
 		}
+	}
+	
+	public static void setMetadataColumnsTest(Document document, Node metadata, tMapDTO tMapDTO)  throws DummyNotFoundException{
+		//NodeList columns = AbstractNode.getMetadataColumns(metadata);
+		Node dummy = AbstractNode.getDummy(metadata);
+		Node start = dummy.cloneNode(true);
+		NodeBuilder.removeNode(dummy);
+		NamedNodeMap attributes = start.getAttributes();
+		/*get the first non-text node (when the first element-node is found the loop ends)
+			while(start.getNodeType()==Node.TEXT_NODE) {
+				start = start.getNextSibling();
+			}
+		//clone the first non-text node
+		//dummy = start.cloneNode(true);
+		//get its attributes
+		//remove the rest (perhaps it's better outsourcing this)
+		while (metadata.getFirstChild()!=null){
+			System.out.println(DocumentCreator.getStringFromDocument(metadata.getFirstChild()));
+			NodeBuilder.removeNode(document, metadata.getFirstChild());
+		}
+		*/
+		for (int i = 0; i < tMapDTO.getPackageColumns().size(); i++) {
+			//clone the dummy
+			Element e = (Element) start.cloneNode(true);
+				//get the values to the attributes
+			System.out.println(e.getAttribute("key"));
+			System.out.println(tMapDTO.getPackageColumns().get(i).isKey());
+				e.setAttribute(e.getAttribute("key"), tMapDTO.getPackageColumns().get(i).isKey());
+				e.setAttribute("length", tMapDTO.getPackageColumns().get(i).getLength());
+				e.setAttribute("name", tMapDTO.getPackageColumns().get(i).getName());
+				e.setAttribute("nullable", tMapDTO.getPackageColumns().get(i).isNullable());
+				e.setAttribute("precision", tMapDTO.getPackageColumns().get(i).getPrecision());
+				e.setAttribute("type", tMapDTO.getPackageColumns().get(i).getType());
+				e.setAttribute("usefulColumn", tMapDTO.getPackageColumns().get(i).isUsefulColumn());
+				NodeBuilder.appendElementToContext(metadata, e);
+			}
+			//append the newly cloned node
+		
 	}
 	
 	//in case you get the metadata from an another node
@@ -231,7 +271,11 @@ public abstract class AbstractNode {
 		return type;
 	}
 	
-	public static Node getDummy(Node node) {
-		return Navigator.getElementByName(node, "dummy");
+	public static Node getDummy(Node node) throws DummyNotFoundException{
+		Node n = Navigator.processXPathQueryNode(node,XPathExpressions.getByNameAttribute, "dummy");
+		if (n == null) {
+			throw new DummyNotFoundException();
+		}
+		return n;
 	}
 }

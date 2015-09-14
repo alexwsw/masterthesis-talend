@@ -2,21 +2,21 @@ package dto;
 
 public class ColumnDTO {
 	
-	private boolean isKey;
+	private String isKey;
 	private String length;
 	private String name;
-	private boolean nullable;
+	private String nullable;
 	public String precision;
 	//value assigning witch case+enum, DTO's shouldn't contain any logic, 
 	//outsourcing to the next class could be better
 	private String sourceType;
 	private String type;
-	private boolean usefulColumn;
+	private String usefulColumn;
 	
 	
-	public ColumnDTO(boolean isKey, String length, String name,
-			boolean nullable, String precision, String sourceType, String type,
-			boolean usefulColumn) {
+	public ColumnDTO(String isKey, String length, String name,
+			String nullable, String precision, String sourceType, String type,
+			String usefulColumn) {
 		super();
 		this.isKey = isKey;
 		this.length = length;
@@ -29,12 +29,12 @@ public class ColumnDTO {
 	}
 
 
-	public boolean isKey() {
+	public String isKey() {
 		return isKey;
 	}
 
 
-	public void setKey(boolean isKey) {
+	public void setKey(String isKey) {
 		this.isKey = isKey;
 	}
 
@@ -59,12 +59,12 @@ public class ColumnDTO {
 	}
 
 
-	public boolean isNullable() {
+	public String isNullable() {
 		return nullable;
 	}
 
 
-	public void setNullable(boolean nullable) {
+	public void setNullable(String nullable) {
 		this.nullable = nullable;
 	}
 
@@ -99,12 +99,12 @@ public class ColumnDTO {
 	}
 
 
-	public boolean isUsefulColumn() {
+	public String isUsefulColumn() {
 		return usefulColumn;
 	}
 
 
-	public void setUsefulColumn(boolean usefulColumn) {
+	public void setUsefulColumn(String usefulColumn) {
 		this.usefulColumn = usefulColumn;
 	}	
 	

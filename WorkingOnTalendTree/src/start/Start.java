@@ -1,5 +1,8 @@
 package start;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -10,13 +13,16 @@ import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
 import database.tMSSqlInput;
 import database.tMSSqlOutput;
+import dto.ColumnDTO;
+import dto.tMapDTO;
+import exception.DummyNotFoundException;
 import exception.WrongNodeException;
 
 
 public class Start {
 	
 	//
-	public static void main(String[] args) throws WrongNodeException {
+	public static void main(String[] args) throws WrongNodeException, DummyNotFoundException {
 
 		String template = ".//Template//TalendXML.item";
 		String output = ".//Output//TalendJob.item";
@@ -32,9 +38,31 @@ public class Start {
 		//String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
 		String password = "v8+RGusCeE5g7aN7EnZnUA==";
 		
+		Map<Integer, ColumnDTO> packageColumns = new TreeMap<Integer, ColumnDTO>();
+		ColumnDTO c1 = new ColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
+		packageColumns.put(0, c1);
+		ColumnDTO c2 = new ColumnDTO("false", "10", "Mandat", "false", "10", null, "id_Integer", "true");
+		packageColumns.put(1, c2);
+		ColumnDTO c3 = new ColumnDTO("false", "10", "Werbetraeger", "false", "10", null, "id_String", "true");
+		packageColumns.put(2, c3);
+		
+		Map<Integer, ColumnDTO>lookupTable_Returncolumns = new TreeMap<Integer, ColumnDTO>();
+		ColumnDTO l1 = new ColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
+		lookupTable_Returncolumns.put(0, l1);
+		ColumnDTO l2 = new ColumnDTO("false", "10", "BK", "true", "10", null, "id_String", "true");
+		lookupTable_Returncolumns.put(1, l2);
+		ColumnDTO l3 = new ColumnDTO("false", "10", "Name", "true", "10", null, "id_String", "true");
+		lookupTable_Returncolumns.put(2, l3);
+		Map<String, String> packageOutputColumns_ReturnColumns = new TreeMap<String, String>();
+		packageOutputColumns_ReturnColumns.put("ID", "FK_Werbetraeger_BK");
+		packageOutputColumns_ReturnColumns.put("Name", "WerbetraegerName");
+		tMapDTO tmap = new tMapDTO("0-", packageColumns, lookupTable_Returncolumns, "lookupTable", "BK", null, packageOutputColumns_ReturnColumns);
+		
+		/*
 		String [][] sourceTableColumns = {{"true", "10", "ID", "false", "10", "id_Integer", "true"}, 
 											{"false", "10", "Alter", "false", "10", "id_Integer", "true"}, 
 											};
+		*/
 		
 		String sourceTableName = "dummyKunde";
 		String destinationTableName = "outputKunde";
@@ -61,23 +89,16 @@ public class Start {
 		AbstractNode.setAttribute(source, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
 		AbstractNode.setAttribute(source, "QUERY", String.format(String.format("\"%s\"",sourceTableSQL.toString()), sourceTableName));
 		Node metadataFlow = AbstractNode.getMetadata(document, source, "FLOW");
-		AbstractNode.setMetadataColumnsTest(document, metadataFlow, sourceTableColumns);
+		AbstractNode.setMetadataColumnsTest(document, metadataFlow, tmap);
 		
 		//Connection
-		Connection.updateConnection(document, AbstractNode.getElementByValue(document, "MyInput"), AbstractNode.getElementByValue(document, "MyTransformer"));
+		Connection.updateConnection(document, AbstractNode.getElementByValue(document, "MyInput"), AbstractNode.getElementByValue(document, "PreparedMatchColumn"));
 		
 		Node transformer = AbstractNode.getElementByValue(document, "MyTransformer");
 		System.out.println(AbstractNode.verifyNodeType(transformer));
 		tMap.getNodeData(transformer);
-		AbstractNode.removeNode(document, transformer);
-		NodeList incConns = AbstractNode.getIncomingConnections(document, transformer);
-		for (int i = 0; i<incConns.getLength(); i++){
-			System.err.println(DocumentCreator.getStringFromDocument(incConns.item(i)));
-		}
-		AbstractNode.setMetaDataColumnsTest(document, destination);
-		Node test = tMSSqlInput.newInstance(document, "MyLog");
-		Node tst = tMSSqlInput.newInstance(document, "MyTest");
-		Node outTest = tMSSqlOutput.newInstance(document, "TestOutput");
+		tMap.resetNode(document, transformer);
+		
 		
 		//update java_library_path in all nodes
 		AbstractNode.updateJavaLibraryPath(document);

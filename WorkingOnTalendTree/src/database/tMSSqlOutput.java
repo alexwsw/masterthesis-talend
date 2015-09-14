@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import enums.XPathExpressions;
 import abstractNode.AbstractNode;
 import start.Navigator;
 import start.NodeBuilder;
@@ -17,14 +18,14 @@ public class tMSSqlOutput {
 	}
 
 	public static Element newInstance (Document document, String name) {
-		NodeList list = Navigator.getElementsByComponentName(document, tMSSqlOutput.class.getSimpleName());
+		NodeList list = Navigator.processXpathQueryNodeList(document, XPathExpressions.getComponentsByComponentName, tMSSqlOutput.class.getSimpleName());
 		//get the first node from the list
 		Node n = list.item(0);
 		//true = all child elements are copied as well
 		Element copy = (Element) n.cloneNode(true);
-		Element label = (Element) Navigator.getElementByName(copy, "LABEL");
+		Element label = (Element) Navigator.processXPathQueryNode(copy, XPathExpressions.getByNameAttribute, "LABEL");
 		label.setAttribute("value", name);
-		Element uniqueName = (Element) Navigator.getElementByName(copy, "UNIQUE_NAME");
+		Element uniqueName = (Element) Navigator.processXPathQueryNode(copy, XPathExpressions.getByNameAttribute, "UNIQUE_NAME");
 		uniqueName.setAttribute("value", tMSSqlOutput.class.getSimpleName() + "_" + countInstance(document));
 		Element mData = (Element) AbstractNode.getMetadata(document, copy);
 		mData.setAttribute("name", uniqueName.getAttribute("value"));
