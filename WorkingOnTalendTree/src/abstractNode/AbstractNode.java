@@ -169,8 +169,6 @@ public abstract class AbstractNode {
 			//clone the dummy
 			Element e = (Element) start.cloneNode(true);
 				//get the values to the attributes
-			System.err.println(e.getAttribute("key"));
-			System.err.println(tMapDTO.getPackageColumns().get(i).isKey());
 				e.setAttribute("key", tMapDTO.getPackageColumns().get(i).isKey());
 				e.setAttribute("length", tMapDTO.getPackageColumns().get(i).getLength());
 				e.setAttribute("name", tMapDTO.getPackageColumns().get(i).getName());
@@ -178,7 +176,6 @@ public abstract class AbstractNode {
 				e.setAttribute("precision", tMapDTO.getPackageColumns().get(i).getPrecision());
 				e.setAttribute("type", tMapDTO.getPackageColumns().get(i).getType());
 				e.setAttribute("usefulColumn", tMapDTO.getPackageColumns().get(i).isUsefulColumn());
-				System.out.println("Key is: " + e.getAttribute("key"));
 				NodeBuilder.appendElementToContext(metadata, e);
 			}
 			//append the newly cloned node
@@ -258,11 +255,10 @@ public abstract class AbstractNode {
 				continue;
 			}
 			else {
-				System.out.println(nodes.item(i).getNodeName());
 				AbstractNode.setAttribute(nodes.item(i), "JAVA_LIBRARY_PATH", absPath);
-				System.out.println("success");
 			}
 		}
+		System.out.printf("Java library path updated for %s nodes!%n", nodes.getLength());
 	}
 	
 	public static String verifyNodeType(Node node) {
