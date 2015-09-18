@@ -157,9 +157,9 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlInput_1">     
     
-<column key="true" length="10" name="ID" nullable="false" precision="10" true="true" type="id_Integer" usefulColumn="true"/>
-<column key="true" length="10" name="Mandat" nullable="false" precision="10" true="false" type="id_Integer" usefulColumn="true"/>
-<column key="true" length="10" name="Werbetraeger" nullable="false" precision="10" true="false" type="id_String" usefulColumn="true"/>
+<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="416" posY="288">
