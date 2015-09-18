@@ -12,22 +12,22 @@ import start.*;
 public class tMSSqlConnection extends AbstractNode {
 	
 	//public static int counter = 0;
+	private static final String componentName = "tMSSqlConnection";
 	
 	public static int countInstance(Document document) { 
-		int i = Navigator.getNumberOfNodes(document, tMSSqlConnection.class.getSimpleName());
-		return i++;
+		int i = Navigator.getNumberOfNodes(document, componentName);
+		return ++i;
 	}
 
-	public static Element newInstance (Document document, String name) {
-		NodeList list = Navigator.processXpathQueryNodeList(document, XPathExpressions.getComponentsByComponentName, tMSSqlConnection.class.getSimpleName());
+	public static Element newInstance (Document document, Document template, String name) {
 		//get the first node from the list
-		Node n = list.item(0);
+		Node n = Navigator.processXPathQueryNode(template, XPathExpressions.getComponentsByComponentName, componentName);
 		//true = all child elements are copied as well
-		Element copy = (Element) n.cloneNode(true);
+		Element copy = (Element) document.importNode(n, true);
 		Element label = (Element) Navigator.processXPathQueryNode(copy, XPathExpressions.getByNameAttribute, "LABEL");
 		label.setAttribute("value", name);
 		Element uniqueName = (Element) Navigator.processXPathQueryNode(copy, XPathExpressions.getByNameAttribute, "UNIQUE_NAME");
-		uniqueName.setAttribute("value", tMSSqlConnection.class.getSimpleName() + "_" + countInstance(document));
+		uniqueName.setAttribute("value", componentName + "_" + countInstance(document));
 		return copy;
 	}
 	

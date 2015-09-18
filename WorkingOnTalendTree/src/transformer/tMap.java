@@ -16,31 +16,29 @@ import start.NodeBuilder;
 import abstractNode.*;
 
 public class tMap extends AbstractNode {
+	
+	private static final String componentName = "tMap";
 
 	public static int countInstance(Document document) {
 		int i = Navigator.getNumberOfNodes(document,
-				tMSSqlOutput.class.getSimpleName());
+				componentName);
 		return ++i;
 	}
 
-	public static Element newInstance(Document document, String name) throws WrongNodeException {
-		NodeList list = Navigator.processXpathQueryNodeList(document,
-				XPathExpressions.getComponentsByComponentName,
-				tMap.class.getSimpleName());
-		// get the first node from the list
-		Node n = list.item(0);
+	public static Element newInstance(Document document, Document template, String name) throws WrongNodeException {
+		
+		Node n = Navigator.processXPathQueryNode(template, XPathExpressions.getComponentsByComponentName, componentName);
 		// true = all child elements are copied as well
-		Element copy = (Element) n.cloneNode(true);
+		Element copy = (Element) document.importNode(n, true);
 		Element label = (Element) Navigator.processXPathQueryNode(copy,
 				XPathExpressions.getByNameAttribute, "LABEL");
 		label.setAttribute("value", name);
 		Element uniqueName = (Element) Navigator.processXPathQueryNode(copy,
 				XPathExpressions.getByNameAttribute, "UNIQUE_NAME");
-		uniqueName.setAttribute("value", tMap.class.getSimpleName() + "_"
+		uniqueName.setAttribute("value", componentName + "_"
 				+ countInstance(document));
 		Element mData = (Element) AbstractNode.getMetadata(document, copy);
 		mData.setAttribute("name", uniqueName.getAttribute("value"));
-		resetNode(document, copy);
 		NodeBuilder.appendNodeElement(document, copy);
 		return copy;
 	}

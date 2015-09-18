@@ -28,6 +28,7 @@ public class Start {
 		String output = ".//Output//TalendJob.item";
 		//parse xml
 		Document document = DocumentCreator.buildDocument(template);
+		Document fixedTemplate = DocumentCreator.buildDocument(template);
 		
 		String host = "172.21.100.77";
 		String port = "1433";
@@ -98,6 +99,10 @@ public class Start {
 		System.out.println(AbstractNode.verifyNodeType(transformer));
 		tMap.getNodeData(transformer);
 		tMap.resetNode(document, transformer);
+		tMSSqlOutput.newInstance(document, fixedTemplate, "MyTestNode");
+		tMap.newInstance(document, fixedTemplate, "myTestTMap");
+		tMSSqlInput.newInstance(document, fixedTemplate, "MyTestInput");
+		tMSSqlConnection.newInstance(document, fixedTemplate, "MyTestConnection");
 		
 		
 		//update java_library_path in all nodes
