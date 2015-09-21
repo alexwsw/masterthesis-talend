@@ -6,6 +6,8 @@ public enum XPathExpressions {
 	getByChildValue("//*[@value='%s']"),
 	//Any "name attribute" e.g. name of the metadata or "UNIQUE_NAME" (must be unique for the given context)
 	getByNameAttribute("./*[@name='%s']"),
+	//try to find an attribute within of an element
+	findAttribute("./@*[name()='%s']"),
 	//for connections
 	getConnection("//*[@source='%s'and @target='%s']"),
 	getConnections("/*[name()='connection']"),
@@ -29,6 +31,8 @@ public enum XPathExpressions {
 	
 	//get NodeData
 	getNodeData("./*[name()='nodeData']"),
+	//get VarTables
+	getVarTables("./*[name()='varTables']"),
 	
 	//get Nodes
 	getNodes("./*[name()='node']"),

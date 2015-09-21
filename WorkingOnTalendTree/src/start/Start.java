@@ -98,6 +98,8 @@ public class Start {
 		Node transformer = AbstractNode.getElementByValue(document, "MyTransformer");
 		System.out.println(AbstractNode.verifyNodeType(transformer));
 		tMap.getNodeData(transformer);
+		//set prefix test
+		tMap.setPrefix(document, tMap.getNodeData(transformer), "0-");
 		tMSSqlOutput.newInstance(document, fixedTemplate, "MyTestNode");
 		tMap.newInstance(document, fixedTemplate, "myTestTMap");
 		tMSSqlInput.newInstance(document, fixedTemplate, "MyTestInput");

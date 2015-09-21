@@ -261,6 +261,7 @@ public abstract class AbstractNode {
 		System.out.printf("Java library path updated for %s nodes!%n", nodes.getLength());
 	}
 	
+	//only suitable for NODES (verification according to componentName attribute)
 	public static String verifyNodeType(Node node) {
 		String type = null;
 		Element e = (Element) node;
@@ -268,11 +269,32 @@ public abstract class AbstractNode {
 		return type;
 	}
 	
+	//get and remove dummy node at the same time???
 	public static Node getDummy(Node node) throws DummyNotFoundException{
 		Node n = Navigator.processXPathQueryNode(node,XPathExpressions.getByNameAttribute, "dummy");
 		if (n == null) {
 			throw new DummyNotFoundException();
 		}
 		return n;
+	}
+	
+	//necessary???
+	public static Element cloneDummy(Node dummy) {
+		return (Element) dummy.cloneNode(true);
+	}
+	
+	public static void removeDummy(Node dummy) {
+		NodeBuilder.removeNode(dummy);
+	}
+	
+	//check whether a given node contains an attribute (before creating a new one)
+	public static boolean hasAttribute(Node node, String attributeName) {
+		if(Navigator.processXPathQueryNode(node, XPathExpressions.findAttribute, attributeName) == null) {
+			System.out.printf("%s attribute NOT found!%n", attributeName);
+			return false;
+		} else {
+			System.out.printf("%s attribute found!%n", attributeName);
+			return true;
+		}
 	}
 }

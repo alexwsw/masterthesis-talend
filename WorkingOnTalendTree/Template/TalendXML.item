@@ -209,7 +209,7 @@
     <nodeData xsi:type="MapperData">
       <uiProperties shellMaximized="true"/>
       <varTables name="Var" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="" name="dummy" type="id_Integer"/>
+<mapperTableEntries name="dummy" type="id_Integer"/>
 </varTables>
       <outputTables name="MyOutput" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="" name="dummy" type="id_Integer"/>
