@@ -206,7 +206,7 @@
     <elementParameter field="TEXT" name="LABEL" value="MyTransformer"/>
     <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="Output">
+    <metadata connector="FLOW" name="MyOutput">
 <column key="false" length="10" name="dummy" nullable="false" precision="0" type="id_Integer" usefulColumn="true"/>
 </metadata>
     <nodeData xsi:type="MapperData">
