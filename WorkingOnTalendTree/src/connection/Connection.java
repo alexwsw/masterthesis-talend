@@ -56,7 +56,7 @@ public class Connection {
 	}
 
 	// in Progress
-	public static void createConnection(Document document, Node source, Node target) {
+	public static void createConnection(Document document, Document template, Node source, Node target) {
 		if (findConnection(document, source, target) != null) {
 			System.out.println("Connection already exists");
 			// evtl. update connection

@@ -71,7 +71,7 @@ public class tMap extends AbstractNode {
 		NodeList inputTables = Navigator.processXpathQueryNodeList(nodeData,
 				XPathExpressions.getTMapInputTables, null);
 		Node varTables = Navigator.processXPathQueryNode(nodeData,
-				XPathExpressions.getTMapVarTables, null);
+				XPathExpressions.getByNodeName, "varTables");
 		NodeList outputTables = Navigator.processXpathQueryNodeList(nodeData,
 				XPathExpressions.getTMapOutputTables, null);
 		child = inputTables.item(0).getFirstChild();

@@ -15,10 +15,11 @@ public enum XPathExpressions {
 	getIncomingMainConnection("//*[@target='%s' and @lineStyle='0']"),
 	//metadata of a certain type (e.g. "FLOW") (type can be stored in an enum)
 	getMetadata("./*[@connector='%s' and @name='%s']"),
+	//generalized xpath expression suitable for all nodes
+	getByNodeName("./*[name()='%s']"),
 	getMetadataByType("./*[name()='metadata']"),
 	getTMapMetadata("./*[name()='metadata' and @connector='FLOW']"),
 	getTMapInputTables("./*[name()='inputTables']"),
-	getTMapVarTables("./*[name()='varTables']"),
 	getTMapOutputTables("./*[name='outputTables']"),
 	
 	//test
