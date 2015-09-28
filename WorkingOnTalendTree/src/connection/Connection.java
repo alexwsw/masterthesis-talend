@@ -1,10 +1,12 @@
 package connection;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import enums.EConnectionTypes;
 import enums.XPathExpressions;
 import start.DocumentCreator;
 import start.Navigator;
@@ -54,15 +56,44 @@ public class Connection {
 		a = Navigator.processXPathQueryNode(node, XPathExpressions.getByNameAttribute, "TRACES_CONNECTION_FILTER");
 		return a;
 	}
+	
+	public static int countConnections (Document document, EConnectionTypes type) {
+		int number = 0;
+		NodeList connList = Navigator.processXpathQueryNodeList(document, XPathExpressions.getFlowConnection, type.getType());
+		number = connList.getLength();
+		return number;
+	}
 
 	// in Progress
-	public static void createConnection(Document document, Document template, Node source, Node target) {
-		if (findConnection(document, source, target) != null) {
+	// connect Metadata, not Nodes (due to tMap with many metadata child nodes!!!!!)
+	// type type is an enum that defines connection's lineStyle and type
+	public static void newConnection(Document document, Document template, Node sourceMetadata, Node target, EConnectionTypes type) {
+		if (findConnection(document, sourceMetadata.getParentNode(), target) != null) {
 			System.out.println("Connection already exists");
 			// evtl. update connection
 		} else {
-			Node root = document.getDocumentElement();
-			Element newConnection = document.createElement("connection");
+			Element metadata = (Element) sourceMetadata;
+			Node metadataParent = sourceMetadata.getParentNode();
+			int numberConns = AbstractNode.getOutgoingConnections(document, metadataParent).getLength();
+			String sourceConnectionFormat = AbstractNode.getAttribute(metadataParent, "CONNECTION_FORMAT");
+			String sourceUniqueName = AbstractNode.getAttribute(metadataParent, "UNIQUE_NAME");
+			String targetUniqueName = AbstractNode.getAttribute(target, "UNIQUE_NAME");
+			Node importConnection = Navigator.processXPathQueryNode(template, XPathExpressions.getFlowConnection, type.getType());
+			
+			Element newConnection = (Element) document.importNode(importConnection, true);
+			newConnection.setAttribute("label", String.format("%s%s", sourceConnectionFormat, countConnections(document, type) + 1));
+			AbstractNode.setAttribute(newConnection, "UNIQUE_NAME", newConnection.getAttribute("label"));
+			newConnection.setAttribute("lineStyle", type.getLineStyle());
+			newConnection.setAttribute("metaname", metadata.getAttribute("name"));
+			newConnection.setAttribute("source", sourceUniqueName);
+			newConnection.setAttribute("target", targetUniqueName);
+			if(numberConns > 0) {
+				Attr outputid = document.createAttribute("outputId");
+				outputid.setValue(String.valueOf(++numberConns));
+				newConnection.setAttributeNode(outputid);
+			}
+			NodeBuilder.appendNodeElement(document, newConnection);
+			
 
 		}
 	}

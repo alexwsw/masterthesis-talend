@@ -206,7 +206,7 @@
     <elementParameter field="TEXT" name="LABEL" value="MyTransformer"/>
     <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" name="MyOutput">
+    <metadata connector="FLOW" name="Output">
 <column key="false" length="10" name="dummy" nullable="false" precision="0" type="id_Integer" usefulColumn="true"/>
 </metadata>
     <nodeData xsi:type="MapperData">
@@ -532,4 +532,16 @@
     <column key="true" length="10" name="dummy" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 </metadata>
   </node>
+<connection connectorName="FLOW" label="row5" lineStyle="0" metaname="tMSSqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tMSSqlInput_3" target="tMSSqlOutput_2">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+    <elementValue elementRef="TRACE_COLUMN" value="ID"/>
+<elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+<elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+<elementValue elementRef="TRACE_COLUMN" value="Alter"/>
+<elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+<elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+</elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row5"/>
+  </connection>
 </talendfile:ProcessType>

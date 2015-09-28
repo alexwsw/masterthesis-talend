@@ -15,6 +15,7 @@ import database.tMSSqlInput;
 import database.tMSSqlOutput;
 import dto.ColumnDTO;
 import dto.tMapDTO;
+import enums.EConnectionTypes;
 import exception.DummyNotFoundException;
 import exception.WrongNodeException;
 
@@ -100,9 +101,10 @@ public class Start {
 		tMap.getNodeData(transformer);
 		//set prefix test
 		tMap.setPrefix(document, tMap.getNodeData(transformer), "0-");
-		tMSSqlOutput.newInstance(document, fixedTemplate, "MyTestNode");
+		Node a = tMSSqlOutput.newInstance(document, fixedTemplate, "MyTestNode");
 		tMap.newInstance(document, fixedTemplate, "myTestTMap");
-		tMSSqlInput.newInstance(document, fixedTemplate, "MyTestInput");
+		Node b = tMSSqlInput.newInstance(document, fixedTemplate, "MyTestInput");
+		Connection.newConnection(document, fixedTemplate, AbstractNode.getMetadata(document, b), a, EConnectionTypes.Main);
 		tMSSqlConnection.newInstance(document, fixedTemplate, "MyTestConnection");
 		
 		
