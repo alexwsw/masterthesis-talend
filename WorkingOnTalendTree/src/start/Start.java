@@ -16,6 +16,7 @@ import database.tMSSqlOutput;
 import dto.ColumnDTO;
 import dto.tMapDTO;
 import enums.EConnectionTypes;
+import enums.XPathExpressions;
 import exception.DummyNotFoundException;
 import exception.WrongNodeException;
 
@@ -102,9 +103,17 @@ public class Start {
 		//set prefix test
 		tMap.setPrefix(document, tMap.getNodeData(transformer), "0-");
 		Node a = tMSSqlOutput.newInstance(document, fixedTemplate, "MyTestNode");
-		tMap.newInstance(document, fixedTemplate, "myTestTMap");
+		
+		Node mapper = tMap.newInstance(document, fixedTemplate, "myTestTMap");
+		NodeBuilder.appendElementToContext(tMap.getNodeData(mapper), tMap.createVarTables(document));
+		tMap.setPrefix(document, tMap.getNodeData(mapper), "123-");
+		NodeBuilder.appendElementToContext(tMap.getNodeData(mapper), tMap.createOutputTables(document, "myConn"));
+		NodeBuilder.appendElementToContext(Navigator.processXPathQueryNode(tMap.getNodeData(mapper), XPathExpressions.getOutputTables, null) ,tMap.createNodeDataColumnDummy(document));
+		NodeBuilder.appendElementToContext(mapper,tMap.createTMapMetadata(document, Navigator.processXPathQueryNode(tMap.getNodeData(mapper), XPathExpressions.getOutputTables, null)));
+		NodeBuilder.appendElementToContext(tMap.getMetadata(document, mapper), AbstractNode.createMetadataColumnDummy(document));
 		Node b = tMSSqlInput.newInstance(document, fixedTemplate, "MyTestInput");
-		Connection.newConnection(document, fixedTemplate, AbstractNode.getMetadata(document, b), a, EConnectionTypes.Main);
+		AbstractNode.setMetadataFromDTO(document, AbstractNode.extractMetadata(AbstractNode.getMetadata(document, source)), AbstractNode.getMetadata(document, b));
+		Connection.newConnection(document, fixedTemplate, AbstractNode.getMetadata(document, mapper), a, EConnectionTypes.Main);
 		tMSSqlConnection.newInstance(document, fixedTemplate, "MyTestConnection");
 		
 		

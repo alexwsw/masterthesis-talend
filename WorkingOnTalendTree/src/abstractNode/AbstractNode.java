@@ -2,6 +2,8 @@ package abstractNode;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -10,6 +12,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import connection.Connection;
+import dto.ColumnDTO;
 import dto.tMapDTO;
 import enums.XPathExpressions;
 import exception.DummyNotFoundException;
@@ -295,6 +298,72 @@ public abstract class AbstractNode {
 		} else {
 			System.out.printf("%s attribute found!%n", attributeName);
 			return true;
+		}
+	}
+	
+	
+	//suggest to André
+	public static Element createMetadataColumnDummy(Document document) {
+		Element dummy = null;
+		dummy = document.createElement("column");
+		dummy.setAttributeNode(document.createAttribute("key"));
+		dummy.setAttributeNode(document.createAttribute("length"));
+		dummy.setAttributeNode(document.createAttribute("name"));
+		dummy.setAttributeNode(document.createAttribute("nullable"));
+		dummy.setAttributeNode(document.createAttribute("precision"));
+		dummy.setAttributeNode(document.createAttribute("type"));
+		dummy.setAttributeNode(document.createAttribute("usefulColumn"));		
+		return dummy;
+	}
+	
+	public static Element createMetadata(Document document, Node node) {
+		Element metaData = null;
+		//Element dummy = (Element)AbstractNode.createMetadataColumnDummy(document);
+		metaData = document.createElement("metadata");
+		metaData.setAttributeNode(document.createAttribute("connector"));
+		metaData.setAttributeNode(document.createAttribute("name"));
+		metaData.setAttribute("connector", "FLOW");
+		metaData.setAttribute("metadata", AbstractNode.getNodesUniqueName(document, node));
+		//NodeBuilder.appendElementToContext(metaData, dummy);
+		
+		
+		return metaData;
+	}
+	
+	public static Collection <? extends ColumnDTO> extractMetadata (Node metaData) {
+		Collection<ColumnDTO> mDataColumns = new ArrayList<ColumnDTO>();
+		Node firstChild = metaData.getFirstChild();
+		while (firstChild != null) {
+			if(firstChild.getNodeType() == Node.TEXT_NODE) {
+				firstChild = firstChild.getNextSibling();
+				continue;
+			}
+			Element mDataColumn = (Element) firstChild;
+			String isKey = mDataColumn.getAttribute("key");
+			String length = mDataColumn.getAttribute("length");
+			String name = mDataColumn.getAttribute("name");
+			String nullable = mDataColumn.getAttribute("nullable");
+			String precision = mDataColumn.getAttribute("precision");
+			String type = mDataColumn.getAttribute("type");
+			String usefulColumn = mDataColumn.getAttribute("usefulColumn");
+			ColumnDTO column = new ColumnDTO(isKey, length, name, nullable, precision, null, type, usefulColumn);
+			mDataColumns.add(column);
+			firstChild = firstChild.getNextSibling();
+		}
+		return mDataColumns;
+	}
+	
+	public static void setMetadataFromDTO (Document document, Collection<? extends ColumnDTO> columns, Node metadata) {
+		for (ColumnDTO column : columns) {
+			Element dummy = AbstractNode.createMetadataColumnDummy(document);
+			dummy.setAttribute("key", column.isKey());
+			dummy.setAttribute("length", column.getLength());
+			dummy.setAttribute("name", column.getName());
+			dummy.setAttribute("nullable", column.isNullable());
+			dummy.setAttribute("precision", column.getPrecision());
+			dummy.setAttribute("type", column.getType());
+			dummy.setAttribute("usefulColumn", column.isUsefulColumn());
+			NodeBuilder.appendElementToContext(metadata, dummy);
 		}
 	}
 }

@@ -482,22 +482,19 @@
     <elementParameter field="TEXT" name="LABEL" value="myTestTMap"/>
     <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="MatchOutput" name="tMap_3">
-      <column comment="" key="false" name="dummy" nullable="false" pattern="" sourceType="" type="id_Integer" usefulColumn="true"/>
-    </metadata>
+    
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
-      <varTables name="Var" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="dummy" type="id_Integer"/>
-      </varTables>
-      <outputTables name="MatchOutput" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="dummy" type="id_Integer"/>
-      </outputTables>
-      <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="DF_Input" sizeState="INTERMEDIATE">
-        <mapperTableEntries name="dummy" type="id_Integer"/>
-      </inputTables>
-    </nodeData>
-  </node>
+<varTables name="Var" sizeState="INTERMEDIATE">
+<mapperTableEntries expression="123-" name="testVariable" type="id_String"/>
+</varTables>
+<outputTables name="myConn" sizeState="INTERMEDIATE">
+<mapperTableEntries name="dummy" type=""/>
+</outputTables>
+</nodeData>
+  <metadata connector="FLOW" name="myConn">
+<column key="" length="" name="" nullable="" precision="" type="" usefulColumn=""/>
+</metadata>
+</node>
 <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="192" posY="288">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_3"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="U:\git\masterthesis-talend\WorkingOnTalendTree\java"/>
@@ -530,9 +527,12 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlInput_3">     
     <column key="true" length="10" name="dummy" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
   </node>
-<connection connectorName="FLOW" label="row5" lineStyle="0" metaname="tMSSqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tMSSqlInput_3" target="tMSSqlOutput_2">
+<connection connectorName="FLOW" label="row5" lineStyle="0" metaname="myConn" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMSSqlOutput_2">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
     <elementValue elementRef="TRACE_COLUMN" value="ID"/>
 <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>

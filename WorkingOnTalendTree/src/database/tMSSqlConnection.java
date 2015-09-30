@@ -34,7 +34,7 @@ public class tMSSqlConnection extends AbstractNode {
 
 	public static void setDBConnection (Document document, String label, String host, String port, String schema, String database, String user, String password) throws WrongNodeException {
 		Node dbNode = AbstractNode.getElementByValue(document, label);
-		String requiredType = "tMSSqlConnection";
+		String requiredType = componentName;
 		String nodeType = AbstractNode.verifyNodeType(dbNode);
 		if (!(nodeType.equals(requiredType))){
 			throw new WrongNodeException(requiredType, nodeType);
