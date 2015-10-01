@@ -13,6 +13,7 @@ public enum XPathExpressions {
 	getConnections("/*[name()='connection']"),
 	getFlowConnection("//*[name()='connection' and @connectorName='%s']"),
 	getMetaDataForConnection("//*[name()='metadata' and @name='%s']"),
+	getConnectionByLabel("//*[@label='%s']"),
 	//need to be tested!!!!!!!!!!
 	getIncomingMainConnection("//*[@target='%s' and @lineStyle='0']"),
 	//metadata of a certain type (e.g. "FLOW") (type can be stored in an enum)

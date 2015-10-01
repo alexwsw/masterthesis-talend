@@ -94,6 +94,9 @@ public class Start {
 		Node metadataFlow = AbstractNode.getMetadata(document, source, "FLOW");
 		AbstractNode.setMetadataColumnsTest(document, metadataFlow, tmap);
 		
+		tMap.doLookup(document, fixedTemplate, tmap);
+		
+		/*
 		//Connection
 		Connection.updateConnection(document, AbstractNode.getElementByValue(document, "MyInput"), AbstractNode.getElementByValue(document, "PreparedMatchColumn"));
 		
@@ -178,12 +181,12 @@ public class Start {
 		System.out.println("unique Name: " + AbstractNode.getUniqueName(document, "MyCommit"));
 		Connection.createConnection(document, node2, node);
 		
-		DocumentCreator.SaveDOMFile(document, output);
 
 		/*for (int i = 0; i<nodeMap.getLength(); i++) {
 			System.out.println(nodeMap.item(i).getNodeName() + " " + nodeMap.item(i).getNodeValue());
 		}*/
 		
+		DocumentCreator.SaveDOMFile(document, output);
 		
 	
 

@@ -330,6 +330,7 @@ public abstract class AbstractNode {
 		return metaData;
 	}
 	
+	//iterate over a Node's metadata and save it within a DT-Object
 	public static Collection <? extends ColumnDTO> extractMetadata (Node metaData) {
 		Collection<ColumnDTO> mDataColumns = new ArrayList<ColumnDTO>();
 		Node firstChild = metaData.getFirstChild();
@@ -353,6 +354,7 @@ public abstract class AbstractNode {
 		return mDataColumns;
 	}
 	
+	//create columns for a metadata Node from a DT-Object
 	public static void setMetadataFromDTO (Document document, Collection<? extends ColumnDTO> columns, Node metadata) {
 		for (ColumnDTO column : columns) {
 			Element dummy = AbstractNode.createMetadataColumnDummy(document);

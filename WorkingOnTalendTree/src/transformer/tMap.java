@@ -1,5 +1,7 @@
 package transformer;
 
+import java.util.Collection;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -8,6 +10,7 @@ import org.w3c.dom.NodeList;
 
 import database.tMSSqlInput;
 import database.tMSSqlOutput;
+import dto.ColumnDTO;
 import dto.tMapDTO;
 import enums.ETypes;
 import enums.XPathExpressions;
@@ -62,6 +65,7 @@ public class tMap extends AbstractNode {
 		}
 		Node nodeData = tMap.getNodeData(input);
 		NodeBuilder.removeAllChildNodes(nodeData);
+		
 		
 		/*
 		Node child = mData.item(0).getFirstChild();
@@ -120,16 +124,11 @@ public class tMap extends AbstractNode {
 	}
 
 	//Document parameter is required for Attr creation
-	public static void setPrefix(Document document, Node nodeData, String prefix)
-			throws DummyNotFoundException{	
-			Node varTables = Navigator.processXPathQueryNode(nodeData,
-					XPathExpressions.getVarTables, null);
-			System.err.println(DocumentCreator.getStringFromDocument(varTables));
+	public static void setPrefix(Document document, Node nodeData, String prefix) {	
+			Element varTables = tMap.createVarTables(document);
 			//make a clone of the dummy
 			Element dummy = (Element) tMap.createNodeDataColumnDummy(document);
-			System.err.println(DocumentCreator.getStringFromDocument(dummy));
 			//remove all the present elements from varTables
-			NodeBuilder.removeAllChildNodes(varTables);
 			if (!(AbstractNode.hasAttribute(dummy, "expression"))) { 
 			Attr expression = document.createAttribute("expression");
 			dummy.setAttributeNode(expression);
@@ -138,6 +137,7 @@ public class tMap extends AbstractNode {
 			dummy.setAttribute("type", "id_String");
 			dummy.setAttribute("expression", prefix);
 			NodeBuilder.appendElementToContext(varTables, dummy);
+			NodeBuilder.appendElementToContext(nodeData, varTables);
 		
 	}
 	
@@ -207,22 +207,40 @@ public class tMap extends AbstractNode {
 		return metaData;
 	}
 	
+	public static void setTablesFromDTO (Document document, Node tables, Collection<? extends ColumnDTO> columns) {
+		for (ColumnDTO column : columns) {
+			Element dummy = tMap.createNodeDataColumnDummy(document);
+			dummy.setAttribute("name", column.getName());
+			dummy.setAttribute("type", column.getType());
+			NodeBuilder.appendElementToContext(tables, dummy);
+		}
+	}
+	
 	
 	public static void doLookup (Document document, Document template, tMapDTO data) throws WrongNodeException {
 		String startPointMark = "ConnectionPoint";
-		Element startConnection = (Element) AbstractNode.getElementByValue(document, startPointMark);
+		Element startConnection = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getConnectionByLabel, startPointMark);
+		System.out.println(DocumentCreator.getStringFromDocument(startConnection));
 		Element startMetadata = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getMetaDataForConnection, startConnection.getAttribute("metaname"));
+		//relabel the connection (essential for the inputTables)
 		startConnection.setAttribute("label", startMetadata.getAttribute("name"));
 		Element prefixTMap = tMap.newInstance(document, template, "PrefixMaker");
 		Element lookupTMap = tMap.newInstance(document, template, "LookupNode");
 		Element lookupDb = tMSSqlInput.newInstance(document, template, "LookupDB");
+		//redirect the startConnection to the prefix tMap Node
 		startConnection.setAttribute("target", AbstractNode.getNodesUniqueName(document, prefixTMap));
+		Element inputTables = tMap.createInputTables(document, startConnection.getAttribute("label"));
+		setTablesFromDTO(document, inputTables, tMap.extractMetadata(startMetadata));
+		NodeBuilder.appendElementToContext(tMap.getNodeData(prefixTMap), inputTables);
+		tMap.setPrefix(document, tMap.getNodeData(prefixTMap), data.getPrefix());
+		
 		
 		
 		
 		NodeBuilder.appendNodeElement(document, prefixTMap);
 		NodeBuilder.appendNodeElement(document, lookupDb);
 		NodeBuilder.appendNodeElement(document, lookupTMap);
+		System.out.println("feddich");
 	}
 
 }
