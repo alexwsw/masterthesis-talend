@@ -180,8 +180,10 @@ public class tMap extends AbstractNode {
 		return tables;
 	}
 	
-	//inputTables Element has few additonal attributes to output/varTables
+	//inputTables Element has few additional attributes to output/varTables
+	//Note: create inputTables, extract and paste Metadata simultaneously
 	public static Element createInputTables(Document document, String connLabel) {
+		//"vessel" for the data
 		Element inputTables = document.createElement("inputTables");
 		inputTables.setAttributeNode(document.createAttribute("lookupMode"));
 		inputTables.setAttributeNode(document.createAttribute("matchingMode"));
@@ -220,7 +222,6 @@ public class tMap extends AbstractNode {
 	public static void doLookup (Document document, Document template, tMapDTO data) throws WrongNodeException {
 		String startPointMark = "ConnectionPoint";
 		Element startConnection = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getConnectionByLabel, startPointMark);
-		System.out.println(DocumentCreator.getStringFromDocument(startConnection));
 		Element startMetadata = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getMetaDataForConnection, startConnection.getAttribute("metaname"));
 		//relabel the connection (essential for the inputTables)
 		startConnection.setAttribute("label", startMetadata.getAttribute("name"));
