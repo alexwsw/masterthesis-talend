@@ -141,6 +141,7 @@ public class tMap extends AbstractNode {
 		
 	}
 	
+	//in progress
 	public static void setInputTables(Document document, Node node, ETypes type) throws WrongNodeException {
 		if (!(AbstractNode.verifyNodeType(node).equals(componentName))) {
 			throw new WrongNodeException(componentName, AbstractNode.verifyNodeType(node));
@@ -223,6 +224,7 @@ public class tMap extends AbstractNode {
 		String startPointMark = "ConnectionPoint";
 		Element startConnection = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getConnectionByLabel, startPointMark);
 		Element startMetadata = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getMetaDataForConnection, startConnection.getAttribute("metaname"));
+		Element previousNode = (Element)startMetadata.getParentNode();
 		//relabel the connection (essential for the inputTables)
 		startConnection.setAttribute("label", startMetadata.getAttribute("name"));
 		Element prefixTMap = tMap.newInstance(document, template, "PrefixMaker");
@@ -236,8 +238,11 @@ public class tMap extends AbstractNode {
 		tMap.setPrefix(document, tMap.getNodeData(prefixTMap), data.getPrefix());
 		
 		
-		
-		
+		//put nodes onto the proper place in the designer (separate method?)
+		prefixTMap.setAttribute("posY", String.valueOf(Integer.parseInt(previousNode.getAttribute("posY")) + 150));
+		lookupTMap.setAttribute("posY", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posY")) + 150));
+		lookupDb.setAttribute("posX", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posX")) + 150));
+		lookupDb.setAttribute("posY", lookupTMap.getAttribute("posY"));
 		NodeBuilder.appendNodeElement(document, prefixTMap);
 		NodeBuilder.appendNodeElement(document, lookupDb);
 		NodeBuilder.appendNodeElement(document, lookupTMap);
