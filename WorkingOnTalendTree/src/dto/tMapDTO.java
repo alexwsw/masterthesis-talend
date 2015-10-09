@@ -1,21 +1,26 @@
 package dto;
 
+import java.util.List;
 import java.util.Map;
 
 public class tMapDTO {
 	
 	private String prefix;
-	//need to get the proper data type for that
-	private Map <Integer, ? extends ColumnDTO> packageColumns;
-	private Map <Integer, ? extends ColumnDTO> lookupTable_Retuncolumns;
+	//columns, relevant for the actual Lookup
+	private List <AdvancedColumnDTO> packageColumns;
+	//columns we get back from the Lookup table
+	private List <AdvancedColumnDTO> lookupTable_Retuncolumns;
+	//the table for the Lookup
 	private String lookupTable;
+	//Lookup column in the lookup table
 	private String lookupColumn;
+	//name of the matchparameter in the input table (e.g prefix + packageColumns)
 	private String packageOutputColumn_MatchColumn;
 	private Map<String, String> packageOutputColumns_ReturnColumns;
 	//add an attribute for mapping stuff
 	
 	public tMapDTO(String prefix,
-			Map<Integer, ? extends ColumnDTO> packageColumns, Map<Integer, ? extends ColumnDTO> lookupTable_Returncolumns, String lookupTable,
+			List<AdvancedColumnDTO> packageColumns, List<AdvancedColumnDTO> lookupTable_Returncolumns, String lookupTable,
 			String lookupColumn, String packageOutputColumn_MatchColumn, Map<String, String>packageOutputColumns_ReturnColumns ) {
 		super();
 		this.prefix = prefix;
@@ -27,24 +32,6 @@ public class tMapDTO {
 		this.packageOutputColumns_ReturnColumns = packageOutputColumns_ReturnColumns;
 	}
 
-	public Map<String, String> getPackageOutputColumns_ReturnColumns() {
-		return packageOutputColumns_ReturnColumns;
-	}
-
-	public void setPackageOutputColumns_ReturnColumns(
-			Map<String, String> packageOutputColumns_ReturnColumns) {
-		this.packageOutputColumns_ReturnColumns = packageOutputColumns_ReturnColumns;
-	}
-
-	public Map<Integer, ? extends ColumnDTO> getLookupTable_Retuncolumns() {
-		return lookupTable_Retuncolumns;
-	}
-
-	public void setLookupTable_Retuncolumns(
-			Map<Integer, ? extends ColumnDTO> lookupTable_Retuncolumns) {
-		this.lookupTable_Retuncolumns = lookupTable_Retuncolumns;
-	}
-
 	public String getPrefix() {
 		return prefix;
 	}
@@ -53,12 +40,21 @@ public class tMapDTO {
 		this.prefix = prefix;
 	}
 
-	public Map<Integer, ? extends ColumnDTO> getPackageColumns() {
+	public List<AdvancedColumnDTO> getPackageColumns() {
 		return packageColumns;
 	}
 
-	public void setPackageColumns(Map<Integer, ? extends ColumnDTO> packageColumns) {
+	public void setPackageColumns(List<AdvancedColumnDTO> packageColumns) {
 		this.packageColumns = packageColumns;
+	}
+
+	public List<AdvancedColumnDTO> getLookupTable_Retuncolumns() {
+		return lookupTable_Retuncolumns;
+	}
+
+	public void setLookupTable_Retuncolumns(
+			List<AdvancedColumnDTO> lookupTable_Retuncolumns) {
+		this.lookupTable_Retuncolumns = lookupTable_Retuncolumns;
 	}
 
 	public String getLookupTable() {
@@ -85,6 +81,18 @@ public class tMapDTO {
 			String packageOutputColumn_MatchColumn) {
 		this.packageOutputColumn_MatchColumn = packageOutputColumn_MatchColumn;
 	}
+
+	public Map<String, String> getPackageOutputColumns_ReturnColumns() {
+		return packageOutputColumns_ReturnColumns;
+	}
+
+	public void setPackageOutputColumns_ReturnColumns(
+			Map<String, String> packageOutputColumns_ReturnColumns) {
+		this.packageOutputColumns_ReturnColumns = packageOutputColumns_ReturnColumns;
+	}
+
+	
+	
 	
 	
 	

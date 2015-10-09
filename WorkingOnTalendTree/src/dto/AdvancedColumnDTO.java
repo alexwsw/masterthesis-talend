@@ -1,30 +1,26 @@
 package dto;
 
-public class ColumnDTO {
+public class AdvancedColumnDTO extends BasicColumnDTO {
 	
 	private String isKey;
 	private String length;
-	private String name;
 	private String nullable;
 	public String precision;
 	//value assigning witch case+enum, DTO's shouldn't contain any logic, 
 	//outsourcing to the next class could be better
 	private String sourceType;
-	private String type;
 	private String usefulColumn;
 	
 	
-	public ColumnDTO(String isKey, String length, String name,
+	public AdvancedColumnDTO(String isKey, String length, String name,
 			String nullable, String precision, String sourceType, String type,
 			String usefulColumn) {
-		super();
+		super(name, type);
 		this.isKey = isKey;
 		this.length = length;
-		this.name = name;
 		this.nullable = nullable;
 		this.precision = precision;
 		this.sourceType = sourceType;
-		this.type = type;
 		this.usefulColumn = usefulColumn;
 	}
 

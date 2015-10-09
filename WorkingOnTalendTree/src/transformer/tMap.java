@@ -8,10 +8,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import connection.Connection;
 import database.tMSSqlInput;
 import database.tMSSqlOutput;
-import dto.ColumnDTO;
+import dto.AdvancedColumnDTO;
 import dto.tMapDTO;
+import enums.EConnectionTypes;
 import enums.ETypes;
 import enums.XPathExpressions;
 import exception.DummyNotFoundException;
@@ -210,14 +212,16 @@ public class tMap extends AbstractNode {
 		return metaData;
 	}
 	
-	public static void setTablesFromDTO (Document document, Node tables, Collection<? extends ColumnDTO> columns) {
-		for (ColumnDTO column : columns) {
+	public static void setTablesFromDTO (Document document, Node tables, Collection<AdvancedColumnDTO> columns) {
+		for (AdvancedColumnDTO column : columns) {
 			Element dummy = tMap.createNodeDataColumnDummy(document);
 			dummy.setAttribute("name", column.getName());
 			dummy.setAttribute("type", column.getType());
 			NodeBuilder.appendElementToContext(tables, dummy);
 		}
 	}
+	
+	public static void setOutputTables(Document document, Node tables ) {}
 	
 	
 	public static void doLookup (Document document, Document template, tMapDTO data) throws WrongNodeException {
@@ -229,13 +233,22 @@ public class tMap extends AbstractNode {
 		startConnection.setAttribute("label", startMetadata.getAttribute("name"));
 		Element prefixTMap = tMap.newInstance(document, template, "PrefixMaker");
 		Element lookupTMap = tMap.newInstance(document, template, "LookupNode");
-		Element lookupDb = tMSSqlInput.newInstance(document, template, "LookupDB");
+		Element lookupDb = tMSSqlInput.newInstance(document, template, "LookupDB", data.getLookupTable_Retuncolumns(), "MyConnection", data.getLookupTable());
+		Connection.newConnection(document, template, AbstractNode.getMetadata(document, lookupDb, "FLOW"), lookupTMap, EConnectionTypes.Lookup);
 		//redirect the startConnection to the prefix tMap Node
 		startConnection.setAttribute("target", AbstractNode.getNodesUniqueName(document, prefixTMap));
+		//put the entire data from the input Dto into the inputTables
 		Element inputTables = tMap.createInputTables(document, startConnection.getAttribute("label"));
 		setTablesFromDTO(document, inputTables, tMap.extractMetadata(startMetadata));
 		NodeBuilder.appendElementToContext(tMap.getNodeData(prefixTMap), inputTables);
+		
+		/*
+		Element outputTables = tMap.createOutputTables(document, "preparedOutput");
+		Element outputMData = tMap.createMetadata(document, outputTables);
+		*/
+		
 		tMap.setPrefix(document, tMap.getNodeData(prefixTMap), data.getPrefix());
+		
 		
 		
 		//put nodes onto the proper place in the designer (separate method?)

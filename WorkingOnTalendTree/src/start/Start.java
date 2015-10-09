@@ -1,5 +1,7 @@
 package start;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -13,7 +15,7 @@ import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
 import database.tMSSqlInput;
 import database.tMSSqlOutput;
-import dto.ColumnDTO;
+import dto.AdvancedColumnDTO;
 import dto.tMapDTO;
 import enums.EConnectionTypes;
 import enums.XPathExpressions;
@@ -41,21 +43,21 @@ public class Start {
 		//String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
 		String password = "v8+RGusCeE5g7aN7EnZnUA==";
 		
-		Map<Integer, ColumnDTO> packageColumns = new TreeMap<Integer, ColumnDTO>();
-		ColumnDTO c1 = new ColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
-		packageColumns.put(0, c1);
-		ColumnDTO c2 = new ColumnDTO("false", "10", "Mandat", "false", "10", null, "id_Integer", "true");
-		packageColumns.put(1, c2);
-		ColumnDTO c3 = new ColumnDTO("false", "10", "Werbetraeger", "false", "10", null, "id_String", "true");
-		packageColumns.put(2, c3);
+		List <AdvancedColumnDTO> packageColumns = new ArrayList <AdvancedColumnDTO>();
+		AdvancedColumnDTO c1 = new AdvancedColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
+		packageColumns.add(c1);
+		AdvancedColumnDTO c2 = new AdvancedColumnDTO("false", "10", "Mandat", "false", "10", null, "id_Integer", "true");
+		packageColumns.add(c2);
+		AdvancedColumnDTO c3 = new AdvancedColumnDTO("false", "10", "Werbetraeger", "false", "10", null, "id_String", "true");
+		packageColumns.add(c3);
 		
-		Map<Integer, ColumnDTO>lookupTable_Returncolumns = new TreeMap<Integer, ColumnDTO>();
-		ColumnDTO l1 = new ColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
-		lookupTable_Returncolumns.put(0, l1);
-		ColumnDTO l2 = new ColumnDTO("false", "10", "BK", "true", "10", null, "id_String", "true");
-		lookupTable_Returncolumns.put(1, l2);
-		ColumnDTO l3 = new ColumnDTO("false", "10", "Name", "true", "10", null, "id_String", "true");
-		lookupTable_Returncolumns.put(2, l3);
+		List <AdvancedColumnDTO>lookupTable_Returncolumns = new ArrayList <AdvancedColumnDTO>();
+		AdvancedColumnDTO l1 = new AdvancedColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
+		lookupTable_Returncolumns.add(l1);
+		AdvancedColumnDTO l2 = new AdvancedColumnDTO("false", "10", "BK", "true", "10", null, "id_String", "true");
+		lookupTable_Returncolumns.add(l2);
+		AdvancedColumnDTO l3 = new AdvancedColumnDTO("false", "10", "Name", "true", "10", null, "id_String", "true");
+		lookupTable_Returncolumns.add(l3);
 		Map<String, String> packageOutputColumns_ReturnColumns = new TreeMap<String, String>();
 		packageOutputColumns_ReturnColumns.put("ID", "FK_Werbetraeger_BK");
 		packageOutputColumns_ReturnColumns.put("Name", "WerbetraegerName");
@@ -187,6 +189,7 @@ public class Start {
 		}*/
 		
 		DocumentCreator.SaveDOMFile(document, output);
+		
 		
 	
 

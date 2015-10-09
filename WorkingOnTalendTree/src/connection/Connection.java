@@ -68,10 +68,7 @@ public class Connection {
 	// connect Metadata, not Nodes (due to tMap with many metadata child nodes!!!!!)
 	// type type is an enum that defines connection's lineStyle and type
 	public static void newConnection(Document document, Document template, Node sourceMetadata, Node target, EConnectionTypes type) {
-		if (findConnection(document, sourceMetadata.getParentNode(), target) != null) {
-			System.out.println("Connection already exists");
-			// evtl. update connection
-		} else {
+		
 			Element metadata = (Element) sourceMetadata;
 			Node metadataParent = sourceMetadata.getParentNode();
 			int numberConns = AbstractNode.getOutgoingConnections(document, metadataParent).getLength();
@@ -95,7 +92,7 @@ public class Connection {
 			NodeBuilder.appendNodeElement(document, newConnection);
 			
 
-		}
+		
 	}
 
 	public static void updateConnection(Document document, Node connection) {

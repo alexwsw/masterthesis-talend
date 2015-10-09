@@ -1,10 +1,15 @@
 package database;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import dto.AdvancedColumnDTO;
+import dto.BasicColumnDTO;
 import enums.XPathExpressions;
 import abstractNode.AbstractNode;
 import start.Navigator;
@@ -19,16 +24,36 @@ public class tMSSqlInput extends AbstractNode{
 		return ++i;
 	}
 
-	public static Element newInstance (Document document, Document template, String name) {
+	public static Element newInstance (Document document, Document template, String name, Collection<AdvancedColumnDTO> columns, String connLabel, String table) {
 		Node n = Navigator.processXPathQueryNode(template, XPathExpressions.getComponentsByComponentName, componentName);
 		//true = all child elements are copied as well
 		Element copy = (Element) document.importNode(n, true);
+		//remove irrelevant data
+		tMSSqlInput.resetNode(document, copy);
+		//set label and unique_name
 		Element label = (Element) Navigator.processXPathQueryNode(copy, XPathExpressions.getByNameAttribute, "LABEL");
 		label.setAttribute("value", name);
 		Element uniqueName = (Element) Navigator.processXPathQueryNode(copy, XPathExpressions.getByNameAttribute, "UNIQUE_NAME");
-		uniqueName.setAttribute("value", tMSSqlInput.class.getSimpleName() + "_" + countInstance(document));
+		uniqueName.setAttribute("value", componentName + "_" + countInstance(document));
+		//set connection to Database
+		tMSSqlInput.setDbConnection(document, copy, connLabel);
+		//add new metadata
+		Element mData = AbstractNode.createMetadata(document, copy);
+		AbstractNode.setMetadataFromDTO(document, columns, mData);
+		//separate Method for SQL statement generating???
+		String sqlParameters = "";
+		for(AdvancedColumnDTO column : columns) {
+			sqlParameters += column.getName() + ",";
+		}
+		AbstractNode.setAttribute(copy, "TABLE", table);
+		//delete the last comma
+		sqlParameters = sqlParameters.substring(0, sqlParameters.length()-1);
+		String sqlStatement = String.format("select %s from %s", sqlParameters, table);
+		AbstractNode.setAttribute(copy, "QUERY", sqlStatement);
+		/*
 		Element mData = (Element) AbstractNode.getMetadata(document, copy);
 		mData.setAttribute("name", uniqueName.getAttribute("value"));
+		*/
 		NodeBuilder.appendNodeElement(document, copy);
 		return copy;
 	}
@@ -44,6 +69,8 @@ public class tMSSqlInput extends AbstractNode{
 		AbstractNode.setAttribute(input, "TABLE", "");
 		AbstractNode.setAttribute(input, "QUERY", "");
 		Node mData = AbstractNode.getMetadata(document, input, "FLOW");
+		NodeBuilder.removeNode(mData);
+		/*
 		Node child = mData.getFirstChild();
 		while(child.getNodeType() == Node.TEXT_NODE) {
 			child = child.getNextSibling();
@@ -52,5 +79,6 @@ public class tMSSqlInput extends AbstractNode{
 		dummy.setAttribute("name", "dummy");
 		NodeBuilder.removeAllChildNodes(mData);
 		NodeBuilder.appendElementToContext(mData, dummy);
+		*/
 	}
 }
