@@ -126,66 +126,83 @@ public class tMap extends AbstractNode {
 	}
 
 	//Document parameter is required for Attr creation
-	public static void setPrefix(Document document, Node nodeData, String prefix) {	
-			Element varTables = tMap.createVarTables(document);
+	public static String setPrefix(Document document, Node nodeData, tMapDTO data) throws WrongNodeException {	
+			Element varTables = tMap.createVarTables(document, nodeData);
 			//make a clone of the dummy
 			Element dummy = (Element) tMap.createNodeDataColumnDummy(document);
 			//remove all the present elements from varTables
-			if (!(AbstractNode.hasAttribute(dummy, "expression"))) { 
-			Attr expression = document.createAttribute("expression");
-			dummy.setAttributeNode(expression);
-			}
+			tMap.addAttribute(document, dummy);
 			dummy.setAttribute("name", "testVariable");
 			dummy.setAttribute("type", "id_String");
-			dummy.setAttribute("expression", prefix);
+			dummy.setAttribute("expression", data.getPrefix());
 			NodeBuilder.appendElementToContext(varTables, dummy);
-			NodeBuilder.appendElementToContext(nodeData, varTables);
+			//NodeBuilder.appendElementToContext(nodeData, varTables);
+			return varTables.getAttribute("name");
 		
+	}
+	
+	public static void addAttribute(Document document, Element dummy) {
+		if (!(AbstractNode.hasAttribute(dummy, "expression"))) { 
+			Attr expression = document.createAttribute("expression");
+			dummy.setAttributeNode(expression);
+			} else {
+				System.out.println("Attribute expression already exists");
+			}
 	}
 	
 	//in progress
-	public static void setInputTables(Document document, Node node, ETypes type) throws WrongNodeException {
+	public static String setInputTables(Document document, Node node, Collection<AdvancedColumnDTO> columns, EConnectionTypes type) throws WrongNodeException {
 		if (!(AbstractNode.verifyNodeType(node).equals(componentName))) {
 			throw new WrongNodeException(componentName, AbstractNode.verifyNodeType(node));
 		}
-		Node nodeData = tMap.getNodeData(node);
-		
-		
-		
+		Element incomingConnection = (Element) Connection.findConnection(document, node, type);
+		Element inputTables = tMap.createInputTables(document, node, incomingConnection.getAttribute("label"));
+		Element dummy = tMap.createNodeDataColumnDummy(document);
+		for(AdvancedColumnDTO column : columns) {
+			dummy.setAttribute("name", column.getName());
+			dummy.setAttribute("type", column.getType());
+			NodeBuilder.appendElementToContext(inputTables, dummy);
+		}
+		return inputTables.getAttribute("name");
 	}
 	
 	
-	//suggest to André
+	//suggest to Andrï¿½
 	public static Element createNodeDataColumnDummy(Document document) {
 		Element dummy = null;
 		dummy = document.createElement("mapperTableEntries");
 		dummy.setAttributeNode(document.createAttribute("name"));
 		dummy.setAttributeNode(document.createAttribute("type"));
-		dummy.setAttribute("name", "dummy");		
+		//dummy.setAttribute("name", "dummy");		
 		return dummy;
 	}
 	
-	public static Element createVarTables(Document document) {
+	public static Element createVarTables(Document document, Node node) throws WrongNodeException {
 		Element tables = document.createElement("varTables");
 		tables.setAttributeNode(document.createAttribute("name"));
 		tables.setAttributeNode(document.createAttribute("sizeState"));
 		tables.setAttribute("name", "Var");
 		tables.setAttribute("sizeState", "INTERMEDIATE");
+		Node nodeData = tMap.getNodeData(node);
+		NodeBuilder.appendElementToContext(nodeData, tables);
 		return tables;
 	}
 	
-	public static Element createOutputTables(Document document, String name) {
+	public static Element createOutputTables(Document document, Node node, String name) throws WrongNodeException {
 		Element tables = document.createElement("outputTables");
 		tables.setAttributeNode(document.createAttribute("name"));
 		tables.setAttributeNode(document.createAttribute("sizeState"));
 		tables.setAttribute("name", name);
 		tables.setAttribute("sizeState", "INTERMEDIATE");
+		Node nodeData = tMap.getNodeData(node);
+		NodeBuilder.appendElementToContext(nodeData, tables);
 		return tables;
 	}
 	
 	//inputTables Element has few additional attributes to output/varTables
 	//Note: create inputTables, extract and paste Metadata simultaneously
-	public static Element createInputTables(Document document, String connLabel) {
+	public static Element createInputTables(Document document, Node node, String connLabel) throws WrongNodeException {
+		
 		//"vessel" for the data
 		Element inputTables = document.createElement("inputTables");
 		inputTables.setAttributeNode(document.createAttribute("lookupMode"));
@@ -196,6 +213,8 @@ public class tMap extends AbstractNode {
 		inputTables.setAttribute("sizeState", "INTERMEDIATE");
 		inputTables.setAttribute("lookupMode", "LOAD_ONCE");
 		inputTables.setAttribute("matchingMode", "UNIQUE_MATCH");
+		Node nodeData = tMap.getNodeData(node);
+		NodeBuilder.appendElementToContext(nodeData, inputTables);
 		return inputTables;	
 	}
 	
@@ -209,9 +228,12 @@ public class tMap extends AbstractNode {
 		metaData.setAttributeNode(document.createAttribute("name"));
 		metaData.setAttribute("connector", "FLOW");
 		metaData.setAttribute("name", tableName);
+		Node ElementNode = output.getParentNode().getParentNode();
+		NodeBuilder.appendElementToContext(ElementNode, metaData);
 		return metaData;
 	}
 	
+	//perhaps not necessary
 	public static void setTablesFromDTO (Document document, Node tables, Collection<AdvancedColumnDTO> columns) {
 		for (AdvancedColumnDTO column : columns) {
 			Element dummy = tMap.createNodeDataColumnDummy(document);
@@ -221,7 +243,44 @@ public class tMap extends AbstractNode {
 		}
 	}
 	
-	public static void setOutputTables(Document document, Node tables ) {}
+	public static void setOutput(Document document, Node node, String name, Collection <AdvancedColumnDTO> inputColumns, tMapDTO data, String mainTable, String secondaryTable) throws WrongNodeException {
+		Element outputTables = tMap.createOutputTables(document, node, name);
+		Element metaData = tMap.createTMapMetadata(document, outputTables);
+		if(data != null) {
+		String matchColumn = String.format("String.valueOf(\"%s\"", data.getPrefix());
+		for(AdvancedColumnDTO column : data.getPackageColumns()) {
+			matchColumn = matchColumn + String.format("+ %s.%s", mainTable, column.getName());
+			String.valueOf("\"0-\" + %s + %s");
+		}
+		Element nodeDummy = tMap.createNodeDataColumnDummy(document);
+		tMap.addAttribute(document, nodeDummy);
+		nodeDummy.setAttribute("name", data.getPackageOutputColumn_MatchColumn());
+		//probably get it from the Lookup table
+		AdvancedColumnDTO lookupColumn = tMap.getColumnFromDTO(data.getTableLookupColumns(), data.getLookupColumn());
+		lookupColumn.setName(data.getPackageOutputColumn_MatchColumn());
+		nodeDummy.setAttribute("type", lookupColumn.getType());
+		nodeDummy.setAttribute("expression", matchColumn);
+		NodeBuilder.appendElementToContext(outputTables, nodeDummy);
+		AbstractNode.setMetadataColumnFromDTO(document, lookupColumn, metaData);
+		}
+		for(AdvancedColumnDTO column : inputColumns) {
+			Element dummy = tMap.createNodeDataColumnDummy(document);
+			tMap.addAttribute(document, dummy);
+			dummy.setAttribute("expression", String.format("%s.%s", mainTable, column.getName()));
+			dummy.setAttribute("name", column.getName());
+			dummy.setAttribute("type", column.getType());			
+		}
+		tMap.setWholeMetadataFromDTO(document, inputColumns, metaData);			
+	}
+	
+	public static AdvancedColumnDTO getColumnFromDTO(Collection<AdvancedColumnDTO> columns, String name) {
+		for(AdvancedColumnDTO column : columns) {
+			if(name.equals(column.getName())) {
+				return column;
+			}
+		}
+		return null;
+	}
 	
 	
 	public static void doLookup (Document document, Document template, tMapDTO data) throws WrongNodeException {
@@ -233,21 +292,21 @@ public class tMap extends AbstractNode {
 		startConnection.setAttribute("label", startMetadata.getAttribute("name"));
 		Element prefixTMap = tMap.newInstance(document, template, "PrefixMaker");
 		Element lookupTMap = tMap.newInstance(document, template, "LookupNode");
-		Element lookupDb = tMSSqlInput.newInstance(document, template, "LookupDB", data.getLookupTable_Retuncolumns(), "MyConnection", data.getLookupTable());
+		Element lookupDb = tMSSqlInput.newInstance(document, template, "LookupDB", data.getTableLookupColumns(), "MyConnection", data.getLookupTable());
 		Connection.newConnection(document, template, AbstractNode.getMetadata(document, lookupDb, "FLOW"), lookupTMap, EConnectionTypes.Lookup);
 		//redirect the startConnection to the prefix tMap Node
 		startConnection.setAttribute("target", AbstractNode.getNodesUniqueName(document, prefixTMap));
 		//put the entire data from the input Dto into the inputTables
-		Element inputTables = tMap.createInputTables(document, startConnection.getAttribute("label"));
-		setTablesFromDTO(document, inputTables, tMap.extractMetadata(startMetadata));
-		NodeBuilder.appendElementToContext(tMap.getNodeData(prefixTMap), inputTables);
+		Element inputTables = tMap.createInputTables(document, prefixTMap, startConnection.getAttribute("label"));
+		String inputName = tMap.setInputTables(document, prefixTMap, tMap.extractMetadata(startMetadata), EConnectionTypes.Main);
+		tMap.setOutput(document, prefixTMap, "meinOutput", tMap.extractMetadata(startMetadata), data, inputName, null);
 		
 		/*
 		Element outputTables = tMap.createOutputTables(document, "preparedOutput");
 		Element outputMData = tMap.createMetadata(document, outputTables);
 		*/
 		
-		tMap.setPrefix(document, tMap.getNodeData(prefixTMap), data.getPrefix());
+		//String varTableName =  tMap.setPrefix(document, tMap.getNodeData(prefixTMap), data);
 		
 		
 		
@@ -261,5 +320,11 @@ public class tMap extends AbstractNode {
 		NodeBuilder.appendNodeElement(document, lookupTMap);
 		System.out.println("feddich");
 	}
+	
+
+	public static void setPrefixMakerNode(Node prefixTMap, tMapDTO data, Collection<AdvancedColumnDTO>packageColumns) {
+		
+	}
+	
 
 }

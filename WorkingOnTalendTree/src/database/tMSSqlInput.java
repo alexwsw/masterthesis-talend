@@ -39,7 +39,7 @@ public class tMSSqlInput extends AbstractNode{
 		tMSSqlInput.setDbConnection(document, copy, connLabel);
 		//add new metadata
 		Element mData = AbstractNode.createMetadata(document, copy);
-		AbstractNode.setMetadataFromDTO(document, columns, mData);
+		AbstractNode.setWholeMetadataFromDTO(document, columns, mData);
 		//separate Method for SQL statement generating???
 		String sqlParameters = "";
 		for(AdvancedColumnDTO column : columns) {

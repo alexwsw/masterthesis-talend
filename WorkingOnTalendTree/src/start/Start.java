@@ -43,25 +43,34 @@ public class Start {
 		//String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
 		String password = "v8+RGusCeE5g7aN7EnZnUA==";
 		
-		List <AdvancedColumnDTO> packageColumns = new ArrayList <AdvancedColumnDTO>();
+		//columns we start with
+		List<AdvancedColumnDTO>Package = new ArrayList<AdvancedColumnDTO>();
 		AdvancedColumnDTO c1 = new AdvancedColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
-		packageColumns.add(c1);
+		Package.add(c1);
 		AdvancedColumnDTO c2 = new AdvancedColumnDTO("false", "10", "Mandat", "false", "10", null, "id_Integer", "true");
-		packageColumns.add(c2);
+		Package.add(c2);
 		AdvancedColumnDTO c3 = new AdvancedColumnDTO("false", "10", "Werbetraeger", "false", "10", null, "id_String", "true");
-		packageColumns.add(c3);
+		Package.add(c3);
 		
-		List <AdvancedColumnDTO>lookupTable_Returncolumns = new ArrayList <AdvancedColumnDTO>();
+		//columns we need for the lookup
+		List <AdvancedColumnDTO> packageLookupColumns = new ArrayList <AdvancedColumnDTO>();
+		AdvancedColumnDTO a2 = new AdvancedColumnDTO("false", "10", "Mandat", "false", "10", null, "id_Integer", "true");
+		packageLookupColumns.add(a2);
+		AdvancedColumnDTO a3 = new AdvancedColumnDTO("false", "10", "Werbetraeger", "false", "10", null, "id_String", "true");
+		packageLookupColumns.add(a3);
+		
+		//columns the lookup table is built with
+		List <AdvancedColumnDTO>lookupTableColumns = new ArrayList <AdvancedColumnDTO>();
 		AdvancedColumnDTO l1 = new AdvancedColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
-		lookupTable_Returncolumns.add(l1);
+		lookupTableColumns.add(l1);
 		AdvancedColumnDTO l2 = new AdvancedColumnDTO("false", "10", "BK", "true", "10", null, "id_String", "true");
-		lookupTable_Returncolumns.add(l2);
+		lookupTableColumns.add(l2);
 		AdvancedColumnDTO l3 = new AdvancedColumnDTO("false", "10", "Name", "true", "10", null, "id_String", "true");
-		lookupTable_Returncolumns.add(l3);
+		lookupTableColumns.add(l3);
 		Map<String, String> packageOutputColumns_ReturnColumns = new TreeMap<String, String>();
-		packageOutputColumns_ReturnColumns.put("ID", "FK_Werbetraeger_BK");
+		packageOutputColumns_ReturnColumns.put("ID", "FK_Werbetraeger_ID");
 		packageOutputColumns_ReturnColumns.put("Name", "WerbetraegerName");
-		tMapDTO tmap = new tMapDTO("0-", packageColumns, lookupTable_Returncolumns, "lookupTable", "BK", null, packageOutputColumns_ReturnColumns);
+		tMapDTO tmap = new tMapDTO("0-", packageLookupColumns, lookupTableColumns, "lookupTable", "BK", "FK_Werbetraeger_BK", packageOutputColumns_ReturnColumns);
 		
 		/*
 		String [][] sourceTableColumns = {{"true", "10", "ID", "false", "10", "id_Integer", "true"}, 
@@ -94,7 +103,12 @@ public class Start {
 		AbstractNode.setAttribute(source, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
 		AbstractNode.setAttribute(source, "QUERY", String.format(String.format("\"%s\"",sourceTableSQL.toString()), sourceTableName));
 		Node metadataFlow = AbstractNode.getMetadata(document, source, "FLOW");
-		AbstractNode.setMetadataColumnsTest(document, metadataFlow, tmap);
+		AbstractNode.setMetadataColumnsTest(document, metadataFlow, Package);
+		
+		//Transformer
+		Node transformer = AbstractNode.getElementByValue(document, "MyTransformer");
+		String inputName = tMap.setInputTables(document, transformer, AbstractNode.extractMetadata(metadataFlow), EConnectionTypes.Main);
+		tMap.setOutput(document, transformer, "testName", AbstractNode.extractMetadata(metadataFlow), null, inputName, null);
 		
 		tMap.doLookup(document, fixedTemplate, tmap);
 		

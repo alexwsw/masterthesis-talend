@@ -15,6 +15,7 @@ import connection.Connection;
 import dto.AdvancedColumnDTO;
 import dto.BasicColumnDTO;
 import dto.tMapDTO;
+import enums.EConnectionTypes;
 import enums.XPathExpressions;
 import exception.DummyNotFoundException;
 import start.DocumentCreator;
@@ -150,7 +151,7 @@ public abstract class AbstractNode {
 		}
 	}
 	
-	public static void setMetadataColumnsTest(Document document, Node metadata, tMapDTO tMapDTO)  throws DummyNotFoundException{
+	public static void setMetadataColumnsTest(Document document, Node metadata, Collection<AdvancedColumnDTO>columns)  throws DummyNotFoundException{
 		//NodeList columns = AbstractNode.getMetadataColumns(metadata);
 		Node dummy = AbstractNode.getDummy(metadata);
 		Node start = dummy.cloneNode(true);
@@ -169,17 +170,17 @@ public abstract class AbstractNode {
 			NodeBuilder.removeNode(document, metadata.getFirstChild());
 		}
 		*/
-		for (int i = 0; i < tMapDTO.getPackageColumns().size(); i++) {
+		for (AdvancedColumnDTO column : columns) {
 			//clone the dummy
 			Element e = (Element) start.cloneNode(true);
 				//get the values to the attributes
-				e.setAttribute("key", tMapDTO.getPackageColumns().get(i).isKey());
-				e.setAttribute("length", tMapDTO.getPackageColumns().get(i).getLength());
-				e.setAttribute("name", tMapDTO.getPackageColumns().get(i).getName());
-				e.setAttribute("nullable", tMapDTO.getPackageColumns().get(i).isNullable());
-				e.setAttribute("precision", tMapDTO.getPackageColumns().get(i).getPrecision());
-				e.setAttribute("type", tMapDTO.getPackageColumns().get(i).getType());
-				e.setAttribute("usefulColumn", tMapDTO.getPackageColumns().get(i).isUsefulColumn());
+				e.setAttribute("key", column.isKey());
+				e.setAttribute("length", column.getLength());
+				e.setAttribute("name", column.getName());
+				e.setAttribute("nullable", column.isNullable());
+				e.setAttribute("precision", column.getPrecision());
+				e.setAttribute("type", column.getType());
+				e.setAttribute("usefulColumn", column.isUsefulColumn());
 				NodeBuilder.appendElementToContext(metadata, e);
 			}
 			//append the newly cloned node
@@ -189,7 +190,7 @@ public abstract class AbstractNode {
 	//in case you get the metadata from an another node
 	public static void setMetaDataColumnsTest(Document document, Node node){
 		Node targetMetadata = AbstractNode.getMetadata(document, node, "FLOW");
-		Element connection = (Element)Connection.findMainConnection(document, node);
+		Element connection = (Element)Connection.findConnection(document, node, EConnectionTypes.Main);
 		Node source = AbstractNode.getElementByValue(document, connection.getAttribute("source"));
 		Node sourceMetadata = AbstractNode.getMetadata(document, source, "FLOW");
 		//delete targetMetadata
@@ -303,7 +304,7 @@ public abstract class AbstractNode {
 	}
 	
 	
-	//suggest to André
+	//suggest to Andrï¿½
 	public static Element createMetadataColumnDummy(Document document) {
 		Element dummy = null;
 		dummy = document.createElement("column");
@@ -357,17 +358,20 @@ public abstract class AbstractNode {
 	}
 	
 	//create columns for a metadata Node from a DT-Object
-	public static void setMetadataFromDTO (Document document, Collection<AdvancedColumnDTO> columns, Node metadata) {
+	public static void setWholeMetadataFromDTO (Document document, Collection<AdvancedColumnDTO> columns, Node metadata) {
 		for (AdvancedColumnDTO column : columns) {
-			Element dummy = AbstractNode.createMetadataColumnDummy(document);
-			dummy.setAttribute("key", column.isKey());
-			dummy.setAttribute("length", column.getLength());
-			dummy.setAttribute("name", column.getName());
-			dummy.setAttribute("nullable", column.isNullable());
-			dummy.setAttribute("precision", column.getPrecision());
-			dummy.setAttribute("type", column.getType());
-			dummy.setAttribute("usefulColumn", column.isUsefulColumn());
-			NodeBuilder.appendElementToContext(metadata, dummy);
+			AbstractNode.setMetadataColumnFromDTO(document, column, metadata);
 		}
+	}
+	public static void setMetadataColumnFromDTO(Document document, AdvancedColumnDTO column, Node metadata) {
+		Element dummy = AbstractNode.createMetadataColumnDummy(document);
+		dummy.setAttribute("key", column.isKey());
+		dummy.setAttribute("length", column.getLength());
+		dummy.setAttribute("name", column.getName());
+		dummy.setAttribute("nullable", column.isNullable());
+		dummy.setAttribute("precision", column.getPrecision());
+		dummy.setAttribute("type", column.getType());
+		dummy.setAttribute("usefulColumn", column.isUsefulColumn());
+		NodeBuilder.appendElementToContext(metadata, dummy);
 	}
 }

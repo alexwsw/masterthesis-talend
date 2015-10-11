@@ -45,9 +45,9 @@ public class Connection {
 		}
 	}
 	
-	public static Node findMainConnection(Document document, Node node){
+	public static Node findConnection(Document document, Node node, EConnectionTypes type){
 		Node connection = null;
-		connection = Navigator.processXPathQueryNode(document, XPathExpressions.getIncomingMainConnection, AbstractNode.getNodesUniqueName(document, node));
+		connection = Navigator.processXPathQueryNode(document, XPathExpressions.getIncomingConnection, AbstractNode.getNodesUniqueName(document, node), type.getLineStyle());
 		return connection;
 	}
 

@@ -9,7 +9,7 @@ public class tMapDTO {
 	//columns, relevant for the actual Lookup
 	private List <AdvancedColumnDTO> packageColumns;
 	//columns we get back from the Lookup table
-	private List <AdvancedColumnDTO> lookupTable_Retuncolumns;
+	private List <AdvancedColumnDTO> lookupTableColumns;
 	//the table for the Lookup
 	private String lookupTable;
 	//Lookup column in the lookup table
@@ -20,12 +20,12 @@ public class tMapDTO {
 	//add an attribute for mapping stuff
 	
 	public tMapDTO(String prefix,
-			List<AdvancedColumnDTO> packageColumns, List<AdvancedColumnDTO> lookupTable_Returncolumns, String lookupTable,
+			List<AdvancedColumnDTO> packageColumns, List<AdvancedColumnDTO> lookupTableColumns, String lookupTable,
 			String lookupColumn, String packageOutputColumn_MatchColumn, Map<String, String>packageOutputColumns_ReturnColumns ) {
 		super();
 		this.prefix = prefix;
 		this.packageColumns = packageColumns;
-		this.lookupTable_Retuncolumns = lookupTable_Returncolumns;
+		this.lookupTableColumns = lookupTableColumns;
 		this.lookupTable = lookupTable;
 		this.lookupColumn = lookupColumn;
 		this.packageOutputColumn_MatchColumn = packageOutputColumn_MatchColumn;
@@ -48,13 +48,13 @@ public class tMapDTO {
 		this.packageColumns = packageColumns;
 	}
 
-	public List<AdvancedColumnDTO> getLookupTable_Retuncolumns() {
-		return lookupTable_Retuncolumns;
+	public List<AdvancedColumnDTO> getTableLookupColumns() {
+		return lookupTableColumns;
 	}
 
-	public void setLookupTable_Retuncolumns(
+	public void setTableLookupColumns(
 			List<AdvancedColumnDTO> lookupTable_Retuncolumns) {
-		this.lookupTable_Retuncolumns = lookupTable_Retuncolumns;
+		this.lookupTableColumns = lookupTable_Retuncolumns;
 	}
 
 	public String getLookupTable() {

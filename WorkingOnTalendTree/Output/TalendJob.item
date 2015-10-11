@@ -193,8 +193,17 @@
       <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="DF_Lookup" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="" name="dummy" type="id_Integer"/>
       </inputTables>
-    </nodeData>
-  </node>
+    <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="DF_input" sizeState="INTERMEDIATE">
+<mapperTableEntries name="Werbetraeger" type="id_String"/>
+</inputTables>
+<outputTables name="testName" sizeState="INTERMEDIATE"/>
+</nodeData>
+  <metadata connector="FLOW" name="testName">
+<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
+</metadata>
+</node>
   <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_2"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
@@ -421,14 +430,19 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
     <nodeData xsi:type="MapperData">
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="MyOutput" sizeState="INTERMEDIATE"/>
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="MyOutput" sizeState="INTERMEDIATE">
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
-<varTables name="Var" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="0-" name="testVariable" type="id_String"/>
-</varTables>
+<outputTables name="meinOutput" sizeState="INTERMEDIATE">
+<mapperTableEntries expression="String.valueOf(&quot;0-&quot;+ MyOutput.Mandat+ MyOutput.Werbetraeger" name="FK_Werbetraeger_BK" type="id_String"/>
+</outputTables>
 </nodeData>
-  </node>
+  <metadata connector="FLOW" name="meinOutput">
+<column key="false" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+</metadata>
+</node>
 <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="630" posY="588">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_3"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
