@@ -45,11 +45,11 @@ public class tMSSqlInput extends AbstractNode{
 		for(AdvancedColumnDTO column : columns) {
 			sqlParameters += column.getName() + ",";
 		}
-		AbstractNode.setAttribute(copy, "TABLE", table);
+		AbstractNode.setAttribute(copy, "TABLE", String.format("\"%s\"", table));
 		//delete the last comma
 		sqlParameters = sqlParameters.substring(0, sqlParameters.length()-1);
 		String sqlStatement = String.format("select %s from %s", sqlParameters, table);
-		AbstractNode.setAttribute(copy, "QUERY", sqlStatement);
+		AbstractNode.setAttribute(copy, "QUERY", String.format("\"%s\"", sqlStatement));
 		/*
 		Element mData = (Element) AbstractNode.getMetadata(document, copy);
 		mData.setAttribute("name", uniqueName.getAttribute("value"));

@@ -137,12 +137,12 @@
     <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;dummyKunde&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;sourceTable&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select * from dummyKunde&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select * from sourceTable&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -178,7 +178,10 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="MyOutput">
       <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-    </metadata>
+    <column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
+</metadata>
     <nodeData xsi:type="MapperData">
       <uiProperties/>
       <varTables name="Var" sizeState="INTERMEDIATE">
@@ -186,24 +189,21 @@
       </varTables>
       <outputTables name="MyOutput" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="" name="dasIstUnserDummy" type="id_String"/>
-      </outputTables>
+      <mapperTableEntries expression="DF_input.ID" name="ID" type="id_Integer"/>
+<mapperTableEntries expression="DF_input.Mandat" name="Mandat" type="id_Integer"/>
+<mapperTableEntries expression="DF_input.Werbetraeger" name="Werbetraeger" type="id_String"/>
+</outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="DF_input" sizeState="INTERMEDIATE">
         <mapperTableEntries name="dummy" type="id_Integer"/>
-      </inputTables>
+      <mapperTableEntries name="ID" type="id_Integer"/>
+<mapperTableEntries name="Mandat" type="id_Integer"/>
+<mapperTableEntries name="Werbetraeger" type="id_String"/>
+</inputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="ALL_ROWS" name="DF_Lookup" sizeState="INTERMEDIATE">
         <mapperTableEntries expression="" name="dummy" type="id_Integer"/>
       </inputTables>
-    <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="DF_input" sizeState="INTERMEDIATE">
-<mapperTableEntries name="Werbetraeger" type="id_String"/>
-</inputTables>
-<outputTables name="testName" sizeState="INTERMEDIATE"/>
-</nodeData>
-  <metadata connector="FLOW" name="testName">
-<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
-</metadata>
-</node>
+    </nodeData>
+  </node>
   <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="480" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_2"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
@@ -252,7 +252,7 @@
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;outputKunde&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;werbetraeger&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CHECK" name="IDENTITY_INSERT" value="false"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT_OR_UPDATE"/>
@@ -285,8 +285,11 @@
     <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlOutput_1">
-      <column key="false" length="10" name="dummy" nullable="false" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
-    </metadata>
+    <column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Werbetraeger_ID" nullable="true" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="WerbetraegerName" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+</metadata>
     <metadata connector="REJECT" name="REJECT">
       <column key="false" length="10" name="dummy" nullable="false" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
       <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
@@ -405,7 +408,16 @@
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
-<connection connectorName="FLOW" label="row4" lineStyle="8" metaname="tMSSqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tMSSqlInput_3" target="tMap_3">
+<connection connectorName="FLOW" label="tMSSqlInput_3" lineStyle="8" metaname="tMSSqlInput_3" offsetLabelX="0" offsetLabelY="0" source="tMSSqlInput_3" target="tMap_3">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
+  </connection>
+<connection connectorName="FLOW" label="meinOutput" lineStyle="0" metaname="meinOutput" offsetLabelX="0" offsetLabelY="0" source="tMap_2" target="tMap_3">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -413,6 +425,15 @@
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4"/>
+  </connection>
+<connection connectorName="FLOW" label="ConnectionPoint" lineStyle="0" metaname="ConnectionPoint" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMSSqlOutput_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row5"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="438">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_2"/>
@@ -430,17 +451,26 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="MyOutput" sizeState="INTERMEDIATE"/>
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="MyOutput" sizeState="INTERMEDIATE">
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries name="ID" type="id_Integer"/>
+<mapperTableEntries name="Mandat" type="id_Integer"/>
+<mapperTableEntries name="Werbetraeger" type="id_String"/>
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(&quot;0-&quot;+ MyOutput.Mandat+ MyOutput.Werbetraeger" name="FK_Werbetraeger_BK" type="id_String"/>
+<mapperTableEntries expression="String.valueOf(&quot;0-&quot;+ MyOutput.Mandat+ MyOutput.Werbetraeger)" name="FK_Werbetraeger_BK" type="id_String"/>
+<mapperTableEntries expression="MyOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries expression="MyOutput.ID" name="ID" type="id_Integer"/>
+<mapperTableEntries expression="MyOutput.Mandat" name="Mandat" type="id_Integer"/>
+<mapperTableEntries expression="MyOutput.Werbetraeger" name="Werbetraeger" type="id_String"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
 <column key="false" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
 <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="630" posY="588">
@@ -455,12 +485,12 @@
     <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="lookupTable"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;lookupTable&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="select ID,BK,Name from lookupTable"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK,Name from lookupTable&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -495,6 +525,37 @@
     <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
-    <nodeData xsi:type="MapperData"/>
-  </node>
+    <nodeData xsi:type="MapperData">
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="meinOutput" sizeState="INTERMEDIATE">
+<mapperTableEntries name="FK_Werbetraeger_BK" type="id_String"/>
+<mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries name="ID" type="id_Integer"/>
+<mapperTableEntries name="Mandat" type="id_Integer"/>
+<mapperTableEntries name="Werbetraeger" type="id_String"/>
+</inputTables>
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tMSSqlInput_3" sizeState="INTERMEDIATE">
+<mapperTableEntries name="ID" type="id_Integer"/>
+<mapperTableEntries expression="meinOutput.FK_Werbetraeger_BK" name="BK" type="id_String"/>
+<mapperTableEntries name="Name" type="id_String"/>
+</inputTables>
+<outputTables name="ConnectionPoint" sizeState="INTERMEDIATE">
+<mapperTableEntries expression="meinOutput.FK_Werbetraeger_BK" name="FK_Werbetraeger_BK" type="id_String"/>
+<mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries expression="meinOutput.ID" name="ID" type="id_Integer"/>
+<mapperTableEntries expression="meinOutput.Mandat" name="Mandat" type="id_Integer"/>
+<mapperTableEntries expression="meinOutput.Werbetraeger" name="Werbetraeger" type="id_String"/>
+<mapperTableEntries expression="tMSSqlInput_3.ID" name="FK_Werbetraeger_ID" type="id_Integer"/>
+<mapperTableEntries expression="tMSSqlInput_3.Name" name="WerbetraegerName" type="id_String"/>
+</outputTables>
+</nodeData>
+  <metadata connector="FLOW" name="ConnectionPoint">
+<column key="true" length="10" name="FK_Werbetraeger_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="WerbetraegerName" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
+</metadata>
+</node>
 </talendfile:ProcessType>

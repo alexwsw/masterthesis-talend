@@ -72,14 +72,24 @@ public class Start {
 		packageOutputColumns_ReturnColumns.put("Name", "WerbetraegerName");
 		tMapDTO tmap = new tMapDTO("0-", packageLookupColumns, lookupTableColumns, "lookupTable", "BK", "FK_Werbetraeger_BK", packageOutputColumns_ReturnColumns);
 		
+		//schema columns in the target table
+		List<AdvancedColumnDTO>targetColumns = new ArrayList<AdvancedColumnDTO>();
+		AdvancedColumnDTO t1 = new AdvancedColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
+		targetColumns.add(t1);
+		AdvancedColumnDTO t2 = new AdvancedColumnDTO("false", "10", "FK_Werbetraeger_ID", "true", "10", null, "id_Integer", "true");
+		targetColumns.add(t2);
+		AdvancedColumnDTO t3 = new AdvancedColumnDTO("false", "10", "FK_Werbetraeger_BK", "true", "10", null, "id_String", "true");
+		targetColumns.add(t3);
+		AdvancedColumnDTO t4 = new AdvancedColumnDTO("false", "10", "WerbetraegerName", "true", "10", null, "id_String", "true");
+		targetColumns.add(t4);
 		/*
 		String [][] sourceTableColumns = {{"true", "10", "ID", "false", "10", "id_Integer", "true"}, 
 											{"false", "10", "Alter", "false", "10", "id_Integer", "true"}, 
 											};
 		*/
 		
-		String sourceTableName = "dummyKunde";
-		String destinationTableName = "outputKunde";
+		String sourceTableName = "sourceTable";
+		String destinationTableName = "werbetraeger";
 		String packageDBCommand = "INSERT_OR_UPDATE";
 		//let's keep it simple (the star must be replaced by column names in the final version)
 		String sourceTableSQL = "select * from %s";
@@ -96,6 +106,7 @@ public class Start {
 		AbstractNode.setAttribute(destination, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
 		AbstractNode.setAttribute(destination, "TABLE", String.format("\"%s\"", destinationTableName));
 		AbstractNode.setAttribute(destination, "DATA_ACTION", packageDBCommand);
+		AbstractNode.setWholeMetadataFromDTO(document, targetColumns, AbstractNode.getMetadata(document, destination));
 		
 		//Input
 		Node source = AbstractNode.getElementByValue(document, "MyInput");
@@ -108,7 +119,7 @@ public class Start {
 		//Transformer
 		Node transformer = AbstractNode.getElementByValue(document, "MyTransformer");
 		String inputName = tMap.setInputTables(document, transformer, AbstractNode.extractMetadata(metadataFlow), EConnectionTypes.Main);
-		tMap.setOutput(document, transformer, "testName", AbstractNode.extractMetadata(metadataFlow), null, inputName, null);
+		tMap.setOutput(document, transformer, "MyOutput", AbstractNode.extractMetadata(metadataFlow), null, inputName, null);
 		
 		tMap.doLookup(document, fixedTemplate, tmap);
 		

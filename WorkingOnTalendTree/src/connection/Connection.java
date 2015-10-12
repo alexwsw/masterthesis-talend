@@ -67,7 +67,7 @@ public class Connection {
 	// in Progress
 	// connect Metadata, not Nodes (due to tMap with many metadata child nodes!!!!!)
 	// type type is an enum that defines connection's lineStyle and type
-	public static void newConnection(Document document, Document template, Node sourceMetadata, Node target, EConnectionTypes type) {
+	public static Element newConnection(Document document, Document template, Node sourceMetadata, Node target, EConnectionTypes type) {
 		
 			Element metadata = (Element) sourceMetadata;
 			Node metadataParent = sourceMetadata.getParentNode();
@@ -78,8 +78,8 @@ public class Connection {
 			Node importConnection = Navigator.processXPathQueryNode(template, XPathExpressions.getFlowConnection, type.getType());
 			
 			Element newConnection = (Element) document.importNode(importConnection, true);
-			newConnection.setAttribute("label", String.format("%s%s", sourceConnectionFormat, countConnections(document, type) + 1));
-			AbstractNode.setAttribute(newConnection, "UNIQUE_NAME", newConnection.getAttribute("label"));
+			newConnection.setAttribute("label", String.format("%s", metadata.getAttribute("name")));
+			AbstractNode.setAttribute(newConnection, "UNIQUE_NAME", String.valueOf(sourceConnectionFormat + Connection.countConnections(document, type)));
 			newConnection.setAttribute("lineStyle", type.getLineStyle());
 			newConnection.setAttribute("metaname", metadata.getAttribute("name"));
 			newConnection.setAttribute("source", sourceUniqueName);
@@ -90,7 +90,7 @@ public class Connection {
 				newConnection.setAttributeNode(outputid);
 			}
 			NodeBuilder.appendNodeElement(document, newConnection);
-			
+			return newConnection;
 
 		
 	}

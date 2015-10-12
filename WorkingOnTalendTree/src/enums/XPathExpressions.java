@@ -8,6 +8,7 @@ public enum XPathExpressions {
 	getByNameAttribute("./*[@name='%s']"),
 	//try to find an attribute within of an element
 	findAttribute("./@*[name()='%s']"),
+	findElement(".//*[name()='%s' and @name='%s']"),
 	//for connections
 	getConnection("//*[@metaname='%s'and @target='%s']"),
 	getConnections("/*[name()='connection']"),
@@ -23,7 +24,7 @@ public enum XPathExpressions {
 	getMetadataByType("./*[name()='metadata']"),
 	getTMapMetadata("./*[name()='metadata' and @connector='FLOW']"),
 	getTMapInputTables("./*[name()='inputTables']"),
-	getTMapOutputTables("./*[name='outputTables']"),
+	getTMapOutputTables("./*[name()='outputTables']"),
 	
 	//test
 	getIncommingConnections("./*[@target='%s']"),

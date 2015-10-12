@@ -363,7 +363,7 @@ public abstract class AbstractNode {
 			AbstractNode.setMetadataColumnFromDTO(document, column, metadata);
 		}
 	}
-	public static void setMetadataColumnFromDTO(Document document, AdvancedColumnDTO column, Node metadata) {
+	public static Element setMetadataColumnFromDTO(Document document, AdvancedColumnDTO column, Node metadata) {
 		Element dummy = AbstractNode.createMetadataColumnDummy(document);
 		dummy.setAttribute("key", column.isKey());
 		dummy.setAttribute("length", column.getLength());
@@ -373,5 +373,6 @@ public abstract class AbstractNode {
 		dummy.setAttribute("type", column.getType());
 		dummy.setAttribute("usefulColumn", column.isUsefulColumn());
 		NodeBuilder.appendElementToContext(metadata, dummy);
+		return dummy;
 	}
 }
