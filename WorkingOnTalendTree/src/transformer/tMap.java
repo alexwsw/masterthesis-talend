@@ -354,6 +354,7 @@ public class tMap extends AbstractNode {
 	public static void doLookup (Document document, Document template, tMapDTO data) throws WrongNodeException {
 		//ConnectionPoint mark must be changed connection(Label), inputTables and metadata (tMap)
 		//setting/removing of ConnectionPoint should be outsourced in a separate method
+		//ConnectionPoint as unique_name? could be more useful....
 		String startPointMark = "ConnectionPoint";
 		Element startConnection = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getConnectionByLabel, startPointMark);
 		Element startMetadata = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getMetaDataForConnection, startConnection.getAttribute("metaname"));
