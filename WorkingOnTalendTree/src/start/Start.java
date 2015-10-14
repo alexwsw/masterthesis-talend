@@ -5,20 +5,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.xml.bind.JAXBException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import transformer.tMap;
-import connection.Connection;
 import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
-import database.tMSSqlInput;
-import database.tMSSqlOutput;
 import dto.AdvancedColumnDTO;
 import dto.tMapDTO;
 import enums.EConnectionTypes;
-import enums.XPathExpressions;
 import exception.DummyNotFoundException;
 import exception.WrongNodeException;
 
@@ -26,7 +23,7 @@ import exception.WrongNodeException;
 public class Start {
 	
 	//
-	public static void main(String[] args) throws WrongNodeException, DummyNotFoundException {
+	public static void main(String[] args) throws WrongNodeException, DummyNotFoundException, JAXBException {
 
 		String template = ".//Template//TalendXML.item";
 		String output = ".//Output//TalendJob.item";
@@ -153,18 +150,6 @@ public class Start {
 		DocumentCreator.SaveDOMFile(document, output);
 		
 		
-		String pass2 = "10Runsql";
-		
-		
-		/*
-		//JDBC stuff
-		String connURL = String.format("jdbc:sqlserver://%s;databaseName=%s;schema=%s", host, database, schema);
-		DBConnectionBuilder connection = new DBConnectionBuilder();
-		SQLQueryPerformer performer = new SQLQueryPerformer(connection.getConnection(connURL, user, pass2));
-		performer.executeQuery(sourceTableName);
-		//connection.getConnection(connURL, user, pass2);
-		performer.executePreparedStatement(destinationTableName);
-		connection.closeConnection();
 		
 		
 		
@@ -211,10 +196,30 @@ public class Start {
 
 		/*for (int i = 0; i<nodeMap.getLength(); i++) {
 			System.out.println(nodeMap.item(i).getNodeName() + " " + nodeMap.item(i).getNodeValue());
-		}*/
+		String pass2 = "10Runsql";
 		
+		
+		
+		//JDBC stuff
+		String connURL = String.format("jdbc:sqlserver://%s;databaseName=%s;schema=%s", host, database, schema);
+		DBConnectionBuilder connection = new DBConnectionBuilder();
+		SQLQueryPerformer performer = new SQLQueryPerformer(connection.getConnection(connURL, user, pass2));
+		performer.executeQuery(sourceTableName);
+		//connection.getConnection(connURL, user, pass2);
+		performer.executePreparedStatement(destinationTableName);
+		connection.closeConnection();
+		Class.forName("tMap.class").getDeclaredMethod("newInstance", Document document, Document template);
+		
+		}*/
+		Node metadata = AbstractNode.getMetadata(document, destination).getFirstChild();
 		DocumentCreator.SaveDOMFile(document, output);
 		
+		while(metadata.getNodeType() == Node.TEXT_NODE) {
+			metadata = metadata.getNextSibling();
+		}
+		
+		testClass.doSomething(document, metadata);
+		System.out.println(DocumentCreator.getStringFromDocument(metadata.getParentNode()));
 		
 	
 

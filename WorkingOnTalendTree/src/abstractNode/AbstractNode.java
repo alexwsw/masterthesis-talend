@@ -151,6 +151,7 @@ public abstract class AbstractNode {
 		}
 	}
 	
+	//TODO replace the static dummy by a dynamic one
 	public static void setMetadataColumnsTest(Document document, Node metadata, Collection<AdvancedColumnDTO>columns)  throws DummyNotFoundException{
 		//NodeList columns = AbstractNode.getMetadataColumns(metadata);
 		Node dummy = AbstractNode.getDummy(metadata);
@@ -304,7 +305,9 @@ public abstract class AbstractNode {
 	}
 	
 	
-	//suggest to Andr�
+	//suggest to Andre
+	//single attributes can be held as constant values in an enum!!!!
+	//Marshalling a DTO Object into an Element could be also an idea
 	public static Element createMetadataColumnDummy(Document document) {
 		Element dummy = null;
 		dummy = document.createElement("column");

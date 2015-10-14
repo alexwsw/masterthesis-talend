@@ -289,6 +289,7 @@
 <column key="false" length="10" name="FK_Werbetraeger_ID" nullable="true" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="WerbetraegerName" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+<column xmlns="" xmlns:ns5="http://www.talend.org/mapper" key="true" length="10" name="WASUUUUUUP" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column key="false" length="10" name="dummy" nullable="false" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>

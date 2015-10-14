@@ -12,7 +12,8 @@ public class DBConnectionBuilder {
 	public Connection getConnection(String connectURL, String user, String password) {
 		
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			//Class.forName is obsolete since JDBC 4.0
+			//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			if(conn == null) {
 			conn = DriverManager.getConnection(connectURL, user, password);
 			System.out.println("Connection created");

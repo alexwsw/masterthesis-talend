@@ -6,6 +6,7 @@ import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import node.AbstractNode;
 import node.INode;
@@ -67,8 +68,8 @@ public class Main {
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		marshaller.marshal(type, System.out);
 		
-		System.out.println();
 		
+	
 		/*Marshalling subjob
 		jb = JAXBContext.newInstance(Subjob.class);
 		Marshaller m2 = jb.createMarshaller();

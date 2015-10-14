@@ -1,4 +1,4 @@
-package transformer;
+package enums;
 
 public enum ETableTypes {
 	
