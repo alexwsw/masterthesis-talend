@@ -69,6 +69,14 @@ public class Start {
 		packageOutputColumns_ReturnColumns.put("Name", "WerbetraegerName");
 		tMapDTO tmap = new tMapDTO("0-", packageLookupColumns, lookupTableColumns, "lookupTable", "BK", "FK_Werbetraeger_BK", packageOutputColumns_ReturnColumns);
 		
+		List <AdvancedColumnDTO>packageReturnColumns = new ArrayList <AdvancedColumnDTO>();
+		AdvancedColumnDTO o1 = new AdvancedColumnDTO("false", "10", "FK_Werbetraeger_ID", "false", "10", null, "id_Integer", "true");
+		packageReturnColumns.add(o1);
+		AdvancedColumnDTO o3 = new AdvancedColumnDTO("false", "10", "WerbetraegerName", "true", "10", null, "id_String", "true");
+		packageReturnColumns.add(o1);
+
+
+
 		//schema columns in the target table
 		List<AdvancedColumnDTO>targetColumns = new ArrayList<AdvancedColumnDTO>();
 		AdvancedColumnDTO t1 = new AdvancedColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
@@ -217,8 +225,8 @@ public class Start {
 		while(metadata.getNodeType() == Node.TEXT_NODE) {
 			metadata = metadata.getNextSibling();
 		}
-		
-		testClass.doSomething(document, metadata);
+		System.err.println(DocumentCreator.getStringFromDocument(metadata));
+		testClass.doSomething(metadata);
 		System.out.println(DocumentCreator.getStringFromDocument(metadata.getParentNode()));
 		
 	

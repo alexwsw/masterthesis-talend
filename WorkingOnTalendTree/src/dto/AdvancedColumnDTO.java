@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
-@XmlRootElement(name="column", namespace="")
+@XmlRootElement(name="column", namespace="http://www.talend.org/mapper")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class AdvancedColumnDTO {
 	

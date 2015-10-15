@@ -310,7 +310,7 @@ public abstract class AbstractNode {
 	//Marshalling a DTO Object into an Element could be also an idea
 	public static Element createMetadataColumnDummy(Document document) {
 		Element dummy = null;
-		dummy = document.createElement("column");
+		dummy = document.createElementNS("http://www.talend.org/mapper", "column");
 		dummy.setAttributeNode(document.createAttribute("key"));
 		dummy.setAttributeNode(document.createAttribute("length"));
 		dummy.setAttributeNode(document.createAttribute("name"));
@@ -324,7 +324,7 @@ public abstract class AbstractNode {
 	public static Element createMetadata(Document document, Node node) {
 		Element metaData = null;
 		//Element dummy = (Element)AbstractNode.createMetadataColumnDummy(document);
-		metaData = document.createElement("metadata");
+		metaData = document.createElementNS("http://www.talend.org/mapper","metadata");
 		metaData.setAttributeNode(document.createAttribute("connector"));
 		metaData.setAttributeNode(document.createAttribute("name"));
 		metaData.setAttribute("connector", "FLOW");

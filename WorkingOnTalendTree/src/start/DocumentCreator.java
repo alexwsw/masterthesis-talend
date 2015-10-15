@@ -66,6 +66,7 @@ public class DocumentCreator {
 			StreamResult result = new StreamResult(writer);
 			TransformerFactory tf = TransformerFactory.newInstance();
 			Transformer transformer = tf.newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform(domSource, result);
 			return writer.toString();
 		} catch (TransformerException ex) {

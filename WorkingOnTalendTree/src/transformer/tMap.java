@@ -190,7 +190,7 @@ public class tMap extends AbstractNode {
 	//suggest to Andr�
 	public static Element createNodeDataColumnDummy(Document document) {
 		Element dummy = null;
-		dummy = document.createElement("mapperTableEntries");
+		dummy = document.createElementNS("http://www.talend.org/mapper","mapperTableEntries");
 		dummy.setAttributeNode(document.createAttribute("name"));
 		dummy.setAttributeNode(document.createAttribute("type"));
 		//dummy.setAttribute("name", "dummy");		
@@ -199,7 +199,7 @@ public class tMap extends AbstractNode {
 	
 	public static Element createVarTables(Document document, Node node) throws WrongNodeException {
 		if(!(tMap.doesElementExist(node, "varTables", "Var"))) {
-		Element tables = document.createElement("varTables");
+		Element tables = document.createElementNS("http://www.talend.org/mapper","varTables");
 		tables.setAttributeNode(document.createAttribute("name"));
 		tables.setAttributeNode(document.createAttribute("sizeState"));
 		tables.setAttribute("name", "Var");
@@ -214,7 +214,7 @@ public class tMap extends AbstractNode {
 	
 	public static Element createOutputTables(Document document, Node node, String name) throws WrongNodeException {
 		if (!(tMap.doesElementExist(node, "outputTables", name))) {
-		Element tables = document.createElement("outputTables");
+		Element tables = document.createElementNS("http://www.talend.org/mapper","outputTables");
 		tables.setAttributeNode(document.createAttribute("name"));
 		tables.setAttributeNode(document.createAttribute("sizeState"));
 		tables.setAttribute("name", name);
@@ -233,7 +233,7 @@ public class tMap extends AbstractNode {
 	public static Element createInputTables(Document document, Node node, String connLabel) throws WrongNodeException {
 		if (!(tMap.doesElementExist(node, "inputTables", connLabel))) {
 		//"vessel" for the data
-		Element inputTables = document.createElement("inputTables");
+		Element inputTables = document.createElementNS("http://www.talend.org/mapper","inputTables");
 		inputTables.setAttributeNode(document.createAttribute("lookupMode"));
 		inputTables.setAttributeNode(document.createAttribute("matchingMode"));
 		inputTables.setAttributeNode(document.createAttribute("name"));
@@ -256,7 +256,7 @@ public class tMap extends AbstractNode {
 		Element metaData = null;
 		String tableName = output.getAttribute("name");
 		//Element dummy = (Element)AbstractNode.createMetadataColumnDummy(document);
-		metaData = document.createElement("metadata");
+		metaData = document.createElementNS("http://www.talend.org/mapper","metadata");
 		metaData.setAttributeNode(document.createAttribute("connector"));
 		metaData.setAttributeNode(document.createAttribute("name"));
 		metaData.setAttribute("connector", "FLOW");
