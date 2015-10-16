@@ -19,6 +19,8 @@ public class tMapDTO {
 	private Map<String, String> packageOutputColumns_ReturnColumns;
 	//add an attribute for mapping stuff
 	
+	public tMapDTO(){}
+	
 	public tMapDTO(String prefix,
 			List<AdvancedColumnDTO> packageColumns, List<AdvancedColumnDTO> lookupTableColumns, String lookupTable,
 			String lookupColumn, String packageOutputColumn_MatchColumn, Map<String, String>packageOutputColumns_ReturnColumns ) {

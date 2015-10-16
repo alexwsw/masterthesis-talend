@@ -1,5 +1,6 @@
 package start;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,8 @@ public class Start {
 		packageOutputColumns_ReturnColumns.put("Name", "WerbetraegerName");
 		tMapDTO tmap = new tMapDTO("0-", packageLookupColumns, lookupTableColumns, "lookupTable", "BK", "FK_Werbetraeger_BK", packageOutputColumns_ReturnColumns);
 		
+		
+		//should be added to tMapDTO Object in order to define the lookup output properly
 		List <AdvancedColumnDTO>packageReturnColumns = new ArrayList <AdvancedColumnDTO>();
 		AdvancedColumnDTO o1 = new AdvancedColumnDTO("false", "10", "FK_Werbetraeger_ID", "false", "10", null, "id_Integer", "true");
 		packageReturnColumns.add(o1);
@@ -221,7 +224,6 @@ public class Start {
 		}*/
 		Node metadata = AbstractNode.getMetadata(document, destination).getFirstChild();
 		DocumentCreator.SaveDOMFile(document, output);
-		
 		while(metadata.getNodeType() == Node.TEXT_NODE) {
 			metadata = metadata.getNextSibling();
 		}
@@ -229,7 +231,6 @@ public class Start {
 		testClass.doSomething(metadata);
 		System.out.println(DocumentCreator.getStringFromDocument(metadata.getParentNode()));
 		
-	
-
+		
 	}
 }

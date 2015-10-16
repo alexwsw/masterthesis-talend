@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+   <session-factory>
+
+      <!-- Database connection settings: HSQL -->
+
+      <!-- 
+
+        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+
+        <property name="connection.url">jdbc:hsqldb:hsql://localhost</property>
+
+        <property name="connection.username">sa</property>
+
+        <property name="connection.password"></property>
+
+         -->
+
+      <!-- Database connection settings: MySQL -->
+
+      <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+
+      <property name="hibernate.connection.username">isETL_User</property>
+
+      <property name="hibernate.connection.password">10Runsql</property>
+
+      <property name="hibernate.connection.url">jdbc:sqlserver://172.21.100.77;databaseName=TALEND_TEST;schema=dbo</property>
+
+      <!-- JDBC connection pool (use the built-in) -->
+
+      <property name="connection.pool_size">1</property>
+
+      <!-- SQL dialect -->
+
+      <property name="hibernate.dialect">org.hibernate.dialect.SQLServer2008Dialect</property>
+
+      <!-- Enable Hibernate's automatic session context management -->
+
+      <property name="current_session_context_class">thread</property>
+
+      <!-- Disable the second-level cache  -->
+
+      <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+      <!-- Echo all executed SQL to stdout -->
+
+      <property name="show_sql">true</property>
+
+      <!-- Drop and re-create the database schema on startup (validate | update | create | create-drop)-->
+
+      <property name="hbm2ddl.auto">create-drop</property>
+
+      <!--  mapping resource="entities/Entities.hbm.xml"/> -->
+
+      <mapping class="dto.AdvancedColumnDTO" />
+
+      <mapping class="dto.tMapDTO" />
+
+   </session-factory>
+
+</hibernate-configuration>
