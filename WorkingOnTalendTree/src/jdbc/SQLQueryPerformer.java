@@ -30,6 +30,23 @@ public class SQLQueryPerformer {
 			e.printStackTrace();
 		}
 	}
+	
+	//TEST
+	public ResultSet executeSQLQuery(String SQLStatement) {
+		try {
+			Statement stmt = null;
+			if (conn != null) {
+				stmt = conn.createStatement();
+				String query = SQLStatement;
+				ResultSet rs = stmt.executeQuery(query);
+				return rs;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public void executePreparedStatement(String tableName){
 		try {

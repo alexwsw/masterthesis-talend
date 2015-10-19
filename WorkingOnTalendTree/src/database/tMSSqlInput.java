@@ -9,7 +9,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import dto.AdvancedColumnDTO;
-import dto.BasicColumnDTO;
 import enums.XPathExpressions;
 import abstractNode.AbstractNode;
 import start.Navigator;

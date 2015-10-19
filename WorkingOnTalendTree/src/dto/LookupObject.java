@@ -3,7 +3,7 @@ package dto;
 import java.util.List;
 import java.util.Map;
 
-public class tMapDTO {
+public class LookupObject {
 	
 	private String prefix;
 	//columns, relevant for the actual Lookup
@@ -19,9 +19,9 @@ public class tMapDTO {
 	private Map<String, String> packageOutputColumns_ReturnColumns;
 	//add an attribute for mapping stuff
 	
-	public tMapDTO(){}
+	public LookupObject(){}
 	
-	public tMapDTO(String prefix,
+	public LookupObject(String prefix,
 			List<AdvancedColumnDTO> packageColumns, List<AdvancedColumnDTO> lookupTableColumns, String lookupTable,
 			String lookupColumn, String packageOutputColumn_MatchColumn, Map<String, String>packageOutputColumns_ReturnColumns ) {
 		super();

@@ -13,7 +13,7 @@ import connection.Connection;
 import database.tMSSqlInput;
 import database.tMSSqlOutput;
 import dto.AdvancedColumnDTO;
-import dto.tMapDTO;
+import dto.LookupObject;
 import enums.EConnectionTypes;
 import enums.ETypes;
 import enums.XPathExpressions;
@@ -127,7 +127,7 @@ public class tMap extends AbstractNode {
 	}
 
 	//Document parameter is required for Attr creation
-	public static String setPrefix(Document document, Node nodeData, tMapDTO data) throws WrongNodeException {	
+	public static String setPrefix(Document document, Node nodeData, LookupObject data) throws WrongNodeException {	
 			Element varTables = tMap.createVarTables(document, nodeData);
 			//make a clone of the dummy
 			Element dummy = (Element) tMap.createNodeDataColumnDummy(document);
@@ -167,7 +167,7 @@ public class tMap extends AbstractNode {
 		return inputTables.getAttribute("name");
 	}
 	
-	public static String setInputTables(Document document, Node node, Collection<AdvancedColumnDTO> columns, tMapDTO data, String mainInputTables, EConnectionTypes type) throws WrongNodeException {
+	public static String setInputTables(Document document, Node node, Collection<AdvancedColumnDTO> columns, LookupObject data, String mainInputTables, EConnectionTypes type) throws WrongNodeException {
 		if (!(AbstractNode.verifyNodeType(node).equals(componentName))) {
 			throw new WrongNodeException(componentName, AbstractNode.verifyNodeType(node));
 		}
@@ -279,7 +279,7 @@ public class tMap extends AbstractNode {
 		}
 	}
 	
-	public static Element setLookupOutput(Document document, Node node, String name, Collection <AdvancedColumnDTO> inputColumns, Collection<AdvancedColumnDTO> lookupColumns, tMapDTO data, String mainTable, String secondaryTable) throws WrongNodeException {
+	public static Element setLookupOutput(Document document, Node node, String name, Collection <AdvancedColumnDTO> inputColumns, Collection<AdvancedColumnDTO> lookupColumns, LookupObject data, String mainTable, String secondaryTable) throws WrongNodeException {
 		Element outputTables = tMap.createOutputTables(document, node, name);
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
 		for(AdvancedColumnDTO column : inputColumns) {
@@ -308,7 +308,7 @@ public class tMap extends AbstractNode {
 		return metaData;
 	}
 	
-	public static Element setOutput(Document document, Node node, String name, Collection <AdvancedColumnDTO> inputColumns, tMapDTO data, String mainTable, String secondaryTable) throws WrongNodeException {
+	public static Element setOutput(Document document, Node node, String name, Collection <AdvancedColumnDTO> inputColumns, LookupObject data, String mainTable, String secondaryTable) throws WrongNodeException {
 		Element outputTables = tMap.createOutputTables(document, node, name);
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
 		if(data != null) {
@@ -351,7 +351,7 @@ public class tMap extends AbstractNode {
 	}
 	
 	
-	public static void doLookup (Document document, Document template, tMapDTO data) throws WrongNodeException {
+	public static void doLookup (Document document, Document template, LookupObject data) throws WrongNodeException {
 		//ConnectionPoint mark must be changed connection(Label), inputTables and metadata (tMap)
 		//setting/removing of ConnectionPoint should be outsourced in a separate method
 		//ConnectionPoint as unique_name? could be more useful....
@@ -407,7 +407,7 @@ public class tMap extends AbstractNode {
 		}
 	}
 	
-	public static String setJoinForLookup(String inputTableName, String lookupTableName, tMapDTO data) {
+	public static String setJoinForLookup(String inputTableName, String lookupTableName, LookupObject data) {
 		return  String.format("%s.%s", inputTableName, data.getPackageOutputColumn_MatchColumn());
 	}
 	
@@ -416,7 +416,7 @@ public class tMap extends AbstractNode {
 	}
 	
 
-	public static void setPrefixMakerNode(Node prefixTMap, tMapDTO data, Collection<AdvancedColumnDTO>packageColumns) {
+	public static void setPrefixMakerNode(Node prefixTMap, LookupObject data, Collection<AdvancedColumnDTO>packageColumns) {
 		
 	}
 	

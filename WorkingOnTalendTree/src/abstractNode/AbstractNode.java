@@ -13,8 +13,7 @@ import org.w3c.dom.NodeList;
 
 import connection.Connection;
 import dto.AdvancedColumnDTO;
-import dto.BasicColumnDTO;
-import dto.tMapDTO;
+import dto.LookupObject;
 import enums.EConnectionTypes;
 import enums.XPathExpressions;
 import exception.DummyNotFoundException;

@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="ApacheCodec/commons-codec-1.10-tests.jar"/>
 	<classpathentry kind="lib" path="ApacheCodec/commons-codec-1.10.jar"/>
 	<classpathentry kind="lib" path="JDBC/sqljdbc41.jar"/>
+	<classpathentry kind="lib" path="Commons_BeanUtils/commons-beanutils-1.9.2.jar"/>
+	<classpathentry kind="lib" path="JPA/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
