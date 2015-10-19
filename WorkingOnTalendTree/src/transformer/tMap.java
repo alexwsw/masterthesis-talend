@@ -313,8 +313,8 @@ public class tMap extends AbstractNode {
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
 		if(data != null) {
 		String matchColumn = String.format("String.valueOf(\"%s\"", data.getPrefix());
-		for(AdvancedColumnDTO column : data.getPackageColumns()) {
-			matchColumn = matchColumn + String.format("+ %s.%s", mainTable, column.getName());
+		for(String column : data.getPackageColumns()) {
+			matchColumn = matchColumn + String.format("+ %s.%s", mainTable, column);
 			String.valueOf("\"0-\" + %s + %s");
 		}
 		matchColumn = matchColumn + ")";

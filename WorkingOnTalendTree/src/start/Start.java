@@ -57,10 +57,10 @@ public class Start {
 		Package.add(c3);
 		
 		//columns we need for the lookup
-		List <AdvancedColumnDTO> packageLookupColumns = new     ArrayList <AdvancedColumnDTO>();
-		AdvancedColumnDTO a2 = new AdvancedColumnDTO("false", "10", "Mandat", "false", "10", null, "id_Integer", "true");
+		List <String> packageLookupColumns = new ArrayList <String>();
+		String a2 = "Mandat";
 		packageLookupColumns.add(a2);
-		AdvancedColumnDTO a3 = new AdvancedColumnDTO("false", "10", "Werbetraeger", "false", "10", null, "id_String", "true");
+		String a3 = "Werbetraeger";
 		packageLookupColumns.add(a3);
 		
 		//columns the lookup table is built with

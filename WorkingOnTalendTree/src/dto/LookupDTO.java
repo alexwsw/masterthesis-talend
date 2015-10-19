@@ -4,6 +4,7 @@ import javax.persistence.*;
 @Entity
 public class LookupDTO {
 	
+	//Value for LookupType is required as well!!!!!
 	@Column(name="LU_MatchInputcolumnprefix")
 	private String prefix;
 	@Column(name="LU_MatchInputcolumns")
