@@ -174,7 +174,7 @@ public abstract class AbstractNode {
 			//clone the dummy
 			Element e = (Element) start.cloneNode(true);
 				//get the values to the attributes
-				e.setAttribute("key", column.isKey());
+				e.setAttribute("key", String.valueOf(column.isKey()));
 				e.setAttribute("length", column.getLength());
 				e.setAttribute("name", column.getName());
 				e.setAttribute("nullable", column.isNullable());
@@ -367,7 +367,7 @@ public abstract class AbstractNode {
 	}
 	public static Element setMetadataColumnFromDTO(Document document, AdvancedColumnDTO column, Node metadata) {
 		Element dummy = AbstractNode.createMetadataColumnDummy(document);
-		dummy.setAttribute("key", column.isKey());
+		dummy.setAttribute("key", String.valueOf(column.isKey()));
 		dummy.setAttribute("length", column.getLength());
 		dummy.setAttribute("name", column.getName());
 		dummy.setAttribute("nullable", column.isNullable());

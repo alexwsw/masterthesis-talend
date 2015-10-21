@@ -326,7 +326,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="DF_input"/>
   </connection>
-  <connection connectorName="FLOW" label="ConnectionPoint" lineStyle="0" metaname="MyOutput" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tMSSqlOutput_1">
+  <connection connectorName="FLOW" label="MyOutput" lineStyle="0" metaname="MyOutput" offsetLabelX="0" offsetLabelY="0" source="tMap_1" target="tMSSqlOutput_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="TRID"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -339,7 +339,7 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="MyOutput"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="ConnectionPoint"/>
   </connection>
   <connection connectorName="FLOW" label="DF_Lookup" lineStyle="8" metaname="tMSSqlInput_1" offsetLabelX="0" offsetLabelY="0" source="tMSSqlInput_2" target="tMap_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">

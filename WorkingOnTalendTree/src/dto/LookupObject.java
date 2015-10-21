@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
+import jdbc.SQLQueryPerformer;
+
 public class LookupObject {
 
 	private String prefix;
@@ -28,8 +30,9 @@ public class LookupObject {
 	public LookupObject() {
 	}
 
-	public LookupObject(String prefix, List<String> packageColumns, List<AdvancedColumnDTO> lookupTableColumns,
-			String lookupTable, String lookupColumn, String packageOutputColumn_MatchColumn,
+	public LookupObject(String prefix, List<String> packageColumns,
+			List<AdvancedColumnDTO> lookupTableColumns, String lookupTable,
+			String lookupColumn, String packageOutputColumn_MatchColumn,
 			Map<String, String> packageOutputColumns_ReturnColumns) {
 		super();
 		this.prefix = prefix;
@@ -43,12 +46,16 @@ public class LookupObject {
 
 	public LookupObject(LookupDTO lookup) {
 		this.prefix = lookup.getPrefix();
+		this.packageColumns = doPackageColumns(lookup.getPackageColumns());
 		this.lookupTable = lookup.getLookupTable();
 		this.lookupColumn = lookup.getLookupColumn();
-		this.packageOutputColumn_MatchColumn = lookup.getPackageOutputColumn_MatchColumn();
-		this.packageOutputColumns_ReturnColumns = setMapping(split(lookup.getTableOutputColumn()), split(lookup.getLookupOutputColumns()));
+		this.packageOutputColumn_MatchColumn = lookup
+				.getPackageOutputColumn_MatchColumn();
+		this.packageOutputColumns_ReturnColumns = setMapping(
+				split(lookup.getTableOutputColumn()),
+				split(lookup.getLookupOutputColumns()));
 	}
-
+	
 	public String getPrefix() {
 		return prefix;
 	}
@@ -69,7 +76,8 @@ public class LookupObject {
 		return lookupTableColumns;
 	}
 
-	public void setTableLookupColumns(List<AdvancedColumnDTO> lookupTable_Retuncolumns) {
+	public void setTableLookupColumns(
+			List<AdvancedColumnDTO> lookupTable_Retuncolumns) {
 		this.lookupTableColumns = lookupTable_Retuncolumns;
 	}
 
@@ -93,7 +101,8 @@ public class LookupObject {
 		return packageOutputColumn_MatchColumn;
 	}
 
-	public void setPackageOutputColumn_MatchColumn(String packageOutputColumn_MatchColumn) {
+	public void setPackageOutputColumn_MatchColumn(
+			String packageOutputColumn_MatchColumn) {
 		this.packageOutputColumn_MatchColumn = packageOutputColumn_MatchColumn;
 	}
 
@@ -101,11 +110,13 @@ public class LookupObject {
 		return packageOutputColumns_ReturnColumns;
 	}
 
-	public void setPackageOutputColumns_ReturnColumns(Map<String, String> packageOutputColumns_ReturnColumns) {
+	public void setPackageOutputColumns_ReturnColumns(
+			Map<String, String> packageOutputColumns_ReturnColumns) {
 		this.packageOutputColumns_ReturnColumns = packageOutputColumns_ReturnColumns;
 	}
 
-	public Map<String, String> setMapping(String[] sourceColumns, String[] returnColumns) {
+	public Map<String, String> setMapping(String[] sourceColumns,
+			String[] returnColumns) {
 		Map<String, String> columnsMapping = new TreeMap<String, String>();
 		if (sourceColumns.length == returnColumns.length) {
 			for (int i = 0; i < sourceColumns.length; i++) {
@@ -114,12 +125,47 @@ public class LookupObject {
 		}
 		return columnsMapping;
 	}
-	
-	//Outsource, this method has nothing to do with this object
-	public String[]split (String argument) {
-		//split only if there're multiple columns given (separated by comma)
-		String[]splitted = argument.split(Pattern.quote(","));
+
+	// Outsource, this method has nothing to do with this object
+	public String[] split(String argument) {
+		// split only if there're multiple columns given (separated by comma)
+		String[] splitted = argument.split(Pattern.quote(","));
 		return splitted;
 	}
+
+	public String toString() {
+		return String
+				.format("Prefix: %s%nPackageColumns: %s%nLookupTable: %s%nLookupColumn: %s%nMatchColumn: %s%nMapping: %s%n",
+						prefix, packageColumns.toString(), lookupTable, lookupColumn,
+						packageOutputColumn_MatchColumn,
+						packageOutputColumns_ReturnColumns.toString());
+	}
+
+	// verify whether there's a @Trim value in the input String (Prio b)
+	public boolean containsTrim(String input) {
+		return input.contains("@Trim");
+	}
+
+	// remove @Trim value from the String
+	public String removeTrim(String input) {
+		if (input == null) {
+			return null;
+		}
+		String regex = "(@Trim)?";
+		input = input.replaceAll(regex, "");
+		return input;
+	}
+	
+	//Array'd fit as well
+	public List<String> doPackageColumns(String packageColumns) {
+		List<String>columns = new ArrayList<String>();
+		String[]split = packageColumns.split(Pattern.quote(","));
+		for(String a : split) {
+			columns.add(a);
+		}	
+		return columns;
+	}
+	
+	
 
 }

@@ -1,27 +1,34 @@
 package dto;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
+@Entity
 @XmlRootElement(name="column", namespace="http://www.talend.org/mapper")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class AdvancedColumnDTO {
 	
-
-	private int id;
-	private String isKey;
+	@Column(name="is_key")
+	private boolean isKey;
+	@Column(name="field_length")
 	private String length;
+	@Column(name="is_nullable")
 	private String nullable;
+	@Column(name="precision")
 	public String precision;
+	@Column(name="name")
 	public String name;
 	public String type;
 	//value assigning witch case+enum, DTO's shouldn't contain any logic, 
 	//outsourcing to the next class could be better
+	@Column(name="sourceType")
 	private String sourceType;
+	@Column(name="usefulColumn")
 	private String usefulColumn;
 	
 	public AdvancedColumnDTO(){}
@@ -30,7 +37,7 @@ public class AdvancedColumnDTO {
 			String nullable, String precision, String sourceType, String type,
 			String usefulColumn) {
 		//super(name, type);
-		this.isKey = isKey;
+		//this.isKey = isKey;
 		this.length = length;
 		this.name = name;
 		this.type = type;
@@ -41,11 +48,11 @@ public class AdvancedColumnDTO {
 	}
 
 	@XmlAttribute(name="key")
-	public String isKey() {
+	public boolean isKey() {
 		return isKey;
 	}
 
-	public void setKey(String isKey) {
+	public void setKey(boolean isKey) {
 		this.isKey = isKey;
 	}
 
@@ -121,7 +128,17 @@ public class AdvancedColumnDTO {
 	}	
 	
 	public String toString() {
-		return (String.format("Key: %s,%nLength: %s,%nName: %s,%nNullable: %s,%nPrecision: %s,%nType: %s,%nUseful Column: %s%n", isKey, length, name, nullable, precision, type, usefulColumn));
+		return (String.format("Key: %s,%nLength: %s,%nName: %s,%nNullable: %s,%nPrecision: %s,%nType: %s,%nUseful Column: %s%n", isKey, length, name, nullable, precision, sourceType, usefulColumn));
+	}
+	
+	public void mapType(String type) {
+		switch(type) {
+		case "INT":
+			this.type = "id_Integer";
+			break;
+		case "NVARCHAR":
+			this.type = "id_String";
+		}
 	}
 	
 	

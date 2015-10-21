@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class SQLQueryPerformer {
 
@@ -47,6 +48,54 @@ public class SQLQueryPerformer {
 		}
 		return null;
 	}
+	
+	
+	public ResultSet getMetadataForColumns(String database, String tableName, String... columnNames){
+		ResultSet columns = null;
+		String query = "select " +  
+				"(case when c.CONSTRAINT_TYPE = upper('primary key') then 'true' else 'false' end) as is_key, " +
+				"(case when a.CHARACTER_MAXIMUM_LENGTH is null then 10 else a.CHARACTER_MAXIMUM_LENGTH end) as field_length, " +
+				"a.COLUMN_NAME as name, " +
+				"(case when a.IS_NULLABLE = upper('yes') then 'true' else 'false' end) as is_nullable, " +
+				//--a.COLUMN_NAME as originalDbColumnName,
+				"(case when a.NUMERIC_PRECISION is null then '0' else a.NUMERIC_PRECISION end) as precision, " +
+				"upper(a.DATA_TYPE) as sourceType, 'true' as usefulColumn " +
+				"from " + 
+				"[database].INFORMATION_SCHEMA.COLUMNS a " +
+				"left join " +
+				"[database].INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE b " + 
+				"on " + 
+				"a.TABLE_NAME = b.TABLE_NAME and a.COLUMN_NAME = b.COLUMN_NAME " +
+				"left join " + 
+				"[database].INFORMATION_SCHEMA.TABLE_CONSTRAINTS c " + 
+				"on " + 
+				"c.CONSTRAINT_NAME = b.CONSTRAINT_NAME and b.TABLE_NAME = c.TABLE_NAME " +
+				"where " + 
+				"a.TABLE_NAME = '%s' " + 
+				"and " + 
+				"(c.CONSTRAINT_TYPE = upper('primary key') "+ 
+				"or " + 
+				"c.CONSTRAINT_NAME is null)" +
+				"and " +
+				"(%s)";
+		query = query.replaceAll("(database)", database);
+		String whereColumns = "";
+		for(String a : columnNames) {
+			whereColumns = whereColumns + String.format("a.COLUMN_NAME = '%s' or ", a);
+		}
+		whereColumns = whereColumns.substring(0, whereColumns.length()-3);
+		query = String.format(query, tableName, whereColumns);
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			System.out.println(query);
+			columns = pstmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return columns;
+	}
+	
 
 	public void executePreparedStatement(String tableName){
 		try {

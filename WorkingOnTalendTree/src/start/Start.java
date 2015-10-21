@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBException;
 
@@ -60,7 +61,7 @@ public class Start {
 		List <String> packageLookupColumns = new ArrayList <String>();
 		String a2 = "Mandat";
 		packageLookupColumns.add(a2);
-		String a3 = "Werbetraeger";
+		String a3 = "Werbetraeger@Trim";
 		packageLookupColumns.add(a3);
 		
 		//columns the lookup table is built with
@@ -225,13 +226,26 @@ public class Start {
 		String connURL = String.format("jdbc:sqlserver://%s;databaseName=%s;schema=%s", host, database2, schema2);
 		DBConnectionBuilder connection = new DBConnectionBuilder();
 		SQLQueryPerformer performer = new SQLQueryPerformer(connection.getConnection(connURL, user, pass2));
-		String sqlstatement = "Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = 7";
+		String sqlstatement = "Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = 29";
 		ResultSet rs = performer.executeSQLQuery(sqlstatement);
 		ResultSetMapper<LookupDTO> mapper = new ResultSetMapper<LookupDTO>();
 		List<LookupDTO> out = mapper.mapRersultSetToObject(rs, LookupDTO.class);
 		for(LookupDTO a : out) {
 			System.err.println(a);
 		}
+		ResultSetMapper<AdvancedColumnDTO> mapper2 = new ResultSetMapper<AdvancedColumnDTO>();
+		LookupObject obj = new LookupObject(out.get(10));
+		ResultSet rs2 = performer.getMetadataForColumns(database2, obj.getLookupTable(), obj.getLookupColumn(), "ID", "FK_Date_ID");
+		List<AdvancedColumnDTO> columns = mapper2.mapRersultSetToObject(rs2, AdvancedColumnDTO.class);
+		for(AdvancedColumnDTO a : columns) {
+			System.out.println(a);
+		}
+		rs2 = performer.getMetadataForColumns(database2, "tblBestellposition", "FK_Faktura_ID", "FK_Date_Valutadatum_ID");
+		List<AdvancedColumnDTO> columns2 = mapper2.mapRersultSetToObject(rs2, AdvancedColumnDTO.class);
+		for(AdvancedColumnDTO a : columns2) {
+			System.out.println(a);
+		}
+		System.out.println(obj);
 		//connection.getConnection(connURL, user, pass2);
 		//performer.executePreparedStatement(destinationTableName);
 		connection.closeConnection();
@@ -245,7 +259,6 @@ public class Start {
 		System.err.println(DocumentCreator.getStringFromDocument(metadata));
 		testClass.doSomething(metadata);
 		System.out.println(DocumentCreator.getStringFromDocument(metadata.getParentNode()));
-		
 		
 	}
 }

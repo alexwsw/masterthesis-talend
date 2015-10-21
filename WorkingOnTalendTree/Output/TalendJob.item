@@ -157,7 +157,7 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlInput_1">
       
-    <column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+    <column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
@@ -178,7 +178,7 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="MyOutput">
       <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-    <column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+    <column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
@@ -285,7 +285,7 @@
     <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlOutput_1">
-    <column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+    <column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Werbetraeger_ID" nullable="true" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="WerbetraegerName" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
@@ -426,14 +426,14 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4"/>
   </connection>
-<connection connectorName="FLOW" label="ConnectionPoint" lineStyle="0" metaname="ConnectionPoint" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMSSqlOutput_1">
+<connection connectorName="FLOW" label="Lookup1" lineStyle="0" metaname="Lookup1" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMSSqlOutput_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row5"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="ConnectionPoint"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="438">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_2"/>
@@ -458,7 +458,7 @@
 <mapperTableEntries name="Werbetraeger" type="id_String"/>
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(&quot;0-&quot;+ MyOutput.Mandat+ MyOutput.Werbetraeger)" name="FK_Werbetraeger_BK" type="id_String"/>
+<mapperTableEntries expression="String.valueOf(&quot;0-&quot; + MyOutput.Mandat + MyOutput.Werbetraeger.trim())" name="FK_Werbetraeger_BK" type="id_String"/>
 <mapperTableEntries expression="MyOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 <mapperTableEntries expression="MyOutput.ID" name="ID" type="id_Integer"/>
 <mapperTableEntries expression="MyOutput.Mandat" name="Mandat" type="id_Integer"/>
@@ -468,7 +468,7 @@
   <metadata connector="FLOW" name="meinOutput">
 <column key="false" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
@@ -505,7 +505,7 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
   <metadata connector="FLOW" name="tMSSqlInput_3">
-<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="Name" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
@@ -538,7 +538,7 @@
 <mapperTableEntries expression="meinOutput.FK_Werbetraeger_BK" name="BK" type="id_String"/>
 <mapperTableEntries name="Name" type="id_String"/>
 </inputTables>
-<outputTables name="ConnectionPoint" sizeState="INTERMEDIATE">
+<outputTables name="Lookup1" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Werbetraeger_BK" name="FK_Werbetraeger_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 <mapperTableEntries expression="meinOutput.ID" name="ID" type="id_Integer"/>
@@ -548,12 +548,12 @@
 <mapperTableEntries expression="tMSSqlInput_3.Name" name="WerbetraegerName" type="id_String"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="ConnectionPoint">
-<column key="true" length="10" name="FK_Werbetraeger_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+  <metadata connector="FLOW" name="Lookup1">
+<column key="false" length="10" name="FK_Werbetraeger_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="WerbetraegerName" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>

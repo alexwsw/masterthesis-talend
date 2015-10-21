@@ -15,7 +15,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 public class ResultSetMapper<T> {
 	@SuppressWarnings("unchecked")
-	public List<T> mapRersultSetToObject(ResultSet rs, Class outputClass) {
+	public List<T> mapRersultSetToObject(ResultSet rs, Class<?> outputClass) {
 		List<T> outputList = null;
 		try {
 			// make sure resultset is not null
@@ -40,9 +40,6 @@ public class ResultSetMapper<T> {
 								if (field.isAnnotationPresent(Column.class)) {
 									Column column = field
 											.getAnnotation(Column.class);
-									System.out.println(column.name());
-									System.out.println(columnName);
-									System.out.println(column.name().equalsIgnoreCase(columnName));
 									if (column.name().equalsIgnoreCase(
 											columnName)
 											&& columnValue != null) {

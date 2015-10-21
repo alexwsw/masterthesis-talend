@@ -313,9 +313,16 @@ public class tMap extends AbstractNode {
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
 		if(data != null) {
 		String matchColumn = String.format("String.valueOf(\"%s\"", data.getPrefix());
+		//if there's a trim statement
 		for(String column : data.getPackageColumns()) {
-			matchColumn = matchColumn + String.format("+ %s.%s", mainTable, column);
+			if (column.contains("@Trim")) {
+				column = removeTrim(column);
+				matchColumn = matchColumn + String.format(" + %s.%s.trim()", mainTable, column);
+				
+			} else {
+			matchColumn = matchColumn + String.format(" + %s.%s", mainTable, column);
 			String.valueOf("\"0-\" + %s + %s");
+			}
 		}
 		matchColumn = matchColumn + ")";
 		Element nodeDummy = tMap.createNodeDataColumnDummy(document);
@@ -356,11 +363,12 @@ public class tMap extends AbstractNode {
 		//setting/removing of ConnectionPoint should be outsourced in a separate method
 		//ConnectionPoint as unique_name? could be more useful....
 		String startPointMark = "ConnectionPoint";
-		Element startConnection = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getConnectionByLabel, startPointMark);
+		Element startConnection = (Element) AbstractNode.getElementByValue(document, startPointMark);
 		Element startMetadata = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getMetaDataForConnection, startConnection.getAttribute("metaname"));
 		Element previousNode = (Element)startMetadata.getParentNode();
 		//relabel the connection (essential for the inputTables)
-		startConnection.setAttribute("label", startMetadata.getAttribute("name"));
+		AbstractNode.setAttribute(startConnection, "UNIQUE_NAME", startConnection.getAttribute("metaname"));
+		//startConnection.setAttribute("label", startMetadata.getAttribute("name"));
 		Element prefixTMap = tMap.newInstance(document, template, "PrefixMaker");
 		Element lookupTMap = tMap.newInstance(document, template, "LookupNode");
 		Element lookupDb = tMSSqlInput.newInstance(document, template, "LookupDB", data.getTableLookupColumns(), "MyConnection", data.getLookupTable());
@@ -374,9 +382,9 @@ public class tMap extends AbstractNode {
 		Connection.newConnection(document, template, prefixMData, lookupTMap, EConnectionTypes.Main);
 		String nameInputTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(prefixMData), EConnectionTypes.Main);
 		String nameLookupTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, EConnectionTypes.Lookup);
-		Element lookupMetadata = tMap.setLookupOutput(document, lookupTMap, "ConnectionPoint", tMap.extractMetadata(prefixMData), tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, nameLookupTable);
+		Element lookupMetadata = tMap.setLookupOutput(document, lookupTMap, "Lookup1", tMap.extractMetadata(prefixMData), tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, nameLookupTable);
 		Element newConnection = Connection.newConnection(document, template, lookupMetadata, AbstractNode.getElementByValue(document, "MyOutput"), EConnectionTypes.Main);
-		newConnection.setAttribute("label", "ConnectionPoint");
+		AbstractNode.setAttribute(newConnection, "UNIQUE_NAME", "ConnectionPoint");
 		/*
 		Element outputTables = tMap.createOutputTables(document, "preparedOutput");
 		Element outputMData = tMap.createMetadata(document, outputTables);
@@ -420,5 +428,22 @@ public class tMap extends AbstractNode {
 		
 	}
 	
+	//if there's a collection of multiple Lookups (needs to be tested!!!)
+	public static void doLookup (Document document, Document template, Collection<LookupObject> data) throws WrongNodeException {
+		for(LookupObject a : data){
+			doLookup(document, template, a);
+		}
+			
+	}
+	
+	// remove @Trim value from the String
+		public static String removeTrim(String input) {
+			if (input == null) {
+				return null;
+			}
+			String regex = "(@Trim)?";
+			input = input.replaceAll(regex, "");
+			return input;
+		}
 
 }
