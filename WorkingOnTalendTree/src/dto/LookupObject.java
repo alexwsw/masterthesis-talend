@@ -1,5 +1,6 @@
 package dto;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,9 @@ import java.util.regex.Pattern;
 import jdbc.SQLQueryPerformer;
 
 public class LookupObject {
+	
+	private static Connection conn;
+	
 
 	private String prefix;
 	// columns, relevant for the actual Lookup

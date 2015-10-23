@@ -23,6 +23,7 @@ import database.tMSSqlConnection;
 import dto.AdvancedColumnDTO;
 import dto.LookupDTO;
 import dto.LookupObject;
+import dto.PackageDTO;
 import enums.EConnectionTypes;
 import exception.DummyNotFoundException;
 import exception.WrongNodeException;
@@ -240,12 +241,16 @@ public class Start {
 		for(AdvancedColumnDTO a : columns) {
 			System.out.println(a);
 		}
-		rs2 = performer.getMetadataForColumns(database2, "tblBestellposition", "FK_Faktura_ID", "FK_Date_Valutadatum_ID");
-		List<AdvancedColumnDTO> columns2 = mapper2.mapRersultSetToObject(rs2, AdvancedColumnDTO.class);
-		for(AdvancedColumnDTO a : columns2) {
-			System.out.println(a);
-		}
+	
 		System.out.println(obj);
+		
+		ResultSetMapper<PackageDTO>forPackage = new ResultSetMapper<PackageDTO>();
+		
+		String sql2 = "Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgroup where ID = 11";
+		List<PackageDTO>packages = forPackage.mapRersultSetToObject(performer.executeSQLQuery(sql2), PackageDTO.class);
+		for(PackageDTO p : packages) {
+			System.out.println(p);
+		}
 		//connection.getConnection(connURL, user, pass2);
 		//performer.executePreparedStatement(destinationTableName);
 		connection.closeConnection();
