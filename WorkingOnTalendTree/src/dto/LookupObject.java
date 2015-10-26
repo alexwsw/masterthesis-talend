@@ -1,24 +1,20 @@
 package dto;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-import jdbc.SQLQueryPerformer;
-
 public class LookupObject {
 	
-	private static Connection conn;
 	
 
 	private String prefix;
 	// columns, relevant for the actual Lookup
 	private List<String> packageColumns;
 	// columns we get back from the Lookup table
-	private List<AdvancedColumnDTO> lookupTableColumns;
+	private List<ColumnDTO> lookupTableColumns;
 	// the table for the Lookup
 	private String lookupTable;
 	// Lookup column in the lookup table
@@ -29,13 +25,13 @@ public class LookupObject {
 	private Map<String, String> packageOutputColumns_ReturnColumns;
 	// add an attribute for mapping stuff
 	// defines the names and format for the Lookup output columns
-	private List<AdvancedColumnDTO> packageReturnColumns;
+	private List<ColumnDTO> packageReturnColumns;
 
 	public LookupObject() {
 	}
 
 	public LookupObject(String prefix, List<String> packageColumns,
-			List<AdvancedColumnDTO> lookupTableColumns, String lookupTable,
+			List<ColumnDTO> lookupTableColumns, String lookupTable,
 			String lookupColumn, String packageOutputColumn_MatchColumn,
 			Map<String, String> packageOutputColumns_ReturnColumns) {
 		super();
@@ -76,12 +72,12 @@ public class LookupObject {
 		this.packageColumns = packageColumns;
 	}
 
-	public List<AdvancedColumnDTO> getTableLookupColumns() {
+	public List<ColumnDTO> getLookupTableColumns() {
 		return lookupTableColumns;
 	}
 
-	public void setTableLookupColumns(
-			List<AdvancedColumnDTO> lookupTable_Retuncolumns) {
+	public void setLookupTableColumns(
+			List<ColumnDTO> lookupTable_Retuncolumns) {
 		this.lookupTableColumns = lookupTable_Retuncolumns;
 	}
 
@@ -128,6 +124,14 @@ public class LookupObject {
 			}
 		}
 		return columnsMapping;
+	}
+
+	public List<ColumnDTO> getPackageReturnColumns() {
+		return packageReturnColumns;
+	}
+
+	public void setPackageReturnColumns(List<ColumnDTO> packageReturnColumns) {
+		this.packageReturnColumns = packageReturnColumns;
 	}
 
 	// Outsource, this method has nothing to do with this object

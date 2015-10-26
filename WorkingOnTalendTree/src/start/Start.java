@@ -1,7 +1,9 @@
 package start;
 
 
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,8 @@ import org.w3c.dom.Node;
 import transformer.tMap;
 import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
-import dto.AdvancedColumnDTO;
+import dto.ColumnDTO;
+import dto.ColumnManager;
 import dto.LookupDTO;
 import dto.LookupObject;
 import dto.PackageDTO;
@@ -50,12 +53,12 @@ public class Start {
 		String password = "v8+RGusCeE5g7aN7EnZnUA==";
 		
 		//columns we start with
-		List<AdvancedColumnDTO>Package = new ArrayList<AdvancedColumnDTO>();
-		AdvancedColumnDTO c1 = new AdvancedColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
+		List<ColumnDTO>Package = new ArrayList<ColumnDTO>();
+		ColumnDTO c1 = new ColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
 		Package.add(c1);
-		AdvancedColumnDTO c2 = new AdvancedColumnDTO("false", "10", "Mandat", "false", "10", null, "id_Integer", "true");
+		ColumnDTO c2 = new ColumnDTO("false", "10", "Mandat", "false", "10", null, "id_Integer", "true");
 		Package.add(c2);
-		AdvancedColumnDTO c3 = new AdvancedColumnDTO("false", "10", "Werbetraeger", "false", "10", null, "id_String", "true");
+		ColumnDTO c3 = new ColumnDTO("false", "10", "Werbetraeger", "false", "10", null, "id_String", "true");
 		Package.add(c3);
 		
 		//columns we need for the lookup
@@ -66,12 +69,12 @@ public class Start {
 		packageLookupColumns.add(a3);
 		
 		//columns the lookup table is built with
-		List <AdvancedColumnDTO>lookupTableColumns = new ArrayList <AdvancedColumnDTO>();
-		AdvancedColumnDTO l1 = new AdvancedColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
+		List <ColumnDTO>lookupTableColumns = new ArrayList <ColumnDTO>();
+		ColumnDTO l1 = new ColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
 		lookupTableColumns.add(l1);
-		AdvancedColumnDTO l2 = new AdvancedColumnDTO("false", "10", "BK", "true", "10", null, "id_String", "true");
+		ColumnDTO l2 = new ColumnDTO("false", "10", "BK", "true", "10", null, "id_String", "true");
 		lookupTableColumns.add(l2);
-		AdvancedColumnDTO l3 = new AdvancedColumnDTO("false", "10", "Name", "true", "10", null, "id_String", "true");
+		ColumnDTO l3 = new ColumnDTO("false", "10", "Name", "true", "10", null, "id_String", "true");
 		lookupTableColumns.add(l3);
 		Map<String, String> packageOutputColumns_ReturnColumns = new TreeMap<String, String>();
 		packageOutputColumns_ReturnColumns.put("ID", "FK_Werbetraeger_ID");
@@ -80,23 +83,23 @@ public class Start {
 		
 		
 		//should be added to tMapDTO Object in order to define the lookup output properly
-		List <AdvancedColumnDTO>packageReturnColumns = new ArrayList <AdvancedColumnDTO>();
-		AdvancedColumnDTO o1 = new AdvancedColumnDTO("false", "10", "FK_Werbetraeger_ID", "false", "10", null, "id_Integer", "true");
+		List <ColumnDTO>packageReturnColumns = new ArrayList <ColumnDTO>();
+		ColumnDTO o1 = new ColumnDTO("false", "10", "FK_Werbetraeger_ID", "false", "10", null, "id_Integer", "true");
 		packageReturnColumns.add(o1);
-		AdvancedColumnDTO o3 = new AdvancedColumnDTO("false", "10", "WerbetraegerName", "true", "10", null, "id_String", "true");
+		ColumnDTO o3 = new ColumnDTO("false", "10", "WerbetraegerName", "true", "10", null, "id_String", "true");
 		packageReturnColumns.add(o3);
 
 
 
 		//schema columns in the target table
-		List<AdvancedColumnDTO>targetColumns = new ArrayList<AdvancedColumnDTO>();
-		AdvancedColumnDTO t1 = new AdvancedColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
+		List<ColumnDTO>targetColumns = new ArrayList<ColumnDTO>();
+		ColumnDTO t1 = new ColumnDTO("true", "10", "ID", "false", "10", null, "id_Integer", "true");
 		targetColumns.add(t1);
-		AdvancedColumnDTO t2 = new AdvancedColumnDTO("false", "10", "FK_Werbetraeger_ID", "true", "10", null, "id_Integer", "true");
+		ColumnDTO t2 = new ColumnDTO("false", "10", "FK_Werbetraeger_ID", "true", "10", null, "id_Integer", "true");
 		targetColumns.add(t2);
-		AdvancedColumnDTO t3 = new AdvancedColumnDTO("false", "10", "FK_Werbetraeger_BK", "true", "10", null, "id_String", "true");
+		ColumnDTO t3 = new ColumnDTO("false", "10", "FK_Werbetraeger_BK", "true", "10", null, "id_String", "true");
 		targetColumns.add(t3);
-		AdvancedColumnDTO t4 = new AdvancedColumnDTO("false", "10", "WerbetraegerName", "true", "10", null, "id_String", "true");
+		ColumnDTO t4 = new ColumnDTO("false", "10", "WerbetraegerName", "true", "10", null, "id_String", "true");
 		targetColumns.add(t4);
 		/*
 		String [][] sourceTableColumns = {{"true", "10", "ID", "false", "10", "id_Integer", "true"}, 
@@ -122,7 +125,7 @@ public class Start {
 		AbstractNode.setAttribute(destination, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
 		AbstractNode.setAttribute(destination, "TABLE", String.format("\"%s\"", destinationTableName));
 		AbstractNode.setAttribute(destination, "DATA_ACTION", packageDBCommand);
-		AbstractNode.setWholeMetadataFromDTO(document, targetColumns, AbstractNode.getMetadata(document, destination));
+		//AbstractNode.setWholeMetadataFromDTO(document, targetColumns, AbstractNode.getMetadata(document, destination));
 		
 		//Input
 		Node source = AbstractNode.getElementByValue(document, "MyInput");
@@ -226,7 +229,7 @@ public class Start {
 		String pass2 = "10Runsql";
 		String connURL = String.format("jdbc:sqlserver://%s;databaseName=%s;schema=%s", host, database2, schema2);
 		DBConnectionBuilder connection = new DBConnectionBuilder();
-		SQLQueryPerformer performer = new SQLQueryPerformer(connection.getConnection(connURL, user, pass2));
+		SQLQueryPerformer performer = new SQLQueryPerformer(connection.createConnection(connURL, user, pass2));
 		String sqlstatement = "Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = 29";
 		ResultSet rs = performer.executeSQLQuery(sqlstatement);
 		ResultSetMapper<LookupDTO> mapper = new ResultSetMapper<LookupDTO>();
@@ -234,22 +237,27 @@ public class Start {
 		for(LookupDTO a : out) {
 			System.err.println(a);
 		}
-		ResultSetMapper<AdvancedColumnDTO> mapper2 = new ResultSetMapper<AdvancedColumnDTO>();
+		ResultSetMapper<ColumnDTO> mapper2 = new ResultSetMapper<ColumnDTO>();
 		LookupObject obj = new LookupObject(out.get(10));
 		ResultSet rs2 = performer.getMetadataForColumns(database2, obj.getLookupTable(), obj.getLookupColumn(), "ID", "FK_Date_ID");
-		List<AdvancedColumnDTO> columns = mapper2.mapRersultSetToObject(rs2, AdvancedColumnDTO.class);
-		for(AdvancedColumnDTO a : columns) {
+		List<ColumnDTO> columns = mapper2.mapRersultSetToObject(rs2, ColumnDTO.class);
+		for(ColumnDTO a : columns) {
 			System.out.println(a);
 		}
 	
 		System.out.println(obj);
 		
 		ResultSetMapper<PackageDTO>forPackage = new ResultSetMapper<PackageDTO>();
-		
-		String sql2 = "Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgroup where ID = 11";
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		System.out.print("Package number?: ");
+		int number = input.nextInt();
+		input.close();
+		String sql2 = String.format("Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgroup where ID = %s", number);
 		List<PackageDTO>packages = forPackage.mapRersultSetToObject(performer.executeSQLQuery(sql2), PackageDTO.class);
 		for(PackageDTO p : packages) {
+			ColumnManager clm = new ColumnManager(performer);
 			System.out.println(p);
+			AbstractNode.setWholeMetadataFromDTO(document, clm.getColumnsForTable(database2, p.getDestinationTable(), null), AbstractNode.getMetadata(document, destination));
 		}
 		//connection.getConnection(connURL, user, pass2);
 		//performer.executePreparedStatement(destinationTableName);

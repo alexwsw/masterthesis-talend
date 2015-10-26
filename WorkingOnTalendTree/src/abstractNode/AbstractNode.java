@@ -12,7 +12,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import connection.Connection;
-import dto.AdvancedColumnDTO;
+import dto.ColumnDTO;
 import dto.LookupObject;
 import enums.EConnectionTypes;
 import enums.XPathExpressions;
@@ -151,7 +151,7 @@ public abstract class AbstractNode {
 	}
 	
 	//TODO replace the static dummy by a dynamic one
-	public static void setMetadataColumnsTest(Document document, Node metadata, Collection<AdvancedColumnDTO>columns)  throws DummyNotFoundException{
+	public static void setMetadataColumnsTest(Document document, Node metadata, Collection<ColumnDTO>columns)  throws DummyNotFoundException{
 		//NodeList columns = AbstractNode.getMetadataColumns(metadata);
 		Node dummy = AbstractNode.getDummy(metadata);
 		Node start = dummy.cloneNode(true);
@@ -170,7 +170,7 @@ public abstract class AbstractNode {
 			NodeBuilder.removeNode(document, metadata.getFirstChild());
 		}
 		*/
-		for (AdvancedColumnDTO column : columns) {
+		for (ColumnDTO column : columns) {
 			//clone the dummy
 			Element e = (Element) start.cloneNode(true);
 				//get the values to the attributes
@@ -336,8 +336,8 @@ public abstract class AbstractNode {
 	}
 	
 	//iterate over a Node's metadata and save it within a DT-Object
-	public static Collection <AdvancedColumnDTO> extractMetadata (Node metaData) {
-		Collection<AdvancedColumnDTO> mDataColumns = new ArrayList<AdvancedColumnDTO>();
+	public static Collection <ColumnDTO> extractMetadata (Node metaData) {
+		Collection<ColumnDTO> mDataColumns = new ArrayList<ColumnDTO>();
 		Node firstChild = metaData.getFirstChild();
 		while (firstChild != null) {
 			if(firstChild.getNodeType() == Node.TEXT_NODE) {
@@ -352,7 +352,7 @@ public abstract class AbstractNode {
 			String precision = mDataColumn.getAttribute("precision");
 			String type = mDataColumn.getAttribute("type");
 			String usefulColumn = mDataColumn.getAttribute("usefulColumn");
-			AdvancedColumnDTO column = new AdvancedColumnDTO(isKey, length, name, nullable, precision, null, type, usefulColumn);
+			ColumnDTO column = new ColumnDTO(isKey, length, name, nullable, precision, null, type, usefulColumn);
 			mDataColumns.add(column);
 			firstChild = firstChild.getNextSibling();
 		}
@@ -360,12 +360,12 @@ public abstract class AbstractNode {
 	}
 	
 	//create columns for a metadata Node from a DT-Object
-	public static void setWholeMetadataFromDTO (Document document, Collection<AdvancedColumnDTO> columns, Node metadata) {
-		for (AdvancedColumnDTO column : columns) {
+	public static void setWholeMetadataFromDTO (Document document, Collection<ColumnDTO> columns, Node metadata) {
+		for (ColumnDTO column : columns) {
 			AbstractNode.setMetadataColumnFromDTO(document, column, metadata);
 		}
 	}
-	public static Element setMetadataColumnFromDTO(Document document, AdvancedColumnDTO column, Node metadata) {
+	public static Element setMetadataColumnFromDTO(Document document, ColumnDTO column, Node metadata) {
 		Element dummy = AbstractNode.createMetadataColumnDummy(document);
 		dummy.setAttribute("key", String.valueOf(column.isKey()));
 		dummy.setAttribute("length", column.getLength());

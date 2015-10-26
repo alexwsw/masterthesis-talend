@@ -8,7 +8,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import dto.AdvancedColumnDTO;
+import dto.ColumnDTO;
 import enums.XPathExpressions;
 import abstractNode.AbstractNode;
 import start.Navigator;
@@ -23,7 +23,7 @@ public class tMSSqlInput extends AbstractNode{
 		return ++i;
 	}
 
-	public static Element newInstance (Document document, Document template, String name, Collection<AdvancedColumnDTO> columns, String connLabel, String table) {
+	public static Element newInstance (Document document, Document template, String name, Collection<ColumnDTO> columns, String connLabel, String table) {
 		Node n = Navigator.processXPathQueryNode(template, XPathExpressions.getComponentsByComponentName, componentName);
 		//true = all child elements are copied as well
 		Element copy = (Element) document.importNode(n, true);
@@ -41,7 +41,7 @@ public class tMSSqlInput extends AbstractNode{
 		AbstractNode.setWholeMetadataFromDTO(document, columns, mData);
 		//separate Method for SQL statement generating???
 		String sqlParameters = "";
-		for(AdvancedColumnDTO column : columns) {
+		for(ColumnDTO column : columns) {
 			sqlParameters += column.getName() + ",";
 		}
 		AbstractNode.setAttribute(copy, "TABLE", String.format("\"%s\"", table));

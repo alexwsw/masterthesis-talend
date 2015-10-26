@@ -9,7 +9,7 @@ public class DBConnectionBuilder {
 	private Connection conn = null;
 	
 	//connect to database
-	public Connection getConnection(String connectURL, String user, String password) {
+	public Connection createConnection(String connectURL, String user, String password) {
 		
 		try {
 			//Class.forName is obsolete since JDBC 4.0
@@ -39,6 +39,10 @@ public class DBConnectionBuilder {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public Connection getConnection () {
+		return this.conn;
 	}
 	
 }

@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement(name="column", namespace="http://www.talend.org/mapper")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class AdvancedColumnDTO {
+public class ColumnDTO {
 	
 	@Column(name="is_key")
 	private boolean isKey;
@@ -31,9 +31,9 @@ public class AdvancedColumnDTO {
 	@Column(name="usefulColumn")
 	private String usefulColumn;
 	
-	public AdvancedColumnDTO(){}
+	public ColumnDTO(){}
 	
-	public AdvancedColumnDTO(String isKey, String length, String name,
+	public ColumnDTO(String isKey, String length, String name,
 			String nullable, String precision, String sourceType, String type,
 			String usefulColumn) {
 		//super(name, type);
