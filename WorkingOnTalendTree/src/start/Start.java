@@ -257,7 +257,9 @@ public class Start {
 		for(PackageDTO p : packages) {
 			ColumnManager clm = new ColumnManager(performer);
 			System.out.println(p);
-			AbstractNode.setWholeMetadataFromDTO(document, clm.getColumnsForTable(database2, p.getDestinationTable(), null), AbstractNode.getMetadata(document, destination));
+			List<ColumnDTO> columnsss = clm.getColumnsForTable(database2, p.getDestinationTable(), null);
+			System.out.println(columnsss.toString());
+			AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, destination));
 		}
 		//connection.getConnection(connURL, user, pass2);
 		//performer.executePreparedStatement(destinationTableName);

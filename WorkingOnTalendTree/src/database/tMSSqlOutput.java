@@ -51,10 +51,7 @@ public class tMSSqlOutput {
 		while(child.getNodeType() == Node.TEXT_NODE) {
 			child = child.getNextSibling();
 		}
-		Element dummy = (Element) child.cloneNode(true);
-		dummy.setAttribute("name", "dummy");
 		NodeBuilder.removeAllChildNodes(mData);
-		NodeBuilder.appendElementToContext(mData, dummy);
 	}
 
 }

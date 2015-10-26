@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ColumnDTO {
 	
 	@Column(name="is_key")
-	private boolean isKey;
+	private String isKey;
 	@Column(name="field_length")
 	private String length;
 	@Column(name="is_nullable")
@@ -48,11 +48,11 @@ public class ColumnDTO {
 	}
 
 	@XmlAttribute(name="key")
-	public boolean isKey() {
+	public String isKey() {
 		return isKey;
 	}
 
-	public void setKey(boolean isKey) {
+	public void setKey(String isKey) {
 		this.isKey = isKey;
 	}
 

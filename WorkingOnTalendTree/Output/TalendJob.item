@@ -157,9 +157,9 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlInput_1">
       
-    <column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
+    <column key="null" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="null" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="null" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
   </node>
   <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="288">
@@ -178,9 +178,9 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="MyOutput">
       <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-    <column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
+    <column key="null" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="null" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="null" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
     <nodeData xsi:type="MapperData">
       <uiProperties/>
@@ -285,25 +285,25 @@
     <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlOutput_1">
-    <column key="false" length="10" name="ID" nullable="false" precision="10" type="" usefulColumn="true"/>
-<column key="false" length="255" name="BK" nullable="false" precision="0" type="" usefulColumn="true"/>
-<column key="false" length="255" name="Name" nullable="true" precision="0" type="" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Kampagne_BK" nullable="false" precision="0" type="" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Kampagne_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Mandant_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Sammelwerbetraeger_BK" nullable="false" precision="0" type="" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Sammelwerbetraeger_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Unternehmensbereich_BK" nullable="false" precision="0" type="" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Unternehmensbereich_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_Sourceobject_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_Targetfieldvalue" nullable="false" precision="10" type="" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_isManual" nullable="false" precision="5" type="" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_DMR" nullable="false" precision="0" type="" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_DCR" nullable="false" precision="0" type="" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_ErrorCount" nullable="false" precision="5" type="" usefulColumn="true"/>
+    <column key="null" length="10" name="ID" nullable="false" precision="10" type="" usefulColumn="true"/>
+<column key="null" length="255" name="BK" nullable="false" precision="0" type="" usefulColumn="true"/>
+<column key="null" length="255" name="Name" nullable="true" precision="0" type="" usefulColumn="true"/>
+<column key="null" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="" usefulColumn="true"/>
+<column key="null" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
+<column key="null" length="255" name="FK_Kampagne_BK" nullable="false" precision="0" type="" usefulColumn="true"/>
+<column key="null" length="10" name="FK_Kampagne_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
+<column key="null" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="" usefulColumn="true"/>
+<column key="null" length="10" name="FK_Mandant_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
+<column key="null" length="255" name="FK_Sammelwerbetraeger_BK" nullable="false" precision="0" type="" usefulColumn="true"/>
+<column key="null" length="10" name="FK_Sammelwerbetraeger_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
+<column key="null" length="255" name="FK_Unternehmensbereich_BK" nullable="false" precision="0" type="" usefulColumn="true"/>
+<column key="null" length="10" name="FK_Unternehmensbereich_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
+<column key="null" length="10" name="isETL_Sourceobject_ID" nullable="false" precision="10" type="" usefulColumn="true"/>
+<column key="null" length="10" name="isETL_Targetfieldvalue" nullable="false" precision="10" type="" usefulColumn="true"/>
+<column key="null" length="10" name="isETL_isManual" nullable="false" precision="5" type="" usefulColumn="true"/>
+<column key="null" length="10" name="isETL_DMR" nullable="false" precision="0" type="" usefulColumn="true"/>
+<column key="null" length="10" name="isETL_DCR" nullable="false" precision="0" type="" usefulColumn="true"/>
+<column key="null" length="10" name="isETL_ErrorCount" nullable="false" precision="5" type="" usefulColumn="true"/>
 </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column key="false" length="10" name="dummy" nullable="false" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
@@ -481,11 +481,11 @@
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
-<column key="false" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
+<column key="null" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+<column key="null" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="null" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="null" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="null" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
 <node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="630" posY="588">
@@ -520,9 +520,9 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
   <metadata connector="FLOW" name="tMSSqlInput_3">
-<column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="Name" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+<column key="null" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="null" length="10" name="BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+<column key="null" length="10" name="Name" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="588">
@@ -564,13 +564,13 @@
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="Lookup1">
-<column key="false" length="10" name="FK_Werbetraeger_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="WerbetraegerName" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
+<column key="null" length="10" name="FK_Werbetraeger_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="null" length="10" name="WerbetraegerName" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+<column key="null" length="10" name="FK_Werbetraeger_BK" nullable="true" precision="10" type="id_String" usefulColumn="true"/>
+<column key="null" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="null" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="null" length="10" name="Mandat" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="null" length="10" name="Werbetraeger" nullable="false" precision="10" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
 </talendfile:ProcessType>
