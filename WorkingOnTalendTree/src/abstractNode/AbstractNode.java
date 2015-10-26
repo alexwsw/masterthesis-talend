@@ -174,13 +174,13 @@ public abstract class AbstractNode {
 			//clone the dummy
 			Element e = (Element) start.cloneNode(true);
 				//get the values to the attributes
-				e.setAttribute("key", String.valueOf(column.isKey()));
+				e.setAttribute("key", String.valueOf(column.getKey()));
 				e.setAttribute("length", column.getLength());
 				e.setAttribute("name", column.getName());
 				e.setAttribute("nullable", column.isNullable());
 				e.setAttribute("precision", column.getPrecision());
 				e.setAttribute("type", column.getType());
-				e.setAttribute("usefulColumn", column.isUsefulColumn());
+				e.setAttribute("usefulColumn", column.getUsefulColumn());
 				NodeBuilder.appendElementToContext(metadata, e);
 			}
 			//append the newly cloned node
@@ -367,13 +367,13 @@ public abstract class AbstractNode {
 	}
 	public static Element setMetadataColumnFromDTO(Document document, ColumnDTO column, Node metadata) {
 		Element dummy = AbstractNode.createMetadataColumnDummy(document);
-		dummy.setAttribute("key", String.valueOf(column.isKey()));
+		dummy.setAttribute("key", String.valueOf(column.getKey()));
 		dummy.setAttribute("length", column.getLength());
 		dummy.setAttribute("name", column.getName());
 		dummy.setAttribute("nullable", column.isNullable());
 		dummy.setAttribute("precision", column.getPrecision());
 		dummy.setAttribute("type", column.getType());
-		dummy.setAttribute("usefulColumn", column.isUsefulColumn());
+		dummy.setAttribute("usefulColumn", column.getUsefulColumn());
 		NodeBuilder.appendElementToContext(metadata, dummy);
 		return dummy;
 	}

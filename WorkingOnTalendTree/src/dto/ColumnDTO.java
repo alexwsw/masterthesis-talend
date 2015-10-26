@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ColumnDTO {
 	
 	@Column(name="is_key")
-	private String isKey;
+	private String key;
 	@Column(name="field_length")
 	private String length;
 	@Column(name="is_nullable")
@@ -33,11 +33,11 @@ public class ColumnDTO {
 	
 	public ColumnDTO(){}
 	
-	public ColumnDTO(String isKey, String length, String name,
+	public ColumnDTO(String key, String length, String name,
 			String nullable, String precision, String sourceType, String type,
 			String usefulColumn) {
 		//super(name, type);
-		//this.isKey = isKey;
+		this.key = key;
 		this.length = length;
 		this.name = name;
 		this.type = type;
@@ -48,12 +48,12 @@ public class ColumnDTO {
 	}
 
 	@XmlAttribute(name="key")
-	public String isKey() {
-		return isKey;
+	public String getKey() {
+		return key;
 	}
 
-	public void setKey(String isKey) {
-		this.isKey = isKey;
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	@XmlAttribute(name="length")
@@ -118,7 +118,7 @@ public class ColumnDTO {
 	}
 
 	@XmlAttribute(name="usefulColumn")
-	public String isUsefulColumn() {
+	public String getUsefulColumn() {
 		return usefulColumn;
 	}
 
@@ -128,7 +128,7 @@ public class ColumnDTO {
 	}	
 	
 	public String toString() {
-		return (String.format("Key: %s,%nLength: %s,%nName: %s,%nNullable: %s,%nPrecision: %s,%nType: %s,%nUseful Column: %s%n", isKey, length, name, nullable, precision, sourceType, usefulColumn));
+		return (String.format("Key: %s,%nLength: %s,%nName: %s,%nNullable: %s,%nPrecision: %s,%nType: %s,%nUseful Column: %s%n", key, length, name, nullable, precision, sourceType, usefulColumn));
 	}
 	
 	public void mapType(String type) {
