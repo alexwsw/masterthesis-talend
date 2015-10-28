@@ -25,6 +25,7 @@ import database.tMSSqlConnection;
 import dto.ColumnDTO;
 import dto.ColumnManager;
 import dto.LookupDTO;
+import dto.LookupManager;
 import dto.LookupObject;
 import dto.PackageDTO;
 import enums.EConnectionTypes;
@@ -35,7 +36,7 @@ import exception.WrongNodeException;
 public class Start {
 	
 	//
-	public static void main(String[] args) throws WrongNodeException, DummyNotFoundException, JAXBException {
+	public static void main(String[] args) throws WrongNodeException, DummyNotFoundException, JAXBException, Throwable {
 
 		String template = ".//Template//TalendXML.item";
 		String output = ".//Output//TalendJob.item";
@@ -51,6 +52,77 @@ public class Start {
 		//de-/encryptor required (look in the talend source code for implementation)
 		//String password = "hTgAoqXDCdLnPZDSDy6ojQ==";
 		String password = "v8+RGusCeE5g7aN7EnZnUA==";
+		
+		
+		String schema2= "isETL";
+		String database2= "isModeler_0.9.1";
+		String pass2 = "10Runsql";
+		String connURL = String.format("jdbc:sqlserver://%s;databaseName=%s;schema=%s", host, database2, schema2);
+		DBConnectionBuilder connection = new DBConnectionBuilder();
+		SQLQueryPerformer performer = new SQLQueryPerformer(connection.createConnection(connURL, user, pass2));
+		
+		ResultSetMapper<PackageDTO>forPackage = new ResultSetMapper<PackageDTO>();
+		java.util.Scanner input = new java.util.Scanner(System.in);
+		System.out.print("Package number?: ");
+		int number = input.nextInt();
+		input.close();
+		String sql2 = String.format("Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgroup where ID = %s", number);
+		PackageDTO p = forPackage.mapRersultSetToSingleObject(performer.executeSQLQuery(sql2), PackageDTO.class);
+		ColumnManager clm = new ColumnManager(performer);
+		List<ColumnDTO> columnsss = clm.getColumnsForTable(database2, p.getDestinationTable(), null);
+		System.out.println(columnsss.toString());
+		//Output
+		Node destination = AbstractNode.getElementByValue(document, "MyOutput");
+		AbstractNode.setAttribute(destination, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
+		AbstractNode.setAttribute(destination, "TABLE", String.format("\"%s\"", p.getDestinationTable()));
+		AbstractNode.setAttribute(destination, "DATA_ACTION", "INSERT");
+		//AbstractNode.setWholeMetadataFromDTO(document, targetColumns, AbstractNode.getMetadata(document, destination));
+		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, destination));		
+		LookupManager lMan = new LookupManager(performer, p);
+		List<LookupObject>lookups = lMan.createLookupsFromDatabase(database2, schema2);
+		tMap.doLookup(document, fixedTemplate, lookups);
+		
+		DocumentCreator.SaveDOMFile(document, output);
+		
+		
+		
+		
+		
+		/*
+		String sqlstatement = String.format("Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = %s", p.getId());
+		ResultSet rs = performer.executeSQLQuery(sqlstatement);
+		ResultSetMapper<LookupDTO> mapper = new ResultSetMapper<LookupDTO>();
+		List<LookupDTO> out = mapper.mapRersultSetToObject(rs, LookupDTO.class);
+		for(LookupDTO a : out) {
+			System.err.println(a);
+		}
+		ResultSetMapper<ColumnDTO> mapper2 = new ResultSetMapper<ColumnDTO>();
+		LookupObject obj = new LookupObject(out.get(10));
+		ResultSet rs2 = performer.getMetadataForColumns(database2, obj.getLookupTable(), obj.getLookupColumn(), "ID", "FK_Date_ID");
+		List<ColumnDTO> columns = mapper2.mapRersultSetToObject(rs2, ColumnDTO.class);
+		for(ColumnDTO a : columns) {
+			System.out.println(a);
+		}
+	
+		System.out.println(obj);
+		
+
+		//connection.getConnection(connURL, user, pass2);
+		//performer.executePreparedStatement(destinationTableName);
+		connection.closeConnection();
+		
+		/*
+		Node metadata = AbstractNode.getMetadata(document, destination).getFirstChild();
+		DocumentCreator.SaveDOMFile(document, output);
+		while(metadata.getNodeType() == Node.TEXT_NODE) {
+			metadata = metadata.getNextSibling();
+		}
+		System.err.println(DocumentCreator.getStringFromDocument(metadata));
+		testClass.doSomething(metadata);
+		System.out.println(DocumentCreator.getStringFromDocument(metadata.getParentNode()));
+		
+	}
+		
 		
 		//columns we start with
 		List<ColumnDTO>Package = new ArrayList<ColumnDTO>();
@@ -105,7 +177,7 @@ public class Start {
 		String [][] sourceTableColumns = {{"true", "10", "ID", "false", "10", "id_Integer", "true"}, 
 											{"false", "10", "Alter", "false", "10", "id_Integer", "true"}, 
 											};
-		*/
+		
 		
 		String sourceTableName = "sourceTable";
 		String destinationTableName = "werbetraeger";
@@ -120,12 +192,7 @@ public class Start {
 		Node commit = AbstractNode.getElementByValue(document, "MyCommit");
 		AbstractNode.setAttribute(commit, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
 		
-		//Output
-		Node destination = AbstractNode.getElementByValue(document, "MyOutput");
-		AbstractNode.setAttribute(destination, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
-		AbstractNode.setAttribute(destination, "TABLE", String.format("\"%s\"", destinationTableName));
-		AbstractNode.setAttribute(destination, "DATA_ACTION", packageDBCommand);
-		//AbstractNode.setWholeMetadataFromDTO(document, targetColumns, AbstractNode.getMetadata(document, destination));
+
 		
 		//Input
 		Node source = AbstractNode.getElementByValue(document, "MyInput");
@@ -169,7 +236,6 @@ public class Start {
 		//update java_library_path in all nodes
 		AbstractNode.updateJavaLibraryPath(document);
 		//export File
-		DocumentCreator.SaveDOMFile(document, output);
 		
 		
 		
@@ -224,56 +290,6 @@ public class Start {
 		
 		//JDBC stuff
 
-		String schema2= "isETL";
-		String database2= "isModeler_0.9.1";
-		String pass2 = "10Runsql";
-		String connURL = String.format("jdbc:sqlserver://%s;databaseName=%s;schema=%s", host, database2, schema2);
-		DBConnectionBuilder connection = new DBConnectionBuilder();
-		SQLQueryPerformer performer = new SQLQueryPerformer(connection.createConnection(connURL, user, pass2));
-		String sqlstatement = "Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = 29";
-		ResultSet rs = performer.executeSQLQuery(sqlstatement);
-		ResultSetMapper<LookupDTO> mapper = new ResultSetMapper<LookupDTO>();
-		List<LookupDTO> out = mapper.mapRersultSetToObject(rs, LookupDTO.class);
-		for(LookupDTO a : out) {
-			System.err.println(a);
-		}
-		ResultSetMapper<ColumnDTO> mapper2 = new ResultSetMapper<ColumnDTO>();
-		LookupObject obj = new LookupObject(out.get(10));
-		ResultSet rs2 = performer.getMetadataForColumns(database2, obj.getLookupTable(), obj.getLookupColumn(), "ID", "FK_Date_ID");
-		List<ColumnDTO> columns = mapper2.mapRersultSetToObject(rs2, ColumnDTO.class);
-		for(ColumnDTO a : columns) {
-			System.out.println(a);
-		}
-	
-		System.out.println(obj);
 		
-		ResultSetMapper<PackageDTO>forPackage = new ResultSetMapper<PackageDTO>();
-		java.util.Scanner input = new java.util.Scanner(System.in);
-		System.out.print("Package number?: ");
-		int number = input.nextInt();
-		input.close();
-		String sql2 = String.format("Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgroup where ID = %s", number);
-		List<PackageDTO>packages = forPackage.mapRersultSetToObject(performer.executeSQLQuery(sql2), PackageDTO.class);
-		for(PackageDTO p : packages) {
-			ColumnManager clm = new ColumnManager(performer);
-			System.out.println(p);
-			List<ColumnDTO> columnsss = clm.getColumnsForTable(database2, p.getDestinationTable(), null);
-			System.out.println(columnsss.toString());
-			AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, destination));
-		}
-		//connection.getConnection(connURL, user, pass2);
-		//performer.executePreparedStatement(destinationTableName);
-		connection.closeConnection();
-
-		
-		Node metadata = AbstractNode.getMetadata(document, destination).getFirstChild();
-		DocumentCreator.SaveDOMFile(document, output);
-		while(metadata.getNodeType() == Node.TEXT_NODE) {
-			metadata = metadata.getNextSibling();
-		}
-		System.err.println(DocumentCreator.getStringFromDocument(metadata));
-		testClass.doSomething(metadata);
-		System.out.println(DocumentCreator.getStringFromDocument(metadata.getParentNode()));
-		
-	}
+}
 }

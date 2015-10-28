@@ -78,6 +78,7 @@ public class SQLQueryPerformer {
 				"c.CONSTRAINT_NAME is null)";
 		query = query.replaceAll("(database)", database);
 		query = String.format(query, tableName);
+		System.out.println(query);
 		if (columnNames != null) {
 			query = query + "and (%s)";
 		String whereColumns = "";

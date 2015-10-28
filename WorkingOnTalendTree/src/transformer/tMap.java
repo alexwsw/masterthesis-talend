@@ -2,6 +2,7 @@ package transformer;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Random;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -356,6 +357,8 @@ public class tMap extends AbstractNode {
 	
 	
 	public static void doLookup (Document document, Document template, LookupObject data) throws WrongNodeException {
+		//test random Number for lookup Name
+		Random r = new Random();
 		//ConnectionPoint mark must be changed connection(Label), inputTables and metadata (tMap)
 		//setting/removing of ConnectionPoint should be outsourced in a separate method
 		//ConnectionPoint as unique_name? could be more useful....
@@ -379,7 +382,7 @@ public class tMap extends AbstractNode {
 		Connection.newConnection(document, template, prefixMData, lookupTMap, EConnectionTypes.Main);
 		String nameInputTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(prefixMData), EConnectionTypes.Main);
 		String nameLookupTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, EConnectionTypes.Lookup);
-		Element lookupMetadata = tMap.setLookupOutput(document, lookupTMap, "Lookup1", tMap.extractMetadata(prefixMData), tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, nameLookupTable);
+		Element lookupMetadata = tMap.setLookupOutput(document, lookupTMap, ("Lookup" + r.nextInt()), tMap.extractMetadata(prefixMData), tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, nameLookupTable);
 		Element newConnection = Connection.newConnection(document, template, lookupMetadata, AbstractNode.getElementByValue(document, "MyOutput"), EConnectionTypes.Main);
 		AbstractNode.setAttribute(newConnection, "UNIQUE_NAME", "ConnectionPoint");
 		/*
@@ -392,10 +395,14 @@ public class tMap extends AbstractNode {
 		
 		
 		//put nodes onto the proper place in the designer (separate method?)
-		prefixTMap.setAttribute("posY", String.valueOf(Integer.parseInt(previousNode.getAttribute("posY")) + 150));
-		lookupTMap.setAttribute("posY", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posY")) + 150));
-		lookupDb.setAttribute("posX", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posX")) + 150));
-		lookupDb.setAttribute("posY", lookupTMap.getAttribute("posY"));
+		prefixTMap.setAttribute("posX", String.valueOf(Integer.parseInt(previousNode.getAttribute("posX")) + 150));
+		System.err.printf("Previous Node: %s%n", AbstractNode.getNodesUniqueName(document, previousNode));
+		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, prefixTMap), prefixTMap.getAttribute("posX"), prefixTMap.getAttribute("posY"));
+		lookupTMap.setAttribute("posX", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posX")) + 150));
+		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, lookupTMap), lookupTMap.getAttribute("posX"), lookupTMap.getAttribute("posY"));
+		lookupDb.setAttribute("posY", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posY")) + 150));
+		lookupDb.setAttribute("posX", lookupTMap.getAttribute("posX"));
+		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, lookupDb), lookupDb.getAttribute("posX"), lookupDb.getAttribute("posY"));
 		NodeBuilder.appendNodeElement(document, prefixTMap);
 		NodeBuilder.appendNodeElement(document, lookupDb);
 		NodeBuilder.appendNodeElement(document, lookupTMap);

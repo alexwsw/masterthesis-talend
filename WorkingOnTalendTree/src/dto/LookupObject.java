@@ -46,7 +46,7 @@ public class LookupObject {
 
 	public LookupObject(LookupDTO lookup) {
 		this.prefix = lookup.getPrefix();
-		this.packageColumns = doPackageColumns(lookup.getPackageColumns());
+		this.packageColumns = splitPackageColumns(lookup.getPackageColumns());
 		this.lookupTable = lookup.getLookupTable();
 		this.lookupColumn = lookup.getLookupColumn();
 		this.packageOutputColumn_MatchColumn = lookup
@@ -165,7 +165,7 @@ public class LookupObject {
 	}
 	
 	//Array'd fit as well
-	public List<String> doPackageColumns(String packageColumns) {
+	public List<String> splitPackageColumns(String packageColumns) {
 		List<String>columns = new ArrayList<String>();
 		String[]split = packageColumns.split(Pattern.quote(","));
 		for(String a : split) {

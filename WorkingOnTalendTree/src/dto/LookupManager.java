@@ -14,19 +14,28 @@ public class LookupManager {
 	
 	private SQLQueryPerformer performer;
 	private List<LookupObject>lookups;
-	private ColumnManager cManager = new ColumnManager(performer);
+	private ColumnManager cManager;
+	private PackageDTO p;
 	
-	public LookupManager(SQLQueryPerformer performer) {
+	public LookupManager(SQLQueryPerformer performer, PackageDTO p) {
 		this.performer = performer;
+		this.cManager = new ColumnManager(performer);
+		this.p = p;
 	}
 	
-	public List<LookupObject>createLookupsFromDatabase(String database, String schema, int packageNumber) throws SQLException{
+	public List<LookupObject>createLookupsFromDatabase(String database, String schema) throws SQLException{
 		this.lookups = new ArrayList<LookupObject>();
-		String query = String.format("Select * from [%s].[%s].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = %s", database, schema, packageNumber);
+		String query = String.format("Select * from [%s].[%s].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = %s", database, schema, p.getId());
+		System.out.println(query);
 		ResultSet rs = performer.executeSQLQuery(query);
 		List<LookupDTO> rawLookup = new ResultSetMapper<LookupDTO>().mapRersultSetToObject(rs, LookupDTO.class);
 		for(LookupDTO lookup : rawLookup) {
+			System.out.println(lookup.toString());
 			LookupObject object = new LookupObject(lookup);
+			List<ColumnDTO>a = cManager.getColumnsForTable(database, lookup.getLookupTable(), lookup.getLookupColumn());
+			List<ColumnDTO>b = cManager.getColumnsForTable(database, lookup.getLookupTable(), uniteStrings(lookup.getTableOutputColumn()));
+			object.setLookupTableColumns(combineLists(a,b));
+			object.setPackageReturnColumns(cManager.getColumnsForTable(database, p.getDestinationTable(), uniteStrings(lookup.getLookupOutputColumns())));
 			lookups.add(object);
 		}
 		return lookups;
@@ -40,6 +49,18 @@ public class LookupManager {
 		}
 		String[]splitted = (String[])columnNames.toArray();
 		return splitted;
+	}
+	
+	public String[] uniteStrings (String a) {
+		String[] strings = a.split(",");
+		return strings;
+	}
+	
+	public List<ColumnDTO> combineLists(List <ColumnDTO> a, List <ColumnDTO> b) {
+		for (ColumnDTO c : a) {
+			b.add(c);
+		}
+		return b;
 	}
 
 }
