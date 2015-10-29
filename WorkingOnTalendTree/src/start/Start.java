@@ -1,15 +1,7 @@
 package start;
 
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.regex.Pattern;
-
 import javax.xml.bind.JAXBException;
 
 import jdbc.DBConnectionBuilder;
@@ -21,22 +13,17 @@ import org.w3c.dom.Node;
 
 import transformer.tMap;
 import abstractNode.AbstractNode;
-import database.tMSSqlConnection;
 import dto.ColumnDTO;
 import dto.ColumnManager;
-import dto.LookupDTO;
 import dto.LookupManager;
 import dto.LookupObject;
 import dto.PackageDTO;
-import enums.EConnectionTypes;
-import exception.DummyNotFoundException;
-import exception.WrongNodeException;
 
 
 public class Start {
 	
 	//
-	public static void main(String[] args) throws WrongNodeException, DummyNotFoundException, JAXBException, Throwable {
+	public static void main(String[] args) throws JAXBException, Throwable {
 
 		String template = ".//Template//TalendXML.item";
 		String output = ".//Output//TalendJob.item";
@@ -83,6 +70,7 @@ public class Start {
 		tMap.doLookup(document, fixedTemplate, lookups);
 		
 		DocumentCreator.SaveDOMFile(document, output);
+		connection.closeConnection();
 		
 		
 		
@@ -109,7 +97,7 @@ public class Start {
 
 		//connection.getConnection(connURL, user, pass2);
 		//performer.executePreparedStatement(destinationTableName);
-		connection.closeConnection();
+
 		
 		/*
 		Node metadata = AbstractNode.getMetadata(document, destination).getFirstChild();
