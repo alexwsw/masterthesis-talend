@@ -2,6 +2,7 @@ package start;
 
 
 import java.util.List;
+
 import javax.xml.bind.JAXBException;
 
 import jdbc.DBConnectionBuilder;
@@ -13,6 +14,7 @@ import org.w3c.dom.Node;
 
 import transformer.tMap;
 import abstractNode.AbstractNode;
+import database.tMSSqlConnection;
 import dto.ColumnDTO;
 import dto.ColumnManager;
 import dto.LookupManager;
@@ -58,6 +60,12 @@ public class Start {
 		ColumnManager clm = new ColumnManager(performer);
 		List<ColumnDTO> columnsss = clm.getColumnsForTable(database2, p.getDestinationTable(), null);
 		System.out.println(columnsss.toString());
+		//Connection
+		tMSSqlConnection.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
+				
+		//Commit
+		Node commit = AbstractNode.getElementByValue(document, "MyCommit");
+		AbstractNode.setAttribute(commit, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
 		//Output
 		Node destination = AbstractNode.getElementByValue(document, "MyOutput");
 		AbstractNode.setAttribute(destination, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
@@ -173,14 +181,6 @@ public class Start {
 		//let's keep it simple (the star must be replaced by column names in the final version)
 		String sourceTableSQL = "select * from %s";
 		
-		//Connection
-		tMSSqlConnection.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
-		
-		//Commit
-		Node commit = AbstractNode.getElementByValue(document, "MyCommit");
-		AbstractNode.setAttribute(commit, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
-		
-
 		
 		//Input
 		Node source = AbstractNode.getElementByValue(document, "MyInput");

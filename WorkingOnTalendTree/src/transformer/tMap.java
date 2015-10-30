@@ -395,13 +395,13 @@ public class tMap extends AbstractNode {
 		
 		
 		//put nodes onto the proper place in the designer (separate method?)
-		prefixTMap.setAttribute("posX", String.valueOf(Integer.parseInt(previousNode.getAttribute("posX")) + 150));
+		prefixTMap.setAttribute("posY", String.valueOf(Integer.parseInt(previousNode.getAttribute("posY")) + 150));
 		System.err.printf("Previous Node: %s%n", AbstractNode.getNodesUniqueName(document, previousNode));
 		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, prefixTMap), prefixTMap.getAttribute("posX"), prefixTMap.getAttribute("posY"));
-		lookupTMap.setAttribute("posX", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posX")) + 150));
+		lookupTMap.setAttribute("posY", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posY")) + 150));
 		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, lookupTMap), lookupTMap.getAttribute("posX"), lookupTMap.getAttribute("posY"));
-		lookupDb.setAttribute("posY", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posY")) + 150));
-		lookupDb.setAttribute("posX", lookupTMap.getAttribute("posX"));
+		lookupDb.setAttribute("posX", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posX")) + 150));
+		lookupDb.setAttribute("posY", lookupTMap.getAttribute("posY"));
 		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, lookupDb), lookupDb.getAttribute("posX"), lookupDb.getAttribute("posY"));
 		NodeBuilder.appendNodeElement(document, prefixTMap);
 		NodeBuilder.appendNodeElement(document, lookupDb);
