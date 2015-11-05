@@ -8,6 +8,7 @@ import javax.xml.bind.JAXBException;
 import jdbc.DBConnectionBuilder;
 import jdbc.ResultSetMapper;
 import jdbc.SQLQueryPerformer;
+import secretService.PasswordDecryptor;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -46,6 +47,8 @@ public class Start {
 		String schema2= "isETL";
 		String database2= "isModeler_0.9.1";
 		String pass2 = "10Runsql";
+
+		
 		String connURL = String.format("jdbc:sqlserver://%s;databaseName=%s;schema=%s", host, database2, schema2);
 		DBConnectionBuilder connection = new DBConnectionBuilder();
 		SQLQueryPerformer performer = new SQLQueryPerformer(connection.createConnection(connURL, user, pass2));
