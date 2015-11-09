@@ -138,6 +138,7 @@ public class ColumnDTO {
 			break;
 		case "NVARCHAR":
 			this.type = "id_String";
+			break;
 		}
 	}
 	
