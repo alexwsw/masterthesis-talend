@@ -32,8 +32,8 @@ public class LookupManager {
 		for(LookupDTO lookup : rawLookup) {
 			System.out.println(lookup.toString());
 			LookupObject object = new LookupObject(lookup);
-			List<ColumnDTO>a = cManager.getColumnsForTable(database, lookup.getLookupTable(), lookup.getLookupColumn());
-			List<ColumnDTO>b = cManager.getColumnsForTable(database, lookup.getLookupTable(), uniteStrings(lookup.getTableOutputColumn()));
+			List<ColumnObject>a = cManager.getColumnsForTable(database, lookup.getLookupTable(), lookup.getLookupColumn());
+			List<ColumnObject>b = cManager.getColumnsForTable(database, lookup.getLookupTable(), uniteStrings(lookup.getTableOutputColumn()));
 			object.setLookupTableColumns(combineLists(a,b));
 			object.setPackageReturnColumns(cManager.getColumnsForTable(database, p.getDestinationTable(), uniteStrings(lookup.getLookupOutputColumns())));
 			lookups.add(object);
@@ -56,8 +56,8 @@ public class LookupManager {
 		return strings;
 	}
 	
-	public List<ColumnDTO> combineLists(List <ColumnDTO> a, List <ColumnDTO> b) {
-		for (ColumnDTO c : a) {
+	public List<ColumnObject> combineLists(List <ColumnObject> a, List <ColumnObject> b) {
+		for (ColumnObject c : a) {
 			b.add(c);
 		}
 		return b;

@@ -1,6 +1,7 @@
 package start;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
@@ -18,6 +19,7 @@ import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
 import dto.ColumnDTO;
 import dto.ColumnManager;
+import dto.ColumnObject;
 import dto.LookupManager;
 import dto.LookupObject;
 import dto.PackageDTO;
@@ -61,7 +63,7 @@ public class Start {
 		String sql2 = String.format("Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgroup where ID = %s", number);
 		PackageDTO p = forPackage.mapRersultSetToSingleObject(performer.executeSQLQuery(sql2), PackageDTO.class);
 		ColumnManager clm = new ColumnManager(performer);
-		List<ColumnDTO> columnsss = clm.getColumnsForTable(database2, p.getDestinationTable(), null);
+		List<ColumnObject> columnsss = clm.getColumnsForTable(database2, p.getDestinationTable(), null);
 		System.out.println(columnsss.toString());
 		//Connection
 		tMSSqlConnection.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
@@ -78,6 +80,7 @@ public class Start {
 		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, destination));		
 		LookupManager lMan = new LookupManager(performer, p);
 		List<LookupObject>lookups = lMan.createLookupsFromDatabase(database2, schema2);
+		System.out.println(lookups.toString());
 		tMap.doLookup(document, fixedTemplate, lookups);
 		
 		DocumentCreator.SaveDOMFile(document, output);

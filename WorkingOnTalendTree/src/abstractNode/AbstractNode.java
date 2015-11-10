@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -13,6 +17,7 @@ import org.w3c.dom.NodeList;
 
 import connection.Connection;
 import dto.ColumnDTO;
+import dto.ColumnObject;
 import dto.LookupObject;
 import enums.EConnectionTypes;
 import enums.XPathExpressions;
@@ -151,7 +156,7 @@ public abstract class AbstractNode {
 	}
 	
 	//TODO replace the static dummy by a dynamic one
-	public static void setMetadataColumnsTest(Document document, Node metadata, Collection<ColumnDTO>columns)  throws DummyNotFoundException{
+	public static void setMetadataColumnsTest(Document document, Node metadata, Collection<ColumnObject>columns)  throws DummyNotFoundException{
 		//NodeList columns = AbstractNode.getMetadataColumns(metadata);
 		Node dummy = AbstractNode.getDummy(metadata);
 		Node start = dummy.cloneNode(true);
@@ -170,14 +175,14 @@ public abstract class AbstractNode {
 			NodeBuilder.removeNode(document, metadata.getFirstChild());
 		}
 		*/
-		for (ColumnDTO column : columns) {
+		for (ColumnObject column : columns) {
 			//clone the dummy
 			Element e = (Element) start.cloneNode(true);
 				//get the values to the attributes
 				e.setAttribute("key", String.valueOf(column.getKey()));
 				e.setAttribute("length", column.getLength());
 				e.setAttribute("name", column.getName());
-				e.setAttribute("nullable", column.isNullable());
+				e.setAttribute("nullable", column.getNullable());
 				e.setAttribute("precision", column.getPrecision());
 				e.setAttribute("type", column.getType());
 				e.setAttribute("usefulColumn", column.getUsefulColumn());
@@ -336,8 +341,8 @@ public abstract class AbstractNode {
 	}
 	
 	//iterate over a Node's metadata and save it within a DT-Object
-	public static Collection <ColumnDTO> extractMetadata (Node metaData) {
-		Collection<ColumnDTO> mDataColumns = new ArrayList<ColumnDTO>();
+	public static Collection <ColumnObject> extractMetadata (Node metaData){
+		Collection<ColumnObject> mDataColumns = new ArrayList<ColumnObject>();
 		Node firstChild = metaData.getFirstChild();
 		while (firstChild != null) {
 			if(firstChild.getNodeType() == Node.TEXT_NODE) {
@@ -352,7 +357,8 @@ public abstract class AbstractNode {
 			String precision = mDataColumn.getAttribute("precision");
 			String type = mDataColumn.getAttribute("type");
 			String usefulColumn = mDataColumn.getAttribute("usefulColumn");
-			ColumnDTO column = new ColumnDTO(isKey, length, name, nullable, precision, null, type, usefulColumn);
+			ColumnObject column = new ColumnObject(isKey, length, nullable, precision, name, type,  null,  usefulColumn);
+			System.err.println("ColumnELEMENT: " + column.toString());
 			mDataColumns.add(column);
 			firstChild = firstChild.getNextSibling();
 		}
@@ -360,17 +366,17 @@ public abstract class AbstractNode {
 	}
 	
 	//create columns for a metadata Node from a DT-Object
-	public static void setWholeMetadataFromDTO (Document document, Collection<ColumnDTO> columns, Node metadata) {
-		for (ColumnDTO column : columns) {
+	public static void setWholeMetadataFromDTO (Document document, Collection<ColumnObject> columns, Node metadata) {
+		for (ColumnObject column : columns) {
 			AbstractNode.setMetadataColumnFromDTO(document, column, metadata);
 		}
 	}
-	public static Element setMetadataColumnFromDTO(Document document, ColumnDTO column, Node metadata) {
+	public static Element setMetadataColumnFromDTO(Document document, ColumnObject column, Node metadata) {
 		Element dummy = AbstractNode.createMetadataColumnDummy(document);
 		dummy.setAttribute("key", String.valueOf(column.getKey()));
 		dummy.setAttribute("length", column.getLength());
 		dummy.setAttribute("name", column.getName());
-		dummy.setAttribute("nullable", column.isNullable());
+		dummy.setAttribute("nullable", column.getNullable());
 		dummy.setAttribute("precision", column.getPrecision());
 		dummy.setAttribute("type", column.getType());
 		dummy.setAttribute("usefulColumn", column.getUsefulColumn());

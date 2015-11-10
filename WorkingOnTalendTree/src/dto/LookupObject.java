@@ -14,7 +14,7 @@ public class LookupObject {
 	// columns, relevant for the actual Lookup
 	private List<String> packageColumns;
 	// columns we get back from the Lookup table
-	private List<ColumnDTO> lookupTableColumns;
+	private List<ColumnObject> lookupTableColumns;
 	// the table for the Lookup
 	private String lookupTable;
 	// Lookup column in the lookup table
@@ -25,13 +25,13 @@ public class LookupObject {
 	private Map<String, String> packageOutputColumns_ReturnColumns;
 	// add an attribute for mapping stuff
 	// defines the names and format for the Lookup output columns
-	private List<ColumnDTO> packageReturnColumns;
+	private List<ColumnObject> packageReturnColumns;
 
 	public LookupObject() {
 	}
 
 	public LookupObject(String prefix, List<String> packageColumns,
-			List<ColumnDTO> lookupTableColumns, String lookupTable,
+			List<ColumnObject> lookupTableColumns, String lookupTable,
 			String lookupColumn, String packageOutputColumn_MatchColumn,
 			Map<String, String> packageOutputColumns_ReturnColumns) {
 		super();
@@ -44,6 +44,7 @@ public class LookupObject {
 		this.packageOutputColumns_ReturnColumns = packageOutputColumns_ReturnColumns;
 	}
 
+	//add PackageDTO/PackageObject for assigning necessary values like TargetValue???
 	public LookupObject(LookupDTO lookup) {
 		this.prefix = lookup.getPrefix();
 		this.packageColumns = splitPackageColumns(lookup.getPackageColumns());
@@ -72,12 +73,12 @@ public class LookupObject {
 		this.packageColumns = packageColumns;
 	}
 
-	public List<ColumnDTO> getLookupTableColumns() {
+	public List<ColumnObject> getLookupTableColumns() {
 		return lookupTableColumns;
 	}
 
 	public void setLookupTableColumns(
-			List<ColumnDTO> lookupTable_Retuncolumns) {
+			List<ColumnObject> lookupTable_Retuncolumns) {
 		this.lookupTableColumns = lookupTable_Retuncolumns;
 	}
 
@@ -126,11 +127,11 @@ public class LookupObject {
 		return columnsMapping;
 	}
 
-	public List<ColumnDTO> getPackageReturnColumns() {
+	public List<ColumnObject> getPackageReturnColumns() {
 		return packageReturnColumns;
 	}
 
-	public void setPackageReturnColumns(List<ColumnDTO> packageReturnColumns) {
+	public void setPackageReturnColumns(List<ColumnObject> packageReturnColumns) {
 		this.packageReturnColumns = packageReturnColumns;
 	}
 

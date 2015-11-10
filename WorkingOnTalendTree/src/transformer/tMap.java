@@ -12,7 +12,8 @@ import org.w3c.dom.NodeList;
 
 import connection.Connection;
 import database.tMSSqlInput;
-import dto.ColumnDTO;
+import dto.ColumnObject;
+import dto.ColumnObject;
 import dto.LookupObject;
 import enums.EConnectionTypes;
 import enums.XPathExpressions;
@@ -150,13 +151,13 @@ public class tMap extends AbstractNode {
 	}
 	
 	//in progress
-	public static String setInputTables(Document document, Node node, Collection<ColumnDTO> columns, EConnectionTypes type) throws WrongNodeException {
+	public static String setInputTables(Document document, Node node, Collection<ColumnObject> columns, EConnectionTypes type) throws WrongNodeException {
 		if (!(AbstractNode.verifyNodeType(node).equals(componentName))) {
 			throw new WrongNodeException(componentName, AbstractNode.verifyNodeType(node));
 		}
 		Element incomingConnection = (Element) Connection.findConnection(document, node, type);
 		Element inputTables = tMap.createInputTables(document, node, incomingConnection.getAttribute("label"));
-		for(ColumnDTO column : columns) {
+		for(ColumnObject column : columns) {
 			Element dummy = tMap.createNodeDataColumnDummy(document);
 			dummy.setAttribute("name", column.getName());
 			dummy.setAttribute("type", column.getType());
@@ -165,13 +166,13 @@ public class tMap extends AbstractNode {
 		return inputTables.getAttribute("name");
 	}
 	
-	public static String setInputTables(Document document, Node node, Collection<ColumnDTO> columns, LookupObject data, String mainInputTables, EConnectionTypes type) throws WrongNodeException {
+	public static String setInputTables(Document document, Node node, Collection<ColumnObject> columns, LookupObject data, String mainInputTables, EConnectionTypes type) throws WrongNodeException {
 		if (!(AbstractNode.verifyNodeType(node).equals(componentName))) {
 			throw new WrongNodeException(componentName, AbstractNode.verifyNodeType(node));
 		}
 		Element incomingConnection = (Element) Connection.findConnection(document, node, type);
 		Element inputTables = tMap.createInputTables(document, node, incomingConnection.getAttribute("label"));
-		for(ColumnDTO column : columns) {
+		for(ColumnObject column : columns) {
 			Element dummy = tMap.createNodeDataColumnDummy(document);
 			if (column.getName().equals(data.getLookupColumn())) {
 				tMap.addAttribute(document, dummy);
@@ -268,8 +269,8 @@ public class tMap extends AbstractNode {
 	}
 	
 	//perhaps not necessary
-	public static void setTablesFromDTO (Document document, Node tables, Collection<ColumnDTO> columns) {
-		for (ColumnDTO column : columns) {
+	public static void setTablesFromDTO (Document document, Node tables, Collection<ColumnObject> columns) {
+		for (ColumnObject column : columns) {
 			Element dummy = tMap.createNodeDataColumnDummy(document);
 			dummy.setAttribute("name", column.getName());
 			dummy.setAttribute("type", column.getType());
@@ -277,10 +278,10 @@ public class tMap extends AbstractNode {
 		}
 	}
 	
-	public static Element setLookupOutput(Document document, Node node, String name, Collection <ColumnDTO> inputColumns, Collection<ColumnDTO> lookupColumns, LookupObject data, String mainTable, String secondaryTable) throws WrongNodeException {
+	public static Element setLookupOutput(Document document, Node node, String name, Collection <ColumnObject> inputColumns, Collection<ColumnObject> lookupColumns, LookupObject data, String mainTable, String secondaryTable) throws WrongNodeException {
 		Element outputTables = tMap.createOutputTables(document, node, name);
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
-		for(ColumnDTO column : inputColumns) {
+		for(ColumnObject column : inputColumns) {
 			Element dummy = tMap.createNodeDataColumnDummy(document);
 			tMap.addAttribute(document, dummy);
 			dummy.setAttribute("expression", String.format("%s.%s", mainTable, column.getName()));
@@ -288,7 +289,7 @@ public class tMap extends AbstractNode {
 			dummy.setAttribute("type", column.getType());
 			NodeBuilder.appendElementToContext(outputTables, dummy);
 		}
-		for(ColumnDTO column : lookupColumns) {
+		for(ColumnObject column : lookupColumns) {
 			Element dummy = tMap.createNodeDataColumnDummy(document);
 			for(Map.Entry<String, String> entry : data.getPackageOutputColumns_ReturnColumns().entrySet()) {
 				if (column.getName().equals(entry.getKey())) {
@@ -306,11 +307,11 @@ public class tMap extends AbstractNode {
 		return metaData;
 	}
 	
-	public static Element setOutput(Document document, Node node, String name, Collection <ColumnDTO> inputColumns, LookupObject data, String mainTable, String secondaryTable) throws WrongNodeException {
+	public static Element setOutput(Document document, Node node, String name, Collection <ColumnObject> inputColumns, LookupObject data, String mainTable, String secondaryTable) throws WrongNodeException {
 		Element outputTables = tMap.createOutputTables(document, node, name);
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
 		if(data != null) {
-		String matchColumn = String.format("String.valueOf(\"%s\"", data.getPrefix());
+		String matchColumn = String.format("String.valueOf(%s ", data.getPrefix());
 		//if there's a trim statement
 		for(String column : data.getPackageColumns()) {
 			if (column.contains("@Trim")) {
@@ -327,14 +328,15 @@ public class tMap extends AbstractNode {
 		tMap.addAttribute(document, nodeDummy);
 		nodeDummy.setAttribute("name", data.getPackageOutputColumn_MatchColumn());
 		//probably get it from the Lookup table
-		ColumnDTO lookupColumn = tMap.getColumnFromDTO(data.getLookupTableColumns(), data.getLookupColumn());
+		ColumnObject lookupColumn = tMap.getColumnFromDTO(data.getLookupTableColumns(), data.getLookupColumn());
 		lookupColumn.setName(data.getPackageOutputColumn_MatchColumn());
 		nodeDummy.setAttribute("type", lookupColumn.getType());
 		nodeDummy.setAttribute("expression", matchColumn);
 		NodeBuilder.appendElementToContext(outputTables, nodeDummy);
 		AbstractNode.setMetadataColumnFromDTO(document, lookupColumn, metaData);
 		}
-		for(ColumnDTO column : inputColumns) {
+		for(ColumnObject column : inputColumns) {
+			System.err.println(column.toString());
 			Element dummy = tMap.createNodeDataColumnDummy(document);
 			tMap.addAttribute(document, dummy);
 			dummy.setAttribute("expression", String.format("%s.%s", mainTable, column.getName()));
@@ -346,8 +348,8 @@ public class tMap extends AbstractNode {
 		return metaData;
 	}
 	
-	public static ColumnDTO getColumnFromDTO(Collection<ColumnDTO> columns, String name) {
-		for(ColumnDTO column : columns) {
+	public static ColumnObject getColumnFromDTO(Collection<ColumnObject> columns, String name) {
+		for(ColumnObject column : columns) {
 			if(name.equals(column.getName())) {
 				return column;
 			}
@@ -382,7 +384,7 @@ public class tMap extends AbstractNode {
 		Connection.newConnection(document, template, prefixMData, lookupTMap, EConnectionTypes.Main);
 		String nameInputTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(prefixMData), EConnectionTypes.Main);
 		String nameLookupTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, EConnectionTypes.Lookup);
-		Element lookupMetadata = tMap.setLookupOutput(document, lookupTMap, ("Lookup" + r.nextInt()), tMap.extractMetadata(prefixMData), tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, nameLookupTable);
+		Element lookupMetadata = tMap.setLookupOutput(document, lookupTMap, ("Lookup" + r.nextInt(100000)), tMap.extractMetadata(prefixMData), tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, nameLookupTable);
 		Element newConnection = Connection.newConnection(document, template, lookupMetadata, AbstractNode.getElementByValue(document, "MyOutput"), EConnectionTypes.Main);
 		AbstractNode.setAttribute(newConnection, "UNIQUE_NAME", "ConnectionPoint");
 		/*
@@ -428,7 +430,7 @@ public class tMap extends AbstractNode {
 	}
 	
 
-	public static void setPrefixMakerNode(Node prefixTMap, LookupObject data, Collection<ColumnDTO>packageColumns) {
+	public static void setPrefixMakerNode(Node prefixTMap, LookupObject data, Collection<ColumnObject>packageColumns) {
 		
 	}
 	
