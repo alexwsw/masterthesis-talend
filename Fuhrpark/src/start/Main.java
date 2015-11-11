@@ -1,6 +1,7 @@
 package start;
 
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -66,6 +67,16 @@ public class Main {
 		String n = "100,000.00";
 		String regex = "([1-9])([0-9]{0,2})(([\\,])([0-9]{3}))*(([\\.])([0-9])+)?";
 		System.out.println(n.matches(regex));
+		try {
+			Constructor i = Class.forName("blabla").getConstructor(String.class);
+			Object o = i.newInstance("blabla");
+			Method method = Class.forName("blabla").getMethod("convert", String.class);
+			method.invoke(o, "blabla");
+		} catch (NoSuchMethodException | SecurityException
+				| ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
