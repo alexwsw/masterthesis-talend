@@ -240,7 +240,7 @@
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblWerbetraeger&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblEinkaufsgruppe&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CHECK" name="IDENTITY_INSERT" value="false"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
@@ -276,21 +276,15 @@
     <column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="255" name="Name" nullable="true" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Kampagne_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Kampagne_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Mandant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Sammelwerbetraeger_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Sammelwerbetraeger_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Unternehmensbereich_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Unternehmensbereich_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Einkaufsgruppenkategorie_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Einkaufsgruppenkategorie_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="isETL_Sourceobject_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="isETL_Targetfieldvalue" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="isETL_isManual" nullable="false" precision="5" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_DMR" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_DCR" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="isETL_DMR" nullable="false" precision="0" type="id_Date" usefulColumn="true"/>
+<column key="false" length="10" name="isETL_DCR" nullable="false" precision="0" type="id_Date" usefulColumn="true"/>
 <column key="false" length="10" name="isETL_ErrorCount" nullable="false" precision="5" type="id_String" usefulColumn="true"/>
 </metadata>
     <metadata connector="REJECT" name="REJECT">
@@ -429,14 +423,14 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup33302" lineStyle="0" metaname="Lookup33302" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_4">
+<connection connectorName="FLOW" label="Lookup68609" lineStyle="0" metaname="Lookup68609" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_4">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup33302"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup68609"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="438">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_2"/>
@@ -458,12 +452,12 @@
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(&quot;0-&quot;  + MyOutput.WAART.trim())" name="FK_Werbetraegergruppe_BK" type="id_String"/>
+<mapperTableEntries expression="String.valueOf(&quot;0-&quot;  + MyOutput.CBVAL.trim())" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
 <mapperTableEntries expression="MyOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
@@ -479,12 +473,12 @@
     <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblWerbetraegergruppe&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblEinkaufsgruppehaupteinkaufsgruppe&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblWerbetraegergruppe&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblEinkaufsgruppehaupteinkaufsgruppe&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -520,22 +514,22 @@
     
     <nodeData xsi:type="MapperData">
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Werbetraegergruppe_BK" type="id_String"/>
+<mapperTableEntries name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tMSSqlInput_3" sizeState="INTERMEDIATE">
 <mapperTableEntries name="ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Werbetraegergruppe_BK" name="BK" type="id_String"/>
+<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppehaupteinkaufsgruppe_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup33302" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="meinOutput.FK_Werbetraegergruppe_BK" name="FK_Werbetraegergruppe_BK" type="id_String"/>
+<outputTables name="Lookup68609" sizeState="INTERMEDIATE">
+<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppehaupteinkaufsgruppe_BK" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
-<mapperTableEntries expression="tMSSqlInput_3.ID" name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
+<mapperTableEntries expression="tMSSqlInput_3.ID" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup33302">
-<column key="true" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+  <metadata connector="FLOW" name="Lookup68609">
+<column key="true" length="10" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
@@ -557,14 +551,14 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row7"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup13851" lineStyle="0" metaname="Lookup13851" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tMap_6">
+<connection connectorName="FLOW" label="Lookup46887" lineStyle="0" metaname="Lookup46887" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tMSSqlOutput_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup13851"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="ConnectionPoint"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="738">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_4"/>
@@ -582,22 +576,22 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup33302" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_BK" type="id_String"/>
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup68609" sizeState="INTERMEDIATE">
+<mapperTableEntries name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(&quot;0-&quot;  + Lookup33302.WAMNR.trim())" name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup33302.FK_Werbetraegergruppe_ID" name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup33302.FK_Werbetraegergruppe_BK" name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup33302.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries expression="String.valueOf(&quot;0-&quot;  + Lookup68609.CBINT.trim())" name="FK_Einkaufsgruppenkategorie_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup68609.FK_Einkaufsgruppehaupteinkaufsgruppe_ID" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup68609.FK_Einkaufsgruppehaupteinkaufsgruppe_BK" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup68609.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
-<column key="false" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Einkaufsgruppenkategorie_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="true" length="10" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
@@ -613,12 +607,12 @@
     <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblMandant&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblEinkaufsgruppenkategorie&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblMandant&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblEinkaufsgruppenkategorie&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -654,520 +648,28 @@
     
     <nodeData xsi:type="MapperData">
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_BK" type="id_String"/>
+<mapperTableEntries name="FK_Einkaufsgruppenkategorie_BK" type="id_String"/>
+<mapperTableEntries name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tMSSqlInput_4" sizeState="INTERMEDIATE">
 <mapperTableEntries name="ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Mandant_BK" name="BK" type="id_String"/>
+<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppenkategorie_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup13851" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="meinOutput.FK_Mandant_BK" name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Werbetraegergruppe_ID" name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Werbetraegergruppe_BK" name="FK_Werbetraegergruppe_BK" type="id_String"/>
+<outputTables name="Lookup46887" sizeState="INTERMEDIATE">
+<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppenkategorie_BK" name="FK_Einkaufsgruppenkategorie_BK" type="id_String"/>
+<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppehaupteinkaufsgruppe_ID" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" type="id_Integer"/>
+<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppehaupteinkaufsgruppe_BK" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
-<mapperTableEntries expression="tMSSqlInput_4.ID" name="FK_Mandant_ID" type="id_Integer"/>
+<mapperTableEntries expression="tMSSqlInput_4.ID" name="FK_Einkaufsgruppenkategorie_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup13851">
-<column key="true" length="10" name="FK_Mandant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-</metadata>
-</node>
-<connection connectorName="FLOW" label="tMSSqlInput_5" lineStyle="8" metaname="tMSSqlInput_5" offsetLabelX="0" offsetLabelY="0" source="tMSSqlInput_5" target="tMap_7">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row9"/>
-  </connection>
-<connection connectorName="FLOW" label="meinOutput" lineStyle="0" metaname="meinOutput" offsetLabelX="0" offsetLabelY="0" source="tMap_6" target="tMap_7">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row10"/>
-  </connection>
-<connection connectorName="FLOW" label="Lookup98936" lineStyle="0" metaname="Lookup98936" offsetLabelX="0" offsetLabelY="0" source="tMap_7" target="tMap_8">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup98936"/>
-  </connection>
-<node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="1038">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_6"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_K_xKoNMBEeSAxusthb54Bg-tMap_1-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
-    <elementParameter field="TEXT" name="LABEL" value="PrefixMaker"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    
-    <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup13851" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
-</inputTables>
-<outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(&quot;0-&quot;  + Lookup13851.WABIDC.trim())" name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup13851.FK_Mandant_ID" name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup13851.FK_Mandant_BK" name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup13851.FK_Werbetraegergruppe_ID" name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup13851.FK_Werbetraegergruppe_BK" name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup13851.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
-</outputTables>
-</nodeData>
-  <metadata connector="FLOW" name="meinOutput">
-<column key="false" length="255" name="FK_Unternehmensbereich_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Mandant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-</metadata>
-</node>
-<node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="630" posY="1188">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_5"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
-    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblUnternehmensbereich&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblUnternehmensbereich&quot;"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
-    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
-    <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRIM" value="false"/>
-    </elementParameter>
-    <elementParameter field="TEXT" name="LABEL" value="LookupDB"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    
-  <metadata connector="FLOW" name="tMSSqlInput_5">
-<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-</metadata>
-</node>
-<node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="1188">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_7"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_K_xKoNMBEeSAxusthb54Bg-tMap_1-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
-    <elementParameter field="TEXT" name="LABEL" value="LookupNode"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    
-    <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
-</inputTables>
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tMSSqlInput_5" sizeState="INTERMEDIATE">
-<mapperTableEntries name="ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Unternehmensbereich_BK" name="BK" type="id_String"/>
-</inputTables>
-<outputTables name="Lookup98936" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="meinOutput.FK_Unternehmensbereich_BK" name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Mandant_ID" name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Mandant_BK" name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Werbetraegergruppe_ID" name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Werbetraegergruppe_BK" name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
-<mapperTableEntries expression="tMSSqlInput_5.ID" name="FK_Unternehmensbereich_ID" type="id_Integer"/>
-</outputTables>
-</nodeData>
-  <metadata connector="FLOW" name="Lookup98936">
-<column key="true" length="10" name="FK_Unternehmensbereich_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Unternehmensbereich_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Mandant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-</metadata>
-</node>
-<connection connectorName="FLOW" label="tMSSqlInput_6" lineStyle="8" metaname="tMSSqlInput_6" offsetLabelX="0" offsetLabelY="0" source="tMSSqlInput_6" target="tMap_9">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row12"/>
-  </connection>
-<connection connectorName="FLOW" label="meinOutput" lineStyle="0" metaname="meinOutput" offsetLabelX="0" offsetLabelY="0" source="tMap_8" target="tMap_9">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row13"/>
-  </connection>
-<connection connectorName="FLOW" label="Lookup94966" lineStyle="0" metaname="Lookup94966" offsetLabelX="0" offsetLabelY="0" source="tMap_9" target="tMap_10">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup94966"/>
-  </connection>
-<node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="1338">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_8"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_K_xKoNMBEeSAxusthb54Bg-tMap_1-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
-    <elementParameter field="TEXT" name="LABEL" value="PrefixMaker"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    
-    <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup98936" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Unternehmensbereich_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
-</inputTables>
-<outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(&quot;0-&quot;  + Lookup98936.WAKAMP.trim())" name="FK_Kampagne_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup98936.FK_Unternehmensbereich_ID" name="FK_Unternehmensbereich_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup98936.FK_Unternehmensbereich_BK" name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup98936.FK_Mandant_ID" name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup98936.FK_Mandant_BK" name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup98936.FK_Werbetraegergruppe_ID" name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup98936.FK_Werbetraegergruppe_BK" name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup98936.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
-</outputTables>
-</nodeData>
-  <metadata connector="FLOW" name="meinOutput">
-<column key="false" length="255" name="FK_Kampagne_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Unternehmensbereich_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Unternehmensbereich_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Mandant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-</metadata>
-</node>
-<node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="630" posY="1488">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_6"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
-    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblKampagne&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblKampagne&quot;"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
-    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
-    <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRIM" value="false"/>
-    </elementParameter>
-    <elementParameter field="TEXT" name="LABEL" value="LookupDB"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    
-  <metadata connector="FLOW" name="tMSSqlInput_6">
-<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-</metadata>
-</node>
-<node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="1488">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_9"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_K_xKoNMBEeSAxusthb54Bg-tMap_1-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
-    <elementParameter field="TEXT" name="LABEL" value="LookupNode"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    
-    <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Kampagne_BK" type="id_String"/>
-<mapperTableEntries name="FK_Unternehmensbereich_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
-</inputTables>
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tMSSqlInput_6" sizeState="INTERMEDIATE">
-<mapperTableEntries name="ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Kampagne_BK" name="BK" type="id_String"/>
-</inputTables>
-<outputTables name="Lookup94966" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="meinOutput.FK_Kampagne_BK" name="FK_Kampagne_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Unternehmensbereich_ID" name="FK_Unternehmensbereich_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Unternehmensbereich_BK" name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Mandant_ID" name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Mandant_BK" name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Werbetraegergruppe_ID" name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Werbetraegergruppe_BK" name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
-<mapperTableEntries expression="tMSSqlInput_6.ID" name="FK_Kampagne_ID" type="id_Integer"/>
-</outputTables>
-</nodeData>
-  <metadata connector="FLOW" name="Lookup94966">
-<column key="true" length="10" name="FK_Kampagne_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Kampagne_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Unternehmensbereich_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Unternehmensbereich_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Mandant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-</metadata>
-</node>
-<connection connectorName="FLOW" label="tMSSqlInput_7" lineStyle="8" metaname="tMSSqlInput_7" offsetLabelX="0" offsetLabelY="0" source="tMSSqlInput_7" target="tMap_11">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row15"/>
-  </connection>
-<connection connectorName="FLOW" label="meinOutput" lineStyle="0" metaname="meinOutput" offsetLabelX="0" offsetLabelY="0" source="tMap_10" target="tMap_11">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row16"/>
-  </connection>
-<connection connectorName="FLOW" label="Lookup77406" lineStyle="0" metaname="Lookup77406" offsetLabelX="0" offsetLabelY="0" source="tMap_11" target="tMSSqlOutput_1">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="ConnectionPoint"/>
-  </connection>
-<node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="1638">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_10"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_K_xKoNMBEeSAxusthb54Bg-tMap_1-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
-    <elementParameter field="TEXT" name="LABEL" value="PrefixMaker"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    
-    <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup94966" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Kampagne_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Kampagne_BK" type="id_String"/>
-<mapperTableEntries name="FK_Unternehmensbereich_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
-</inputTables>
-<outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(&quot;0-&quot;  + Lookup94966.WAWA5C.trim())" name="FK_Sammelwerbetraeger_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup94966.FK_Kampagne_ID" name="FK_Kampagne_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup94966.FK_Kampagne_BK" name="FK_Kampagne_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup94966.FK_Unternehmensbereich_ID" name="FK_Unternehmensbereich_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup94966.FK_Unternehmensbereich_BK" name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup94966.FK_Mandant_ID" name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup94966.FK_Mandant_BK" name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup94966.FK_Werbetraegergruppe_ID" name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup94966.FK_Werbetraegergruppe_BK" name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup94966.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
-</outputTables>
-</nodeData>
-  <metadata connector="FLOW" name="meinOutput">
-<column key="false" length="255" name="FK_Sammelwerbetraeger_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Kampagne_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Kampagne_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Unternehmensbereich_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Unternehmensbereich_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Mandant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-</metadata>
-</node>
-<node componentName="tMSSqlInput" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="630" posY="1788">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_7"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
-    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblSammelwerbetraeger&quot;"/>
-    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
-    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
-    <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblSammelwerbetraeger&quot;"/>
-    <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
-    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="CHECK" name="TRIM_ALL_COLUMN" value="false"/>
-    <elementParameter field="TABLE" name="TRIM_COLUMN">
-      <elementValue elementRef="SCHEMA_COLUMN" value="dummy"/>
-      <elementValue elementRef="TRIM" value="false"/>
-    </elementParameter>
-    <elementParameter field="TEXT" name="LABEL" value="LookupDB"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    
-  <metadata connector="FLOW" name="tMSSqlInput_7">
-<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-</metadata>
-</node>
-<node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="1788">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_11"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="EXTERNAL" name="MAP" value=""/>
-    <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
-    <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_K_xKoNMBEeSAxusthb54Bg-tMap_1-PREVIEW.bmp"/>
-    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
-    <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
-    <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
-    <elementParameter field="CHECK" name="CHANGE_HASH_AND_EQUALS_FOR_BIGDECIMAL" value="false"/>
-    <elementParameter field="TEXT" name="LABEL" value="LookupNode"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    
-    <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Sammelwerbetraeger_BK" type="id_String"/>
-<mapperTableEntries name="FK_Kampagne_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Kampagne_BK" type="id_String"/>
-<mapperTableEntries name="FK_Unternehmensbereich_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
-</inputTables>
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tMSSqlInput_7" sizeState="INTERMEDIATE">
-<mapperTableEntries name="ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Sammelwerbetraeger_BK" name="BK" type="id_String"/>
-</inputTables>
-<outputTables name="Lookup77406" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="meinOutput.FK_Sammelwerbetraeger_BK" name="FK_Sammelwerbetraeger_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Kampagne_ID" name="FK_Kampagne_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Kampagne_BK" name="FK_Kampagne_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Unternehmensbereich_ID" name="FK_Unternehmensbereich_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Unternehmensbereich_BK" name="FK_Unternehmensbereich_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Mandant_ID" name="FK_Mandant_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Mandant_BK" name="FK_Mandant_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Werbetraegergruppe_ID" name="FK_Werbetraegergruppe_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Werbetraegergruppe_BK" name="FK_Werbetraegergruppe_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
-<mapperTableEntries expression="tMSSqlInput_7.ID" name="FK_Sammelwerbetraeger_ID" type="id_Integer"/>
-</outputTables>
-</nodeData>
-  <metadata connector="FLOW" name="Lookup77406">
-<column key="true" length="10" name="FK_Sammelwerbetraeger_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Sammelwerbetraeger_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Kampagne_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Kampagne_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Unternehmensbereich_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Unternehmensbereich_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Mandant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Mandant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Werbetraegergruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Werbetraegergruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+  <metadata connector="FLOW" name="Lookup46887">
+<column key="true" length="10" name="FK_Einkaufsgruppenkategorie_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Einkaufsgruppenkategorie_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="true" length="10" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>

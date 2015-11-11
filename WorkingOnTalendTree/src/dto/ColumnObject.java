@@ -134,6 +134,16 @@ public class ColumnObject {
 		case "NVARCHAR":
 			this.type = "id_String";
 			break;
+		case "BIT":
+			this.type = "id_Boolean";
+			break;
+		case "DATE":
+		case "DATETIME":
+			this.type = "id_Date";
+			break;
+		//according to JDBC decimal should be converted into BigDecimal
+		case "DECIMAL":
+			this.type = "id_Double";
 		default:
 			this.type = "id_String";
 		}

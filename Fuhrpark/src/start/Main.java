@@ -1,6 +1,9 @@
 package start;
 
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,7 +55,17 @@ public class Main {
 		Integer b = 34;
 		String c = String.valueOf(b);
 		System.out.println(z);
-		
+		String k = "2123.35";
+		BigDecimal l = new BigDecimal(k);
+		System.out.println(l);
+		String datum = "2222-12/20";
+		String pattern = "([0-9]{2})([\\/\\-\\.])([0-9]{2})([\\/\\-\\.])([0-9]{4})";
+		System.out.println(datum.matches(pattern));
+		System.out.println(datum.replaceAll("[\\/\\-\\.]", ""));
+		String number = "1.002.134,33";
+		String n = "100,000.00";
+		String regex = "([1-9])([0-9]{0,2})(([\\,])([0-9]{3}))*(([\\.])([0-9])+)?";
+		System.out.println(n.matches(regex));
 		
 	}
 
