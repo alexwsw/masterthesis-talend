@@ -67,6 +67,9 @@ public class Main {
 		String n = "100,000.00";
 		String regex = "([1-9])([0-9]{0,2})(([\\,])([0-9]{3}))*(([\\.])([0-9])+)?";
 		System.out.println(n.matches(regex));
+		Object o = d2;
+		System.out.println(o.toString());
+		/*
 		try {
 			Constructor i = Class.forName("blabla").getConstructor(String.class);
 			Object o = i.newInstance("blabla");
@@ -77,6 +80,8 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
+	
 		
 	}
 

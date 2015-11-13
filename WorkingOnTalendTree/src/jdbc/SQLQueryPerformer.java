@@ -52,6 +52,9 @@ public class SQLQueryPerformer {
 	
 	public ResultSet getMetadataForColumns(String database, String tableName, String... columnNames){
 		ResultSet columns = null;
+		//if there is a schema definition before the table name
+		tableName = tableName.replaceAll("[a-zA-Z]+(\\.)", "");
+		System.err.println(tableName);
 		String query = "select " +  
 				"(case when c.CONSTRAINT_TYPE = upper('primary key') then 'true' else 'false' end) as is_key, " +
 				"(case when a.CHARACTER_MAXIMUM_LENGTH is null then 10 else a.CHARACTER_MAXIMUM_LENGTH end) as field_length, " +

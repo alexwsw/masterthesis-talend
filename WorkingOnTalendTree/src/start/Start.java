@@ -47,7 +47,7 @@ public class Start {
 		
 		
 		String schema2= "isETL";
-		String database2= "isModeler_0.9.1";
+		String database2= "Henry_LS_DWH";
 		String pass2 = "10Runsql";
 
 		
@@ -60,7 +60,7 @@ public class Start {
 		System.out.print("Package number?: ");
 		int number = input.nextInt();
 		input.close();
-		String sql2 = String.format("Select * from [isModeler_0.9.1].[isETL].tblSourceobjectgroup where ID = %s", number);
+		String sql2 = String.format("Select * from [%s].[%s].tblSourceobjectgroup where ID = %s", database2, schema2, number);
 		PackageDTO p = forPackage.mapRersultSetToSingleObject(performer.executeSQLQuery(sql2), PackageDTO.class);
 		ColumnManager clm = new ColumnManager(performer);
 		List<ColumnObject> columnsss = clm.getColumnsForTable(database2, p.getDestinationTable(), null);

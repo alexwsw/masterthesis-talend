@@ -1,7 +1,5 @@
 package dto;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,6 +21,10 @@ public class LookupManager {
 		this.p = p;
 	}
 	
+	//handler for Column functions (@trim, @upper, @lower, @dummy) must be implemented
+	//also the the remover for (DT_WSTR,1)
+	//and finally
+	//isETL_Targetfieldvalue is set into the first tMap from the globalMap
 	public List<LookupObject>createLookupsFromDatabase(String database, String schema) throws SQLException{
 		this.lookups = new ArrayList<LookupObject>();
 		String query = String.format("Select * from [%s].[%s].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = %s", database, schema, p.getId());

@@ -380,6 +380,10 @@ public abstract class AbstractNode {
 		dummy.setAttribute("precision", column.getPrecision());
 		dummy.setAttribute("type", column.getType());
 		dummy.setAttribute("usefulColumn", column.getUsefulColumn());
+		if(column.getSourceType() != null) {
+			dummy.setAttributeNode(document.createAttribute("sourceType"));
+			dummy.setAttribute("sourceType", column.getSourceType());
+		}
 		NodeBuilder.appendElementToContext(metadata, dummy);
 		return dummy;
 	}

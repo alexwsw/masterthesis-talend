@@ -132,6 +132,9 @@ public class ColumnObject {
 			this.type = "id_Integer";
 			break;
 		case "NVARCHAR":
+		case "NCHAR":
+		case "NTEXT":
+		case "TEXT":
 			this.type = "id_String";
 			break;
 		case "BIT":
@@ -141,9 +144,20 @@ public class ColumnObject {
 		case "DATETIME":
 			this.type = "id_Date";
 			break;
+		case "SMALLINT":
+		case "TINYINT":
+			this.type = "id_Short";
+			break;
+		case "BIGINT":
+			this.type = "id_Long";
+			break;
 		//according to JDBC decimal should be converted into BigDecimal
 		case "DECIMAL":
+		case "FLOAT":
 			this.type = "id_Double";
+			break;
+		case "REAL":
+			this.type = "id_Float";
 		default:
 			this.type = "id_String";
 		}

@@ -240,7 +240,7 @@
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblEinkaufsgruppe&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblBestellkopf&quot;"/>
     <elementParameter field="CLOSED_LIST" name="TABLE_ACTION" value="NONE"/>
     <elementParameter field="CHECK" name="IDENTITY_INSERT" value="false"/>
     <elementParameter field="CLOSED_LIST" name="DATA_ACTION" value="INSERT"/>
@@ -273,19 +273,19 @@
     <elementParameter field="TEXT" name="HINT" value="&lt;b&gt;__UNIQUE_NAME__&lt;/b&gt;&lt;br&gt;__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlOutput_1">
-    <column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="255" name="Name" nullable="true" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Einkaufsgruppenkategorie_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Einkaufsgruppenkategorie_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_Sourceobject_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_Targetfieldvalue" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_isManual" nullable="false" precision="5" type="id_String" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_DMR" nullable="false" precision="0" type="id_Date" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_DCR" nullable="false" precision="0" type="id_Date" usefulColumn="true"/>
-<column key="false" length="10" name="isETL_ErrorCount" nullable="false" precision="5" type="id_String" usefulColumn="true"/>
+    <column key="true" length="10" name="ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="BK" nullable="false" precision="0" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
+<column key="false" length="255" name="Name" nullable="true" precision="0" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Kunde_BK" nullable="false" precision="0" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Kunde_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Date_Bestelldatum_BK" nullable="false" precision="0" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="isETL_Sourceobject_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="isETL_Targetfieldvalue" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="isETL_isManual" nullable="false" precision="5" sourceType="SMALLINT" type="id_Short" usefulColumn="true"/>
+<column key="false" length="10" name="isETL_DMR" nullable="false" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+<column key="false" length="10" name="isETL_DCR" nullable="false" precision="0" sourceType="DATETIME" type="id_Date" usefulColumn="true"/>
+<column key="false" length="10" name="isETL_ErrorCount" nullable="false" precision="5" sourceType="SMALLINT" type="id_Short" usefulColumn="true"/>
 </metadata>
     <metadata connector="REJECT" name="REJECT">
       <column key="false" length="10" name="dummy" nullable="false" precision="0" sourceType="INT" type="id_Integer" usefulColumn="true"/>
@@ -423,14 +423,14 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup68609" lineStyle="0" metaname="Lookup68609" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_4">
+<connection connectorName="FLOW" label="Lookup53890" lineStyle="0" metaname="Lookup53890" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_4">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup68609"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup53890"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="438">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_2"/>
@@ -452,12 +452,12 @@
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(&quot;0-&quot;  + MyOutput.CBVAL.trim())" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
+<mapperTableEntries expression="String.valueOf((DT_WSTR&#9;,1) isETL_Targetfieldvalue+&quot;-&quot;  + MyOutput.BAKNR@TRIM)" name="FK_Kunde_BK" type="id_String"/>
 <mapperTableEntries expression="MyOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
-<column key="false" length="255" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Kunde_BK" nullable="false" precision="0" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
@@ -473,12 +473,12 @@
     <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblEinkaufsgruppehaupteinkaufsgruppe&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblKunde&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblEinkaufsgruppehaupteinkaufsgruppe&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblKunde&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -493,8 +493,8 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
   <metadata connector="FLOW" name="tMSSqlInput_3">
-<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="true" length="10" name="ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="BK" nullable="false" precision="0" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="588">
@@ -514,22 +514,22 @@
     
     <nodeData xsi:type="MapperData">
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
+<mapperTableEntries name="FK_Kunde_BK" type="id_String"/>
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tMSSqlInput_3" sizeState="INTERMEDIATE">
 <mapperTableEntries name="ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppehaupteinkaufsgruppe_BK" name="BK" type="id_String"/>
+<mapperTableEntries expression="meinOutput.FK_Kunde_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup68609" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppehaupteinkaufsgruppe_BK" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
+<outputTables name="Lookup53890" sizeState="INTERMEDIATE">
+<mapperTableEntries expression="meinOutput.FK_Kunde_BK" name="FK_Kunde_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
-<mapperTableEntries expression="tMSSqlInput_3.ID" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" type="id_Integer"/>
+<mapperTableEntries expression="tMSSqlInput_3.ID" name="FK_Kunde_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup68609">
-<column key="true" length="10" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+  <metadata connector="FLOW" name="Lookup53890">
+<column key="false" length="10" name="FK_Kunde_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Kunde_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
@@ -551,7 +551,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row7"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup46887" lineStyle="0" metaname="Lookup46887" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tMSSqlOutput_1">
+<connection connectorName="FLOW" label="Lookup85660" lineStyle="0" metaname="Lookup85660" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tMSSqlOutput_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -576,22 +576,22 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup68609" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup53890" sizeState="INTERMEDIATE">
+<mapperTableEntries name="FK_Kunde_ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Kunde_BK" type="id_String"/>
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(&quot;0-&quot;  + Lookup68609.CBINT.trim())" name="FK_Einkaufsgruppenkategorie_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup68609.FK_Einkaufsgruppehaupteinkaufsgruppe_ID" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup68609.FK_Einkaufsgruppehaupteinkaufsgruppe_BK" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup68609.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries expression="String.valueOf(null  + Lookup53890.BAEJMT)" name="FK_Date_Bestelldatum_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup53890.FK_Kunde_ID" name="FK_Kunde_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup53890.FK_Kunde_BK" name="FK_Kunde_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup53890.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
-<column key="false" length="255" name="FK_Einkaufsgruppenkategorie_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Date_Bestelldatum_BK" nullable="false" precision="0" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Kunde_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Kunde_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
@@ -607,12 +607,12 @@
     <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
     <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
-    <elementParameter field="DBTABLE" name="TABLE" value="&quot;tblEinkaufsgruppenkategorie&quot;"/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;isLIB.tblDate&quot;"/>
     <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblEinkaufsgruppenkategorie&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK_MSSQL from isLIB.tblDate&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -627,8 +627,8 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
   <metadata connector="FLOW" name="tMSSqlInput_4">
-<column key="true" length="10" name="ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="true" length="10" name="ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="BK_MSSQL" nullable="false" precision="0" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="888">
@@ -648,28 +648,28 @@
     
     <nodeData xsi:type="MapperData">
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries name="FK_Einkaufsgruppenkategorie_BK" type="id_String"/>
-<mapperTableEntries name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" type="id_Integer"/>
-<mapperTableEntries name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
+<mapperTableEntries name="FK_Date_Bestelldatum_BK" type="id_String"/>
+<mapperTableEntries name="FK_Kunde_ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Kunde_BK" type="id_String"/>
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tMSSqlInput_4" sizeState="INTERMEDIATE">
 <mapperTableEntries name="ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppenkategorie_BK" name="BK" type="id_String"/>
+<mapperTableEntries expression="meinOutput.FK_Date_Bestelldatum_BK" name="BK_MSSQL" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup46887" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppenkategorie_BK" name="FK_Einkaufsgruppenkategorie_BK" type="id_String"/>
-<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppehaupteinkaufsgruppe_ID" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" type="id_Integer"/>
-<mapperTableEntries expression="meinOutput.FK_Einkaufsgruppehaupteinkaufsgruppe_BK" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" type="id_String"/>
+<outputTables name="Lookup85660" sizeState="INTERMEDIATE">
+<mapperTableEntries expression="meinOutput.FK_Date_Bestelldatum_BK" name="FK_Date_Bestelldatum_BK" type="id_String"/>
+<mapperTableEntries expression="meinOutput.FK_Kunde_ID" name="FK_Kunde_ID" type="id_Integer"/>
+<mapperTableEntries expression="meinOutput.FK_Kunde_BK" name="FK_Kunde_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
-<mapperTableEntries expression="tMSSqlInput_4.ID" name="FK_Einkaufsgruppenkategorie_ID" type="id_Integer"/>
+<mapperTableEntries expression="tMSSqlInput_4.ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup46887">
-<column key="true" length="10" name="FK_Einkaufsgruppenkategorie_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Einkaufsgruppenkategorie_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
-<column key="true" length="10" name="FK_Einkaufsgruppehaupteinkaufsgruppe_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
-<column key="false" length="255" name="FK_Einkaufsgruppehaupteinkaufsgruppe_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+  <metadata connector="FLOW" name="Lookup85660">
+<column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Date_Bestelldatum_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Kunde_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="255" name="FK_Kunde_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>

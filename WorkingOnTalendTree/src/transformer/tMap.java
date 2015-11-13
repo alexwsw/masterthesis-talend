@@ -1,6 +1,7 @@
 package transformer;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -277,7 +278,7 @@ public class tMap extends AbstractNode {
 			NodeBuilder.appendElementToContext(tables, dummy);
 		}
 	}
-	
+																					//metadata from previous node			//metadata from the lookup DB node
 	public static Element setLookupOutput(Document document, Node node, String name, Collection <ColumnObject> inputColumns, Collection<ColumnObject> lookupColumns, LookupObject data, String mainTable, String secondaryTable) throws WrongNodeException {
 		Element outputTables = tMap.createOutputTables(document, node, name);
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
@@ -298,7 +299,8 @@ public class tMap extends AbstractNode {
 					dummy.setAttribute("name", entry.getValue());
 					dummy.setAttribute("type", column.getType());
 					NodeBuilder.appendElementToContext(outputTables, dummy);
-					Element metadataDummy = AbstractNode.setMetadataColumnFromDTO(document, column, metaData);
+					ColumnObject returnObject = getObjectByName(data.getPackageReturnColumns(), entry.getValue());
+					Element metadataDummy = AbstractNode.setMetadataColumnFromDTO(document, returnObject, metaData);
 					metadataDummy.setAttribute("name", entry.getValue());
 				}	
 			}
@@ -451,5 +453,15 @@ public class tMap extends AbstractNode {
 			input = input.replaceAll(regex, "");
 			return input;
 		}
+		
+	public static ColumnObject getObjectByName(List<ColumnObject>columns, String name) {
+		for(ColumnObject o : columns) {
+			if (o.getName().equals(name)) {
+				return o;
+			}
+		}
+		System.out.println(name + " not found!!!!!!");
+		return null;
+	}
 
 }

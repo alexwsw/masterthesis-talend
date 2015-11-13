@@ -133,6 +133,8 @@ public class LookupObject {
 
 	public void setPackageReturnColumns(List<ColumnObject> packageReturnColumns) {
 		this.packageReturnColumns = packageReturnColumns;
+		System.out.println("HIIIIIEEER");
+		System.out.println(this.packageReturnColumns.toString());
 	}
 
 	// Outsource, this method has nothing to do with this object
@@ -167,6 +169,9 @@ public class LookupObject {
 	
 	//Array'd fit as well
 	public List<String> splitPackageColumns(String packageColumns) {
+		if(packageColumns == null) {
+			return null;
+		}
 		List<String>columns = new ArrayList<String>();
 		String[]split = packageColumns.split(Pattern.quote(","));
 		for(String a : split) {
