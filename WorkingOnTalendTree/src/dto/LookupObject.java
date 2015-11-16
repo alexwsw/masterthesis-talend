@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-public class LookupObject {
+public class LookupObject extends AbstractObject {
 	
 	
 
@@ -46,7 +46,12 @@ public class LookupObject {
 
 	//add PackageDTO/PackageObject for assigning necessary values like TargetValue???
 	public LookupObject(LookupDTO lookup) {
-		this.prefix = lookup.getPrefix();
+		String rawPrefix = lookup.getPrefix();
+		//remove the data type definition like (DT_WSTR,1)
+		rawPrefix = removeDataType(rawPrefix);
+		//get rid of targetFieldValue if there's one
+		rawPrefix = targetFieldValueHandling(rawPrefix);
+		this.prefix = rawPrefix;
 		this.packageColumns = splitPackageColumns(lookup.getPackageColumns());
 		this.lookupTable = lookup.getLookupTable();
 		this.lookupColumn = lookup.getLookupColumn();
@@ -175,6 +180,7 @@ public class LookupObject {
 		List<String>columns = new ArrayList<String>();
 		String[]split = packageColumns.split(Pattern.quote(","));
 		for(String a : split) {
+			a = evaluateColumnOption(a);
 			columns.add(a);
 		}	
 		return columns;

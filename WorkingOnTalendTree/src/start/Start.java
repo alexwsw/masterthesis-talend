@@ -80,7 +80,7 @@ public class Start {
 		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, destination));		
 		LookupManager lMan = new LookupManager(performer, p);
 		List<LookupObject>lookups = lMan.createLookupsFromDatabase(database2, schema2);
-		System.out.println(lookups.toString());
+		//System.out.println(lookups.toString());
 		tMap.doLookup(document, fixedTemplate, lookups);
 		
 		DocumentCreator.SaveDOMFile(document, output);

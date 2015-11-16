@@ -14,7 +14,6 @@ import org.w3c.dom.NodeList;
 import connection.Connection;
 import database.tMSSqlInput;
 import dto.ColumnObject;
-import dto.ColumnObject;
 import dto.LookupObject;
 import enums.EConnectionTypes;
 import enums.XPathExpressions;
@@ -114,16 +113,12 @@ public class tMap extends AbstractNode {
 
 	}
 
-	public static Node getNodeData(Node node) throws WrongNodeException {
+	public static Node getNodeData(Node node)  {
 		// type verification (only tMap nodes contain nodeData)
-		if (!(AbstractNode.verifyNodeType(node).equals(componentName))) {
-			throw new WrongNodeException(componentName, AbstractNode.verifyNodeType(node));
-		} else {
 			Node a = Navigator.processXPathQueryNode(node,
 					XPathExpressions.getNodeData, null);
 			System.out.println(DocumentCreator.getStringFromDocument(a));
 			return a;
-		}
 	}
 
 	//Document parameter is required for Attr creation
@@ -212,7 +207,7 @@ public class tMap extends AbstractNode {
 		}
 	}
 	
-	public static Element createOutputTables(Document document, Node node, String name) throws WrongNodeException {
+	public static Element createOutputTables(Document document, Node node, String name) {
 		if (!(tMap.doesElementExist(node, "outputTables", name))) {
 		Element tables = document.createElementNS("http://www.talend.org/mapper","outputTables");
 		tables.setAttributeNode(document.createAttribute("name"));
@@ -309,20 +304,14 @@ public class tMap extends AbstractNode {
 		return metaData;
 	}
 	
-	public static Element setOutput(Document document, Node node, String name, Collection <ColumnObject> inputColumns, LookupObject data, String mainTable, String secondaryTable) throws WrongNodeException {
+	public static Element setOutput(Document document, Node node, String name, Collection <ColumnObject> inputColumns, LookupObject data, String mainTable, String secondaryTable) {
 		Element outputTables = tMap.createOutputTables(document, node, name);
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
 		if(data != null) {
 		String matchColumn = String.format("String.valueOf(%s ", data.getPrefix());
-		//if there's a trim statement
-		for(String column : data.getPackageColumns()) {
-			if (column.contains("@Trim")) {
-				column = removeTrim(column);
-				matchColumn = matchColumn + String.format(" + %s.%s.trim()", mainTable, column);
-				
-			} else {
-			matchColumn = matchColumn + String.format(" + %s.%s", mainTable, column);
-			String.valueOf("\"0-\" + %s + %s");
+		if (data.getPackageColumns() != null) {
+			for(String column : data.getPackageColumns()) {
+				matchColumn = matchColumn + String.format(" + %s.%s", mainTable, column);			
 			}
 		}
 		matchColumn = matchColumn + ")";
@@ -444,15 +433,6 @@ public class tMap extends AbstractNode {
 			
 	}
 	
-	// remove @Trim value from the String
-		public static String removeTrim(String input) {
-			if (input == null) {
-				return null;
-			}
-			String regex = "(@Trim)?";
-			input = input.replaceAll(regex, "");
-			return input;
-		}
 		
 	public static ColumnObject getObjectByName(List<ColumnObject>columns, String name) {
 		for(ColumnObject o : columns) {

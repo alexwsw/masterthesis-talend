@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="column", namespace="http://www.talend.org/mapper")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class ColumnObject {
+public class ColumnObject extends AbstractObject {
 
 	// Data Object for the programm, constructor needs a ColumnDTO generated
 	// from the database
@@ -17,6 +17,7 @@ public class ColumnObject {
 	private String precision;
 	private String name;
 	private String type;
+	private String pattern;
 	private String sourceType;
 	private String usefulColumn;
 
@@ -24,16 +25,17 @@ public class ColumnObject {
 		this.key = column.getKey();
 		this.length = column.getLength();
 		this.nullable = column.getNullable();
-		this.precision = column.getPrecision();
+		this.precision = (column.getPrecision() == null)? "0" : column.getPrecision();
 		this.name = column.getName();
 		this.sourceType = column.getSourceType();
 		mapType(this.sourceType);
+		this.pattern = (this.sourceType == "id_Date")? "dd-MM-yyyy" : null;
 		this.usefulColumn = "true";
 	}
 	
 	public ColumnObject(String key, String length, String nullable,
 			String precision, String name, String type, String sourceType,
-			String usefulColumn) {
+			String usefulColumn, String pattern) {
 		super();
 		this.key = key;
 		this.length = length;
@@ -125,6 +127,13 @@ public class ColumnObject {
 		this.usefulColumn = usefulColumn;
 	}
 
+	public String getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
+	}
 
 	public void mapType(String type) {
 		switch (type) {

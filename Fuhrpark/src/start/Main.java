@@ -9,6 +9,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -69,6 +71,14 @@ public class Main {
 		System.out.println(n.matches(regex));
 		Object o = d2;
 		System.out.println(o.toString());
+		String string = "Hallo@TRIM";
+		String pat = "@[A-Za-z]+";
+		System.out.println(string.matches(pat));
+		Pattern p = Pattern.compile(pat);
+		Matcher m = p.matcher(string);
+		if (m.find()){
+			System.out.println(m.group().substring(1).toLowerCase());
+		}
 		/*
 		try {
 			Constructor i = Class.forName("blabla").getConstructor(String.class);

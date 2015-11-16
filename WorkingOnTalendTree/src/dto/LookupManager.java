@@ -27,8 +27,7 @@ public class LookupManager {
 	//isETL_Targetfieldvalue is set into the first tMap from the globalMap
 	public List<LookupObject>createLookupsFromDatabase(String database, String schema) throws SQLException{
 		this.lookups = new ArrayList<LookupObject>();
-		String query = String.format("Select * from [%s].[%s].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = %s", database, schema, p.getId());
-		System.out.println(query);
+		String query = String.format("Select * from [%s].[%s].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = %s order by LU_SolveOrder", database, schema, p.getId());
 		ResultSet rs = performer.executeSQLQuery(query);
 		List<LookupDTO> rawLookup = new ResultSetMapper<LookupDTO>().mapRersultSetToObject(rs, LookupDTO.class);
 		for(LookupDTO lookup : rawLookup) {

@@ -2,19 +2,38 @@ package stringConverter;
 
 public class StringConverter {
 	
-	public static double stringToDouble(String value, String pattern) {
-		double result;
-		value = value.replaceAll(pattern, "");
-		
-		return result;
+	private String yearFirst = "([0-9]{4})([\\/\\-\\.])([0-9]{2})([\\/\\-\\.])([0-9]{2})";
+	private String monthFirst = "([0-9]{2})([\\/\\-\\.])([0-9]{2})([\\/\\-\\.])([0-9]{4})";
+	
+	public static double stringToDouble(String value, int id) throws Exception {
+		switch (id) {
+		case 8:
+			return Double.parseDouble(value);
+		case 9:
+			return Double.parseDouble(value.replaceAll(",", "."));
+		case 10:
+			return Double.parseDouble(value.replaceAll(",", ""));
+		case 11:
+			value = value.replaceAll(".", "");
+			return Double.parseDouble(value.replaceAll(",", "."));
+		default:
+			throw new Exception();
+		}
+	
 	}
 	
 	public static Date stringToDate(String value, String pattern) {
 		
 	}
 	
-	public static int stringToInt(String value) {
+	public static int stringToInt(String value, int id) throws Exception {	
 		
+		switch(id){
+		case 1:
+			return Integer.parseInt(value);
+		default:
+			throw new Exception();
+		}
 	}
 	
 	public static String stringToString (String value, int pattern) {

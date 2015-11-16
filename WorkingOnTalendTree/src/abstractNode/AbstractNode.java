@@ -357,7 +357,8 @@ public abstract class AbstractNode {
 			String precision = mDataColumn.getAttribute("precision");
 			String type = mDataColumn.getAttribute("type");
 			String usefulColumn = mDataColumn.getAttribute("usefulColumn");
-			ColumnObject column = new ColumnObject(isKey, length, nullable, precision, name, type,  null,  usefulColumn);
+			String pattern = (AbstractNode.hasAttribute(mDataColumn, "pattern")? mDataColumn.getAttribute("pattern") : null);
+			ColumnObject column = new ColumnObject(isKey, length, nullable, precision, name, type,  null,  usefulColumn, pattern);
 			System.err.println("ColumnELEMENT: " + column.toString());
 			mDataColumns.add(column);
 			firstChild = firstChild.getNextSibling();
@@ -383,6 +384,10 @@ public abstract class AbstractNode {
 		if(column.getSourceType() != null) {
 			dummy.setAttributeNode(document.createAttribute("sourceType"));
 			dummy.setAttribute("sourceType", column.getSourceType());
+		}
+		if(column.getPattern() != null) {
+			dummy.setAttributeNode(document.createAttribute("pattern"));
+			dummy.setAttribute("pattern", column.getSourceType());
 		}
 		NodeBuilder.appendElementToContext(metadata, dummy);
 		return dummy;
