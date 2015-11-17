@@ -45,6 +45,18 @@ public class ColumnObject extends AbstractObject implements Cloneable {
 		this.type = type;
 		this.sourceType = sourceType;
 		this.usefulColumn = usefulColumn;
+		this.pattern = pattern;
+	}
+	
+	public ColumnObject (ColumnObject otherObject) {
+		this.key = otherObject.getKey();
+		this.length = otherObject.getLength();
+		this.nullable = otherObject.getNullable();
+		this.precision = otherObject.getPrecision();
+		this.name = otherObject.getName();
+		this.sourceType = otherObject.getSourceType();
+		this.usefulColumn = otherObject.getUsefulColumn();
+		this.pattern = otherObject.getPattern();
 	}
 
 	 protected Object clone() throws CloneNotSupportedException {

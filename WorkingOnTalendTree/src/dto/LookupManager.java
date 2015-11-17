@@ -67,30 +67,35 @@ public class LookupManager {
 	
 	public List<ColumnObject> findColumns (List<ColumnObject>table, List<ColumnObject>sourceTable, Map<String,String> mapping, String...name){
 		List<ColumnObject> columns = new ArrayList<ColumnObject>();
-		for (String s : name) {		
+		boolean found;
+		//first look in the destinationTable
+		for (String s : name) {	
+			found = false;
 			for (ColumnObject o : table) {
 				if (s.equals(o.getName())) {
 					columns.add(o);
+					found = true;
 					break;
 				}
 			}
+			if (found == true) {
+				continue;
+			}
+			//when nothing was found
 			String mappedValue = "";
+			//get the source value from the mapping
 			for(Map.Entry<String, String> entry : mapping.entrySet()) {
 				if (entry.getValue().equals(s)) {
 					mappedValue = entry.getKey();
 					break;
 				}
 			}
+			//...and look in the source table to get its format
 			for (ColumnObject o : sourceTable) {
 				if(mappedValue.equals(o.getName())) {
-					ColumnObject newObject = null;
-					try {
-						newObject = (ColumnObject)o.clone();
+					ColumnObject newObject = new ColumnObject(o);	
+					//change the name
 						newObject.setName(s);
-					} catch (CloneNotSupportedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 					columns.add(newObject);
 				}
 			}
