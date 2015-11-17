@@ -373,6 +373,18 @@ public abstract class AbstractNode {
 		}
 	}
 	public static Element setMetadataColumnFromDTO(Document document, ColumnObject column, Node metadata) {
+		Node firstChild = metadata.getFirstChild();
+		while (firstChild != null) {
+			if(firstChild.getNodeType() == Node.TEXT_NODE) {
+				firstChild = firstChild.getNextSibling();
+				continue;
+			}
+			Element child = (Element) firstChild;
+			if(column.getName().equals(child.getAttribute("name"))) {
+				System.out.printf("Element %s already exists!!!!%n", column.getName());
+				return null;
+			}
+		}
 		Element dummy = AbstractNode.createMetadataColumnDummy(document);
 		dummy.setAttribute("key", String.valueOf(column.getKey()));
 		dummy.setAttribute("length", column.getLength());

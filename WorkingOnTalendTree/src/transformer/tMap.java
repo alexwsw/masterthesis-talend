@@ -182,7 +182,6 @@ public class tMap extends AbstractNode {
 	}
 	
 	
-	//suggest to Andr�
 	public static Element createNodeDataColumnDummy(Document document) {
 		Element dummy = null;
 		dummy = document.createElementNS("http://www.talend.org/mapper","mapperTableEntries");

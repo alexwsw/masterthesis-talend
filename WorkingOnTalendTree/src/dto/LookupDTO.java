@@ -21,13 +21,30 @@ public class LookupDTO {
 	private String tableOutputColumn;
 	@Column(name="LU_Outputcolumns")
 	private String lookupOutputColumns;
+	@Column(name="LU2_ValidInputcolumnprefix")
+	private String LU2Prefix;
+	@Column(name="LU2_ValidInputcolumns")
+	private String LU2InputColumns;
+	@Column(name="LU2_Validparameter")
+	private String LU2ValidParameter;
+	@Column(name="LU2_TableValidFromcolumn")
+	private String LU2FromColumn;
+	@Column(name="LU2_TableValidTocolumn")
+	private String LU2ToColumn;
+	@Column(name="LU2_IsInclusiveUpperBound")
+	private String LU2InclusiveUpperBound;
+	
+
 	
 	public LookupDTO() {}
 
-	public LookupDTO(String lookupType, String prefix, String packageColumns, String lookupTable,
-			String lookupColumn, String packageOutputColumn_MatchColumn,
-			String tableOutputColumn, String lookupOutputColumns) {
-		
+		public LookupDTO(String lookupType, String prefix, String packageColumns,
+			String lookupTable, String lookupColumn,
+			String packageOutputColumn_MatchColumn, String tableOutputColumn,
+			String lookupOutputColumns, String lU2Prefix,
+			String lU2InputColumns, String lU2ValidParameter,
+			String lU2FromColumn, String lU2ToColumn,
+			String lU2InclusiveUpperBound) {
 		this.lookupType = lookupType;
 		this.prefix = prefix;
 		this.packageColumns = packageColumns;
@@ -36,8 +53,16 @@ public class LookupDTO {
 		this.packageOutputColumn_MatchColumn = packageOutputColumn_MatchColumn;
 		this.tableOutputColumn = tableOutputColumn;
 		this.lookupOutputColumns = lookupOutputColumns;
+		LU2Prefix = lU2Prefix;
+		LU2InputColumns = lU2InputColumns;
+		LU2ValidParameter = lU2ValidParameter;
+		LU2FromColumn = lU2FromColumn;
+		LU2ToColumn = lU2ToColumn;
+		LU2InclusiveUpperBound = lU2InclusiveUpperBound;
 	}
-	
+
+
+
 	public String getLookupType() {
 		return lookupType;
 	}
@@ -103,7 +128,54 @@ public class LookupDTO {
 		this.lookupOutputColumns = lookupOutputColumns;
 	}
 	
-	
+	public String getLU2Prefix() {
+		return LU2Prefix;
+	}
+
+	public void setLU2Prefix(String lU2Prefix) {
+		LU2Prefix = lU2Prefix;
+	}
+
+	public String getLU2InputColumns() {
+		return LU2InputColumns;
+	}
+
+	public void setLU2InputColumns(String lU2InputColumns) {
+		LU2InputColumns = lU2InputColumns;
+	}
+
+	public String getLU2ValidParameter() {
+		return LU2ValidParameter;
+	}
+
+	public void setLU2ValidParameter(String lU2ValidParameter) {
+		LU2ValidParameter = lU2ValidParameter;
+	}
+
+	public String getLU2FromColumn() {
+		return LU2FromColumn;
+	}
+
+	public void setLU2FromColumn(String lU2FromColumn) {
+		LU2FromColumn = lU2FromColumn;
+	}
+
+	public String getLU2ToColumn() {
+		return LU2ToColumn;
+	}
+
+	public void setLU2ToColumn(String lU2ToColumn) {
+		LU2ToColumn = lU2ToColumn;
+	}
+
+	public String getLU2InclusiveUpperBound() {
+		return LU2InclusiveUpperBound;
+	}
+
+	public void setLU2InclusiveUpperBound(String lU2InclusiveUpperBound) {
+		LU2InclusiveUpperBound = lU2InclusiveUpperBound;
+	}
+
 	public String toString() {
 		return String.format("LookupType: %s%nPrefix: %s%nPackageColumns: %s%nLookupTable: %s%nLookupColumn: %s%nMatchColumn: %s%nTableOutputColumn: %s%nLookupOutputColumns: %s%n", 
 				lookupType, prefix, packageColumns, lookupTable, lookupColumn, packageOutputColumn_MatchColumn, tableOutputColumn, lookupOutputColumns);

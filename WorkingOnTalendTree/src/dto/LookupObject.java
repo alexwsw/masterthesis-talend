@@ -10,22 +10,22 @@ public class LookupObject extends AbstractObject {
 	
 	
 
-	private String prefix;
+	protected String prefix;
 	// columns, relevant for the actual Lookup
-	private List<String> packageColumns;
+	protected List<String> packageColumns;
 	// columns we get back from the Lookup table
-	private List<ColumnObject> lookupTableColumns;
+	protected List<ColumnObject> lookupTableColumns;
 	// the table for the Lookup
-	private String lookupTable;
+	protected String lookupTable;
 	// Lookup column in the lookup table
-	private String lookupColumn;
+	protected String lookupColumn;
 	// name of the matchparameter in the input table (e.g prefix +
 	// packageColumns)
-	private String packageOutputColumn_MatchColumn;
-	private Map<String, String> packageOutputColumns_ReturnColumns;
+	protected String packageOutputColumn_MatchColumn;
+	protected Map<String, String> packageOutputColumns_ReturnColumns;
 	// add an attribute for mapping stuff
 	// defines the names and format for the Lookup output columns
-	private List<ColumnObject> packageReturnColumns;
+	protected List<ColumnObject> packageReturnColumns;
 
 	public LookupObject() {
 	}
