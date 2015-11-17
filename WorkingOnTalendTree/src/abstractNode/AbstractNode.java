@@ -359,7 +359,7 @@ public abstract class AbstractNode {
 			String usefulColumn = mDataColumn.getAttribute("usefulColumn");
 			String pattern = (AbstractNode.hasAttribute(mDataColumn, "pattern")? mDataColumn.getAttribute("pattern") : null);
 			ColumnObject column = new ColumnObject(isKey, length, nullable, precision, name, type,  null,  usefulColumn, pattern);
-			System.err.println("ColumnELEMENT: " + column.toString());
+			//System.err.println("ColumnELEMENT: " + column.toString());
 			mDataColumns.add(column);
 			firstChild = firstChild.getNextSibling();
 		}
@@ -384,9 +384,10 @@ public abstract class AbstractNode {
 				System.out.printf("Element %s already exists!!!!%n", column.getName());
 				return null;
 			}
+			firstChild = firstChild.getNextSibling();
 		}
 		Element dummy = AbstractNode.createMetadataColumnDummy(document);
-		dummy.setAttribute("key", String.valueOf(column.getKey()));
+		dummy.setAttribute("key", column.getKey());
 		dummy.setAttribute("length", column.getLength());
 		dummy.setAttribute("name", column.getName());
 		dummy.setAttribute("nullable", column.getNullable());

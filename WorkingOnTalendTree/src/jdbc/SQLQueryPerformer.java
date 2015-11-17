@@ -82,7 +82,7 @@ public class SQLQueryPerformer {
 		query = query.replaceAll("(database)", database);
 		query = String.format(query, tableName);
 		System.out.println(query);
-		if (columnNames != null) {
+		if (columnNames != null && columnNames.length > 0) {
 			query = query + "and (%s)";
 		String whereColumns = "";
 		for(String a : columnNames) {

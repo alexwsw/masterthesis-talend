@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="column", namespace="http://www.talend.org/mapper")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class ColumnObject extends AbstractObject {
+public class ColumnObject extends AbstractObject implements Cloneable {
 
 	// Data Object for the programm, constructor needs a ColumnDTO generated
 	// from the database
@@ -47,7 +47,9 @@ public class ColumnObject extends AbstractObject {
 		this.usefulColumn = usefulColumn;
 	}
 
-
+	 protected Object clone() throws CloneNotSupportedException {
+	        return super.clone();
+	    }
 
 	@XmlAttribute(name="key")
 	public String getKey() {
@@ -175,4 +177,6 @@ public class ColumnObject extends AbstractObject {
 	public String toString() {
 		return (String.format("Key: %s,%nLength: %s,%nName: %s,%nNullable: %s,%nPrecision: %s,%nType: %s,%nUseful Column: %s%n", key, length, name, nullable, precision, sourceType, usefulColumn));
 	}
+	
+	
 }

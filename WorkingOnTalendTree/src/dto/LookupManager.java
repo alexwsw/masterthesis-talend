@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import jdbc.ResultSetMapper;
 import jdbc.SQLQueryPerformer;
@@ -34,9 +35,9 @@ public class LookupManager {
 			System.out.println(lookup.toString());
 			LookupObject object = new LookupObject(lookup);
 			List<ColumnObject>a = cManager.getColumnsForTable(database, lookup.getLookupTable(), lookup.getLookupColumn());
-			List<ColumnObject>b = cManager.getColumnsForTable(database, lookup.getLookupTable(), uniteStrings(lookup.getTableOutputColumn()));
+			List<ColumnObject>b = cManager.getColumnsForTable(database, lookup.getLookupTable(), splitString(lookup.getTableOutputColumn()));
 			object.setLookupTableColumns(combineLists(a,b));
-			object.setPackageReturnColumns(cManager.getColumnsForTable(database, p.getDestinationTable(), uniteStrings(lookup.getLookupOutputColumns())));
+			object.setPackageReturnColumns(findColumns(cManager.getColumnsForTable(database, p.getDestinationTable()), b, object.getPackageOutputColumns_ReturnColumns() , splitString(lookup.getLookupOutputColumns())));
 			lookups.add(object);
 		}
 		return lookups;
@@ -52,7 +53,7 @@ public class LookupManager {
 		return splitted;
 	}
 	
-	public String[] uniteStrings (String a) {
+	public String[] splitString (String a) {
 		String[] strings = a.split(",");
 		return strings;
 	}
@@ -62,6 +63,39 @@ public class LookupManager {
 			b.add(c);
 		}
 		return b;
+	}
+	
+	public List<ColumnObject> findColumns (List<ColumnObject>table, List<ColumnObject>sourceTable, Map<String,String> mapping, String...name){
+		List<ColumnObject> columns = new ArrayList<ColumnObject>();
+		for (String s : name) {		
+			for (ColumnObject o : table) {
+				if (s.equals(o.getName())) {
+					columns.add(o);
+					break;
+				}
+			}
+			String mappedValue = "";
+			for(Map.Entry<String, String> entry : mapping.entrySet()) {
+				if (entry.getValue().equals(s)) {
+					mappedValue = entry.getKey();
+					break;
+				}
+			}
+			for (ColumnObject o : sourceTable) {
+				if(mappedValue.equals(o.getName())) {
+					ColumnObject newObject = null;
+					try {
+						newObject = (ColumnObject)o.clone();
+						newObject.setName(s);
+					} catch (CloneNotSupportedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					columns.add(newObject);
+				}
+			}
+		}
+		return columns;
 	}
 
 }
