@@ -14,6 +14,7 @@ import org.w3c.dom.NodeList;
 import connection.Connection;
 import database.tMSSqlInput;
 import dto.ColumnObject;
+import dto.Lookup2Object;
 import dto.LookupObject;
 import enums.EConnectionTypes;
 import enums.XPathExpressions;
@@ -33,7 +34,7 @@ public class tMap extends AbstractNode {
 	}
 
 	public static Element newInstance(Document document, Document template,
-			String name) throws WrongNodeException {
+			String name) {
 
 		Node n = Navigator.processXPathQueryNode(template,
 				XPathExpressions.getComponentsByComponentName, componentName);
@@ -56,8 +57,7 @@ public class tMap extends AbstractNode {
 	}
 
 	// remove all the processed data from the node
-	public static void resetNode(Document document, Node input)
-			throws WrongNodeException {
+	public static void resetNode(Document document, Node input) {
 		// reset metadata
 		// tMap can possess multiple metadata nodes
 		NodeList mData = Navigator.processXpathQueryNodeList(input,
@@ -146,11 +146,18 @@ public class tMap extends AbstractNode {
 			}
 	}
 	
+	public static void addAttribute(Document document, Element dummy, String name) {
+		if (!(AbstractNode.hasAttribute(dummy, name))) { 
+			Attr expression = document.createAttribute(name);
+			dummy.setAttributeNode(expression);
+			} else {
+				System.out.println("Attribute expression already exists");
+			}
+	}
+	
 	//in progress
-	public static String setInputTables(Document document, Node node, Collection<ColumnObject> columns, EConnectionTypes type) throws WrongNodeException {
-		if (!(AbstractNode.verifyNodeType(node).equals(componentName))) {
-			throw new WrongNodeException(componentName, AbstractNode.verifyNodeType(node));
-		}
+	public static String setInputTables(Document document, Node node, Collection<ColumnObject> columns, EConnectionTypes type) {
+
 		Element incomingConnection = (Element) Connection.findConnection(document, node, type);
 		Element inputTables = tMap.createInputTables(document, node, incomingConnection.getAttribute("label"));
 		for(ColumnObject column : columns) {
@@ -162,10 +169,10 @@ public class tMap extends AbstractNode {
 		return inputTables.getAttribute("name");
 	}
 	
-	public static String setInputTables(Document document, Node node, Collection<ColumnObject> columns, LookupObject data, String mainInputTables, EConnectionTypes type) throws WrongNodeException {
-		if (!(AbstractNode.verifyNodeType(node).equals(componentName))) {
-			throw new WrongNodeException(componentName, AbstractNode.verifyNodeType(node));
-		}
+	//needs to be redesigned!!!!
+	//try setting the join match model attribute to "all matches"
+	public static String setInputTables(Document document, Node node, Collection<ColumnObject> columns, LookupObject data, String mainInputTables, EConnectionTypes type) {
+
 		Element incomingConnection = (Element) Connection.findConnection(document, node, type);
 		Element inputTables = tMap.createInputTables(document, node, incomingConnection.getAttribute("label"));
 		for(ColumnObject column : columns) {
@@ -177,6 +184,15 @@ public class tMap extends AbstractNode {
 			dummy.setAttribute("name", column.getName());
 			dummy.setAttribute("type", column.getType());
 			NodeBuilder.appendElementToContext(inputTables, dummy);
+		}
+		if (data instanceof Lookup2Object) {
+			addAttribute(document, inputTables, "expressionFilter");
+			addAttribute(document, inputTables, "activateExpressionFilter");
+			addAttribute(document, inputTables, "activateCondensedTool");
+			addAttribute(document, inputTables, "innerJoin");
+			inputTables.setAttribute("activateExpressionFilter", "true");
+			inputTables.setAttribute("activateCondensedTool", "true");
+			inputTables.setAttribute("innerJoin", "true");
 		}
 		return inputTables.getAttribute("name");
 	}
@@ -224,7 +240,7 @@ public class tMap extends AbstractNode {
 	
 	//inputTables Element has few additional attributes to output/varTables
 	//Note: create inputTables, extract and paste Metadata simultaneously
-	public static Element createInputTables(Document document, Node node, String connLabel) throws WrongNodeException {
+	public static Element createInputTables(Document document, Node node, String connLabel) {
 		if (!(tMap.doesElementExist(node, "inputTables", connLabel))) {
 		//"vessel" for the data
 		Element inputTables = document.createElementNS("http://www.talend.org/mapper","inputTables");
@@ -273,7 +289,7 @@ public class tMap extends AbstractNode {
 		}
 	}
 																					//metadata from previous node			//metadata from the lookup DB node
-	public static Element setLookupOutput(Document document, Node node, String name, Collection <ColumnObject> inputColumns, Collection<ColumnObject> lookupColumns, LookupObject data, String mainTable, String secondaryTable) throws WrongNodeException {
+	public static Element setLookupOutput(Document document, Node node, String name, Collection <ColumnObject> inputColumns, Collection<ColumnObject> lookupColumns, LookupObject data, String mainTable, String secondaryTable) {
 		Element outputTables = tMap.createOutputTables(document, node, name);
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
 		for(ColumnObject column : inputColumns) {
@@ -307,12 +323,21 @@ public class tMap extends AbstractNode {
 		Element outputTables = tMap.createOutputTables(document, node, name);
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
 		if(data != null) {
-		String matchColumn = String.format("String.valueOf(%s ", data.getPrefix());
-		if (data.getPackageColumns() != null) {
-			for(String column : data.getPackageColumns()) {
-				matchColumn = matchColumn + String.format(" + %s.%s", mainTable, column);			
-			}
+			String matchColumn = "";
+			if (data.getPrefix() != null) {
+			matchColumn = String.format("String.valueOf(%s ", data.getPrefix());
+				if (data.getPackageColumns() != null) {
+					for(String column : data.getPackageColumns()) {
+						matchColumn = matchColumn + String.format(" + %s.%s", mainTable, column);			
+				}
 		}
+			} else {
+				matchColumn = "String.valueOf(";
+				for(String column : data.getPackageColumns()) {
+					matchColumn = matchColumn + String.format("%s.%s + ", mainTable, column);			
+				}
+				matchColumn = matchColumn.substring(0, matchColumn.length()-3);
+			}
 		matchColumn = matchColumn + ")";
 		Element nodeDummy = tMap.createNodeDataColumnDummy(document);
 		tMap.addAttribute(document, nodeDummy);
@@ -348,7 +373,60 @@ public class tMap extends AbstractNode {
 	}
 	
 	
-	public static void doLookup (Document document, Document template, LookupObject data) throws WrongNodeException {
+	public static void doLookup (Document document, Document template, LookupObject data) {
+		//test random Number for lookup Name
+		Random r = new Random();
+		//ConnectionPoint mark must be changed connection(Label), inputTables and metadata (tMap)
+		//setting/removing of ConnectionPoint should be outsourced in a separate method
+		//ConnectionPoint as unique_name? could be more useful....
+		String startPointMark = "ConnectionPoint";
+		Element startConnection = (Element) AbstractNode.getElementByValue(document, startPointMark);
+		Element startMetadata = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getMetaDataForConnection, startConnection.getAttribute("metaname"));
+		Element previousNode = (Element)startMetadata.getParentNode();
+		//relabel the connection (essential for the inputTables)
+		AbstractNode.setAttribute(startConnection, "UNIQUE_NAME", startConnection.getAttribute("metaname"));
+		//startConnection.setAttribute("label", startMetadata.getAttribute("name"));
+		Element prefixTMap = tMap.newInstance(document, template, "PrefixMaker");
+		Element lookupTMap = tMap.newInstance(document, template, "LookupNode");
+		Element lookupDb = tMSSqlInput.newInstance(document, template, "LookupDB", data.getLookupTableColumns(), "MyConnection", data.getLookupTable());
+		Connection.newConnection(document, template, AbstractNode.getMetadata(document, lookupDb, "FLOW"), lookupTMap, EConnectionTypes.Lookup);
+		//redirect the startConnection to the prefix tMap Node
+		startConnection.setAttribute("target", AbstractNode.getNodesUniqueName(document, prefixTMap));
+		//put the entire data from the input Dto into the inputTables
+		//Element inputTables = tMap.createInputTables(document, prefixTMap, startConnection.getAttribute("label"));
+		String inputName = tMap.setInputTables(document, prefixTMap, tMap.extractMetadata(startMetadata), EConnectionTypes.Main);
+		Element prefixMData = tMap.setOutput(document, prefixTMap, "meinOutput", tMap.extractMetadata(startMetadata), data, inputName, null);
+		Connection.newConnection(document, template, prefixMData, lookupTMap, EConnectionTypes.Main);
+		String nameInputTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(prefixMData), EConnectionTypes.Main);
+		String nameLookupTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, EConnectionTypes.Lookup);
+		Element lookupMetadata = tMap.setLookupOutput(document, lookupTMap, ("Lookup" + r.nextInt(100000)), tMap.extractMetadata(prefixMData), tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, nameLookupTable);
+		Element newConnection = Connection.newConnection(document, template, lookupMetadata, AbstractNode.getElementByValue(document, "MyOutput"), EConnectionTypes.Main);
+		AbstractNode.setAttribute(newConnection, "UNIQUE_NAME", "ConnectionPoint");
+		/*
+		Element outputTables = tMap.createOutputTables(document, "preparedOutput");
+		Element outputMData = tMap.createMetadata(document, outputTables);
+		*/
+		
+		//String varTableName =  tMap.setPrefix(document, tMap.getNodeData(prefixTMap), data);
+		
+		
+		
+		//put nodes onto the proper place in the designer (separate method?)
+		prefixTMap.setAttribute("posY", String.valueOf(Integer.parseInt(previousNode.getAttribute("posY")) + 150));
+		System.err.printf("Previous Node: %s%n", AbstractNode.getNodesUniqueName(document, previousNode));
+		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, prefixTMap), prefixTMap.getAttribute("posX"), prefixTMap.getAttribute("posY"));
+		lookupTMap.setAttribute("posY", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posY")) + 150));
+		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, lookupTMap), lookupTMap.getAttribute("posX"), lookupTMap.getAttribute("posY"));
+		lookupDb.setAttribute("posX", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posX")) + 150));
+		lookupDb.setAttribute("posY", lookupTMap.getAttribute("posY"));
+		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, lookupDb), lookupDb.getAttribute("posX"), lookupDb.getAttribute("posY"));
+		NodeBuilder.appendNodeElement(document, prefixTMap);
+		NodeBuilder.appendNodeElement(document, lookupDb);
+		NodeBuilder.appendNodeElement(document, lookupTMap);
+		System.out.println("feddich");
+	}
+	
+	public static void doLookup2 (Document document, Document template, Lookup2Object data) {
 		//test random Number for lookup Name
 		Random r = new Random();
 		//ConnectionPoint mark must be changed connection(Label), inputTables and metadata (tMap)
@@ -427,7 +505,11 @@ public class tMap extends AbstractNode {
 	//if there's a collection of multiple Lookups (needs to be tested!!!)
 	public static void doLookup (Document document, Document template, Collection<LookupObject> data) throws WrongNodeException {
 		for(LookupObject a : data){
+			if (a instanceof LookupObject) {
 			doLookup(document, template, a);
+			} else {
+				doLookup2(document, template, (Lookup2Object)a);
+			}
 		}
 			
 	}

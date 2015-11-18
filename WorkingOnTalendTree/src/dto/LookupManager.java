@@ -33,13 +33,24 @@ public class LookupManager {
 		List<LookupDTO> rawLookup = new ResultSetMapper<LookupDTO>().mapRersultSetToObject(rs, LookupDTO.class);
 		for(LookupDTO lookup : rawLookup) {
 			System.out.println(lookup.toString());
-			LookupObject object = new LookupObject(lookup);
+			LookupObject object = null;
+			if (lookup.getLookupType().equals("1")){
+			object = new LookupObject(lookup);
+			} else {
+				object = new Lookup2Object(lookup); 
+				}
 			List<ColumnObject>a = cManager.getColumnsForTable(database, lookup.getLookupTable(), lookup.getLookupColumn());
 			List<ColumnObject>b = cManager.getColumnsForTable(database, lookup.getLookupTable(), splitString(lookup.getTableOutputColumn()));
 			object.setLookupTableColumns(combineLists(a,b));
 			object.setPackageReturnColumns(findColumns(cManager.getColumnsForTable(database, p.getDestinationTable()), b, object.getPackageOutputColumns_ReturnColumns() , splitString(lookup.getLookupOutputColumns())));
+			if (object instanceof Lookup2Object) {
+				Lookup2Object temp = (Lookup2Object) object;
+				List<ColumnObject>additionalCols = cManager.getColumnsForTable(database, temp.getLookupTable(), temp.getLU2FromColumn(), temp.getLU2ToColumn());
+				temp.setLookupTableColumns(combineLists(temp.getLookupTableColumns(), additionalCols));
+			}
+			
 			lookups.add(object);
-		}
+			}
 		return lookups;
 	}
 	
@@ -55,6 +66,9 @@ public class LookupManager {
 	
 	public String[] splitString (String a) {
 		String[] strings = a.split(",");
+		for (int i = 0; i<strings.length; i++) {
+			strings[i] = strings[i].trim();
+		}
 		return strings;
 	}
 	

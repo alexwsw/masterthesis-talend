@@ -431,14 +431,14 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row4"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup18457" lineStyle="0" metaname="Lookup18457" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_4">
+<connection connectorName="FLOW" label="Lookup53919" lineStyle="0" metaname="Lookup53919" offsetLabelX="0" offsetLabelY="0" source="tMap_3" target="tMap_4">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup18457"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup53919"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="438">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_2"/>
@@ -529,13 +529,13 @@
 <mapperTableEntries name="ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup18457" sizeState="INTERMEDIATE">
+<outputTables name="Lookup53919" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 <mapperTableEntries expression="tMSSqlInput_3.ID" name="FK_Artikel_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup18457">
+  <metadata connector="FLOW" name="Lookup53919">
 <column key="false" length="10" name="FK_Artikel_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Artikel_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="dasIstUnserDummy" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
@@ -559,14 +559,14 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row7"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup47892" lineStyle="0" metaname="Lookup47892" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tMap_6">
+<connection connectorName="FLOW" label="Lookup57213" lineStyle="0" metaname="Lookup57213" offsetLabelX="0" offsetLabelY="0" source="tMap_5" target="tMap_6">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup47892"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup57213"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="738">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_4"/>
@@ -584,16 +584,16 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup18457" sizeState="INTERMEDIATE">
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup53919" sizeState="INTERMEDIATE">
 <mapperTableEntries name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Artikel_BK" type="id_String"/>
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf( globalMap.get(&quot;FELC1_TargetfieldValue&quot;)+&quot;-&quot;  + Lookup18457.BBKAUF)" name="FK_Bestellkopf_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup18457.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup18457.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup18457.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries expression="String.valueOf( globalMap.get(&quot;FELC1_TargetfieldValue&quot;)+&quot;-&quot;  + Lookup53919.BBKAUF)" name="FK_Bestellkopf_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup53919.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup53919.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup53919.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
@@ -620,7 +620,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,BK from tblBestellkopf&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,FK_Date_Bestelldatum_ID,BK from tblBestellkopf&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -636,6 +636,7 @@
     
   <metadata connector="FLOW" name="tMSSqlInput_4">
 <column key="true" length="10" name="ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="BK" nullable="false" precision="0" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
 </metadata>
 </node>
@@ -663,18 +664,21 @@
 </inputTables>
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tMSSqlInput_4" sizeState="INTERMEDIATE">
 <mapperTableEntries name="ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup47892" sizeState="INTERMEDIATE">
+<outputTables name="Lookup57213" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 <mapperTableEntries expression="tMSSqlInput_4.ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="tMSSqlInput_4.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup47892">
+  <metadata connector="FLOW" name="Lookup57213">
 <column key="false" length="10" name="FK_Bestellkopf_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Bestellkopf_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Artikel_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Artikel_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
@@ -699,14 +703,14 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row10"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup1863" lineStyle="0" metaname="Lookup1863" offsetLabelX="0" offsetLabelY="0" source="tMap_7" target="tMap_8">
+<connection connectorName="FLOW" label="Lookup21466" lineStyle="0" metaname="Lookup21466" offsetLabelX="0" offsetLabelY="0" source="tMap_7" target="tMap_8">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup1863"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup21466"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="1038">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_6"/>
@@ -724,8 +728,9 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup47892" sizeState="INTERMEDIATE">
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup57213" sizeState="INTERMEDIATE">
 <mapperTableEntries name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Artikel_BK" type="id_String"/>
@@ -733,16 +738,18 @@
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="String.valueOf(globalMap.get(&quot;FELC1_TargetfieldValue&quot;) )" name="FK_Tenant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup47892.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup47892.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup47892.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup47892.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup47892.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries expression="Lookup57213.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup57213.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup57213.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup57213.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup57213.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup57213.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
 <column key="false" length="255" name="FK_Tenant_BK" nullable="false" precision="0" sourceType="NVARCHAR" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Bestellkopf_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Bestellkopf_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Artikel_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Artikel_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
@@ -804,6 +811,7 @@
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="meinOutput" sizeState="INTERMEDIATE">
 <mapperTableEntries name="FK_Tenant_BK" type="id_String"/>
 <mapperTableEntries name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Artikel_BK" type="id_String"/>
@@ -813,9 +821,10 @@
 <mapperTableEntries name="ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Tenant_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup1863" sizeState="INTERMEDIATE">
+<outputTables name="Lookup21466" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="meinOutput.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
@@ -823,10 +832,11 @@
 <mapperTableEntries expression="tMSSqlInput_5.ID" name="FK_Tenant_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup1863">
+  <metadata connector="FLOW" name="Lookup21466">
 <column key="false" length="10" name="FK_Tenant_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Tenant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Bestellkopf_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Bestellkopf_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Artikel_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Artikel_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
@@ -851,14 +861,14 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row13"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup83544" lineStyle="0" metaname="Lookup83544" offsetLabelX="0" offsetLabelY="0" source="tMap_9" target="tMap_10">
+<connection connectorName="FLOW" label="Lookup80255" lineStyle="0" metaname="Lookup80255" offsetLabelX="0" offsetLabelY="0" source="tMap_9" target="tMap_10">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup83544"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup80255"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="480" posY="1338">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_8"/>
@@ -876,10 +886,11 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup1863" sizeState="INTERMEDIATE">
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup21466" sizeState="INTERMEDIATE">
 <mapperTableEntries name="FK_Tenant_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Tenant_BK" type="id_String"/>
 <mapperTableEntries name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Artikel_BK" type="id_String"/>
@@ -887,13 +898,14 @@
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="String.valueOf(globalMap.get(&quot;FELC1_TargetfieldValue&quot;) )" name="FK_Waehrung_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup1863.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup1863.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup1863.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup1863.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup1863.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup1863.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup1863.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries expression="Lookup21466.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup21466.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup21466.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup21466.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup21466.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup21466.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup21466.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup21466.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
@@ -901,6 +913,7 @@
 <column key="false" length="10" name="FK_Tenant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Tenant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Bestellkopf_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Bestellkopf_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Artikel_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Artikel_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
@@ -964,6 +977,7 @@
 <mapperTableEntries name="FK_Tenant_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Tenant_BK" type="id_String"/>
 <mapperTableEntries name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Artikel_BK" type="id_String"/>
@@ -973,11 +987,12 @@
 <mapperTableEntries name="ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Waehrung_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup83544" sizeState="INTERMEDIATE">
+<outputTables name="Lookup80255" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Waehrung_BK" name="FK_Waehrung_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="meinOutput.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
@@ -985,12 +1000,13 @@
 <mapperTableEntries expression="tMSSqlInput_6.ID" name="FK_Waehrung_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup83544">
+  <metadata connector="FLOW" name="Lookup80255">
 <column key="false" length="10" name="FK_Waehrung_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Waehrung_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Tenant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Tenant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Bestellkopf_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Bestellkopf_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Artikel_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Artikel_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
@@ -1015,7 +1031,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row16"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup72368" lineStyle="0" metaname="Lookup72368" offsetLabelX="0" offsetLabelY="0" source="tMap_11" target="tMSSqlOutput_1">
+<connection connectorName="FLOW" label="Lookup1211" lineStyle="0" metaname="Lookup1211" offsetLabelX="0" offsetLabelY="0" source="tMap_11" target="tMSSqlOutput_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="dummy"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -1040,28 +1056,30 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup83544" sizeState="INTERMEDIATE">
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup80255" sizeState="INTERMEDIATE">
 <mapperTableEntries name="FK_Waehrung_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Waehrung_BK" type="id_String"/>
 <mapperTableEntries name="FK_Tenant_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Tenant_BK" type="id_String"/>
 <mapperTableEntries name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Artikel_BK" type="id_String"/>
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(null )" name="FK_Tenant_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup83544.FK_Waehrung_ID" name="FK_Waehrung_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup83544.FK_Waehrung_BK" name="FK_Waehrung_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup83544.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup83544.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup83544.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup83544.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup83544.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup83544.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup83544.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries expression="String.valueOf(Lookup80255.null)" name="FK_Tenant_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup80255.FK_Waehrung_ID" name="FK_Waehrung_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup80255.FK_Waehrung_BK" name="FK_Waehrung_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup80255.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup80255.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup80255.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup80255.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup80255.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup80255.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup80255.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup80255.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
@@ -1070,6 +1088,7 @@
 <column key="false" length="255" name="FK_Waehrung_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Tenant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Bestellkopf_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Bestellkopf_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Artikel_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Artikel_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
@@ -1093,7 +1112,7 @@
     <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
     <elementParameter field="GUESS_SCHEMA" name="GUESS_SCHEMA" value="&quot;&quot;"/>
-    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select ID,Waehrungskurs_EUR_in_Fremdwaehrung,Waehrungskurs_Fremdwaehrung_in_EUR,FK_Tenant_ID from tblWaehrungskurs&quot;"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;select VALID_FROM,VALID_TO,ID,Waehrungskurs_EUR_in_Fremdwaehrung,Waehrungskurs_Fremdwaehrung_in_EUR,FK_Tenant_ID from tblWaehrungskurs&quot;"/>
     <elementParameter field="MAPPING_TYPE" name="MAPPING" value="id_MSSQL"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;noDatetimeStringSync=true&quot;"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
@@ -1108,6 +1127,8 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     
   <metadata connector="FLOW" name="tMSSqlInput_7">
+<column key="false" length="10" name="VALID_FROM" nullable="true" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="VALID_TO" nullable="true" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="true" length="10" name="ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Waehrungskurs_EUR_in_Fremdwaehrung" nullable="true" precision="18" sourceType="DECIMAL" type="id_Double" usefulColumn="true"/>
 <column key="false" length="10" name="Waehrungskurs_Fremdwaehrung_in_EUR" nullable="true" precision="18" sourceType="DECIMAL" type="id_Double" usefulColumn="true"/>
@@ -1136,37 +1157,46 @@
 <mapperTableEntries name="FK_Waehrung_BK" type="id_String"/>
 <mapperTableEntries name="FK_Tenant_BK" type="id_String"/>
 <mapperTableEntries name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Artikel_BK" type="id_String"/>
 <mapperTableEntries name="dasIstUnserDummy" type="id_String"/>
 </inputTables>
 <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="tMSSqlInput_7" sizeState="INTERMEDIATE">
+<mapperTableEntries name="VALID_FROM" type="id_Integer"/>
+<mapperTableEntries name="VALID_TO" type="id_Integer"/>
 <mapperTableEntries name="ID" type="id_Integer"/>
 <mapperTableEntries name="Waehrungskurs_EUR_in_Fremdwaehrung" type="id_Double"/>
 <mapperTableEntries name="Waehrungskurs_Fremdwaehrung_in_EUR" type="id_Double"/>
 <mapperTableEntries expression="meinOutput.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
 </inputTables>
-<outputTables name="Lookup72368" sizeState="INTERMEDIATE">
+<outputTables name="Lookup1211" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Waehrung_ID" name="FK_Waehrung_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Waehrung_BK" name="FK_Waehrung_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="meinOutput.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.dasIstUnserDummy" name="dasIstUnserDummy" type="id_String"/>
+<mapperTableEntries expression="tMSSqlInput_7.ID" name="FK_Waehrungskurs_ID" type="id_Integer"/>
+<mapperTableEntries expression="tMSSqlInput_7.Waehrungskurs_EUR_in_Fremdwaehrung" name="Waehrungskurs_EUR_in_Fremdwaehrung" type="id_Double"/>
 <mapperTableEntries expression="tMSSqlInput_7.Waehrungskurs_Fremdwaehrung_in_EUR" name="Waehrungskurs_Fremdwaehrung_in_EUR" type="id_Double"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup72368">
+  <metadata connector="FLOW" name="Lookup1211">
+<column key="false" length="10" name="FK_Waehrungskurs_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="Waehrungskurs_EUR_in_Fremdwaehrung" nullable="true" precision="18" sourceType="DECIMAL" type="id_Double" usefulColumn="true"/>
 <column key="false" length="10" name="Waehrungskurs_Fremdwaehrung_in_EUR" nullable="true" precision="18" sourceType="DECIMAL" type="id_Double" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Tenant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Waehrung_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Waehrung_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Tenant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Bestellkopf_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
+<column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Bestellkopf_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Artikel_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Artikel_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>

@@ -146,6 +146,9 @@ public class LookupObject extends AbstractObject {
 	public String[] split(String argument) {
 		// split only if there're multiple columns given (separated by comma)
 		String[] splitted = argument.split(Pattern.quote(","));
+		for(int i = 0; i<splitted.length; i++) {
+			splitted[i] = splitted[i].trim();
+		}
 		return splitted;
 	}
 
@@ -157,21 +160,6 @@ public class LookupObject extends AbstractObject {
 						packageOutputColumns_ReturnColumns.toString());
 	}
 
-	// verify whether there's a @Trim value in the input String (Prio b)
-	public boolean containsTrim(String input) {
-		return input.contains("@Trim");
-	}
-
-	// remove @Trim value from the String
-	public String removeTrim(String input) {
-		if (input == null) {
-			return null;
-		}
-		String regex = "(@Trim)?";
-		input = input.replaceAll(regex, "");
-		return input;
-	}
-	
 	//Array'd fit as well
 	public List<String> splitPackageColumns(String packageColumns) {
 		if(packageColumns == null) {
@@ -181,6 +169,7 @@ public class LookupObject extends AbstractObject {
 		String[]split = packageColumns.split(Pattern.quote(","));
 		for(String a : split) {
 			a = evaluateColumnOption(a);
+			a = a.trim();
 			columns.add(a);
 		}	
 		return columns;

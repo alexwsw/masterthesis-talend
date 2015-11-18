@@ -54,6 +54,7 @@ public class ColumnObject extends AbstractObject implements Cloneable {
 		this.nullable = otherObject.getNullable();
 		this.precision = otherObject.getPrecision();
 		this.name = otherObject.getName();
+		this.type = otherObject.getType();
 		this.sourceType = otherObject.getSourceType();
 		this.usefulColumn = otherObject.getUsefulColumn();
 		this.pattern = otherObject.getPattern();

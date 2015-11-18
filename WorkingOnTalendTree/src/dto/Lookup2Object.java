@@ -1,5 +1,8 @@
 package dto;
 
+import java.util.ArrayList;
+
+
 public class Lookup2Object extends LookupObject {
 	
 	private String LU2Prefix;
@@ -11,8 +14,8 @@ public class Lookup2Object extends LookupObject {
 	
 	public Lookup2Object (LookupDTO lookup) {
 		super(lookup);
-		this.LU2Prefix = lookup.getLU2Prefix();
-		this.LU2InputColumns = lookup.getLU2InputColumns();
+		this.prefix = lookup.getLU2Prefix();
+		setPackageColumns(lookup.getLU2InputColumns());
 		this.LU2ValidParameter = lookup.getLU2ValidParameter();
 		this.LU2FromColumn = lookup.getLU2FromColumn();
 		this.LU2ToColumn = lookup.getLU2ToColumn();
@@ -67,5 +70,13 @@ public class Lookup2Object extends LookupObject {
 		LU2InclusiveUpperBound = lU2InclusiveUpperBound;
 	}
 	
+	public void setPackageColumns (String newColumn){
+		if (this.packageColumns == null) {
+			this.packageColumns = new ArrayList<String>();
+			packageColumns.add(newColumn);
+		} else {
+			packageColumns.add(newColumn);
+		}
+	}
 	
 }

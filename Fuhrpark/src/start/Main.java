@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
@@ -78,6 +79,15 @@ public class Main {
 		Matcher m = p.matcher(string);
 		if (m.find()){
 			System.out.println(m.group().substring(1).toLowerCase());
+		}
+		String h = " FK_Bestellkopf";
+		ArrayList <Object> ups = new ArrayList<Object>();
+		String hi = "moin";
+		ups.add(hi);
+		for(Object ob : ups) {
+			System.out.println(ob.getClass().getSimpleName().equals("String"));
+			String oba = (String) ob;
+			System.out.println(oba.substring(2));
 		}
 		/*
 		try {
