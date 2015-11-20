@@ -124,6 +124,7 @@ public class ResultSetMapper<T> {
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			System.err.println("No data was found!!!!");
 			e.printStackTrace();
 		} catch (InstantiationException e) {
 			e.printStackTrace();

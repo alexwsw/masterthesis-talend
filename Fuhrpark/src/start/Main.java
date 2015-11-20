@@ -1,6 +1,8 @@
 package start;
 
 
+import java.awt.FlowLayout;
+import java.awt.TextArea;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -13,6 +15,8 @@ import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -89,6 +93,19 @@ public class Main {
 			String oba = (String) ob;
 			System.out.println(oba.substring(2));
 		}
+		JFrame frame = new JFrame("myWindow");
+		frame.setLayout(new FlowLayout(FlowLayout.LEADING));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		TextArea area = new TextArea();
+		frame.add(area);
+		frame.setVisible(true);
+		int i = 0;
+		while (i<100) {
+			area.append(String.format("Hello World%n"));
+			frame.pack();
+			i++;
+		}
+		area.append("The end");
 		/*
 		try {
 			Constructor i = Class.forName("blabla").getConstructor(String.class);

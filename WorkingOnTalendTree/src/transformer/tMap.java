@@ -175,6 +175,23 @@ public class tMap extends AbstractNode {
 
 		Element incomingConnection = (Element) Connection.findConnection(document, node, type);
 		Element inputTables = tMap.createInputTables(document, node, incomingConnection.getAttribute("label"));
+		if (data instanceof Lookup2Object) {
+			Lookup2Object temp = (Lookup2Object) data;
+			String upperBound = "<";
+			addAttribute(document, inputTables, "expressionFilter");
+			addAttribute(document, inputTables, "activateExpressionFilter");
+			addAttribute(document, inputTables, "activateCondensedTool");
+			addAttribute(document, inputTables, "innerJoin");
+			inputTables.setAttribute("activateExpressionFilter", "true");
+			inputTables.setAttribute("activateCondensedTool", "true");
+			inputTables.setAttribute("innerJoin", "true");
+			inputTables.setAttribute("matchingMode", "ALL_MATCHES");
+			if(temp.getLU2InclusiveUpperBound().equals("1")) {
+				upperBound = "<=";
+			}
+			String expression = String.format("%s.%s > %s.%s && %s.%s %s %s.%s", mainInputTables, temp.getLU2ValidParameter(), inputTables.getAttribute("name"), temp.getLU2FromColumn(), mainInputTables, temp.getLU2ValidParameter(), upperBound, inputTables.getAttribute("name"), temp.getLU2ToColumn());
+			inputTables.setAttribute("expressionFilter", expression);
+		}
 		for(ColumnObject column : columns) {
 			Element dummy = tMap.createNodeDataColumnDummy(document);
 			if (column.getName().equals(data.getLookupColumn())) {
@@ -184,15 +201,6 @@ public class tMap extends AbstractNode {
 			dummy.setAttribute("name", column.getName());
 			dummy.setAttribute("type", column.getType());
 			NodeBuilder.appendElementToContext(inputTables, dummy);
-		}
-		if (data instanceof Lookup2Object) {
-			addAttribute(document, inputTables, "expressionFilter");
-			addAttribute(document, inputTables, "activateExpressionFilter");
-			addAttribute(document, inputTables, "activateCondensedTool");
-			addAttribute(document, inputTables, "innerJoin");
-			inputTables.setAttribute("activateExpressionFilter", "true");
-			inputTables.setAttribute("activateCondensedTool", "true");
-			inputTables.setAttribute("innerJoin", "true");
 		}
 		return inputTables.getAttribute("name");
 	}
@@ -426,58 +434,7 @@ public class tMap extends AbstractNode {
 		System.out.println("feddich");
 	}
 	
-	public static void doLookup2 (Document document, Document template, Lookup2Object data) {
-		//test random Number for lookup Name
-		Random r = new Random();
-		//ConnectionPoint mark must be changed connection(Label), inputTables and metadata (tMap)
-		//setting/removing of ConnectionPoint should be outsourced in a separate method
-		//ConnectionPoint as unique_name? could be more useful....
-		String startPointMark = "ConnectionPoint";
-		Element startConnection = (Element) AbstractNode.getElementByValue(document, startPointMark);
-		Element startMetadata = (Element) Navigator.processXPathQueryNode(document, XPathExpressions.getMetaDataForConnection, startConnection.getAttribute("metaname"));
-		Element previousNode = (Element)startMetadata.getParentNode();
-		//relabel the connection (essential for the inputTables)
-		AbstractNode.setAttribute(startConnection, "UNIQUE_NAME", startConnection.getAttribute("metaname"));
-		//startConnection.setAttribute("label", startMetadata.getAttribute("name"));
-		Element prefixTMap = tMap.newInstance(document, template, "PrefixMaker");
-		Element lookupTMap = tMap.newInstance(document, template, "LookupNode");
-		Element lookupDb = tMSSqlInput.newInstance(document, template, "LookupDB", data.getLookupTableColumns(), "MyConnection", data.getLookupTable());
-		Connection.newConnection(document, template, AbstractNode.getMetadata(document, lookupDb, "FLOW"), lookupTMap, EConnectionTypes.Lookup);
-		//redirect the startConnection to the prefix tMap Node
-		startConnection.setAttribute("target", AbstractNode.getNodesUniqueName(document, prefixTMap));
-		//put the entire data from the input Dto into the inputTables
-		//Element inputTables = tMap.createInputTables(document, prefixTMap, startConnection.getAttribute("label"));
-		String inputName = tMap.setInputTables(document, prefixTMap, tMap.extractMetadata(startMetadata), EConnectionTypes.Main);
-		Element prefixMData = tMap.setOutput(document, prefixTMap, "meinOutput", tMap.extractMetadata(startMetadata), data, inputName, null);
-		Connection.newConnection(document, template, prefixMData, lookupTMap, EConnectionTypes.Main);
-		String nameInputTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(prefixMData), EConnectionTypes.Main);
-		String nameLookupTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, EConnectionTypes.Lookup);
-		Element lookupMetadata = tMap.setLookupOutput(document, lookupTMap, ("Lookup" + r.nextInt(100000)), tMap.extractMetadata(prefixMData), tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, nameLookupTable);
-		Element newConnection = Connection.newConnection(document, template, lookupMetadata, AbstractNode.getElementByValue(document, "MyOutput"), EConnectionTypes.Main);
-		AbstractNode.setAttribute(newConnection, "UNIQUE_NAME", "ConnectionPoint");
-		/*
-		Element outputTables = tMap.createOutputTables(document, "preparedOutput");
-		Element outputMData = tMap.createMetadata(document, outputTables);
-		*/
-		
-		//String varTableName =  tMap.setPrefix(document, tMap.getNodeData(prefixTMap), data);
-		
-		
-		
-		//put nodes onto the proper place in the designer (separate method?)
-		prefixTMap.setAttribute("posY", String.valueOf(Integer.parseInt(previousNode.getAttribute("posY")) + 150));
-		System.err.printf("Previous Node: %s%n", AbstractNode.getNodesUniqueName(document, previousNode));
-		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, prefixTMap), prefixTMap.getAttribute("posX"), prefixTMap.getAttribute("posY"));
-		lookupTMap.setAttribute("posY", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posY")) + 150));
-		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, lookupTMap), lookupTMap.getAttribute("posX"), lookupTMap.getAttribute("posY"));
-		lookupDb.setAttribute("posX", String.valueOf(Integer.parseInt(prefixTMap.getAttribute("posX")) + 150));
-		lookupDb.setAttribute("posY", lookupTMap.getAttribute("posY"));
-		System.err.printf("Node: %s, PosX = %s, PosY = %s", AbstractNode.getNodesUniqueName(document, lookupDb), lookupDb.getAttribute("posX"), lookupDb.getAttribute("posY"));
-		NodeBuilder.appendNodeElement(document, prefixTMap);
-		NodeBuilder.appendNodeElement(document, lookupDb);
-		NodeBuilder.appendNodeElement(document, lookupTMap);
-		System.out.println("feddich");
-	}
+	
 	
 	public static boolean doesElementExist (Node node, String elementTag, String parameter) {
 		Node result = Navigator.processXPathQueryNode(node, XPathExpressions.findElement, elementTag, parameter);
@@ -505,11 +462,8 @@ public class tMap extends AbstractNode {
 	//if there's a collection of multiple Lookups (needs to be tested!!!)
 	public static void doLookup (Document document, Document template, Collection<LookupObject> data) throws WrongNodeException {
 		for(LookupObject a : data){
-			if (a instanceof LookupObject) {
 			doLookup(document, template, a);
-			} else {
-				doLookup2(document, template, (Lookup2Object)a);
-			}
+			
 		}
 			
 	}

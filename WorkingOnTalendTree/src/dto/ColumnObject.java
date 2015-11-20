@@ -177,6 +177,8 @@ public class ColumnObject extends AbstractObject implements Cloneable {
 			break;
 		//according to JDBC decimal should be converted into BigDecimal
 		case "DECIMAL":
+			this.type = "id_BigDecimal";
+			break;
 		case "FLOAT":
 			this.type = "id_Double";
 			break;
