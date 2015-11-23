@@ -47,7 +47,7 @@ public class tMSSqlInput extends AbstractNode{
 		AbstractNode.setAttribute(copy, "TABLE", String.format("\"%s\"", table));
 		//delete the last comma
 		sqlParameters = sqlParameters.substring(0, sqlParameters.length()-1);
-		String sqlStatement = String.format("select %s from %s", sqlParameters, table);
+		String sqlStatement = String.format("select %s from dwh.%s", sqlParameters, table);
 		AbstractNode.setAttribute(copy, "QUERY", String.format("\"%s\"", sqlStatement));
 		/*
 		Element mData = (Element) AbstractNode.getMetadata(document, copy);

@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -106,6 +108,26 @@ public class Main {
 			i++;
 		}
 		area.append("The end");
+		String text = "-1 * (Kassenzettelwert_Brutto_LC * Currencyconversionrate_LC_to_EUR_Year)";
+		String regExp = "[A-Za-z][A-Za-z1-9_]*[A-Za-z1-9]";
+		String table = "myTab";
+		p = Pattern.compile(regExp);
+		m = p.matcher(text);
+		Set<String>matches = new TreeSet<String>();
+		while(m.find()) {
+			System.out.println(m.group().toString());
+			matches.add(m.group());
+		}
+		System.out.println(text);
+		for(String aa : matches) {
+			if(text.contains(aa)) {
+				text = text.replace(aa, String.format("%s.%s", table, aa));
+			}
+		}
+		System.out.println(text);
+		String prim = "BBEANR,BBMK";
+		String tfv = "0";
+		Object ll = prim;
 		/*
 		try {
 			Constructor i = Class.forName("blabla").getConstructor(String.class);
