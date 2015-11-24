@@ -1,6 +1,7 @@
 package transformer;
 
 import java.util.Collection;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -313,7 +314,7 @@ public class tMap extends AbstractNode {
 			for(Map.Entry<String, String> entry : data.getPackageOutputColumns_ReturnColumns().entrySet()) {
 				if (column.getName().equals(entry.getKey())) {
 					tMap.addAttribute(document, dummy);
-					dummy.setAttribute("expression", String.format("%s.%s", secondaryTable, entry.getKey()));
+					dummy.setAttribute("expression", String.format("(%s.%s == %s)? %s : %s.%s", secondaryTable, entry.getKey(), setNullHandling(column), setDefault(column.getType()), secondaryTable, entry.getKey()));
 					dummy.setAttribute("name", entry.getValue());
 					dummy.setAttribute("type", column.getType());
 					NodeBuilder.appendElementToContext(outputTables, dummy);
@@ -322,7 +323,15 @@ public class tMap extends AbstractNode {
 					metadataDummy.setAttribute("name", entry.getValue());
 				}	
 			}
+			NodeBuilder.appendElementToContext(outputTables, dummy);
 		}
+		ColumnObject object = getObjectByName(lookupColumns, data.getLookupColumn());
+		Element dummy = tMap.createNodeDataColumnDummy(document);
+		dummy.setAttribute("expression", String.format("(%s.%s == null)? ++%s.%s : %s.%s", secondaryTable, data.getLookupColumn(), mainTable, "isETL_ErrorCount", mainTable, "isETL_ErrorCount"));
+		dummy.setAttribute("name", "isETL_ErrorCount");
+		dummy.setAttribute("type", object.getType());
+		NodeBuilder.appendElementToContext(outputTables, dummy);
+
 		tMap.setWholeMetadataFromDTO(document, inputColumns, metaData);
 		return metaData;
 	}
@@ -396,7 +405,7 @@ public class tMap extends AbstractNode {
 		//startConnection.setAttribute("label", startMetadata.getAttribute("name"));
 		Element prefixTMap = tMap.newInstance(document, template, "PrefixMaker");
 		Element lookupTMap = tMap.newInstance(document, template, "LookupNode");
-		Element lookupDb = tMSSqlInput.newInstance(document, template, "LookupDB", data.getLookupTableColumns(), "MyConnection", data.getLookupTable());
+		Element lookupDb = tMSSqlInput.newInstance(document, template, "LookupDB", data.getLookupTableColumns(), "HENRY_DWH_isETL", data.getLookupTable());
 		Connection.newConnection(document, template, AbstractNode.getMetadata(document, lookupDb, "FLOW"), lookupTMap, EConnectionTypes.Lookup);
 		//redirect the startConnection to the prefix tMap Node
 		startConnection.setAttribute("target", AbstractNode.getNodesUniqueName(document, prefixTMap));
@@ -408,7 +417,7 @@ public class tMap extends AbstractNode {
 		String nameInputTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(prefixMData), EConnectionTypes.Main);
 		String nameLookupTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, EConnectionTypes.Lookup);
 		Element lookupMetadata = tMap.setLookupOutput(document, lookupTMap, ("Lookup" + r.nextInt(100000)), tMap.extractMetadata(prefixMData), tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, nameLookupTable);
-		Element newConnection = Connection.newConnection(document, template, lookupMetadata, AbstractNode.getElementByValue(document, "MyOutput"), EConnectionTypes.Main);
+		Element newConnection = Connection.newConnection(document, template, lookupMetadata, AbstractNode.getElementByValue(document, "DER FK_ID"), EConnectionTypes.Main);
 		AbstractNode.setAttribute(newConnection, "UNIQUE_NAME", "ConnectionPoint");
 		/*
 		Element outputTables = tMap.createOutputTables(document, "preparedOutput");
@@ -469,7 +478,7 @@ public class tMap extends AbstractNode {
 	}
 	
 		
-	public static ColumnObject getObjectByName(List<ColumnObject>columns, String name) {
+	public static ColumnObject getObjectByName(Collection<ColumnObject>columns, String name) {
 		for(ColumnObject o : columns) {
 			if (o.getName().equals(name)) {
 				return o;
@@ -477,6 +486,28 @@ public class tMap extends AbstractNode {
 		}
 		System.out.println(name + " not found!!!!!!");
 		return null;
+	}
+	
+	public static String setDefault (String dataType) {
+		switch(dataType) {
+		case "id_String":
+			return "#";
+		case "id_Date":
+			return "new GregorianCalendar(1900, 00, 01).getTime()";
+		case "id_BigDecimal":
+			return "new BigDecimal(\"0\")";
+		default :
+			return "0";
+		}
+	}
+	
+	public static String setNullHandling (ColumnObject object) {
+		if (object.getNullable().equals("true")) {
+			return "null";
+		} else if (!(object.getType().equals("id_String") || object.getType().equals("id_BigDecimal") || object.getType().equals("id_Date"))) {
+			return "0";
+		}
+		return "null";
 	}
 
 }

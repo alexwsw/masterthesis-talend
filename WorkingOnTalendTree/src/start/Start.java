@@ -65,6 +65,7 @@ public class Start {
 		ColumnManager clm = new ColumnManager(performer);
 		List<ColumnObject> columnsss = clm.getColumnsForTable(database2, p.getDestinationTable(), null);
 		System.out.println(columnsss.toString());
+		/*
 		//Connection
 		tMSSqlConnection.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
 				
@@ -72,11 +73,13 @@ public class Start {
 		Node commit = AbstractNode.getElementByValue(document, "MyCommit");
 		AbstractNode.setAttribute(commit, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
 		//Output
-		Node destination = AbstractNode.getElementByValue(document, "MyOutput");
 		AbstractNode.setAttribute(destination, "CONNECTION", AbstractNode.getUniqueName(document, "MyConnection"));
 		AbstractNode.setAttribute(destination, "TABLE", String.format("\"%s\"", p.getDestinationTable()));
 		AbstractNode.setAttribute(destination, "DATA_ACTION", "INSERT");
 		//AbstractNode.setWholeMetadataFromDTO(document, targetColumns, AbstractNode.getMetadata(document, destination));
+		 
+		 */
+		Node destination = AbstractNode.getElementByValue(document, "Update dwh.tbl");
 		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, destination));		
 		LookupManager lMan = new LookupManager(performer, p);
 		List<LookupObject>lookups = lMan.createLookupsFromDatabase(database2, schema2);

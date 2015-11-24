@@ -128,6 +128,8 @@ public class Main {
 		String prim = "BBEANR,BBMK";
 		String tfv = "0";
 		Object ll = prim;
+		Date dada = new GregorianCalendar(1900, 00, 01).getTime();
+		System.out.println(dada);
 		/*
 		try {
 			Constructor i = Class.forName("blabla").getConstructor(String.class);
