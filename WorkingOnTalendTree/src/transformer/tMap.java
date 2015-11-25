@@ -336,7 +336,7 @@ public class tMap extends AbstractNode {
 		return metaData;
 	}
 	
-	public static Element setOutput(Document document, Node node, String name, Collection <ColumnObject> inputColumns, LookupObject data, String mainTable, String secondaryTable) {
+	public static Element setOutput(Document document, Node node, String name, Collection <ColumnObject> inputColumns, LookupObject data, String mainTable) {
 		Element outputTables = tMap.createOutputTables(document, node, name);
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
 		if(data != null) {
@@ -412,7 +412,7 @@ public class tMap extends AbstractNode {
 		//put the entire data from the input Dto into the inputTables
 		//Element inputTables = tMap.createInputTables(document, prefixTMap, startConnection.getAttribute("label"));
 		String inputName = tMap.setInputTables(document, prefixTMap, tMap.extractMetadata(startMetadata), EConnectionTypes.Main);
-		Element prefixMData = tMap.setOutput(document, prefixTMap, "meinOutput", tMap.extractMetadata(startMetadata), data, inputName, null);
+		Element prefixMData = tMap.setOutput(document, prefixTMap, "meinOutput", tMap.extractMetadata(startMetadata), data, inputName);
 		Connection.newConnection(document, template, prefixMData, lookupTMap, EConnectionTypes.Main);
 		String nameInputTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(prefixMData), EConnectionTypes.Main);
 		String nameLookupTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, EConnectionTypes.Lookup);

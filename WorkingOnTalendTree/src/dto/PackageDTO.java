@@ -25,6 +25,7 @@ public class PackageDTO {
 	@Column(name="Destinationtablename")
 	private String destinationTable;
 	
+	
 	public PackageDTO() {}
 
 	public PackageDTO(String id, String name, String dq1, String dq2,

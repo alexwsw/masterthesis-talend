@@ -29,7 +29,7 @@ public class ColumnObject extends AbstractObject implements Cloneable {
 		this.name = column.getName();
 		this.sourceType = column.getSourceType();
 		mapType(this.sourceType);
-		this.pattern = (this.sourceType == "id_Date")? "dd-MM-yyyy" : null;
+		this.pattern = (this.sourceType.equals("DATETIME") || this.sourceType.equals("DATE"))? "\"dd-MM-yyyy\"" : null;
 		this.usefulColumn = "true";
 	}
 	

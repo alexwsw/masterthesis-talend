@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import jdbc.ResultSetMapper;
 import jdbc.SQLQueryPerformer;
@@ -39,13 +41,21 @@ public class LookupManager {
 			} else {
 				object = new Lookup2Object(lookup); 
 				}
-			List<ColumnObject>a = cManager.getColumnsForTable(database, lookup.getLookupTable(), lookup.getLookupColumn());
-			List<ColumnObject>b = cManager.getColumnsForTable(database, lookup.getLookupTable(), splitString(lookup.getTableOutputColumn()));
+			String luSchema = "";
+			Pattern p = Pattern.compile("[A-Za-z]+(\\.)");
+			Matcher m = p.matcher(lookup.getLookupTable());
+			if (m.find()) {
+				luSchema = m.group().substring(0, m.group().length()-1);
+			} else {
+				luSchema = "dwh";
+			}
+			List<ColumnObject>a = cManager.getColumnsForTable(database, lookup.getLookupTable(), luSchema, lookup.getLookupColumn());
+			List<ColumnObject>b = cManager.getColumnsForTable(database, lookup.getLookupTable(), luSchema, splitString(lookup.getTableOutputColumn()));
 			object.setLookupTableColumns(combineLists(a,b));
-			object.setPackageReturnColumns(findColumns(cManager.getColumnsForTable(database, p.getDestinationTable()), b, object.getPackageOutputColumns_ReturnColumns() , splitString(lookup.getLookupOutputColumns())));
+			object.setPackageReturnColumns(findColumns(cManager.getColumnsForTable(database, this.p.getDestinationTable(), "dwh"), b, object.getPackageOutputColumns_ReturnColumns() , splitString(lookup.getLookupOutputColumns())));
 			if (object instanceof Lookup2Object) {
 				Lookup2Object temp = (Lookup2Object) object;
-				List<ColumnObject>additionalCols = cManager.getColumnsForTable(database, temp.getLookupTable(), temp.getLU2FromColumn(), temp.getLU2ToColumn());
+				List<ColumnObject>additionalCols = cManager.getColumnsForTable(database, temp.getLookupTable(), "dwh", temp.getLU2FromColumn(), temp.getLU2ToColumn());
 				temp.setLookupTableColumns(combineLists(temp.getLookupTableColumns(), additionalCols));
 			}
 			

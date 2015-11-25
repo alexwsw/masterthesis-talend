@@ -1,6 +1,8 @@
 package start;
 
 
+import globalVar.tSetGlobalVar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import dto.ColumnObject;
 import dto.LookupManager;
 import dto.LookupObject;
 import dto.PackageDTO;
+import dto.SourceObjectDTO;
 
 
 public class Start {
@@ -47,24 +50,49 @@ public class Start {
 		
 		
 		String schema2= "isETL";
-		String database2= "Henry_LS_DWH";
+		String databaseDWH= "Henry_LS_DWH";
 		String pass2 = "10Runsql";
+		String databaseSA= "Henry_LS_SA_PP";
+		String databaseSRC= "Henry_LS_SRC_PP";
 
 		
-		String connURL = String.format("jdbc:sqlserver://%s;databaseName=%s;schema=%s", host, database2, schema2);
+		String connURL = String.format("jdbc:sqlserver://%s", host);
 		DBConnectionBuilder connection = new DBConnectionBuilder();
 		SQLQueryPerformer performer = new SQLQueryPerformer(connection.createConnection(connURL, user, pass2));
-		
+		/*
+		DBConnectionBuilder connectSA = new DBConnectionBuilder();
+		DBConnectionBuilder connectSRC = new DBConnectionBuilder();
+		String connSA= String.format("jdbc:sqlserver://%s;databaseName=%s", host, databaseSA);
+		String connSRC= String.format("jdbc:sqlserver://%s;databaseName=%s", host, databaseSRC);
+		SQLQueryPerformer perfSA = new SQLQueryPerformer(connectSA.createConnection(connSA, user, pass2));
+		SQLQueryPerformer perfSRC = new SQLQueryPerformer(connectSRC.createConnection(connSRC, user, pass2));
+		*/
 		ResultSetMapper<PackageDTO>forPackage = new ResultSetMapper<PackageDTO>();
+		ResultSetMapper<SourceObjectDTO>forSource = new ResultSetMapper<SourceObjectDTO>();
 		java.util.Scanner input = new java.util.Scanner(System.in);
 		System.out.print("Package number?: ");
 		int number = input.nextInt();
 		input.close();
-		String sql2 = String.format("Select * from [%s].[%s].tblSourceobjectgroup where ID = %s", database2, schema2, number);
-		PackageDTO p = forPackage.mapRersultSetToSingleObject(performer.executeSQLQuery(sql2), PackageDTO.class);
+		String sql2 = String.format("Select * from [%s].[%s].tblSourceobjectgroup where ID = %s", databaseDWH, schema2, number);
+		String sqlSourceObject = String.format("Select top 1 * from [%s].[%s].tblSourceobject where FK_Sourceobjectgroup_ID = %s", databaseDWH, schema2, number);
+		PackageDTO p = forPackage.mapRersultSetToSingleObject(performer.executeSQLQuery(sql2), PackageDTO.class);	
+		SourceObjectDTO s = forSource.mapRersultSetToSingleObject(performer.executeSQLQuery(sqlSourceObject), SourceObjectDTO.class);
+		tSetGlobalVar.setGlobalVariables(document, p, s);
 		ColumnManager clm = new ColumnManager(performer);
-		List<ColumnObject> columnsss = clm.getColumnsForTable(database2, p.getDestinationTable(), null);
-		System.out.println(columnsss.toString());
+		Node dq1 = AbstractNode.getElementByValue(document, "DST tblerr (DQ1)");
+		List<ColumnObject> dq1Col = clm.getColumnsForTable(databaseSA, p.getDq1().substring(4), p.getDq1().substring(0, 3), null);
+		AbstractNode.setWholeMetadataFromDTO(document, dq1Col, AbstractNode.getMetadata(document, dq1));
+		Node dq2 = AbstractNode.getElementByValue(document, "DST tblerr (DQ2)");
+		List<ColumnObject> dq2Col = clm.getColumnsForTable(databaseSA, p.getDq2().substring(4), p.getDq2().substring(0, 3), null);
+		AbstractNode.setWholeMetadataFromDTO(document, dq2Col, AbstractNode.getMetadata(document, dq2));
+		Node dq3 = AbstractNode.getElementByValue(document, "DST tblerr (DQ3)");
+		List<ColumnObject> dq3Col = clm.getColumnsForTable(databaseSA, p.getDq3().substring(4), p.getDq3().substring(0, 3), null);
+		AbstractNode.setWholeMetadataFromDTO(document, dq3Col, AbstractNode.getMetadata(document, dq3));
+		List<ColumnObject> columnsss = clm.getColumnsForTable(databaseDWH, p.getDestinationTable(), "dwh", null);
+		Node start = AbstractNode.getElementByValue(document, "StartPoint");
+		List<ColumnObject> srcTbl = clm.getColumnsForTable(databaseSRC, s.getSourceTable(), "dbo", null);
+		AbstractNode.setWholeMetadataFromDTO(document, srcTbl, AbstractNode.getMetadata(document, start));
+		//System.out.println(columnsss.toString());
 		/*
 		//Connection
 		tMSSqlConnection.setDBConnection(document, "MyConnection", host, port, schema, database, user, password);
@@ -82,7 +110,7 @@ public class Start {
 		Node destination = AbstractNode.getElementByValue(document, "Update dwh.tbl");
 		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, destination));		
 		LookupManager lMan = new LookupManager(performer, p);
-		List<LookupObject>lookups = lMan.createLookupsFromDatabase(database2, schema2);
+		List<LookupObject>lookups = lMan.createLookupsFromDatabase(databaseDWH, schema2);
 		//System.out.println(lookups.toString());
 		tMap.doLookup(document, fixedTemplate, lookups);
 		

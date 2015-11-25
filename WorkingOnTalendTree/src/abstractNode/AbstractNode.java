@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -400,9 +401,18 @@ public abstract class AbstractNode {
 		}
 		if(column.getPattern() != null) {
 			dummy.setAttributeNode(document.createAttribute("pattern"));
-			dummy.setAttribute("pattern", column.getSourceType());
+			dummy.setAttribute("pattern", column.getPattern());
 		}
 		NodeBuilder.appendElementToContext(metadata, dummy);
 		return dummy;
+	}
+	public static Element createElementValueDummy(Document document) {
+		Element dummy = document.createElementNS("http://www.talend.org/mapper", "elementValue");
+		Attr att1 = document.createAttribute("elementRef");
+		Attr att2 = document.createAttribute("value");
+		dummy.setAttributeNode(att1);
+		dummy.setAttributeNode(att2);
+		return dummy;
+		
 	}
 }

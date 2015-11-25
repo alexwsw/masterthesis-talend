@@ -50,12 +50,12 @@ public class SQLQueryPerformer {
 	}
 	
 	
-	public ResultSet getMetadataForColumns(String database, String tableName, String... columnNames){
+	public ResultSet getMetadataForColumns(String database, String tableName, String schema, String... columnNames){
 		ResultSet columns = null;
 		//if there is a schema definition before the table name
 		tableName = tableName.replaceAll("[a-zA-Z]+(\\.)", "");
 		System.err.println(tableName);
-		String query = "select " +  
+		String query = "select distinct " +  
 				"(case when c.CONSTRAINT_TYPE = upper('primary key') then 'true' else 'false' end) as is_key, " +
 				"(case when a.CHARACTER_MAXIMUM_LENGTH is null then 10 else a.CHARACTER_MAXIMUM_LENGTH end) as field_length, " +
 				"a.COLUMN_NAME as name, " +
@@ -73,14 +73,16 @@ public class SQLQueryPerformer {
 				"[database].INFORMATION_SCHEMA.TABLE_CONSTRAINTS c " + 
 				"on " + 
 				"c.CONSTRAINT_NAME = b.CONSTRAINT_NAME and b.TABLE_NAME = c.TABLE_NAME " +
-				"where " + 
+				"where " +
+				"a.TABLE_SCHEMA = '%s' " +
+				"and " +
 				"a.TABLE_NAME = '%s' " + 
 				"and " + 
 				"(c.CONSTRAINT_TYPE = upper('primary key') "+ 
 				"or " + 
 				"c.CONSTRAINT_NAME is null)";
 		query = query.replaceAll("(database)", database);
-		query = String.format(query, tableName);
+		query = String.format(query, schema, tableName);
 		System.out.println(query);
 		if (columnNames != null && columnNames.length > 0) {
 			query = query + "and (%s)";
