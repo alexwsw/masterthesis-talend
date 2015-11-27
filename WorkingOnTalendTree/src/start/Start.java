@@ -41,8 +41,8 @@ public class Start {
 		
 		String host = "172.21.100.77";
 		String port = "1433";
-		String schema= "dbo";
-		String database= "TALEND_TEST";
+		//String schema= "dbo";
+		//String database= "TALEND_TEST";
 		String user = "isETL_User";
 		//de-/encryptor required (look in the talend source code for implementation)
 		//String password = "hTgAoqXDCdLnPZDSDy6ojQ==";

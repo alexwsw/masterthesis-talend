@@ -4,6 +4,7 @@ package start;
 import java.awt.FlowLayout;
 import java.awt.TextArea;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -130,6 +131,16 @@ public class Main {
 		Object ll = prim;
 		Date dada = new GregorianCalendar(1900, 00, 01).getTime();
 		System.out.println(dada);
+		try {
+			Class oo = Class.forName(bmw.getClass().getName());
+			Field[]fields = oo.getDeclaredFields();
+			for (Field f : fields) {
+				System.out.println(f.getName());
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		/*
 		try {
 			Constructor i = Class.forName("blabla").getConstructor(String.class);

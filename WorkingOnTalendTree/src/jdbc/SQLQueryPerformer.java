@@ -63,6 +63,7 @@ public class SQLQueryPerformer {
 				//--a.COLUMN_NAME as originalDbColumnName,
 				"(case when a.NUMERIC_PRECISION is null then '0' else a.NUMERIC_PRECISION end) as precision, " +
 				"upper(a.DATA_TYPE) as sourceType, 'true' as usefulColumn " +
+				"a.ORDINAL_POSITION " +
 				"from " + 
 				"[database].INFORMATION_SCHEMA.COLUMNS a " +
 				"left join " +
@@ -80,7 +81,8 @@ public class SQLQueryPerformer {
 				"and " + 
 				"(c.CONSTRAINT_TYPE = upper('primary key') "+ 
 				"or " + 
-				"c.CONSTRAINT_NAME is null)";
+				"c.CONSTRAINT_NAME is null) " + 
+				"order by a.ORDINAL_POSITION";
 		query = query.replaceAll("(database)", database);
 		query = String.format(query, schema, tableName);
 		System.out.println(query);
