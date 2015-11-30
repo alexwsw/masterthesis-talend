@@ -73,10 +73,13 @@ public class Start {
 		System.out.print("Package number?: ");
 		int number = input.nextInt();
 		input.close();
+		//get package data
 		String sql2 = String.format("Select * from [%s].[%s].tblSourceobjectgroup where ID = %s", databaseDWH, schema2, number);
 		String sqlSourceObject = String.format("Select top 1 * from [%s].[%s].tblSourceobject where FK_Sourceobjectgroup_ID = %s", databaseDWH, schema2, number);
-		PackageDTO p = forPackage.mapRersultSetToSingleObject(performer.executeSQLQuery(sql2), PackageDTO.class);	
+		PackageDTO p = forPackage.mapRersultSetToSingleObject(performer.executeSQLQuery(sql2), PackageDTO.class);
+		//get data for the source object
 		SourceObjectDTO s = forSource.mapRersultSetToSingleObject(performer.executeSQLQuery(sqlSourceObject), SourceObjectDTO.class);
+		//set global variables
 		tSetGlobalVar.setGlobalVariables(document, p, s);
 		ColumnManager clm = new ColumnManager(performer);
 		Node dq1 = AbstractNode.getElementByValue(document, "DST tblerr (DQ1)");
@@ -92,6 +95,21 @@ public class Start {
 		Node start = AbstractNode.getElementByValue(document, "StartPoint");
 		List<ColumnObject> srcTbl = clm.getColumnsForTable(databaseSRC, s.getSourceTable(), "dbo", null);
 		AbstractNode.setWholeMetadataFromDTO(document, srcTbl, AbstractNode.getMetadata(document, start));
+		Node destination = AbstractNode.getElementByValue(document, "Update dwh.tbl");
+		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, destination));		
+		
+		Node firstTMap = AbstractNode.getElementByValue(document, "DER isPKNULL und DER technical fields");
+		tMap.setOutput(document, firstTMap, "Filter_valid_records", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, start)), null, "DER_isPKNULL");
+		tMap.addTechnicalCols(document, s);
+		Node dq1TMap = AbstractNode.getElementByValue(document, "Filter valid records");
+		tMap.setOutput(document, dq1TMap, "Data_Conversion", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, firstTMap)), null, "Filter_valid_records");
+		tMap.setOutput(document, dq1TMap, "DQ1Errors", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, firstTMap)), null, "Filter_valid_records");
+		Node dq2TMap = AbstractNode.getElementByValue(document, "Data conversion");
+		tMap.setOutput(document, dq2TMap, "DER_FUNCTIONAL_FIELDS", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, dq1TMap)), null, "Data_Conversion");
+		
+		LookupManager lMan = new LookupManager(performer, p);
+		List<LookupObject>lookups = lMan.createLookupsFromDatabase(databaseDWH, schema2);
+		tMap.doLookup(document, fixedTemplate, lookups);
 		//System.out.println(columnsss.toString());
 		/*
 		//Connection
@@ -107,12 +125,7 @@ public class Start {
 		//AbstractNode.setWholeMetadataFromDTO(document, targetColumns, AbstractNode.getMetadata(document, destination));
 		 
 		 */
-		Node destination = AbstractNode.getElementByValue(document, "Update dwh.tbl");
-		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, destination));		
-		LookupManager lMan = new LookupManager(performer, p);
-		List<LookupObject>lookups = lMan.createLookupsFromDatabase(databaseDWH, schema2);
 		//System.out.println(lookups.toString());
-		tMap.doLookup(document, fixedTemplate, lookups);
 		
 		DocumentCreator.SaveDOMFile(document, output);
 		connection.closeConnection();

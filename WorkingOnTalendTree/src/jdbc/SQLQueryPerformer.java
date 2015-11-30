@@ -62,7 +62,7 @@ public class SQLQueryPerformer {
 				"(case when a.IS_NULLABLE = upper('yes') then 'true' else 'false' end) as is_nullable, " +
 				//--a.COLUMN_NAME as originalDbColumnName,
 				"(case when a.NUMERIC_PRECISION is null then '0' else a.NUMERIC_PRECISION end) as precision, " +
-				"upper(a.DATA_TYPE) as sourceType, 'true' as usefulColumn " +
+				"upper(a.DATA_TYPE) as sourceType, 'true' as usefulColumn, " +
 				"a.ORDINAL_POSITION " +
 				"from " + 
 				"[database].INFORMATION_SCHEMA.COLUMNS a " +
@@ -81,8 +81,7 @@ public class SQLQueryPerformer {
 				"and " + 
 				"(c.CONSTRAINT_TYPE = upper('primary key') "+ 
 				"or " + 
-				"c.CONSTRAINT_NAME is null) " + 
-				"order by a.ORDINAL_POSITION";
+				"c.CONSTRAINT_NAME is null) ";
 		query = query.replaceAll("(database)", database);
 		query = String.format(query, schema, tableName);
 		System.out.println(query);
@@ -95,6 +94,7 @@ public class SQLQueryPerformer {
 		//remove the rest
 		whereColumns = whereColumns.substring(0, whereColumns.length()-3);
 		query = String.format(query, whereColumns);
+		query = query + " order by a.ORDINAL_POSITION";
 		}
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(query);

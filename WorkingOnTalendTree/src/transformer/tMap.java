@@ -17,6 +17,7 @@ import database.tMSSqlInput;
 import dto.ColumnObject;
 import dto.Lookup2Object;
 import dto.LookupObject;
+import dto.SourceObjectDTO;
 import enums.EConnectionTypes;
 import enums.XPathExpressions;
 import exception.WrongNodeException;
@@ -170,38 +171,45 @@ public class tMap extends AbstractNode {
 		return inputTables.getAttribute("name");
 	}
 	
-	//needs to be redesigned!!!!
-	//try setting the join match model attribute to "all matches"
+
 	public static String setInputTables(Document document, Node node, Collection<ColumnObject> columns, LookupObject data, String mainInputTables, EConnectionTypes type) {
 
 		Element incomingConnection = (Element) Connection.findConnection(document, node, type);
 		Element inputTables = tMap.createInputTables(document, node, incomingConnection.getAttribute("label"));
-		if (data instanceof Lookup2Object) {
-			Lookup2Object temp = (Lookup2Object) data;
-			String upperBound = "<";
-			addAttribute(document, inputTables, "expressionFilter");
-			addAttribute(document, inputTables, "activateExpressionFilter");
-			addAttribute(document, inputTables, "activateCondensedTool");
-			addAttribute(document, inputTables, "innerJoin");
-			inputTables.setAttribute("activateExpressionFilter", "true");
-			inputTables.setAttribute("activateCondensedTool", "true");
-			inputTables.setAttribute("innerJoin", "true");
-			inputTables.setAttribute("matchingMode", "ALL_MATCHES");
-			if(temp.getLU2InclusiveUpperBound().equals("1")) {
-				upperBound = "<=";
+		if(data != null) {
+			if (data instanceof Lookup2Object) {
+				Lookup2Object temp = (Lookup2Object) data;
+				String upperBound = "<";
+				addAttribute(document, inputTables, "expressionFilter");
+				addAttribute(document, inputTables, "activateExpressionFilter");
+				addAttribute(document, inputTables, "activateCondensedTool");
+				addAttribute(document, inputTables, "innerJoin");
+				inputTables.setAttribute("activateExpressionFilter", "true");
+				inputTables.setAttribute("activateCondensedTool", "true");
+				inputTables.setAttribute("innerJoin", "true");
+				inputTables.setAttribute("matchingMode", "ALL_MATCHES");
+				if(temp.getLU2InclusiveUpperBound().equals("1")) {
+					upperBound = "<=";
+				}
+				String expression = String.format("%s.%s > %s.%s && %s.%s %s %s.%s", mainInputTables, temp.getLU2ValidParameter(), inputTables.getAttribute("name"), temp.getLU2FromColumn(), mainInputTables, temp.getLU2ValidParameter(), upperBound, inputTables.getAttribute("name"), temp.getLU2ToColumn());
+				inputTables.setAttribute("expressionFilter", expression);
 			}
-			String expression = String.format("%s.%s > %s.%s && %s.%s %s %s.%s", mainInputTables, temp.getLU2ValidParameter(), inputTables.getAttribute("name"), temp.getLU2FromColumn(), mainInputTables, temp.getLU2ValidParameter(), upperBound, inputTables.getAttribute("name"), temp.getLU2ToColumn());
-			inputTables.setAttribute("expressionFilter", expression);
-		}
-		for(ColumnObject column : columns) {
-			Element dummy = tMap.createNodeDataColumnDummy(document);
-			if (column.getName().equals(data.getLookupColumn())) {
-				tMap.addAttribute(document, dummy);
-				dummy.setAttribute("expression", tMap.setJoinForLookup(mainInputTables, inputTables.getAttribute("name"), data));
+			for(ColumnObject column : columns) {
+				Element dummy = tMap.createNodeDataColumnDummy(document);
+				if (column.getName().equals(data.getLookupColumn())) {
+					tMap.addAttribute(document, dummy);
+					dummy.setAttribute("expression", tMap.setJoinForLookup(mainInputTables, inputTables.getAttribute("name"), data));
+				}
+				dummy.setAttribute("name", column.getName());
+				dummy.setAttribute("type", column.getType());
+				NodeBuilder.appendElementToContext(inputTables, dummy);
 			}
-			dummy.setAttribute("name", column.getName());
-			dummy.setAttribute("type", column.getType());
-			NodeBuilder.appendElementToContext(inputTables, dummy);
+		} else {
+			for (ColumnObject column : columns) {
+				Element dummy = tMap.createNodeDataColumnDummy(document);
+				dummy.setAttribute("name", column.getName());
+				dummy.setAttribute("type", column.getType());
+			}
 		}
 		return inputTables.getAttribute("name");
 	}
@@ -302,6 +310,10 @@ public class tMap extends AbstractNode {
 		Element outputTables = tMap.createOutputTables(document, node, name);
 		Element metaData = tMap.createTMapMetadata(document, outputTables);
 		for(ColumnObject column : inputColumns) {
+			//skip the errorcount (must be defined separately)
+			if(column.getName().equals("isETL_ErrorCount")) {
+				continue;
+			}
 			Element dummy = tMap.createNodeDataColumnDummy(document);
 			tMap.addAttribute(document, dummy);
 			dummy.setAttribute("expression", String.format("%s.%s", mainTable, column.getName()));
@@ -509,5 +521,43 @@ public class tMap extends AbstractNode {
 		}
 		return "null";
 	}
-
+	
+	public static void addTechnicalCols(Document document, SourceObjectDTO s) {
+		String pk = s.getPrimaryKeyColumn();
+		String[] splitPk = pk.split(",");
+		String pkn = s.getPrimaryKeyNameColumn();
+		String[] splitName = pkn.split(",");
+		Node start = AbstractNode.getElementByValue(document, "DER isPKNULL und DER technical fields");
+		Node nodeData = tMap.getNodeData(start);
+		Element inputTables =(Element) Navigator.processXPathQueryNode(nodeData, XPathExpressions.getInputTables, null);
+		String inputTablesName = inputTables.getAttribute("name");
+		Node varTables = Navigator.processXPathQueryNode(nodeData, XPathExpressions.getVarTables, null);
+		Node outputTables = Navigator.processXPathQueryNode(nodeData, XPathExpressions.getOutputTables, null);
+		//expression for the isETL_isValid & isETL_isPKNULL values
+		String expression = String.format("(%s.%s == null ", inputTablesName, splitPk[0].trim());
+		//expression for the BK variable
+		String expressionPk = String.format("String.valueOf(globalMap.get(\"FELC1_TargetfieldValue\"))+\"-\"+%s.%s", inputTablesName, splitPk[0].trim());
+		for(int i = 1; i < splitPk.length; i++) {
+			expression = expression + String.format("|| %s.%s == null", inputTablesName, splitPk[i].trim());
+			expressionPk = expressionPk + String.format("+\"-\"+%s.%s", inputTablesName, splitPk[i].trim());
+		}
+		//expressionPk = expressionPk + ")";
+		String expressionIsValid = expression + String.format(") ? false : %s.isETL_isValid", inputTablesName);
+		String expressionIsPkNull = expression + ") ? true : false ";
+		//expression for the Name variable
+		String expressionName = String.format("%s.%s", inputTablesName, splitName[0].trim());
+		for(int i = 1; i < splitName.length; i++) {
+			expressionName = expressionName + String.format("+\"-\"+%s.%s", inputTablesName, splitName[i].trim());
+		}
+		//expressionName = expressionName + ")";
+		Element isETL_isValid = (Element)Navigator.processXPathQueryNode(outputTables, XPathExpressions.getByNameAttribute, "isETL_isValid");
+		isETL_isValid.setAttribute("expression", expressionIsValid);
+		Element isETL_isPKNULL = (Element)Navigator.processXPathQueryNode(outputTables, XPathExpressions.getByNameAttribute, "isETL_isPKNULL");
+		isETL_isPKNULL.setAttribute("expression", expressionIsPkNull);
+		Element BK = (Element)Navigator.processXPathQueryNode(varTables, XPathExpressions.getByNameAttribute, "BK");
+		BK.setAttribute("expression", expressionPk);
+		Element name = (Element)Navigator.processXPathQueryNode(varTables, XPathExpressions.getByNameAttribute, "Name");
+		name.setAttribute("expression", expressionName);
+	}
+	
 }

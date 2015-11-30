@@ -203,7 +203,7 @@ public abstract class AbstractNode {
 		NodeBuilder.removeAllChildNodes(targetMetadata);
 		Node startConnection = Connection.getConnectionColumns(connection).getFirstChild();
 		while(startConnection.getNextSibling()!=null) {
-			if(startConnection.getNodeType()==node.TEXT_NODE){
+			if(startConnection.getNodeType()==Node.TEXT_NODE){
 				startConnection=startConnection.getNextSibling();
 				continue;
 			}

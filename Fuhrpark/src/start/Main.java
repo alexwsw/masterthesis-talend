@@ -110,27 +110,34 @@ public class Main {
 		}
 		area.append("The end");
 		String text = "-1 * (Kassenzettelwert_Brutto_LC * Currencyconversionrate_LC_to_EUR_Year)";
+		String text2 = "Menge*Einzelpreis*Waehrungskurs_Fremdwaehrung_in_EUR";
 		String regExp = "[A-Za-z][A-Za-z1-9_]*[A-Za-z1-9]";
 		String table = "myTab";
 		p = Pattern.compile(regExp);
-		m = p.matcher(text);
+		m = p.matcher(text2);
 		Set<String>matches = new TreeSet<String>();
 		while(m.find()) {
 			System.out.println(m.group().toString());
 			matches.add(m.group());
 		}
-		System.out.println(text);
+		System.out.println(text2);
 		for(String aa : matches) {
-			if(text.contains(aa)) {
-				text = text.replace(aa, String.format("%s.%s", table, aa));
+			if(text2.contains(aa)) {
+				text2 = text2.replace(aa, String.format("%s.%s", table, aa));
 			}
 		}
-		System.out.println(text);
+		System.out.println(text2);
 		String prim = "BBEANR,BBMK";
 		String tfv = "0";
 		Object ll = prim;
 		Date dada = new GregorianCalendar(1900, 00, 01).getTime();
 		System.out.println(dada);
+		String zahl = "12";
+		String n23 = "123";
+		Object obji = n23;
+		Integer n345 = (Integer)obji;
+		Integer integer = Integer.parseInt(zahl);
+		System.out.println(n345);
 		try {
 			Class oo = Class.forName(bmw.getClass().getName());
 			Field[]fields = oo.getDeclaredFields();
