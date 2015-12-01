@@ -5,19 +5,27 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnectionBuilder {
-	
+
 	private Connection conn = null;
-	
-	//connect to database
-	public Connection createConnection(String connectURL, String user, String password) {
-		
+
+	// connect to database
+	public Connection createConnection(String connectURL, String user,
+			String password) {
+
 		try {
-			//Class.forName is obsolete since JDBC 4.0
-			//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			if(conn == null) {
-			conn = DriverManager.getConnection(connectURL, user, password);
-			System.out.println("Connection created");
-			return conn;
+			// Class.forName is obsolete since JDBC 4.0
+			// Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			if (conn == null) {
+				if (user != null && password != null) {
+					conn = DriverManager.getConnection(connectURL, user,
+							password);
+				} else {
+					//doesn't work so far
+					System.out.println("trying the Microsoft Authentication");
+					conn = DriverManager.getConnection(connectURL);
+				}
+				System.out.println("Connection created");
+				return conn;
 			} else {
 				System.out.println("Connection already exists!");
 				return null;
@@ -27,9 +35,9 @@ public class DBConnectionBuilder {
 		}
 		return null;
 	}
-	
-	//close connection
-	public void closeConnection(){
+
+	// close connection
+	public void closeConnection() {
 		if (this.conn != null) {
 			try {
 				this.conn.close();
@@ -40,9 +48,9 @@ public class DBConnectionBuilder {
 			}
 		}
 	}
-	
-	public Connection getConnection () {
+
+	public Connection getConnection() {
 		return this.conn;
 	}
-	
+
 }

@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -135,9 +136,9 @@ public class Main {
 		String zahl = "12";
 		String n23 = "123";
 		Object obji = n23;
-		Integer n345 = (Integer)obji;
+		//Integer n345 = (Integer)obji;
 		Integer integer = Integer.parseInt(zahl);
-		System.out.println(n345);
+		//System.out.println(n345);
 		try {
 			Class oo = Class.forName(bmw.getClass().getName());
 			Field[]fields = oo.getDeclaredFields();
@@ -148,6 +149,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(UUID.randomUUID());
 		/*
 		try {
 			Constructor i = Class.forName("blabla").getConstructor(String.class);

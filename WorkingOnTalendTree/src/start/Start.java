@@ -14,6 +14,7 @@ import jdbc.SQLQueryPerformer;
 import secretService.PasswordDecryptor;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import transformer.tMap;
@@ -26,6 +27,7 @@ import dto.LookupManager;
 import dto.LookupObject;
 import dto.PackageDTO;
 import dto.SourceObjectDTO;
+import enums.XPathExpressions;
 
 
 public class Start {
@@ -59,6 +61,7 @@ public class Start {
 		String connURL = String.format("jdbc:sqlserver://%s", host);
 		DBConnectionBuilder connection = new DBConnectionBuilder();
 		SQLQueryPerformer performer = new SQLQueryPerformer(connection.createConnection(connURL, user, pass2));
+		//SQLQueryPerformer performer = new SQLQueryPerformer(connection.createConnection(connURL, null, null));
 		/*
 		DBConnectionBuilder connectSA = new DBConnectionBuilder();
 		DBConnectionBuilder connectSRC = new DBConnectionBuilder();
@@ -70,8 +73,13 @@ public class Start {
 		ResultSetMapper<PackageDTO>forPackage = new ResultSetMapper<PackageDTO>();
 		ResultSetMapper<SourceObjectDTO>forSource = new ResultSetMapper<SourceObjectDTO>();
 		java.util.Scanner input = new java.util.Scanner(System.in);
+		System.out.println("Please choose the Package number, select 0 for abort");
 		System.out.print("Package number?: ");
 		int number = input.nextInt();
+		if (number == 0) {
+			System.out.println("Operation cancelled!, Have a nice day!");
+			System.exit(0);
+		}
 		input.close();
 		//get package data
 		String sql2 = String.format("Select * from [%s].[%s].tblSourceobjectgroup where ID = %s", databaseDWH, schema2, number);
@@ -109,7 +117,15 @@ public class Start {
 		
 		LookupManager lMan = new LookupManager(performer, p);
 		List<LookupObject>lookups = lMan.createLookupsFromDatabase(databaseDWH, schema2);
-		tMap.doLookup(document, fixedTemplate, lookups);
+		Node lastLookupNode = tMap.doLookup(document, fixedTemplate, lookups);
+		Node nodeData = tMap.getNodeData(lastLookupNode);
+		Element outputTables = (Element)Navigator.processXPathQueryNode(nodeData, XPathExpressions.getOutputTables, null);
+		String name = outputTables.getAttribute("name");
+		Node calculations = AbstractNode.getElementByValue(document, "Calculations");
+		tMap.setOutput(document, calculations, "Calculations", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, lastLookupNode)), null, name);
+		Node lastTMap = AbstractNode.getElementByValue(document, "DER FK_ID");
+		tMap.setOutput(document, lastTMap, "Output", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, calculations)), null, "Calculations");
+		tMap.setOutput(document, lastTMap, "DQ3_Errors", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, calculations)), null, "Calculations");
 		//System.out.println(columnsss.toString());
 		/*
 		//Connection

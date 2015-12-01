@@ -402,7 +402,7 @@ public class tMap extends AbstractNode {
 	}
 	
 	
-	public static void doLookup (Document document, Document template, LookupObject data) {
+	public static Node doLookup (Document document, Document template, LookupObject data) {
 		//test random Number for lookup Name
 		Random r = new Random();
 		//ConnectionPoint mark must be changed connection(Label), inputTables and metadata (tMap)
@@ -429,7 +429,7 @@ public class tMap extends AbstractNode {
 		String nameInputTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(prefixMData), EConnectionTypes.Main);
 		String nameLookupTable = tMap.setInputTables(document, lookupTMap, tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, EConnectionTypes.Lookup);
 		Element lookupMetadata = tMap.setLookupOutput(document, lookupTMap, ("Lookup" + r.nextInt(100000)), tMap.extractMetadata(prefixMData), tMap.extractMetadata(AbstractNode.getMetadata(document, lookupDb)), data, nameInputTable, nameLookupTable);
-		Element newConnection = Connection.newConnection(document, template, lookupMetadata, AbstractNode.getElementByValue(document, "DER FK_ID"), EConnectionTypes.Main);
+		Element newConnection = Connection.newConnection(document, template, lookupMetadata, AbstractNode.getElementByValue(document, "Calculations"), EConnectionTypes.Main);
 		AbstractNode.setAttribute(newConnection, "UNIQUE_NAME", "ConnectionPoint");
 		/*
 		Element outputTables = tMap.createOutputTables(document, "preparedOutput");
@@ -453,6 +453,7 @@ public class tMap extends AbstractNode {
 		NodeBuilder.appendNodeElement(document, lookupDb);
 		NodeBuilder.appendNodeElement(document, lookupTMap);
 		System.out.println("feddich");
+		return lookupTMap;
 	}
 	
 	
@@ -481,11 +482,13 @@ public class tMap extends AbstractNode {
 	}
 	
 	//if there's a collection of multiple Lookups (needs to be tested!!!)
-	public static void doLookup (Document document, Document template, Collection<LookupObject> data) throws WrongNodeException {
+	public static Node doLookup (Document document, Document template, Collection<LookupObject> data) {
+		Node node = null;
 		for(LookupObject a : data){
-			doLookup(document, template, a);
+			node = doLookup(document, template, a);
 			
 		}
+		return node;
 			
 	}
 	
