@@ -10,9 +10,8 @@ public class DBConnectionBuilder {
 
 	// connect to database
 	public Connection createConnection(String connectURL, String user,
-			String password) {
+			String password) throws SQLException {
 
-		try {
 			// Class.forName is obsolete since JDBC 4.0
 			// Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			if (conn == null) {
@@ -30,10 +29,7 @@ public class DBConnectionBuilder {
 				System.out.println("Connection already exists!");
 				return null;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+			
 	}
 
 	// close connection

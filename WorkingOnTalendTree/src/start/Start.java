@@ -27,6 +27,7 @@ import dto.LookupManager;
 import dto.LookupObject;
 import dto.PackageDTO;
 import dto.SourceObjectDTO;
+import enums.EConnectionTypes;
 import enums.XPathExpressions;
 
 
@@ -41,7 +42,7 @@ public class Start {
 		Document document = DocumentCreator.buildDocument(template);
 		Document fixedTemplate = DocumentCreator.buildDocument(template);
 		
-		String host = "172.21.100.77";
+		String host = "SVR-BIDEV02";
 		String port = "1433";
 		//String schema= "dbo";
 		//String database= "TALEND_TEST";
@@ -59,8 +60,16 @@ public class Start {
 
 		
 		String connURL = String.format("jdbc:sqlserver://%s", host);
+		String connWinURL = connURL + ";integratedSecurity=true;authenticationScheme=JavaKerberos";
 		DBConnectionBuilder connection = new DBConnectionBuilder();
-		SQLQueryPerformer performer = new SQLQueryPerformer(connection.createConnection(connURL, user, pass2));
+		SQLQueryPerformer performer = null;
+		try{
+			performer = new SQLQueryPerformer(connection.createConnection(connURL, user, pass2));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Microsoft authentication failed, try to connect via standard Login & Password");
+			performer = new SQLQueryPerformer(connection.createConnection(connURL, user, pass2));
+		}
 		//SQLQueryPerformer performer = new SQLQueryPerformer(connection.createConnection(connURL, null, null));
 		/*
 		DBConnectionBuilder connectSA = new DBConnectionBuilder();
@@ -103,17 +112,25 @@ public class Start {
 		Node start = AbstractNode.getElementByValue(document, "StartPoint");
 		List<ColumnObject> srcTbl = clm.getColumnsForTable(databaseSRC, s.getSourceTable(), "dbo", null);
 		AbstractNode.setWholeMetadataFromDTO(document, srcTbl, AbstractNode.getMetadata(document, start));
-		Node destination = AbstractNode.getElementByValue(document, "Update dwh.tbl");
-		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, destination));		
+		Node updateDwh = AbstractNode.getElementByValue(document, "Update dwh.tbl");
+		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, updateDwh));		
+		Node insertDwh = AbstractNode.getElementByValue(document, "Insert dwh.tbl");
+		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, insertDwh));		
+		Node lookupDwh = AbstractNode.getElementByValue(document, "LU dwh");
+		AbstractNode.setAttribute(lookupDwh, "QUERY", String.format("select * from %s", p.getDestinationTable()));
+		AbstractNode.setWholeMetadataFromDTO(document, columnsss, AbstractNode.getMetadata(document, lookupDwh));
 		
 		Node firstTMap = AbstractNode.getElementByValue(document, "DER isPKNULL und DER technical fields");
 		tMap.setOutput(document, firstTMap, "Filter_valid_records", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, start)), null, "DER_isPKNULL");
 		tMap.addTechnicalCols(document, s);
 		Node dq1TMap = AbstractNode.getElementByValue(document, "Filter valid records");
-		tMap.setOutput(document, dq1TMap, "Data_Conversion", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, firstTMap)), null, "Filter_valid_records");
-		tMap.setOutput(document, dq1TMap, "DQ1Errors", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, firstTMap)), null, "Filter_valid_records");
+		tMap.setOutput(document, dq1TMap, "Data_Conversion", AbstractNode.extractMetadata(tMap.getTMapMetadata(document, firstTMap, "Filter_valid_records")), null, "Filter_valid_records");
+		tMap.setOutput(document, dq1TMap, "DQ1Errors", AbstractNode.extractMetadata(tMap.getTMapMetadata(document, firstTMap, "Filter_valid_records")), null, "Filter_valid_records");
 		Node dq2TMap = AbstractNode.getElementByValue(document, "Data conversion");
-		tMap.setOutput(document, dq2TMap, "DER_FUNCTIONAL_FIELDS", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, dq1TMap)), null, "Data_Conversion");
+		tMap.setOutput(document, dq2TMap, "DER_FUNCTIONAL_FIELDS", AbstractNode.extractMetadata(tMap.getTMapMetadata(document, dq1TMap, "Data_Conversion")), null, "Data_Conversion");
+		tMap.setOutput(document, dq2TMap, "DQ2_Errors", AbstractNode.extractMetadata(tMap.getTMapMetadata(document, dq1TMap, "Data_Conversion")), null, "Data_Conversion");
+		Node functionalFields = AbstractNode.getElementByValue(document, "DER FUNCTIONAL FIELDS");
+		tMap.setOutput(document, functionalFields, "LU_FIELDS", AbstractNode.extractMetadata(tMap.getTMapMetadata(document, dq2TMap, "DER_FUNCTIONAL_FIELDS")), null, "DER_FUNCTIONAL_FIELDS");
 		
 		LookupManager lMan = new LookupManager(performer, p);
 		List<LookupObject>lookups = lMan.createLookupsFromDatabase(databaseDWH, schema2);
@@ -123,9 +140,16 @@ public class Start {
 		String name = outputTables.getAttribute("name");
 		Node calculations = AbstractNode.getElementByValue(document, "Calculations");
 		tMap.setOutput(document, calculations, "Calculations", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, lastLookupNode)), null, name);
-		Node lastTMap = AbstractNode.getElementByValue(document, "DER FK_ID");
-		tMap.setOutput(document, lastTMap, "Output", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, calculations)), null, "Calculations");
-		tMap.setOutput(document, lastTMap, "DQ3_Errors", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, calculations)), null, "Calculations");
+		Node csplDq3 = AbstractNode.getElementByValue(document, "CSPL DQ3");
+		tMap.setOutput(document, csplDq3, "Output", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, calculations)), null, "Calculations");
+		tMap.setOutput(document, csplDq3, "DQ3_Errors", AbstractNode.extractMetadata(AbstractNode.getMetadata(document, calculations)), null, "Calculations");
+		Node tableLoad = AbstractNode.getElementByValue(document, "Table load");
+		tMap.setInputTables(document, tableLoad, AbstractNode.extractMetadata(AbstractNode.getMetadata(document, lookupDwh)), null, "Output", EConnectionTypes.Lookup);
+		tMap.setOutput(document, tableLoad, "Update", AbstractNode.extractMetadata(tMap.getTMapMetadata(document, csplDq3, "Output")), null, "Output");
+		tMap.setOutput(document, tableLoad, "Insert", AbstractNode.extractMetadata(tMap.getTMapMetadata(document, csplDq3, "Output")), null, "Output");
+		Node bulkInsert = AbstractNode.getElementByValue(document, "Bulk Insert");
+		AbstractNode.setWholeMetadataFromDTO(document, AbstractNode.extractMetadata(tMap.getTMapMetadata(document, tableLoad, "Insert")), AbstractNode.getMetadata(document, bulkInsert));
+	
 		//System.out.println(columnsss.toString());
 		/*
 		//Connection

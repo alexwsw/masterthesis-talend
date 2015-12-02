@@ -23,7 +23,7 @@ public enum XPathExpressions {
 	getByNodeName("./*[name()='%s']"),
 	//the method using this expression must be declared final in the abstract class (due to tMap with multiple metadata nodes)
 	getMetadataByType("./*[name()='metadata']"),
-	getTMapMetadata("./*[name()='metadata' and @connector='FLOW']"),
+	getTMapMetadata("./*[name()='metadata' and @connector='FLOW' and @name='%s']"),
 	//only important for metadata mapping stuff
 	getTMapInputTables("./*[name()='inputTables']"),
 	getTMapOutputTables("./*[name()='outputTables']"),
