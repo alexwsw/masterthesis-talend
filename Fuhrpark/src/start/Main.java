@@ -150,6 +150,9 @@ public class Main {
 			e.printStackTrace();
 		}
 		System.out.println(UUID.randomUUID());
+		int cc = 3;
+		System.out.println(bmw.getClass());
+
 		/*
 		try {
 			Constructor i = Class.forName("blabla").getConstructor(String.class);

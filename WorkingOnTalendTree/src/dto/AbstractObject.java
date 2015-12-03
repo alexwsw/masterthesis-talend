@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,5 +46,20 @@ public abstract class AbstractObject {
 			default: 
 				return column;
 		}
+	}
+	
+	//Array'd fit as well
+	public final List<String> splitPackageColumns(String packageColumns) {
+		if(packageColumns == null) {
+			return null;
+		}
+		List<String>columns = new ArrayList<String>();
+		String[]split = packageColumns.split(Pattern.quote(","));
+		for(String a : split) {
+			a = evaluateColumnOption(a);
+			a = a.trim();
+			columns.add(a);
+		}	
+		return columns;
 	}
 }
