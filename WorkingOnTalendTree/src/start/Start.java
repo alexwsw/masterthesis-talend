@@ -1,9 +1,7 @@
 package start;
 
-
 import globalVar.tSetGlobalVar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
@@ -11,16 +9,12 @@ import javax.xml.bind.JAXBException;
 import jdbc.DBConnectionBuilder;
 import jdbc.ResultSetMapper;
 import jdbc.SQLQueryPerformer;
-import secretService.PasswordDecryptor;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import transformer.tMap;
 import abstractNode.AbstractNode;
-import database.tMSSqlConnection;
-import dto.ColumnDTO;
 import dto.ColumnManager;
 import dto.ColumnObject;
 import dto.LookupManager;
@@ -368,6 +362,5 @@ public class Start {
 		
 		//JDBC stuff
 
-		
 }
 }
