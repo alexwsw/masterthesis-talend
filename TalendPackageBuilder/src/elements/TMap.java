@@ -326,4 +326,10 @@ public class TMap extends CreatableNode implements ITransformer {
 		}
 	}
 
+	@Override
+	public NodeList getWholeMetaDataNodes(Node node) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

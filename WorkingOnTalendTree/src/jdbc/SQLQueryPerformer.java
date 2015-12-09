@@ -1,6 +1,7 @@
 package jdbc;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -105,6 +106,18 @@ public class SQLQueryPerformer {
 			e.printStackTrace();
 		}
 		return columns;
+	}
+	
+	public void getDbData(String tableName) {
+		DatabaseMetaData dbd;
+		try {
+			dbd = conn.getMetaData();
+			ResultSet rs = dbd.getColumns(null, null, tableName, null);
+			ResultSet rs2 = dbd.getPrimaryKeys(null, null, tableName);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -289,14 +289,14 @@ public abstract class AbstractNode {
 //		return n;
 //	}
 	
-	//necessary???
-	public static Element cloneDummy(Node dummy) {
-		return (Element) dummy.cloneNode(true);
-	}
-	
-	public static void removeDummy(Node dummy) {
-		NodeBuilder.removeNode(dummy);
-	}
+//	//necessary???
+//	public static Element cloneDummy(Node dummy) {
+//		return (Element) dummy.cloneNode(true);
+//	}
+//	
+//	public static void removeDummy(Node dummy) {
+//		NodeBuilder.removeNode(dummy);
+//	}
 	
 	//check whether a given node contains an attribute (before creating a new one)
 	public static boolean hasAttribute(Node node, String attributeName) {
@@ -414,5 +414,15 @@ public abstract class AbstractNode {
 		dummy.setAttributeNode(att2);
 		return dummy;
 		
+	}
+	public static Element createElementParameterDummy(Document document) {
+		Element dummy = document.createElementNS("http://www.talend.org/mapper", "elementParameter");
+		Attr att1 = document.createAttribute("field");
+		Attr att2 = document.createAttribute("name");
+		Attr att3 = document.createAttribute("value");
+		dummy.setAttributeNode(att1);
+		dummy.setAttributeNode(att2);
+		dummy.setAttributeNode(att3);
+		return dummy;
 	}
 }
