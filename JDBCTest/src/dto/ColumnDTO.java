@@ -1,6 +1,5 @@
 package dto;
 
-
 public class ColumnDTO {
 
 	private String columnName;

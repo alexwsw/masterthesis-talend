@@ -111,7 +111,7 @@ public class Main {
 		}
 		area.append("The end");
 		String text = "-1 * (Kassenzettelwert_Brutto_LC * Currencyconversionrate_LC_to_EUR_Year)";
-		String text2 = "Menge*Einzelpreis*Waehrungskurs_Fremdwaehrung_in_EUR";
+		String text2 = "(Currencyconversionrate_EUR_to_LC == 0) ? 0 : Saldo * (1 / Currencyconversionrate_EUR_to_LC)";
 		String regExp = "[A-Za-z][A-Za-z1-9_]*[A-Za-z1-9]";
 		String table = "myTab";
 		p = Pattern.compile(regExp);

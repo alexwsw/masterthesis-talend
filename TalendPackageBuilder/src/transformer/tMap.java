@@ -3,6 +3,9 @@ package transformer;
 import java.util.Collection;
 import java.util.Map;
 
+import objects.ColumnDTO;
+import objects.LookupObject;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -13,8 +16,6 @@ import connection.Connection;
 import database.tMSSqlInput;
 import database.tMSSqlOutput;
 import documentParser.DocumentCreator;
-import dto.ColumnDTO;
-import dto.LookupObject;
 import elements.EConnectionTypes;
 import enums.ETypes;
 import exception.DummyNotFoundException;

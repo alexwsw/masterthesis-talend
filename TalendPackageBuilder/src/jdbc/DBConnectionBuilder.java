@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConnectionBuilder {
+public class DBConnectionBuilder implements IConnectionBuilder {
 	
 	private Connection conn = null;
 	
@@ -20,10 +20,12 @@ public class DBConnectionBuilder {
 			return conn;
 			} else {
 				System.out.println("Connection already exists!");
-				return null;
+				return conn;
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			System.out.println("Error connecting to database");
 			e.printStackTrace();
+			System.exit(1);
 		}
 		return null;
 	}
@@ -35,7 +37,7 @@ public class DBConnectionBuilder {
 				this.conn.close();
 				System.out.println("Connection closed");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				System.out.println("Error closing connection");
 				e.printStackTrace();
 			}
 		}

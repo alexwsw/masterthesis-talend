@@ -3,12 +3,13 @@ package database;
 import java.util.Collection;
 import java.util.List;
 
+import objects.ColumnDTO;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import dto.ColumnDTO;
 import finder.XPathExpressions;
 import finder.XPathFinder;
 import abstractNode.AbstractNode;

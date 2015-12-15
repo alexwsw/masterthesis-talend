@@ -14,7 +14,11 @@ import javax.xml.bind.JAXBException;
 
 import jdbc.DBConnectionBuilder;
 import jdbc.ResultSetMapper;
-import jdbc.SQLQueryPerformer;
+import objects.ColumnDTO;
+import objects.LookupDTO;
+import objects.LookupObject;
+import objects.PackageDTO;
+import objects.SQLQueryPerformer;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -23,10 +27,6 @@ import transformer.tMap;
 import abstractNode.AbstractNode;
 import database.tMSSqlConnection;
 import documentParser.DocumentCreator;
-import dto.ColumnDTO;
-import dto.LookupDTO;
-import dto.LookupObject;
-import dto.PackageDTO;
 import elements.EConnectionTypes;
 import exception.DummyNotFoundException;
 import exception.WrongNodeException;

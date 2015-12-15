@@ -1,41 +1,24 @@
 package dto;
 
 import java.util.ArrayList;
+import java.util.List;
 
+public final class Lookup2Object extends LookupObject implements ILookup2Object {
 
-public class Lookup2Object extends LookupObject {
-	
-	private String LU2Prefix;
-	private String LU2InputColumns;
 	private String LU2ValidParameter;
 	private String LU2FromColumn;
 	private String LU2ToColumn;
 	private String LU2InclusiveUpperBound;
-	
-	public Lookup2Object (LookupDTO lookup) {
+
+	public Lookup2Object(LookupDTO lookup) {
 		super(lookup);
+		this.isDerivedMatchParameter = lookup.getLu2IsDerivedValidparameter();
 		this.prefix = lookup.getLU2Prefix();
 		setPackageColumns(lookup.getLU2InputColumns());
 		this.LU2ValidParameter = lookup.getLU2ValidParameter();
 		this.LU2FromColumn = lookup.getLU2FromColumn();
 		this.LU2ToColumn = lookup.getLU2ToColumn();
 		this.LU2InclusiveUpperBound = lookup.getLU2InclusiveUpperBound();
-	}
-
-	public String getLU2Prefix() {
-		return LU2Prefix;
-	}
-
-	public void setLU2Prefix(String lU2Prefix) {
-		LU2Prefix = lU2Prefix;
-	}
-
-	public String getLU2InputColumns() {
-		return LU2InputColumns;
-	}
-
-	public void setLU2InputColumns(String lU2InputColumns) {
-		LU2InputColumns = lU2InputColumns;
 	}
 
 	public String getLU2ValidParameter() {
@@ -69,14 +52,28 @@ public class Lookup2Object extends LookupObject {
 	public void setLU2InclusiveUpperBound(String lU2InclusiveUpperBound) {
 		LU2InclusiveUpperBound = lU2InclusiveUpperBound;
 	}
-	
-	public void setPackageColumns (String newColumn){
+
+	public void setPackageColumns(String newColumn) {
+		if (newColumn == null) {
+			return;
+		}
+		List<String> a = splitPackageColumnsAndEvaluate(newColumn);
 		if (this.packageColumns == null) {
 			this.packageColumns = new ArrayList<String>();
-			packageColumns.add(newColumn);
-		} else {
-			packageColumns.add(newColumn);
 		}
+		for (String s : a) {
+			packageColumns.add(s);
+		}
+
+	}
+
+	@Override
+	public String toString() {
+		return "Lookup2Object [LU2ValidParameter=" + LU2ValidParameter
+				+ ", LU2FromColumn=" + LU2FromColumn + ", LU2ToColumn="
+				+ LU2ToColumn + ", LU2InclusiveUpperBound="
+				+ LU2InclusiveUpperBound + "]";
 	}
 	
+
 }

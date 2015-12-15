@@ -1,4 +1,4 @@
-package dto;
+package objects;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,18 +9,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import jdbc.ResultSetMapper;
-import jdbc.SQLQueryPerformer;
 
 public class LookupManager {
 	
-	private SQLQueryPerformer performer;
+	private IQueryPerformer performer;
 	private List<LookupObject>lookups;
-	private ColumnManager cManager;
-	private PackageDTO p;
+	private PackageObject p;
 	
 	public LookupManager(SQLQueryPerformer performer, PackageDTO p) {
 		this.performer = performer;
-		this.cManager = new ColumnManager(performer);
 		this.p = p;
 	}
 	
@@ -30,8 +27,8 @@ public class LookupManager {
 	//isETL_Targetfieldvalue is set into the first tMap from the globalMap
 	public List<LookupObject>createLookupsFromDatabase(String database, String schema) throws SQLException{
 		this.lookups = new ArrayList<LookupObject>();
-		String query = String.format("Select * from [%s].[%s].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = %s order by LU_SolveOrder", database, schema, p.getId());
-		ResultSet rs = performer.executeSQLQuery(query);
+		String query = String.format("Select * from [%s].[%s].tblSourceobjectgrouplookup where FK_Sourceobjectgroup_ID = %s order by LU_SolveOrder", database, schema, p.getID());
+		ResultSet rs = performer.executeQuery(query);
 		List<LookupDTO> rawLookup = new ResultSetMapper<LookupDTO>().mapRersultSetToObject(rs, LookupDTO.class);
 		for(LookupDTO lookup : rawLookup) {
 			System.out.println(lookup.toString());

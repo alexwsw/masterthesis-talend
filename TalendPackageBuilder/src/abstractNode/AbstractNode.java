@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import objects.ColumnDTO;
+import objects.LookupObject;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -13,8 +16,6 @@ import org.w3c.dom.NodeList;
 
 import connection.Connection;
 import documentParser.DocumentCreator;
-import dto.ColumnDTO;
-import dto.LookupObject;
 import elements.EConnectionTypes;
 import exception.DummyNotFoundException;
 import finder.XPathExpressions;

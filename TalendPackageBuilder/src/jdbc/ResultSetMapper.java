@@ -70,6 +70,10 @@ public class ResultSetMapper<T> {
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Error while mapping the object, the process will be terminated");
+			e.printStackTrace();
+			System.exit(1);
 		}
 		return outputList;
 	}

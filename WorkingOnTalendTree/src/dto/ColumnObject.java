@@ -153,6 +153,7 @@ public class ColumnObject extends AbstractObject implements Cloneable {
 	public void mapType(String type) {
 		switch (type) {
 		case "INT":
+		case "INT IDENTITY":
 			this.type = "id_Integer";
 			break;
 		case "NVARCHAR":

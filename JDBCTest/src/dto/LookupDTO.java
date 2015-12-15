@@ -7,6 +7,8 @@ public class LookupDTO {
 	//Value for LookupType is required as well!!!!!
 	@Column(name="FK_Lookuptype_ID")
 	private String lookupType;
+	@Column(name="LU_IsDerivedMatchparameter")
+	private String isDerivedMatchparameter;
 	@Column(name="LU_MatchInputcolumnprefix")
 	private String prefix;
 	@Column(name="LU_MatchInputcolumns")
@@ -21,6 +23,8 @@ public class LookupDTO {
 	private String tableOutputColumn;
 	@Column(name="LU_Outputcolumns")
 	private String lookupOutputColumns;
+	@Column(name="LU2_IsDerivedValidparameter")
+	private String lu2IsDerivedValidparameter;
 	@Column(name="LU2_ValidInputcolumnprefix")
 	private String LU2Prefix;
 	@Column(name="LU2_ValidInputcolumns")
@@ -33,6 +37,8 @@ public class LookupDTO {
 	private String LU2ToColumn;
 	@Column(name="LU2_IsInclusiveUpperBound")
 	private String LU2InclusiveUpperBound;
+	@Column(name="LU_Matchinputcolumnconversion")
+	private String inputColumnConversion;
 	
 
 	
@@ -174,6 +180,30 @@ public class LookupDTO {
 
 	public void setLU2InclusiveUpperBound(String lU2InclusiveUpperBound) {
 		LU2InclusiveUpperBound = lU2InclusiveUpperBound;
+	}
+
+	public String getIsDerivedMatchparameter() {
+		return isDerivedMatchparameter;
+	}
+
+	public void setIsDerivedMatchparameter(String isDerivedMatchparameter) {
+		this.isDerivedMatchparameter = isDerivedMatchparameter;
+	}
+
+	public String getLu2IsDerivedValidparameter() {
+		return lu2IsDerivedValidparameter;
+	}
+
+	public void setLu2IsDerivedValidparameter(String lu2IsDerivedValidparameter) {
+		this.lu2IsDerivedValidparameter = lu2IsDerivedValidparameter;
+	}
+
+	public String getInputColumnConversion() {
+		return inputColumnConversion;
+	}
+
+	public void setInputColumnConversion(String inputColumnConversion) {
+		this.inputColumnConversion = inputColumnConversion;
 	}
 
 	public String toString() {

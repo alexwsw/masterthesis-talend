@@ -4,10 +4,11 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+
+import objects.ColumnDTO;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-
-import dto.ColumnDTO;
 
 public class testClass {
 	

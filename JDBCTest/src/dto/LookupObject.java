@@ -1,20 +1,19 @@
 package dto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-public class LookupObject extends AbstractObject {
+public class LookupObject extends AbstractObject implements ILookupObject {
 	
 	
-
+	protected String isDerivedMatchParameter;
 	protected String prefix;
 	// columns, relevant for the actual Lookup
 	protected List<String> packageColumns;
 	// columns we get back from the Lookup table
-	protected List<ColumnObject> lookupTableColumns;
+	protected List<IColumnObject> lookupTableDef;
 	// the table for the Lookup
 	protected String lookupTable;
 	// Lookup column in the lookup table
@@ -24,20 +23,21 @@ public class LookupObject extends AbstractObject {
 	protected String packageOutputColumn_MatchColumn;
 	protected Map<String, String> packageOutputColumns_ReturnColumns;
 	// add an attribute for mapping stuff
-	// defines the names and format for the Lookup output columns
-	protected List<ColumnObject> packageReturnColumns;
+	// defines the names and format for the Lookup output columns (look for the definition in the destination table, use the definition of the source when nothing was found)
+	protected List<IColumnObject> packageReturnColumnsDef;
+	protected String inputColumnConversion;
 
 	public LookupObject() {
 	}
 
 	public LookupObject(String prefix, List<String> packageColumns,
-			List<ColumnObject> lookupTableColumns, String lookupTable,
+			List<IColumnObject> lookupTableColumns, String lookupTable,
 			String lookupColumn, String packageOutputColumn_MatchColumn,
 			Map<String, String> packageOutputColumns_ReturnColumns) {
 		super();
 		this.prefix = prefix;
 		this.packageColumns = packageColumns;
-		this.lookupTableColumns = lookupTableColumns;
+		this.lookupTableDef = lookupTableColumns;
 		this.lookupTable = lookupTable;
 		this.lookupColumn = lookupColumn;
 		this.packageOutputColumn_MatchColumn = packageOutputColumn_MatchColumn;
@@ -46,13 +46,14 @@ public class LookupObject extends AbstractObject {
 
 	//add PackageDTO/PackageObject for assigning necessary values like TargetValue???
 	public LookupObject(LookupDTO lookup) {
+		this.isDerivedMatchParameter = lookup.getIsDerivedMatchparameter();
 		String rawPrefix = lookup.getPrefix();
 		//remove the data type definition like (DT_WSTR,1)
 		rawPrefix = removeDataType(rawPrefix);
 		//get rid of targetFieldValue if there's one
 		rawPrefix = targetFieldValueHandling(rawPrefix);
 		this.prefix = rawPrefix;
-		this.packageColumns = splitPackageColumns(lookup.getPackageColumns());
+		this.packageColumns = splitPackageColumnsAndEvaluate(lookup.getPackageColumns());
 		this.lookupTable = lookup.getLookupTable();
 		this.lookupColumn = lookup.getLookupColumn();
 		this.packageOutputColumn_MatchColumn = lookup
@@ -78,13 +79,13 @@ public class LookupObject extends AbstractObject {
 		this.packageColumns = packageColumns;
 	}
 
-	public List<ColumnObject> getLookupTableColumns() {
-		return lookupTableColumns;
+	public List<IColumnObject> getLookupTableDef() {
+		return lookupTableDef;
 	}
 
-	public void setLookupTableColumns(
-			List<ColumnObject> lookupTable_Retuncolumns) {
-		this.lookupTableColumns = lookupTable_Retuncolumns;
+	public void setLookupTableDef(
+			List<IColumnObject> lookupTable_Retuncolumns) {
+		this.lookupTableDef = lookupTable_Retuncolumns;
 	}
 
 	public String getLookupTable() {
@@ -132,16 +133,30 @@ public class LookupObject extends AbstractObject {
 		return columnsMapping;
 	}
 
-	public List<ColumnObject> getPackageReturnColumns() {
-		return packageReturnColumns;
+	public List<IColumnObject> getPackageReturnColumns() {
+		return packageReturnColumnsDef;
 	}
 
-	public void setPackageReturnColumns(List<ColumnObject> packageReturnColumns) {
-		this.packageReturnColumns = packageReturnColumns;
-		System.out.println("HIIIIIEEER");
-		System.out.println(this.packageReturnColumns.toString());
+	public void setPackageReturnColumns(List<IColumnObject> packageReturnColumns) {
+		this.packageReturnColumnsDef = packageReturnColumns;
+//		System.out.println("HIIIIIEEER");
+//		System.out.println(this.packageReturnColumns.toString());
+	}
+	
+	
+
+	public String getIsDerivedMatchParameter() {
+		return isDerivedMatchParameter;
 	}
 
+	public void setIsDerivedMatchParameter(String isDerivedMatchParameter) {
+		this.isDerivedMatchParameter = isDerivedMatchParameter;
+	}
+
+	public void setISDerivedMatchParameter(String parameter) {
+		this.isDerivedMatchParameter = parameter;		
+	}
+	
 	// Outsource, this method has nothing to do with this object
 	public String[] split(String argument) {
 		// split only if there're multiple columns given (separated by comma)
