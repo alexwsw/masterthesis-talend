@@ -69,7 +69,7 @@ public final class Lookup2Object extends LookupObject implements ILookup2Object 
 
 	@Override
 	public String toString() {
-		return "Lookup2Object [LU2ValidParameter=" + LU2ValidParameter
+		return super.toString() + " Lookup2Object [LU2ValidParameter=" + LU2ValidParameter
 				+ ", LU2FromColumn=" + LU2FromColumn + ", LU2ToColumn="
 				+ LU2ToColumn + ", LU2InclusiveUpperBound="
 				+ LU2InclusiveUpperBound + "]";

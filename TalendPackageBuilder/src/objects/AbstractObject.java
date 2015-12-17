@@ -26,6 +26,9 @@ public abstract class AbstractObject {
 	}
 	//in case of a column option
 	public final String evaluateColumnOption(String column) {
+		if (column == null) {
+			return null;
+		}
 		String regex = "@[A-Za-z]+";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(column);

@@ -170,9 +170,9 @@ public class LookupObject extends AbstractObject implements ILookupObject {
 	public String toString() {
 		return String
 				.format("Prefix: %s%nPackageColumns: %s%nLookupTable: %s%nLookupColumn: %s%nMatchColumn: %s%nMapping: %s%n",
-						prefix, packageColumns.toString(), lookupTable, lookupColumn,
+						prefix, packageColumns, lookupTable, lookupColumn,
 						packageOutputColumn_MatchColumn,
-						packageOutputColumns_ReturnColumns.toString());
+						packageOutputColumns_ReturnColumns);
 	}
 
 

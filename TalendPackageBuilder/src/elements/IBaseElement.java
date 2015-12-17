@@ -9,7 +9,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public interface IBaseElement extends IElement{
+import xmlelements.INode;
+
+public interface IBaseElement extends INode{
 	
 	public Node getMetadata (Node node);
 //	public Node connectToNode (Node node, Node target, EConnectionTypes type);

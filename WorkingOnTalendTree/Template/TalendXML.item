@@ -1,81 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <talendfile:ProcessType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.talend.org/mapper" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" defaultContext="Default">
   <context confirmationNeeded="false" name="Default">
-    <contextParameter comment="" name="HENRY_DWH_dwh_AdditionalParams" prompt="HENRY_DWH_dwh_AdditionalParams?" promptNeeded="false" type="id_String" value="instance=SQL2012"/>
-    <contextParameter comment="" name="HENRY_DWH_dwh_Database" prompt="HENRY_DWH_dwh_Database?" promptNeeded="false" type="id_String" value="HENRY_DWH"/>
-    <contextParameter comment="" name="HENRY_DWH_dwh_Login" prompt="HENRY_DWH_dwh_Login?" promptNeeded="false" type="id_String" value="isETL_User"/>
-    <contextParameter comment="" name="HENRY_DWH_dwh_Password" prompt="HENRY_DWH_dwh_Password?" promptNeeded="false" type="id_Password" value="hTgAoqXDCdLnPZDSDy6ojQ=="/>
-    <contextParameter comment="" name="HENRY_DWH_dwh_Port" prompt="HENRY_DWH_dwh_Port?" promptNeeded="false" type="id_String" value="1434"/>
-    <contextParameter comment="" name="HENRY_DWH_dwh_Schema" prompt="HENRY_DWH_dwh_Schema?" promptNeeded="false" type="id_String" value="dwh"/>
-    <contextParameter comment="" name="HENRY_DWH_dwh_Server" prompt="HENRY_DWH_dwh_Server?" promptNeeded="false" type="id_String" value="172.21.110.88"/>
-    <contextParameter comment="" name="HENRY_DWH_isETL_AdditionalParams" prompt="HENRY_DWH_isETL_AdditionalParams?" promptNeeded="false" type="id_String" value="instance=SQL2012"/>
-    <contextParameter comment="" name="HENRY_DWH_isETL_Database" prompt="HENRY_DWH_isETL_Database?" promptNeeded="false" type="id_String" value="HENRY_DWH"/>
-    <contextParameter comment="" name="HENRY_DWH_isETL_Login" prompt="HENRY_DWH_isETL_Login?" promptNeeded="false" type="id_String" value="isETL_User"/>
-    <contextParameter comment="" name="HENRY_DWH_isETL_Password" prompt="HENRY_DWH_isETL_Password?" promptNeeded="false" type="id_Password" value="hTgAoqXDCdLnPZDSDy6ojQ=="/>
-    <contextParameter comment="" name="HENRY_DWH_isETL_Port" prompt="HENRY_DWH_isETL_Port?" promptNeeded="false" type="id_String" value="1434"/>
-    <contextParameter comment="" name="HENRY_DWH_isETL_Schema" prompt="HENRY_DWH_isETL_Schema?" promptNeeded="false" type="id_String" value="isETL"/>
-    <contextParameter comment="" name="HENRY_DWH_isETL_Server" prompt="HENRY_DWH_isETL_Server?" promptNeeded="false" type="id_String" value="172.21.110.88"/>
-    <contextParameter comment="" name="HENRY_SA_dq1_AdditionalParams" prompt="HENRY_SA_dq1_AdditionalParams?" promptNeeded="false" type="id_String" value="instance=SQL2012"/>
-    <contextParameter comment="" name="HENRY_SA_dq1_Database" prompt="HENRY_SA_dq1_Database?" promptNeeded="false" type="id_String" value="HENRY_SA"/>
-    <contextParameter comment="" name="HENRY_SA_dq1_Login" prompt="HENRY_SA_dq1_Login?" promptNeeded="false" type="id_String" value="isETL_User"/>
-    <contextParameter comment="" name="HENRY_SA_dq1_Password" prompt="HENRY_SA_dq1_Password?" promptNeeded="false" type="id_Password" value="hTgAoqXDCdLnPZDSDy6ojQ=="/>
-    <contextParameter comment="" name="HENRY_SA_dq1_Port" prompt="HENRY_SA_dq1_Port?" promptNeeded="false" type="id_String" value="1434"/>
-    <contextParameter comment="" name="HENRY_SA_dq1_Schema" prompt="HENRY_SA_dq1_Schema?" promptNeeded="false" type="id_String" value="dq1"/>
-    <contextParameter comment="" name="HENRY_SA_dq1_Server" prompt="HENRY_SA_dq1_Server?" promptNeeded="false" type="id_String" value="172.21.110.88"/>
-    <contextParameter comment="" name="HENRY_SA_dq2_AdditionalParams" prompt="HENRY_SA_dq2_AdditionalParams?" promptNeeded="false" type="id_String" value="instance=SQL2012"/>
-    <contextParameter comment="" name="HENRY_SA_dq2_Database" prompt="HENRY_SA_dq2_Database?" promptNeeded="false" type="id_String" value="HENRY_SA"/>
-    <contextParameter comment="" name="HENRY_SA_dq2_Login" prompt="HENRY_SA_dq2_Login?" promptNeeded="false" type="id_String" value="isETL_User"/>
-    <contextParameter comment="" name="HENRY_SA_dq2_Password" prompt="HENRY_SA_dq2_Password?" promptNeeded="false" type="id_Password" value="hTgAoqXDCdLnPZDSDy6ojQ=="/>
-    <contextParameter comment="" name="HENRY_SA_dq2_Port" prompt="HENRY_SA_dq2_Port?" promptNeeded="false" type="id_String" value="1434"/>
-    <contextParameter comment="" name="HENRY_SA_dq2_Schema" prompt="HENRY_SA_dq2_Schema?" promptNeeded="false" type="id_String" value="dq2"/>
-    <contextParameter comment="" name="HENRY_SA_dq2_Server" prompt="HENRY_SA_dq2_Server?" promptNeeded="false" type="id_String" value="172.21.110.88"/>
-    <contextParameter comment="" name="HENRY_SA_dq3_AdditionalParams" prompt="HENRY_SA_dq3_AdditionalParams?" promptNeeded="false" type="id_String" value="instance=SQL2012"/>
-    <contextParameter comment="" name="HENRY_SA_dq3_Database" prompt="HENRY_SA_dq3_Database?" promptNeeded="false" type="id_String" value="HENRY_SA"/>
-    <contextParameter comment="" name="HENRY_SA_dq3_Login" prompt="HENRY_SA_dq3_Login?" promptNeeded="false" type="id_String" value="isETL_User"/>
-    <contextParameter comment="" name="HENRY_SA_dq3_Password" prompt="HENRY_SA_dq3_Password?" promptNeeded="false" type="id_Password" value="hTgAoqXDCdLnPZDSDy6ojQ=="/>
-    <contextParameter comment="" name="HENRY_SA_dq3_Port" prompt="HENRY_SA_dq3_Port?" promptNeeded="false" type="id_String" value="1434"/>
-    <contextParameter comment="" name="HENRY_SA_dq3_Schema" prompt="HENRY_SA_dq3_Schema?" promptNeeded="false" type="id_String" value="dq3"/>
-    <contextParameter comment="" name="HENRY_SA_dq3_Server" prompt="HENRY_SA_dq3_Server?" promptNeeded="false" type="id_String" value="172.21.110.88"/>
-    <contextParameter comment="" name="HENRY_SRC_dbo_AdditionalParams" prompt="HENRY_SRC_dbo_AdditionalParams?" promptNeeded="false" type="id_String" value="instance=SQL2012; allowMultiQueries=true"/>
-    <contextParameter comment="" name="HENRY_SRC_dbo_Database" prompt="HENRY_SRC_dbo_Database?" promptNeeded="false" type="id_String" value="HENRY_SRC"/>
-    <contextParameter comment="" name="HENRY_SRC_dbo_Login" prompt="HENRY_SRC_dbo_Login?" promptNeeded="false" type="id_String" value="isETL_User"/>
-    <contextParameter comment="" name="HENRY_SRC_dbo_Password" prompt="HENRY_SRC_dbo_Password?" promptNeeded="false" type="id_Password" value="hTgAoqXDCdLnPZDSDy6ojQ=="/>
-    <contextParameter comment="" name="HENRY_SRC_dbo_Port" prompt="HENRY_SRC_dbo_Port?" promptNeeded="false" type="id_String" value="1434"/>
-    <contextParameter comment="" name="HENRY_SRC_dbo_Schema" prompt="HENRY_SRC_dbo_Schema?" promptNeeded="false" type="id_String" value="dbo"/>
-    <contextParameter comment="" name="HENRY_SRC_dbo_Server" prompt="HENRY_SRC_dbo_Server?" promptNeeded="false" type="id_String" value="172.21.110.88"/>
-    <contextParameter comment="" name="HENRY_SRC_isETL_AdditionalParams" prompt="HENRY_SRC_isETL_AdditionalParams?" promptNeeded="false" type="id_String" value="instance=SQL2012"/>
-    <contextParameter comment="" name="HENRY_SRC_isETL_Database" prompt="HENRY_SRC_isETL_Database?" promptNeeded="false" type="id_String" value="HENRY_SRC"/>
-    <contextParameter comment="" name="HENRY_SRC_isETL_Login" prompt="HENRY_SRC_isETL_Login?" promptNeeded="false" type="id_String" value="isETL_User"/>
-    <contextParameter comment="" name="HENRY_SRC_isETL_Password" prompt="HENRY_SRC_isETL_Password?" promptNeeded="false" type="id_Password" value="hTgAoqXDCdLnPZDSDy6ojQ=="/>
-    <contextParameter comment="" name="HENRY_SRC_isETL_Port" prompt="HENRY_SRC_isETL_Port?" promptNeeded="false" type="id_String" value="1434"/>
-    <contextParameter comment="" name="HENRY_SRC_isETL_Schema" prompt="HENRY_SRC_isETL_Schema?" promptNeeded="false" type="id_String" value="isETL"/>
-    <contextParameter comment="" name="HENRY_SRC_isETL_Server" prompt="HENRY_SRC_isETL_Server?" promptNeeded="false" type="id_String" value="172.21.110.88"/>
-    <contextParameter comment="" name="HENRY_DWH_isLog_Schema" prompt="HENRY_DWH_isLog_Schema?" promptNeeded="false" type="id_String" value="isLOG"/>
-    <contextParameter comment="" name="HENRY_DWH_isLog_AdditionalParams" prompt="HENRY_DWH_isLog_AdditionalParams?" promptNeeded="false" type="id_String" value="instance=SQL2012"/>
-    <contextParameter comment="" name="HENRY_DWH_isLog_Port" prompt="HENRY_DWH_isLog_Port?" promptNeeded="false" type="id_String" value="1434"/>
-    <contextParameter comment="" name="HENRY_DWH_isLog_Server" prompt="HENRY_DWH_isLog_Server?" promptNeeded="false" type="id_String" value="172.21.110.88"/>
-    <contextParameter comment="" name="HENRY_DWH_isLog_Password" prompt="HENRY_DWH_isLog_Password?" promptNeeded="false" type="id_Password" value="hTgAoqXDCdLnPZDSDy6ojQ=="/>
-    <contextParameter comment="" name="HENRY_DWH_isLog_Database" prompt="HENRY_DWH_isLog_Database?" promptNeeded="false" type="id_String" value="HENRY_DWH"/>
-    <contextParameter comment="" name="HENRY_DWH_isLog_Login" prompt="HENRY_DWH_isLog_Login?" promptNeeded="false" type="id_String" value="isETL_User"/>
-    <contextParameter comment="" name="HENRY_DWH_isLIB_AdditionalParams" prompt="HENRY_DWH_isLIB_AdditionalParams?" promptNeeded="false" type="id_String" value="instance=SQL2012"/>
-    <contextParameter comment="" name="HENRY_DWH_isLIB_Server" prompt="HENRY_DWH_isLIB_Server?" promptNeeded="false" type="id_String" value="172.21.110.88"/>
-    <contextParameter comment="" name="HENRY_DWH_isLIB_Password" prompt="HENRY_DWH_isLIB_Password?" promptNeeded="false" type="id_Password" value="hTgAoqXDCdLnPZDSDy6ojQ=="/>
-    <contextParameter comment="" name="HENRY_DWH_isLIB_Database" prompt="HENRY_DWH_isLIB_Database?" promptNeeded="false" type="id_String" value="HENRY_DWH"/>
-    <contextParameter comment="" name="HENRY_DWH_isLIB_Login" prompt="HENRY_DWH_isLIB_Login?" promptNeeded="false" type="id_String" value="isETL_User"/>
-    <contextParameter comment="" name="HENRY_DWH_isLIB_Port" prompt="HENRY_DWH_isLIB_Port?" promptNeeded="false" type="id_String" value="1434"/>
-    <contextParameter comment="" name="HENRY_DWH_isLIB_Schema" prompt="HENRY_DWH_isLIB_Schema?" promptNeeded="false" type="id_String" value="isLIB"/>
+    <contextParameter comment="" name="host" prompt="host?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="port" prompt="port?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="database_dwh" prompt="database_dwh?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="database_sa" prompt="database_sa?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="database_src" prompt="database_src?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="user" prompt="user?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="password" prompt="password?" promptNeeded="false" type="id_String" value=""/>
+    <contextParameter comment="" name="filename" prompt="filename?" promptNeeded="false" type="id_String" value=".\\workspace\\connections.txt"/>
+    <contextParameter comment="" name="printOperations" prompt="printOperations?" promptNeeded="false" type="id_Boolean" value="true"/>
   </context>
   <parameters>
     <elementParameter field="TEXT" name="SCREEN_OFFSET_X" value="0"/>
-    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="0"/>
+    <elementParameter field="TEXT" name="SCREEN_OFFSET_Y" value="160"/>
     <elementParameter field="TEXT" name="REPOSITORY_CONNECTION_ID" value=""/>
     <elementParameter field="CHECK" name="IMPLICITCONTEXT_USE_PROJECT_SETTINGS" value="true"/>
     <elementParameter field="CHECK" name="STATANDLOG_USE_PROJECT_SETTINGS" value="false"/>
     <elementParameter field="CHECK" name="MULTI_THREAD_EXECATION" value="false"/>
     <elementParameter field="CHECK" name="IMPLICIT_TCONTEXTLOAD" value="false"/>
-    <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="false"/>
+    <elementParameter field="RADIO" name="FROM_FILE_FLAG_IMPLICIT_CONTEXT" value="true"/>
     <elementParameter field="RADIO" name="FROM_DATABASE_FLAG_IMPLICIT_CONTEXT" value="false"/>
-    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;&quot;"/>
+    <elementParameter field="FILE" name="IMPLICIT_TCONTEXTLOAD_FILE" value="&quot;C:/Users/becher/Desktop/TOS/TOS_DI-Win32-20141207_1530-V5.6.1/workspace/in.txt&quot;"/>
     <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;&quot;"/>
     <elementParameter field="TECHNICAL" name="PROPERTY_TYPE_IMPLICIT_CONTEXT:PROPERTY_TYPE" value=""/>
     <elementParameter field="TECHNICAL" name="PROPERTY_TYPE_IMPLICIT_CONTEXT:REPOSITORY_PROPERTY_TYPE" value=""/>
@@ -95,9 +41,9 @@
     <elementParameter field="FILE" name="DBFILE_IMPLICIT_CONTEXT" value="&quot;&quot;"/>
     <elementParameter field="DBTABLE" name="DBTABLE_IMPLICIT_CONTEXT" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="QUERY_CONDITION_IMPLICIT_CONTEXT" value="&quot;&quot;"/>
-    <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value=""/>
-    <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value=""/>
-    <elementParameter field="CHECK" name="PRINT_OPERATIONS" value="false"/>
+    <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value="Warning"/>
+    <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value="Warning"/>
+    <elementParameter field="CHECK" name="PRINT_OPERATIONS" value="true"/>
     <elementParameter field="CHECK" name="DISABLE_ERROR" value="false"/>
     <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="false"/>
     <elementParameter field="CHECK" name="DISABLE_INFO" value="false"/>
@@ -160,7 +106,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_2"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_2"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
     <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
@@ -310,7 +256,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_h_vngJd8EeWvtp635kwA-Q-tMap_1-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_v5xY8KPeEeWYk5TngfMXCg-tMap_1-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
@@ -328,7 +274,7 @@
       <column comment="" key="false" length="38" name="isETL_ExecutionInstanceGUID" nullable="false" pattern="" sourceType="" type="id_String" originalLength="38" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
       <outputTables sizeState="INTERMEDIATE" name="Filter_valid_records">
         <mapperTableEntries name="isETL_DMR" expression="TalendDate.getCurrentDate() " type="id_Date" nullable="true"/>
@@ -347,7 +293,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_h_vngJd8EeWvtp635kwA-Q-tMap_2-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_v5xY8KPeEeWYk5TngfMXCg-tMap_2-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
@@ -359,7 +305,7 @@
     <metadata connector="FLOW" name="Data_Conversion"/>
     <metadata connector="FLOW" name="DQ1Errors"/>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="Data_Conversion" expressionFilter="Filter_valid_records.isETL_isValid == true || ((Boolean)globalMap.get(&quot;FELC1_SourceobjectDQ1check&quot;)) == false" activateExpressionFilter="true"/>
       <outputTables sizeState="INTERMEDIATE" name="DQ1Errors" expressionFilter="Filter_valid_records.isETL_isValid == false" activateExpressionFilter="true"/>
@@ -379,7 +325,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_h_vngJd8EeWvtp635kwA-Q-tMap_3-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_v5xY8KPeEeWYk5TngfMXCg-tMap_3-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
@@ -528,7 +474,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_h_vngJd8EeWvtp635kwA-Q-tMap_6-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_v5xY8KPeEeWYk5TngfMXCg-tMap_6-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
@@ -541,7 +487,7 @@
       <column comment="" key="false" length="255" name="BK" nullable="false" pattern="" sourceType="" type="id_String" originalLength="255" usefulColumn="true"/>
     </metadata>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var">
         <mapperTableEntries name="Name" type="id_String"/>
         <mapperTableEntries name="BK" type="id_String"/>
@@ -559,7 +505,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_h_vngJd8EeWvtp635kwA-Q-tMap_5-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_v5xY8KPeEeWYk5TngfMXCg-tMap_5-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
@@ -584,7 +530,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_h_vngJd8EeWvtp635kwA-Q-tMap_4-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_v5xY8KPeEeWYk5TngfMXCg-tMap_4-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
@@ -592,17 +538,13 @@
     <elementParameter field="TEXT" name="LABEL" value="CSPL DQ3"/>
     <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <metadata connector="FLOW" label="Output" name="Output">
-    </metadata>
-    <metadata connector="FLOW" label="DQ3_Errors" name="DQ3_Errors">
-    </metadata>
+    <metadata connector="FLOW" label="Output" name="Output"/>
+    <metadata connector="FLOW" label="DQ3_Errors" name="DQ3_Errors"/>
     <nodeData xsi:type="MapperData">
       <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var"/>
-      <outputTables sizeState="INTERMEDIATE" name="Output">
-      </outputTables>
-      <outputTables sizeState="INTERMEDIATE" name="DQ3_Errors" expressionFilter="Calculations.isETL_ErrorCount>0" activateExpressionFilter="true">
-      </outputTables>
+      <outputTables sizeState="INTERMEDIATE" name="Output"/>
+      <outputTables sizeState="INTERMEDIATE" name="DQ3_Errors" expressionFilter="Calculations.isETL_ErrorCount>0" activateExpressionFilter="true"/>
       <inputTables sizeState="INTERMEDIATE" name="Calculations" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE"/>
     </nodeData>
   </node>
@@ -672,7 +614,7 @@
     <elementParameter field="EXTERNAL" name="MAP" value=""/>
     <elementParameter field="CLOSED_LIST" name="LINK_STYLE" value="AUTO"/>
     <elementParameter field="DIRECTORY" name="TEMPORARY_DATA_DIRECTORY" value=""/>
-    <elementParameter field="IMAGE" name="PREVIEW" value="_h_vngJd8EeWvtp635kwA-Q-tMap_7-PREVIEW.bmp"/>
+    <elementParameter field="IMAGE" name="PREVIEW" value="_v5xY8KPeEeWYk5TngfMXCg-tMap_7-PREVIEW.bmp"/>
     <elementParameter field="CHECK" name="DIE_ON_ERROR" value="true"/>
     <elementParameter field="CHECK" name="LKUP_PARALLELIZE" value="false"/>
     <elementParameter field="TEXT" name="ROWS_BUFFER_SIZE" value="2000000"/>
@@ -683,13 +625,11 @@
     <metadata connector="FLOW" label="Update" name="Update"/>
     <metadata connector="FLOW" label="Insert" name="Insert"/>
     <nodeData xsi:type="MapperData">
-      <uiProperties shellMaximized="true"/>
+      <uiProperties/>
       <varTables sizeState="INTERMEDIATE" name="Var" minimized="true"/>
       <outputTables sizeState="INTERMEDIATE" name="Update"/>
       <outputTables sizeState="INTERMEDIATE" name="Insert" activateCondensedTool="true" rejectInnerJoin="true"/>
-      <inputTables sizeState="INTERMEDIATE" name="Output" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE">
-        <mapperTableEntries name="BK" type="id_String"/>
-      </inputTables>
+      <inputTables sizeState="INTERMEDIATE" name="Output" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE"/>
       <inputTables sizeState="INTERMEDIATE" name="row1" activateCondensedTool="true" matchingMode="UNIQUE_MATCH" lookupMode="LOAD_ONCE" innerJoin="true">
         <mapperTableEntries name="BK" expression="Output.BK " type="id_String" operator="="/>
       </inputTables>
@@ -699,7 +639,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_4"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_2"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
     <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
@@ -732,7 +672,7 @@
   <node componentName="tMSSqlOutputBulk" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="2112">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlOutputBulk_1"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="FILE" name="FILENAME" value="&quot;C:/Users/becher/Desktop/TOS/TOS_DI-Win32-20141207_1530-V5.6.1/workspace/out.csv&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;&quot;.\\workspace\\out.csv&quot;&quot;"/>
     <elementParameter field="CHECK" name="APPEND" value="false"/>
     <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
     <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;;&quot;"/>
@@ -748,7 +688,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlOutput_6"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_2"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="context.HENRY_DWH_dwh_Server"/>
     <elementParameter field="TEXT" name="PORT" value="context.HENRY_DWH_dwh_Port"/>
     <elementParameter field="TEXT" name="DB_SCHEMA" value="context.HENRY_DWH_dwh_Schema"/>
@@ -808,7 +748,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlOutput_7"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_2"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="context.HENRY_DWH_dwh_Server"/>
     <elementParameter field="TEXT" name="PORT" value="context.HENRY_DWH_dwh_Port"/>
     <elementParameter field="TEXT" name="DB_SCHEMA" value="context.HENRY_DWH_dwh_Schema"/>
@@ -871,7 +811,7 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="VARCHAR" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tPrejob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="64" posY="64">
+  <node componentName="tPrejob" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="64" posY="-96">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tPrejob_1"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="TEXT" name="LABEL" value="Open"/>
@@ -1281,11 +1221,11 @@
       <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMSSqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1376" posY="448" sizeX="160" sizeY="32">
+  <node componentName="tMSSqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="1376" posY="320" sizeX="160" sizeY="32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlRow_3"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_3"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
     <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
     <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;&quot;"/>
@@ -1321,7 +1261,7 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlInput_1"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_2"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="context.HENRY_DWH_isETL_Server"/>
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
     <elementParameter field="TEXT" name="PORT" value="context.HENRY_DWH_isETL_Port"/>
@@ -1366,7 +1306,7 @@
   <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="672" posY="320">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_1"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="globalMap.put(&quot;CF_DQ1errtable&quot;, CF_result_set.DQ1);&#xA;globalMap.put(&quot;CF_DQ2errtable&quot;, CF_result_set.DQ2);&#xA;globalMap.put(&quot;CF_DQ3errtable&quot;, CF_result_set.DQ3);&#xA;globalMap.put(&quot;CF_SQL_Pre_Processing_DWH_strSQL&quot;, CF_result_set.PreProcessingSQL);&#xA;globalMap.put(&quot;CF_SQL_Post_Processing_DWH_strSQL&quot;, CF_result_set.PostProcessingSQL);&#xA;&#xA;"/>
+    <elementParameter field="MEMO_JAVA" name="CODE" value="globalMap.put(&quot;CF_DQ1errtable&quot;, CF_result_set.DQ1);&#xA;globalMap.put(&quot;CF_DQ2errtable&quot;, CF_result_set.DQ2);&#xA;globalMap.put(&quot;CF_DQ3errtable&quot;, CF_result_set.DQ3);&#xA;globalMap.put(&quot;CF_SQL_Pre_Processing_DWH_strSQL&quot;, CF_result_set.PreProcessingSQL);&#xA;globalMap.put(&quot;CF_SQL_Post_Processing_DWH_strSQL&quot;, CF_result_set.PostProcessingSQL);&#xA;globalMap.put(&quot;CF_Enable_Alter_Mutationdate&quot;, CF_result_set.Enable_Alter_Mutationdate);&#xA;System.out.println((String)globalMap.get(&quot;CF_Enable_Alter_Mutationdate&quot;));&#xA;String GUID = UUID.randomUUID().toString();&#xA;GUID = String.format(&quot;{%s}&quot;,GUID.toUpperCase());&#xA;globalMap.put(&quot;GUID&quot;, GUID);"/>
     <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
     <elementParameter field="TEXT" name="LABEL" value="Store CF_result set in variables"/>
     <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
@@ -1391,18 +1331,6 @@
       </column>
     </metadata>
   </node>
-  <node componentName="tJavaRow" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1056" posY="320">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJavaRow_3"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="MEMO_JAVA" name="CODE" value="if (((String)globalMap.get(&quot;CF_SQL_Pre_Processing_DWH_strSQL&quot;)) == null)&#xA;globalMap.put(&quot;CF_SQL_Pre_Processing_DWH_strSQL&quot;, &quot;SELECT 1&quot;);&#xA;else &#xA;globalMap.put(&quot;CF_SQL_Pre_Processing_DWH_strSQL&quot;, ((String)globalMap.get(&quot;CF_SQL_Pre_Processing_DWH_strSQL&quot;)));&#xA;&#xA;if (((String)globalMap.get(&quot;CF_SQL_Post_Processing_DWH_strSQL&quot;)) == null)&#xA;globalMap.put(&quot;CF_SQL_Post_Processing_DWH_strSQL&quot;, &quot;SELECT 1&quot;);&#xA;else &#xA;globalMap.put(&quot;CF_SQL_Post_Processing_DWH_strSQL&quot;, ((String)globalMap.get(&quot;CF_SQL_Post_Processing_DWH_strSQL&quot;)));&#xA;"/>
-    <elementParameter field="MEMO_IMPORT" name="IMPORT" value="//import java.util.List;"/>
-    <elementParameter field="TEXT" name="LABEL" value="Replace NULL in Pre_Post_Prcessing"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-    <elementParameter field="CHECK" name="INFORMATION" value="true"/>
-    <elementParameter field="MEMO" name="COMMENT" value="In dieser -JavaRowKomponente wird der SQL Pre- und Post-Processing Code &#xD;&#xA;durch &quot;SELECT 1&quot; ersetzt, falls er leer (NULL) ist. &#xD;&#xA;&#xD;&#xA;Der Job läuft zwar auch durch, wenn die SQL-Abfrage leer ist, gibt aber dann eine &#xD;&#xA;Fehlermeldung aus, die hiermit verhindert  werden kann."/>
-    <metadata connector="FLOW" name="tJavaRow_3"/>
-  </node>
   <node componentName="tWarn" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="1728" posY="864">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tWarn_3"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
@@ -1425,7 +1353,7 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tWarn_4"/>
   </node>
-  <node componentName="tWarn" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="480" posY="1056">
+  <node componentName="tWarn" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="256" posY="928">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tWarn_5"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="TEXT" name="MESSAGE" value="&quot;Error SQL Execute (Post_Processing_DWH) &quot; + ((String)globalMap.get(&quot;G_Sourceobjectgroup&quot;)) + &quot; Error: &quot; + ((String)globalMap.get(&quot;tMSSqlRow_6_ERROR_MESSAGE&quot;))"/>
@@ -1488,7 +1416,7 @@
     <elementParameter field="CHECK" name="ACTIVATE" value="false"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_2"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
     <elementParameter field="TEXT" name="HOST" value="context.HENRY_DWH_isETL_Server"/>
     <elementParameter field="TEXT" name="PORT" value="context.HENRY_DWH_isETL_Port"/>
     <elementParameter field="TEXT" name="DB_SCHEMA" value="context.HENRY_DWH_isETL_Schema"/>
@@ -1728,7 +1656,7 @@
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tWarn_11"/>
   </node>
-  <node componentName="tWarn" componentVersion="0.101" offsetLabelX="20" offsetLabelY="0" posX="1664" posY="1920" sizeX="128" sizeY="32">
+  <node componentName="tWarn" componentVersion="0.101" offsetLabelX="20" offsetLabelY="0" posX="1600" posY="1920" sizeX="128" sizeY="32">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tWarn_12"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="TEXT" name="MESSAGE" value="&quot;Error inserting record set for &quot; + ((String)globalMap.get(&quot;FELC1_SourceobjectDQ3errtable&quot;)) + &quot; Error: &quot; + ((String)globalMap.get(&quot;tMSSqlOutput_5_ERROR_MESSAGE&quot;))"/>
@@ -1865,16 +1793,16 @@
       <column defaultValue="" key="false" length="3" name="count" nullable="true" precision="0" sourceType="" type="id_Integer" usefulColumn="true"/>
     </metadata>
   </node>
-  <node componentName="tMSSqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="64">
+  <node componentName="tMSSqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="224" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlConnection_1"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;172.21.100.77&quot;"/>
+    <elementParameter field="TEXT" name="HOST" value="context.host"/>
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="context.port"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;Henry_DWH_isETL&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;isETL_User&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="v8+RGusCeE5g7aN7EnZnUA=="/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.database_dwh"/>
+    <elementParameter field="TEXT" name="USER" value="context.user"/>
+    <elementParameter field="PASSWORD" name="PASS" value="8pW6Nmy2kuczSBOgoJ7Ub24fQgd+SRSj"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
@@ -1886,48 +1814,27 @@
     <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
-  <node componentName="tMSSqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="256" posY="192">
+  <node componentName="tMSSqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="224" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlCommit_1"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
     <elementParameter field="CHECK" name="CLOSE" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="Commit Henry DWH"/>
+    <elementParameter field="TEXT" name="LABEL" value="Commit DWH"/>
     <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlCommit_1"/>
   </node>
-  <node componentName="tMSSqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="960" posY="64">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlConnection_2"/>
-    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;172.21.100.77&quot;"/>
-    <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
-    <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;dbo&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;TALEND_TEST&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;isETL_User&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="v8+RGusCeE5g7aN7EnZnUA=="/>
-    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
-    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
-    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
-    <elementParameter field="CHECK" name="USE_SHARED_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="SHARED_CONNECTION_NAME" value=""/>
-    <elementParameter field="CHECK" name="AUTO_COMMIT" value="false"/>
-    <elementParameter field="CHECK" name="SHARE_IDENTITY_SETTING" value="false"/>
-    <elementParameter field="TEXT" name="LABEL" value="MyConnection"/>
-    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
-    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
-  </node>
   <node componentName="tMSSqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlCommit_2"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_2"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
     <elementParameter field="CHECK" name="CLOSE" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="Commit Henry SA"/>
+    <elementParameter field="TEXT" name="LABEL" value="Commit SA"/>
     <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlCommit_2"/>
   </node>
-  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="800" posY="192">
+  <node componentName="tJava" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="864" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJava_1"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="MEMO_JAVA" name="CODE" value="//make sure the .csv file is deleted after the bulk insert&#xA;String path = &quot;.\\workspace\\out.csv&quot;;&#xA;File file = new File(path);&#xA;file.deleteOnExit();"/>
@@ -1951,13 +1858,13 @@
   <node componentName="tMSSqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlConnection_3"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;172.21.100.77&quot;"/>
+    <elementParameter field="TEXT" name="HOST" value="context.host"/>
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="context.port"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;Henry_LS_DWH&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;isETL_User&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="v8+RGusCeE5g7aN7EnZnUA=="/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.database_sa"/>
+    <elementParameter field="TEXT" name="USER" value="context.user"/>
+    <elementParameter field="PASSWORD" name="PASS" value="8pW6Nmy2kuczSBOgoJ7Ub24fQgd+SRSj"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
@@ -1969,26 +1876,26 @@
     <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
   </node>
-  <node componentName="tMSSqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="608" posY="192">
+  <node componentName="tMSSqlCommit" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="192">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlCommit_3"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
     <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
     <elementParameter field="CHECK" name="CLOSE" value="true"/>
-    <elementParameter field="TEXT" name="LABEL" value="Commit Henry SRC"/>
+    <elementParameter field="TEXT" name="LABEL" value="Commit SRC"/>
     <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
     <metadata connector="FLOW" name="tMSSqlCommit_3"/>
   </node>
-  <node componentName="tMSSqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="608" posY="64">
+  <node componentName="tMSSqlConnection" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="672" posY="64">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlConnection_4"/>
     <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
-    <elementParameter field="TEXT" name="HOST" value="&quot;172.21.100.77&quot;"/>
+    <elementParameter field="TEXT" name="HOST" value="context.host"/>
     <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
-    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="context.port"/>
     <elementParameter field="TEXT" name="SCHEMA_DB" value="&quot;&quot;"/>
-    <elementParameter field="TEXT" name="DBNAME" value="&quot;Henry_LS_DWH&quot;"/>
-    <elementParameter field="TEXT" name="USER" value="&quot;isETL_User&quot;"/>
-    <elementParameter field="PASSWORD" name="PASS" value="v8+RGusCeE5g7aN7EnZnUA=="/>
+    <elementParameter field="TEXT" name="DBNAME" value="context.database_src"/>
+    <elementParameter field="TEXT" name="USER" value="context.user"/>
+    <elementParameter field="PASSWORD" name="PASS" value="8pW6Nmy2kuczSBOgoJ7Ub24fQgd+SRSj"/>
     <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
     <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
     <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
@@ -1999,6 +1906,138 @@
     <elementParameter field="TEXT" name="LABEL" value="Henry SRC"/>
     <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
     <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+  </node>
+  <node componentName="tWarn" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="256" posY="832">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tWarn_14"/>
+    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
+    <elementParameter field="TEXT" name="MESSAGE" value="&quot;Error SQL Execute (Alter_Mutation_Date) &quot; + ((String)globalMap.get(&quot;G_Sourceobjectgroup&quot;)) + &quot; Error: &quot; + ((String)globalMap.get(&quot;tMSSqlRow_8_ERROR_MESSAGE&quot;))"/>
+    <elementParameter field="TEXT" name="CODE" value="42"/>
+    <elementParameter field="CLOSED_LIST" name="PRIORITY" value="4"/>
+    <elementParameter field="TEXT" name="LABEL" value="Error execute PostProcessing"/>
+    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tWarn_14"/>
+  </node>
+  <node componentName="tMSSqlRow" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="512" posY="832">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlRow_8"/>
+    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
+    <elementParameter field="CHECK" name="USE_EXISTING_CONNECTION" value="true"/>
+    <elementParameter field="COMPONENT_LIST" name="CONNECTION" value="tMSSqlConnection_1"/>
+    <elementParameter field="TEXT" name="HOST" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="PORT" value="&quot;1433&quot;"/>
+    <elementParameter field="TEXT" name="DB_SCHEMA" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="DBNAME" value="&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TYPE" value="MSSQL"/>
+    <elementParameter field="TEXT" name="USER" value="&quot;&quot;"/>
+    <elementParameter field="PASSWORD" name="PASS" value="0RMsyjmybrE="/>
+    <elementParameter field="DBTABLE" name="TABLE" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="IDENTITY_INSERT" value="false"/>
+    <elementParameter field="QUERYSTORE_TYPE" name="QUERYSTORE" value="&quot;&quot;"/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:REPOSITORY_QUERYSTORE_TYPE" value=""/>
+    <elementParameter field="TECHNICAL" name="QUERYSTORE:QUERYSTORE_TYPE" value="BUILT_IN"/>
+    <elementParameter field="MEMO_SQL" name="QUERY" value="&quot;INSERT INTO isETL.tblSourcetablemutationdate ([Sourcetablename], [FROM_Mutationdate], [TO_Mutationdate])&#xD;&#xA;&#xD;&#xA;SELECT TOP 1 [Sourcetablename], [FROM_Mutationdate], [TO_Mutationdate]&#xD;&#xA;FROM isETL.tblSourcetablemutationdate_tmp&quot;&#xD;&#xA;"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="TEXT" name="PROPERTIES" value="&quot;&quot;"/>
+    <elementParameter field="CHECK" name="PROPAGATE_RECORD_SET" value="false"/>
+    <elementParameter field="COLUMN_LIST" name="RECORD_SET_COLUMN" value=""/>
+    <elementParameter field="CHECK" name="USE_PREPAREDSTATEMENT" value="false"/>
+    <elementParameter field="TABLE" name="SET_PREPAREDSTATEMENT_PARAMETERS"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="TEXT" name="COMMIT_EVERY" value="10000"/>
+    <elementParameter field="TEXT" name="LABEL" value="Alter Mutation date"/>
+    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tMSSqlRow_8"/>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tFileInputDelimited" componentVersion="0.102" offsetLabelX="0" offsetLabelY="0" posX="448" posY="-96">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_1"/>
+    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
+    <elementParameter field="LABEL" name="FILENAMETEXT" value="&quot;When the input source is a stream or a zip file,footer and random shouldn't be bigger than 0.&quot;"/>
+    <elementParameter field="FILE" name="FILENAME" value="&quot;.\\workspace\\connections.txt&quot;"/>
+    <elementParameter field="CHECK" name="CSV_OPTION" value="false"/>
+    <elementParameter field="TEXT" name="ROWSEPARATOR" value="&quot;\n&quot;"/>
+    <elementParameter field="OPENED_LIST" name="CSVROWSEPARATOR" value="&quot;\n&quot;"/>
+    <elementParameter field="TEXT" name="FIELDSEPARATOR" value="&quot;;&quot;"/>
+    <elementParameter field="TEXT" name="ESCAPE_CHAR" value="&quot;&quot;&quot;"/>
+    <elementParameter field="TEXT" name="TEXT_ENCLOSURE" value="&quot;&quot;&quot;"/>
+    <elementParameter field="TEXT" name="HEADER" value="0"/>
+    <elementParameter field="TEXT" name="FOOTER" value="0"/>
+    <elementParameter field="TEXT" name="LIMIT" value=""/>
+    <elementParameter field="CHECK" name="REMOVE_EMPTY_ROW" value="true"/>
+    <elementParameter field="CHECK" name="UNCOMPRESS" value="false"/>
+    <elementParameter field="CHECK" name="DIE_ON_ERROR" value="false"/>
+    <elementParameter field="DIRECTORY" name="TEMP_DIR" value="&quot;C:/Users/becher/Desktop/TOS/TOS_DI-Win32-20141207_1530-V5.6.1/workspace&quot;"/>
+    <elementParameter field="CHECK" name="ADVANCED_SEPARATOR" value="false"/>
+    <elementParameter field="TEXT" name="THOUSANDS_SEPARATOR" value="&quot;,&quot;"/>
+    <elementParameter field="TEXT" name="DECIMAL_SEPARATOR" value="&quot;.&quot;"/>
+    <elementParameter field="CHECK" name="RANDOM" value="false"/>
+    <elementParameter field="TEXT" name="NB_RANDOM" value="10"/>
+    <elementParameter field="CHECK" name="TRIMALL" value="false"/>
+    <elementParameter field="TABLE" name="TRIMSELECT">
+      <elementValue elementRef="SCHEMA_COLUMN" value="key"/>
+      <elementValue elementRef="TRIM" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="value"/>
+      <elementValue elementRef="TRIM" value="false"/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="CHECK_FIELDS_NUM" value="false"/>
+    <elementParameter field="CHECK" name="CHECK_DATE" value="false"/>
+    <elementParameter field="ENCODING_TYPE" name="ENCODING" value="&quot;ISO-8859-15&quot;"/>
+    <elementParameter field="TECHNICAL" name="ENCODING:ENCODING_TYPE" value="ISO-8859-15"/>
+    <elementParameter field="CHECK" name="SPLITRECORD" value="false"/>
+    <elementParameter field="CHECK" name="ENABLE_DECODE" value="false"/>
+    <elementParameter field="TABLE" name="DECODE_COLS">
+      <elementValue elementRef="SCHEMA_COLUMN" value="key"/>
+      <elementValue elementRef="DECODE" value="false"/>
+      <elementValue elementRef="SCHEMA_COLUMN" value="value"/>
+      <elementValue elementRef="DECODE" value="false"/>
+    </elementParameter>
+    <elementParameter field="TEXT" name="DESTINATION" value=""/>
+    <elementParameter field="TEXT" name="SCHEMA_OPT_NUM" value="100"/>
+    <elementParameter field="TEXT" name="LABEL" value="Connection list"/>
+    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tFileInputDelimited_1">
+      <column key="false" length="255" name="key" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
+      <column key="false" length="255" name="value" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+    <metadata connector="REJECT" name="REJECT">
+      <column defaultValue="" key="false" length="255" name="errorCode" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="errorMessage" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tContextLoad" componentVersion="0.101" offsetLabelX="0" offsetLabelY="0" posX="608" posY="-96">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tContextLoad_1"/>
+    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
+    <elementParameter field="CLOSED_LIST" name="LOAD_NEW_VARIABLE" value="Warning"/>
+    <elementParameter field="CLOSED_LIST" name="NOT_LOAD_OLD_VARIABLE" value="Warning"/>
+    <elementParameter field="CHECK" name="PRINT_OPERATIONS" value="context.printOperations" contextMode="true"/>
+    <elementParameter field="CHECK" name="DISABLE_ERROR" value="false"/>
+    <elementParameter field="CHECK" name="DISABLE_WARNINGS" value="true"/>
+    <elementParameter field="CHECK" name="DISABLE_INFO" value="true"/>
+    <elementParameter field="CHECK" name="DIEONERROR" value="false"/>
+    <elementParameter field="TEXT" name="LABEL" value="Connection loader"/>
+    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tContextLoad_1">
+      <column defaultValue="" key="false" length="255" name="key" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
+      <column defaultValue="" key="false" length="255" name="value" nullable="true" precision="0" sourceType="" type="id_String" usefulColumn="true"/>
+    </metadata>
+  </node>
+  <node componentName="tWarn" componentVersion="0.101" offsetLabelX="4" offsetLabelY="0" posX="1600" posY="2112" sizeX="128" sizeY="32">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tWarn_15"/>
+    <elementParameter field="DIRECTORY" name="JAVA_LIBRARY_PATH" value="C:\Users\becher\Desktop\TOS\TOS_DI-Win32-20141207_1530-V5.6.1\configuration\lib\java"/>
+    <elementParameter field="TEXT" name="MESSAGE" value="&quot;Error inserting record set for &quot; + ((String)globalMap.get(&quot;G_DEST_Tablename&quot;)) + &quot; Error: &quot; + ((String)globalMap.get(&quot;tMSSqlOutput_6_ERROR_MESSAGE&quot;))"/>
+    <elementParameter field="TEXT" name="CODE" value="42"/>
+    <elementParameter field="CLOSED_LIST" name="PRIORITY" value="4"/>
+    <elementParameter field="TEXT" name="LABEL" value="Error inserting new record"/>
+    <elementParameter field="TEXT" name="HINT" value="&lt;b>__UNIQUE_NAME__&lt;/b>&lt;br>__COMMENT__"/>
+    <elementParameter field="TEXT" name="CONNECTION_FORMAT" value="row"/>
+    <metadata connector="FLOW" name="tWarn_15"/>
   </node>
   <connection connectorName="FLOW" label="Store_FELC1_resultset" lineStyle="0" metaname="tMSSqlInput_2" offsetLabelX="-2" offsetLabelY="20" source="tMSSqlInput_2" target="tJavaRow_2">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
@@ -2035,8 +2074,13 @@
   <connection connectorName="COMPONENT_ERROR" label="OnComponentError" lineStyle="5" metaname="tMSSqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tMSSqlInput_2" target="tWarn_9">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentError3"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tMSSqlInput_2" offsetLabelX="0" offsetLabelY="0" source="tMSSqlInput_2" target="tMSSqlRow_6">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk26"/>
+  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tMSSqlInput_2" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tMSSqlInput_2" target="tMSSqlRow_6">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="(String)globalMap.get(&quot;CF_SQL_Post_Processing_DWH_strSQL&quot;) != null"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="If2"/>
+  </connection>
+  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tMSSqlInput_2" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tMSSqlInput_2" target="tMSSqlRow_8">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="Integer.parseInt((String)globalMap.get(&quot;CF_Enable_Alter_Mutationdate&quot;)) == 1"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="If3"/>
   </connection>
   <connection connectorName="ITERATE" label="Iterate" lineStyle="7" metaname="tForeach_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tForeach_1" target="tMSSqlRow_1">
     <elementParameter field="CHECK" name="ENABLE_PARALLEL" value="false"/>
@@ -2121,6 +2165,14 @@
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentError5"/>
   </connection>
   <connection connectorName="FLOW" label="LU_FIELDS" lineStyle="0" metaname="LU_FIELDS" offsetLabelX="0" offsetLabelY="0" source="tMap_6" target="tMap_5">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="Name"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="BK"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="ConnectionPoint"/>
   </connection>
@@ -2356,17 +2408,20 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row3"/>
   </connection>
+  <connection connectorName="COMPONENT_ERROR" label="OnComponentError" lineStyle="5" metaname="tMSSqlOutput_6" offsetLabelX="0" offsetLabelY="0" source="tMSSqlOutput_6" target="tWarn_15">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentError9"/>
+  </connection>
   <connection connectorName="COMPONENT_ERROR" label="OnComponentError" lineStyle="5" metaname="tMSSqlOutput_7" offsetLabelX="0" offsetLabelY="0" source="tMSSqlOutput_7" target="tWarn_13">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentError10"/>
   </connection>
-  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPrejob_1" offsetLabelX="0" offsetLabelY="0" source="tPrejob_1" target="tMSSqlConnection_1">
+  <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tPrejob_1" offsetLabelX="0" offsetLabelY="0" source="tPrejob_1" target="tFileInputDelimited_1">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk5"/>
   </connection>
   <connection connectorName="COMPONENT_OK" label="OnComponentOk" lineStyle="3" metaname="tSetGlobalVar_2" offsetLabelX="0" offsetLabelY="6" source="tSetGlobalVar_2" target="tMSSqlInput_1">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnComponentOk4"/>
   </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tMSSqlRow_2" offsetLabelX="0" offsetLabelY="0" source="tMSSqlRow_2" target="tMSSqlRow_3">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk22"/>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tMSSqlRow_2" offsetLabelX="-50" offsetLabelY="50" source="tMSSqlRow_2" target="tMSSqlInput_2">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk25"/>
   </connection>
   <connection connectorName="SUBJOB_ERROR" label="OnSubjobError" lineStyle="4" metaname="tMSSqlRow_2" offsetLabelX="-8" offsetLabelY="-8" source="tMSSqlRow_2" target="tWarn_8">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobError7"/>
@@ -2388,9 +2443,6 @@
   </connection>
   <connection connectorName="SUBJOB_ERROR" label="OnSubjobError" lineStyle="4" metaname="tMSSqlRow_6" offsetLabelX="1" offsetLabelY="-11" source="tMSSqlRow_6" target="tWarn_5">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobError2"/>
-  </connection>
-  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tMSSqlRow_3" offsetLabelX="-50" offsetLabelY="50" source="tMSSqlRow_3" target="tMSSqlInput_2">
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk25"/>
   </connection>
   <connection connectorName="SUBJOB_ERROR" label="OnSubjobError" lineStyle="4" metaname="tMSSqlRow_3" offsetLabelX="3" offsetLabelY="-8" source="tMSSqlRow_3" target="tWarn_1">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobError3"/>
@@ -2422,26 +2474,9 @@
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tMSSqlInput_1" offsetLabelX="50" offsetLabelY="-10" source="tMSSqlInput_1" target="tMSSqlRow_5">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk5"/>
   </connection>
-  <connection connectorName="FLOW" label="Replace_NULL_in_Pre_Post_Processing" lineStyle="0" metaname="tJavaRow_1" offsetLabelX="0" offsetLabelY="0" source="tJavaRow_1" target="tJavaRow_3">
-    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
-      <elementValue elementRef="TRACE_COLUMN" value="DQ1"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DQ2"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="DQ3"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="PreProcessingSQL"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-      <elementValue elementRef="TRACE_COLUMN" value="PostProcessingSQL"/>
-      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
-      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
-    </elementParameter>
-    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Replace_NULL_in_Pre_Post_Processing"/>
+  <connection connectorName="RUN_IF" label="If" lineStyle="6" metaname="tJavaRow_1" offsetLabelX="0" offsetLabelY="0" source="tJavaRow_1" target="tMSSqlRow_3">
+    <elementParameter field="MEMO_JAVA" name="CONDITION" value="(String)globalMap.get(&quot;CF_SQL_Pre_Processing_DWH_strSQL&quot;) != null"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="If4"/>
   </connection>
   <connection connectorName="FLOW" label="Logerrors" lineStyle="0" metaname="tLogCatcher_1" offsetLabelX="0" offsetLabelY="0" source="tLogCatcher_1" target="tMSSqlOutput_1">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
@@ -2610,8 +2645,30 @@
   <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tMSSqlCommit_3" offsetLabelX="0" offsetLabelY="0" source="tMSSqlCommit_3" target="tJava_1">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk7"/>
   </connection>
-  <note opaque="true" posX="1856" posY="2624" sizeHeight="161" sizeWidth="257" text="Das Update wird so implementiert, &#xD;&#xA;dass alle zu vergleichenden Spalten &#xD;&#xA;per Lookup verglichen werden.&#xD;&#xA;Es werden dann nur diejenigen &#xD;&#xA;Datensätze an den Output &#xD;&#xA;UpdateChanged Records, wenn &#xD;&#xA;eine der Spalten nicht übereinstimmt."/>
-  <note opaque="true" posX="1888" posY="3136" sizeHeight="64" sizeWidth="96" text="Platzhalter"/>
+  <connection connectorName="SUBJOB_ERROR" label="OnSubjobError" lineStyle="4" metaname="tMSSqlRow_8" offsetLabelX="0" offsetLabelY="0" source="tMSSqlRow_8" target="tWarn_14">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobError11"/>
+  </connection>
+  <connection connectorName="FLOW" label="row2" lineStyle="0" metaname="tFileInputDelimited_1" offsetLabelX="0" offsetLabelY="0" source="tFileInputDelimited_1" target="tContextLoad_1">
+    <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
+      <elementValue elementRef="TRACE_COLUMN" value="value"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+      <elementValue elementRef="TRACE_COLUMN" value="key"/>
+      <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
+      <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
+    </elementParameter>
+    <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="row2"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tFileInputDelimited_1" offsetLabelX="0" offsetLabelY="0" outputId="1" source="tFileInputDelimited_1" target="tMSSqlConnection_1">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk8"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tFileInputDelimited_1" offsetLabelX="0" offsetLabelY="0" outputId="2" source="tFileInputDelimited_1" target="tMSSqlConnection_3">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk9"/>
+  </connection>
+  <connection connectorName="SUBJOB_OK" label="OnSubjobOk" lineStyle="1" metaname="tFileInputDelimited_1" offsetLabelX="0" offsetLabelY="0" outputId="3" source="tFileInputDelimited_1" target="tMSSqlConnection_4">
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="OnSubjobOk10"/>
+  </connection>
   <note opaque="true" posX="2048" posY="32" sizeHeight="385" sizeWidth="385" text="Ablauf:&#xD;&#xA;1. Im Prejob werden alle benötigten &#xD;&#xA;    DB-Verbindungen aufgebaut. &#xD;&#xA;    Äquivalent zu Connection Managern in SSIS&#xD;&#xA;2. In Initialize Sourceobjectgroup werden die &#xD;&#xA;   Variablen gesetzt, die für den weiteren &#xD;&#xA;   Vorgang benötigt werden. &#xD;&#xA;3. In SEQC Load rsSourceobjectgroup werden &#xD;&#xA;    die DQ-Tabellen und Pre/Post-Processing&#xD;&#xA;    Statements ausgelesen und in Variablen&#xD;&#xA;    gespeichert, um sie später wieder zu verwenden.&#xD;&#xA;4.  Im Anschluss werden die DQ-Tabellen geleert &#xD;&#xA;     und das PreProcessing ausgeführt, falls vorhanden.&#xD;&#xA;5.  Dann  werden die Strukturtabellen ausgelesen und&#xD;&#xA;     wiederum in Jobvariablen gespeichert.&#xD;&#xA;6.  Es folgt der Datenfluss gemäß Henry-Standard.">
     <elementParameter field="RADIO" name="NOTELABEL_CENTER" value="false"/>
     <elementParameter field="RADIO" name="NOTETXT_TOP" value="true"/>
@@ -2789,48 +2846,85 @@
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlConnection_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Connection Data Warehouse"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlCommit_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Commit Data Warehouse"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlConnection_2"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
-    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
-  </subjob>
-  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlCommit_2"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Commit Staging Area"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tJava_1"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Delete Bulk File after Insert"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tWarn_13"/>
-    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Log Error"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="255;128;255"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlConnection_3"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Connection Staging Area"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlCommit_3"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Commit Source"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
   <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlConnection_4"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Connection Source"/>
     <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tWarn_14"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Log Error"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="255;128;255"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMSSqlRow_8"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Alter Mutation Date"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="255;255;128"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tFileInputDelimited_1"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="160;190;240"/>
+    <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
+  </subjob>
+  <subjob>
+    <elementParameter field="CHECK" name="SHOW_SUBJOB_TITLE" value="true"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="tWarn_15"/>
+    <elementParameter field="TEXT" name="SUBJOB_TITLE" value="Log Error"/>
+    <elementParameter field="COLOR" name="SUBJOB_TITLE_COLOR" value="255;128;255"/>
     <elementParameter field="COLOR" name="SUBJOB_COLOR" value="220;220;250"/>
   </subjob>
 </talendfile:ProcessType>

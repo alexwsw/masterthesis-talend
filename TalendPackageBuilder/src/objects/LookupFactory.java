@@ -34,8 +34,8 @@ public class LookupFactory implements ILookupFactory {
 		List<LookupDTO> rawLookups = mapper.mapRersultSetToObject(rs, LookupDTO.class);
 		if(rawLookups != null) {
 			lookups = new ArrayList<ILookupObject>();
-		ILookupObject object = null;
 		for(LookupDTO l : rawLookups) {
+			ILookupObject object = null;
 			if(l.getLookupType().equals("1")) {
 				object = new LookupObject(l);
 			} else {
@@ -63,8 +63,8 @@ public class LookupFactory implements ILookupFactory {
 				temp.setLookupTableDef(combineLists(temp.getLookupTableDef(), additionalCols));
 			}
 
+			lookups.add(object);
 		}
-		lookups.add(object);
 		}
 		return lookups;
 	}

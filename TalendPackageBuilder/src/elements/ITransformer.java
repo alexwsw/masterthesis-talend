@@ -8,7 +8,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public interface ITransformer extends IElement {
+import xmlelements.INode;
+
+public interface ITransformer extends INode {
 
 //	public Node getMappingInput(Node node, String name);
 //	public Node getMappingOutput(Node node, String name);

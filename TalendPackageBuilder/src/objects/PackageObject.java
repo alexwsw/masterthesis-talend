@@ -138,15 +138,7 @@ public class PackageObject extends AbstractObject implements IPackageObject {
 
 		@Override
 		public String toString() {
-			return "PackageObject [ID=" + ID + ", name=" + name + ", DQ1="
-					+ DQ1 + ", dq1def=" + dq1def + ", DQ2=" + DQ2 + ", dq2def="
-					+ dq2def + ", DQ3=" + DQ3 + ", dq3def=" + dq3def
-					+ ", DBCommand=" + DBCommand + ", destinationTable="
-					+ destinationTable + ", destinationTableDef="
-					+ destinationTableDef + ", PKColumn=" + PKColumn
-					+ ", PKNameColumn=" + PKNameColumn + ", TLInsertPKN="
-					+ TLInsertPKN + ", TLUpdatePKN=" + TLUpdatePKN
-					+ ", OnErrorHandling=" + OnErrorHandling + "]";
+			return String.format("PackageObject [ID= %s, name= %s]%n",ID, name);
 		}
 
 

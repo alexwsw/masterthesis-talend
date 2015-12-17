@@ -1,8 +1,8 @@
-package elements;
+package xmlelements;
 
 import org.w3c.dom.Node;
 
-public interface IElement {
+public interface INode {
 
 	public Node getElement (Node node, String name);
 	public void setElement (Node node, String name, String value);

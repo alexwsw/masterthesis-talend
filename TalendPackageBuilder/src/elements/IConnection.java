@@ -1,6 +1,8 @@
 package elements;
 
-public interface IConnection extends IElement {
+import xmlelements.INode;
+
+public interface IConnection extends INode {
 	
 
 	

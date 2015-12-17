@@ -839,37 +839,37 @@
       <uiProperties/>
       <varTables minimized="true" name="Var" sizeState="INTERMEDIATE"/>
       <outputTables name="Calculations" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="Lookup68280.FK_Waehrungskurs_ID" name="FK_Waehrungskurs_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup68280.Waehrungskurs_EUR_in_Fremdwaehrung" name="Waehrungskurs_EUR_in_Fremdwaehrung" type="id_BigDecimal"/>
-<mapperTableEntries expression="Lookup68280.Waehrungskurs_Fremdwaehrung_in_EUR" name="Waehrungskurs_Fremdwaehrung_in_EUR" type="id_BigDecimal"/>
-<mapperTableEntries expression="Lookup68280.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup68280.FK_Waehrung_ID" name="FK_Waehrung_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup68280.FK_Waehrung_BK" name="FK_Waehrung_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup68280.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup68280.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup68280.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.Name" name="Name" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.BK" name="BK" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.isETL_DMR" name="isETL_DMR" type="id_Date"/>
-<mapperTableEntries expression="Lookup68280.isETL_Targetfieldvalue" name="isETL_Targetfieldvalue" type="id_Integer"/>
-<mapperTableEntries expression="Lookup68280.isETL_Sourceobject_ID" name="isETL_Sourceobject_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup68280.isETL_isManual" name="isETL_isManual" type="id_Short"/>
-<mapperTableEntries expression="Lookup68280.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Short"/>
-<mapperTableEntries expression="Lookup68280.isETL_ExecutionInstanceGUID" name="isETL_ExecutionInstanceGUID" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.BBMJMT" name="BBMJMT" type="id_Integer"/>
-<mapperTableEntries expression="Lookup68280.isETL_DCR" name="isETL_DCR" type="id_Date"/>
-<mapperTableEntries expression="Lookup68280.isETL_isMultiple" name="isETL_isMultiple" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup68280.isETL_isPKNULL" name="isETL_isPKNULL" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup68280.isETL_isValid" name="isETL_isValid" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup68280.BBEANR" name="BBEANR" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.BBEJMT" name="BBEJMT" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.BBEKPN" name="BBEKPN" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.BBKAUF" name="BBKAUF" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.BBMENG" name="BBMENG" type="id_String"/>
-<mapperTableEntries expression="Lookup68280.isETL_ID" name="isETL_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup32831.FK_Waehrungskurs_ID" name="FK_Waehrungskurs_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup32831.Waehrungskurs_EUR_in_Fremdwaehrung" name="Waehrungskurs_EUR_in_Fremdwaehrung" type="id_BigDecimal"/>
+<mapperTableEntries expression="Lookup32831.Waehrungskurs_Fremdwaehrung_in_EUR" name="Waehrungskurs_Fremdwaehrung_in_EUR" type="id_BigDecimal"/>
+<mapperTableEntries expression="Lookup32831.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup32831.FK_Waehrung_ID" name="FK_Waehrung_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup32831.FK_Waehrung_BK" name="FK_Waehrung_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup32831.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup32831.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup32831.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.Name" name="Name" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.BK" name="BK" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.isETL_DMR" name="isETL_DMR" type="id_Date"/>
+<mapperTableEntries expression="Lookup32831.isETL_Targetfieldvalue" name="isETL_Targetfieldvalue" type="id_Integer"/>
+<mapperTableEntries expression="Lookup32831.isETL_Sourceobject_ID" name="isETL_Sourceobject_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup32831.isETL_isManual" name="isETL_isManual" type="id_Short"/>
+<mapperTableEntries expression="Lookup32831.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Short"/>
+<mapperTableEntries expression="Lookup32831.isETL_ExecutionInstanceGUID" name="isETL_ExecutionInstanceGUID" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.BBMJMT" name="BBMJMT" type="id_Integer"/>
+<mapperTableEntries expression="Lookup32831.isETL_DCR" name="isETL_DCR" type="id_Date"/>
+<mapperTableEntries expression="Lookup32831.isETL_isMultiple" name="isETL_isMultiple" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup32831.isETL_isPKNULL" name="isETL_isPKNULL" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup32831.isETL_isValid" name="isETL_isValid" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup32831.BBEANR" name="BBEANR" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.BBEJMT" name="BBEJMT" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.BBEKPN" name="BBEKPN" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.BBKAUF" name="BBKAUF" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.BBMENG" name="BBMENG" type="id_String"/>
+<mapperTableEntries expression="Lookup32831.isETL_ID" name="isETL_ID" type="id_Integer"/>
 </outputTables>
       <inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="LU_FIELDS" sizeState="INTERMEDIATE">
         <mapperTableEntries name="Name" type="id_String"/>
@@ -3552,7 +3552,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row21"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup30061" lineStyle="0" metaname="Lookup30061" offsetLabelX="-2" offsetLabelY="20" source="tMap_9" target="tMap_10">
+<connection connectorName="FLOW" label="Lookup1922" lineStyle="0" metaname="Lookup1922" offsetLabelX="-2" offsetLabelY="20" source="tMap_9" target="tMap_10">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="ID"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -3577,7 +3577,7 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup30061"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup1922"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="864" posY="1782">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_8"/>
@@ -3756,7 +3756,7 @@
 <mapperTableEntries name="ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup30061" sizeState="INTERMEDIATE">
+<outputTables name="Lookup1922" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.Name" name="Name" type="id_String"/>
 <mapperTableEntries expression="meinOutput.BK" name="BK" type="id_String"/>
@@ -3781,7 +3781,7 @@
 <mapperTableEntries expression="(tMSSqlInput_5.BK == null)? ++meinOutput.isETL_ErrorCount : meinOutput.isETL_ErrorCount" name="isETL_ErrorCount" type="id_String"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup30061">
+  <metadata connector="FLOW" name="Lookup1922">
 <column key="false" length="10" name="FK_Artikel_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Artikel_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="255" name="Name" nullable="false" pattern="" precision="" type="id_String" usefulColumn="true"/>
@@ -3859,7 +3859,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row24"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup71522" lineStyle="0" metaname="Lookup71522" offsetLabelX="-2" offsetLabelY="20" source="tMap_11" target="tMap_12">
+<connection connectorName="FLOW" label="Lookup68144" lineStyle="0" metaname="Lookup68144" offsetLabelX="-2" offsetLabelY="20" source="tMap_11" target="tMap_12">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="ID"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -3884,7 +3884,7 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup71522"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup68144"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="864" posY="2082">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_10"/>
@@ -3903,7 +3903,7 @@
     <elementParameter field="MEMO" name="COMMENT" value="1. Joint die isETL_ID und TargetFieldValue aus der tblSourcetable zu den Datensätzen aus der Source Area. &#13;&#10;2. Bereitet das Filtern der feherlhaften Datensätze vor. "/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup30061" sizeState="INTERMEDIATE">
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup1922" sizeState="INTERMEDIATE">
 <mapperTableEntries name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Artikel_BK" type="id_String"/>
 <mapperTableEntries name="Name" type="id_String"/>
@@ -3927,28 +3927,28 @@
 <mapperTableEntries name="isETL_ID" type="id_Integer"/>
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf( globalMap.get(&quot;FELC1_TargetfieldValue&quot;)+&quot;-&quot;  + Lookup30061.BBKAUF)" name="FK_Bestellkopf_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup30061.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup30061.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup30061.Name" name="Name" type="id_String"/>
-<mapperTableEntries expression="Lookup30061.BK" name="BK" type="id_String"/>
-<mapperTableEntries expression="Lookup30061.isETL_DMR" name="isETL_DMR" type="id_Date"/>
-<mapperTableEntries expression="Lookup30061.isETL_Targetfieldvalue" name="isETL_Targetfieldvalue" type="id_Integer"/>
-<mapperTableEntries expression="Lookup30061.isETL_Sourceobject_ID" name="isETL_Sourceobject_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup30061.isETL_isManual" name="isETL_isManual" type="id_Short"/>
-<mapperTableEntries expression="Lookup30061.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Short"/>
-<mapperTableEntries expression="Lookup30061.isETL_ExecutionInstanceGUID" name="isETL_ExecutionInstanceGUID" type="id_String"/>
-<mapperTableEntries expression="Lookup30061.BBMJMT" name="BBMJMT" type="id_Integer"/>
-<mapperTableEntries expression="Lookup30061.isETL_DCR" name="isETL_DCR" type="id_Date"/>
-<mapperTableEntries expression="Lookup30061.isETL_isMultiple" name="isETL_isMultiple" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup30061.isETL_isPKNULL" name="isETL_isPKNULL" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup30061.isETL_isValid" name="isETL_isValid" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup30061.BBEANR" name="BBEANR" type="id_String"/>
-<mapperTableEntries expression="Lookup30061.BBEJMT" name="BBEJMT" type="id_String"/>
-<mapperTableEntries expression="Lookup30061.BBEKPN" name="BBEKPN" type="id_String"/>
-<mapperTableEntries expression="Lookup30061.BBKAUF" name="BBKAUF" type="id_String"/>
-<mapperTableEntries expression="Lookup30061.BBMENG" name="BBMENG" type="id_String"/>
-<mapperTableEntries expression="Lookup30061.isETL_ID" name="isETL_ID" type="id_Integer"/>
+<mapperTableEntries expression="String.valueOf( globalMap.get(&quot;FELC1_TargetfieldValue&quot;)+&quot;-&quot;  + Lookup1922.BBKAUF)" name="FK_Bestellkopf_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup1922.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup1922.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup1922.Name" name="Name" type="id_String"/>
+<mapperTableEntries expression="Lookup1922.BK" name="BK" type="id_String"/>
+<mapperTableEntries expression="Lookup1922.isETL_DMR" name="isETL_DMR" type="id_Date"/>
+<mapperTableEntries expression="Lookup1922.isETL_Targetfieldvalue" name="isETL_Targetfieldvalue" type="id_Integer"/>
+<mapperTableEntries expression="Lookup1922.isETL_Sourceobject_ID" name="isETL_Sourceobject_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup1922.isETL_isManual" name="isETL_isManual" type="id_Short"/>
+<mapperTableEntries expression="Lookup1922.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Short"/>
+<mapperTableEntries expression="Lookup1922.isETL_ExecutionInstanceGUID" name="isETL_ExecutionInstanceGUID" type="id_String"/>
+<mapperTableEntries expression="Lookup1922.BBMJMT" name="BBMJMT" type="id_Integer"/>
+<mapperTableEntries expression="Lookup1922.isETL_DCR" name="isETL_DCR" type="id_Date"/>
+<mapperTableEntries expression="Lookup1922.isETL_isMultiple" name="isETL_isMultiple" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup1922.isETL_isPKNULL" name="isETL_isPKNULL" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup1922.isETL_isValid" name="isETL_isValid" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup1922.BBEANR" name="BBEANR" type="id_String"/>
+<mapperTableEntries expression="Lookup1922.BBEJMT" name="BBEJMT" type="id_String"/>
+<mapperTableEntries expression="Lookup1922.BBEKPN" name="BBEKPN" type="id_String"/>
+<mapperTableEntries expression="Lookup1922.BBKAUF" name="BBKAUF" type="id_String"/>
+<mapperTableEntries expression="Lookup1922.BBMENG" name="BBMENG" type="id_String"/>
+<mapperTableEntries expression="Lookup1922.isETL_ID" name="isETL_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
@@ -4073,7 +4073,7 @@
 <mapperTableEntries name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup71522" sizeState="INTERMEDIATE">
+<outputTables name="Lookup68144" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
@@ -4101,7 +4101,7 @@
 <mapperTableEntries expression="(tMSSqlInput_6.BK == null)? ++meinOutput.isETL_ErrorCount : meinOutput.isETL_ErrorCount" name="isETL_ErrorCount" type="id_String"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup71522">
+  <metadata connector="FLOW" name="Lookup68144">
 <column key="false" length="10" name="FK_Bestellkopf_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Date_Bestelldatum_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Bestellkopf_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
@@ -4182,7 +4182,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row27"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup81866" lineStyle="0" metaname="Lookup81866" offsetLabelX="-2" offsetLabelY="20" source="tMap_13" target="tMap_14">
+<connection connectorName="FLOW" label="Lookup12121" lineStyle="0" metaname="Lookup12121" offsetLabelX="-2" offsetLabelY="20" source="tMap_13" target="tMap_14">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="ID"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4207,7 +4207,7 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup81866"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup12121"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="864" posY="2382">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_12"/>
@@ -4226,7 +4226,7 @@
     <elementParameter field="MEMO" name="COMMENT" value="1. Joint die isETL_ID und TargetFieldValue aus der tblSourcetable zu den Datensätzen aus der Source Area. &#13;&#10;2. Bereitet das Filtern der feherlhaften Datensätze vor. "/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup71522" sizeState="INTERMEDIATE">
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup68144" sizeState="INTERMEDIATE">
 <mapperTableEntries name="FK_Bestellkopf_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Bestellkopf_BK" type="id_String"/>
@@ -4254,30 +4254,30 @@
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="String.valueOf(globalMap.get(&quot;FELC1_TargetfieldValue&quot;) )" name="FK_Tenant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup71522.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup71522.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup71522.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.Name" name="Name" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.BK" name="BK" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.isETL_DMR" name="isETL_DMR" type="id_Date"/>
-<mapperTableEntries expression="Lookup71522.isETL_Targetfieldvalue" name="isETL_Targetfieldvalue" type="id_Integer"/>
-<mapperTableEntries expression="Lookup71522.isETL_Sourceobject_ID" name="isETL_Sourceobject_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup71522.isETL_isManual" name="isETL_isManual" type="id_Short"/>
-<mapperTableEntries expression="Lookup71522.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Short"/>
-<mapperTableEntries expression="Lookup71522.isETL_ExecutionInstanceGUID" name="isETL_ExecutionInstanceGUID" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.BBMJMT" name="BBMJMT" type="id_Integer"/>
-<mapperTableEntries expression="Lookup71522.isETL_DCR" name="isETL_DCR" type="id_Date"/>
-<mapperTableEntries expression="Lookup71522.isETL_isMultiple" name="isETL_isMultiple" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup71522.isETL_isPKNULL" name="isETL_isPKNULL" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup71522.isETL_isValid" name="isETL_isValid" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup71522.BBEANR" name="BBEANR" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.BBEJMT" name="BBEJMT" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.BBEKPN" name="BBEKPN" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.BBKAUF" name="BBKAUF" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.BBMENG" name="BBMENG" type="id_String"/>
-<mapperTableEntries expression="Lookup71522.isETL_ID" name="isETL_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup68144.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup68144.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup68144.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup68144.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup68144.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup68144.Name" name="Name" type="id_String"/>
+<mapperTableEntries expression="Lookup68144.BK" name="BK" type="id_String"/>
+<mapperTableEntries expression="Lookup68144.isETL_DMR" name="isETL_DMR" type="id_Date"/>
+<mapperTableEntries expression="Lookup68144.isETL_Targetfieldvalue" name="isETL_Targetfieldvalue" type="id_Integer"/>
+<mapperTableEntries expression="Lookup68144.isETL_Sourceobject_ID" name="isETL_Sourceobject_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup68144.isETL_isManual" name="isETL_isManual" type="id_Short"/>
+<mapperTableEntries expression="Lookup68144.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Short"/>
+<mapperTableEntries expression="Lookup68144.isETL_ExecutionInstanceGUID" name="isETL_ExecutionInstanceGUID" type="id_String"/>
+<mapperTableEntries expression="Lookup68144.BBMJMT" name="BBMJMT" type="id_Integer"/>
+<mapperTableEntries expression="Lookup68144.isETL_DCR" name="isETL_DCR" type="id_Date"/>
+<mapperTableEntries expression="Lookup68144.isETL_isMultiple" name="isETL_isMultiple" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup68144.isETL_isPKNULL" name="isETL_isPKNULL" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup68144.isETL_isValid" name="isETL_isValid" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup68144.BBEANR" name="BBEANR" type="id_String"/>
+<mapperTableEntries expression="Lookup68144.BBEJMT" name="BBEJMT" type="id_String"/>
+<mapperTableEntries expression="Lookup68144.BBEKPN" name="BBEKPN" type="id_String"/>
+<mapperTableEntries expression="Lookup68144.BBKAUF" name="BBKAUF" type="id_String"/>
+<mapperTableEntries expression="Lookup68144.BBMENG" name="BBMENG" type="id_String"/>
+<mapperTableEntries expression="Lookup68144.isETL_ID" name="isETL_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
@@ -4406,7 +4406,7 @@
 <mapperTableEntries name="ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Tenant_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup81866" sizeState="INTERMEDIATE">
+<outputTables name="Lookup12121" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
@@ -4436,7 +4436,7 @@
 <mapperTableEntries expression="(tMSSqlInput_7.BK == null)? ++meinOutput.isETL_ErrorCount : meinOutput.isETL_ErrorCount" name="isETL_ErrorCount" type="id_String"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup81866">
+  <metadata connector="FLOW" name="Lookup12121">
 <column key="false" length="10" name="FK_Tenant_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Tenant_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Bestellkopf_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
@@ -4519,7 +4519,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row30"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup78882" lineStyle="0" metaname="Lookup78882" offsetLabelX="-2" offsetLabelY="20" source="tMap_15" target="tMap_16">
+<connection connectorName="FLOW" label="Lookup74023" lineStyle="0" metaname="Lookup74023" offsetLabelX="-2" offsetLabelY="20" source="tMap_15" target="tMap_16">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="ID"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4544,7 +4544,7 @@
       <elementValue elementRef="TRACE_COLUMN_CONDITION" value=""/>
     </elementParameter>
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
-    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup78882"/>
+    <elementParameter field="TEXT" name="UNIQUE_NAME" value="Lookup74023"/>
   </connection>
 <node componentName="tMap" componentVersion="2.1" offsetLabelX="0" offsetLabelY="0" posX="864" posY="2682">
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="tMap_14"/>
@@ -4563,7 +4563,7 @@
     <elementParameter field="MEMO" name="COMMENT" value="1. Joint die isETL_ID und TargetFieldValue aus der tblSourcetable zu den Datensätzen aus der Source Area. &#13;&#10;2. Bereitet das Filtern der feherlhaften Datensätze vor. "/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup81866" sizeState="INTERMEDIATE">
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup12121" sizeState="INTERMEDIATE">
 <mapperTableEntries name="FK_Tenant_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Tenant_BK" type="id_String"/>
 <mapperTableEntries name="FK_Bestellkopf_ID" type="id_Integer"/>
@@ -4593,32 +4593,32 @@
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="String.valueOf(globalMap.get(&quot;FELC1_TargetfieldValue&quot;) )" name="FK_Waehrung_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup81866.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup81866.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup81866.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup81866.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.Name" name="Name" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.BK" name="BK" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.isETL_DMR" name="isETL_DMR" type="id_Date"/>
-<mapperTableEntries expression="Lookup81866.isETL_Targetfieldvalue" name="isETL_Targetfieldvalue" type="id_Integer"/>
-<mapperTableEntries expression="Lookup81866.isETL_Sourceobject_ID" name="isETL_Sourceobject_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup81866.isETL_isManual" name="isETL_isManual" type="id_Short"/>
-<mapperTableEntries expression="Lookup81866.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Short"/>
-<mapperTableEntries expression="Lookup81866.isETL_ExecutionInstanceGUID" name="isETL_ExecutionInstanceGUID" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.BBMJMT" name="BBMJMT" type="id_Integer"/>
-<mapperTableEntries expression="Lookup81866.isETL_DCR" name="isETL_DCR" type="id_Date"/>
-<mapperTableEntries expression="Lookup81866.isETL_isMultiple" name="isETL_isMultiple" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup81866.isETL_isPKNULL" name="isETL_isPKNULL" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup81866.isETL_isValid" name="isETL_isValid" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup81866.BBEANR" name="BBEANR" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.BBEJMT" name="BBEJMT" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.BBEKPN" name="BBEKPN" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.BBKAUF" name="BBKAUF" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.BBMENG" name="BBMENG" type="id_String"/>
-<mapperTableEntries expression="Lookup81866.isETL_ID" name="isETL_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup12121.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup12121.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup12121.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup12121.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup12121.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.Name" name="Name" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.BK" name="BK" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.isETL_DMR" name="isETL_DMR" type="id_Date"/>
+<mapperTableEntries expression="Lookup12121.isETL_Targetfieldvalue" name="isETL_Targetfieldvalue" type="id_Integer"/>
+<mapperTableEntries expression="Lookup12121.isETL_Sourceobject_ID" name="isETL_Sourceobject_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup12121.isETL_isManual" name="isETL_isManual" type="id_Short"/>
+<mapperTableEntries expression="Lookup12121.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Short"/>
+<mapperTableEntries expression="Lookup12121.isETL_ExecutionInstanceGUID" name="isETL_ExecutionInstanceGUID" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.BBMJMT" name="BBMJMT" type="id_Integer"/>
+<mapperTableEntries expression="Lookup12121.isETL_DCR" name="isETL_DCR" type="id_Date"/>
+<mapperTableEntries expression="Lookup12121.isETL_isMultiple" name="isETL_isMultiple" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup12121.isETL_isPKNULL" name="isETL_isPKNULL" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup12121.isETL_isValid" name="isETL_isValid" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup12121.BBEANR" name="BBEANR" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.BBEJMT" name="BBEJMT" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.BBEKPN" name="BBEKPN" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.BBKAUF" name="BBKAUF" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.BBMENG" name="BBMENG" type="id_String"/>
+<mapperTableEntries expression="Lookup12121.isETL_ID" name="isETL_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
@@ -4751,7 +4751,7 @@
 <mapperTableEntries name="ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Waehrung_BK" name="BK" type="id_String"/>
 </inputTables>
-<outputTables name="Lookup78882" sizeState="INTERMEDIATE">
+<outputTables name="Lookup74023" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Waehrung_BK" name="FK_Waehrung_BK" type="id_String"/>
 <mapperTableEntries expression="meinOutput.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
@@ -4783,7 +4783,7 @@
 <mapperTableEntries expression="(tMSSqlInput_8.BK == null)? ++meinOutput.isETL_ErrorCount : meinOutput.isETL_ErrorCount" name="isETL_ErrorCount" type="id_String"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup78882">
+  <metadata connector="FLOW" name="Lookup74023">
 <column key="false" length="10" name="FK_Waehrung_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="255" name="FK_Waehrung_BK" nullable="false" precision="0" type="id_String" usefulColumn="true"/>
 <column key="false" length="10" name="FK_Tenant_ID" nullable="false" precision="10" type="id_Integer" usefulColumn="true"/>
@@ -4868,7 +4868,7 @@
     <elementParameter field="CHECK" name="MONITOR_CONNECTION" value="false"/>
     <elementParameter field="TEXT" name="UNIQUE_NAME" value="row33"/>
   </connection>
-<connection connectorName="FLOW" label="Lookup68280" lineStyle="0" metaname="Lookup68280" offsetLabelX="-2" offsetLabelY="20" source="tMap_17" target="tMap_5">
+<connection connectorName="FLOW" label="Lookup32831" lineStyle="0" metaname="Lookup32831" offsetLabelX="-2" offsetLabelY="20" source="tMap_17" target="tMap_5">
     <elementParameter field="TABLE" name="TRACES_CONNECTION_FILTER">
       <elementValue elementRef="TRACE_COLUMN" value="ID"/>
       <elementValue elementRef="TRACE_COLUMN_CHECKED" value="true"/>
@@ -4912,7 +4912,7 @@
     <elementParameter field="MEMO" name="COMMENT" value="1. Joint die isETL_ID und TargetFieldValue aus der tblSourcetable zu den Datensätzen aus der Source Area. &#13;&#10;2. Bereitet das Filtern der feherlhaften Datensätze vor. "/>
     
     <nodeData xsi:type="MapperData">
-<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup78882" sizeState="INTERMEDIATE">
+<inputTables lookupMode="LOAD_ONCE" matchingMode="UNIQUE_MATCH" name="Lookup74023" sizeState="INTERMEDIATE">
 <mapperTableEntries name="FK_Waehrung_ID" type="id_Integer"/>
 <mapperTableEntries name="FK_Waehrung_BK" type="id_String"/>
 <mapperTableEntries name="FK_Tenant_ID" type="id_Integer"/>
@@ -4943,34 +4943,34 @@
 <mapperTableEntries name="isETL_ID" type="id_Integer"/>
 </inputTables>
 <outputTables name="meinOutput" sizeState="INTERMEDIATE">
-<mapperTableEntries expression="String.valueOf(Lookup78882.FK_Tenant_ID)" name="FK_Tenant_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup78882.FK_Waehrung_ID" name="FK_Waehrung_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup78882.FK_Waehrung_BK" name="FK_Waehrung_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup78882.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup78882.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup78882.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.Name" name="Name" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.BK" name="BK" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.isETL_DMR" name="isETL_DMR" type="id_Date"/>
-<mapperTableEntries expression="Lookup78882.isETL_Targetfieldvalue" name="isETL_Targetfieldvalue" type="id_Integer"/>
-<mapperTableEntries expression="Lookup78882.isETL_Sourceobject_ID" name="isETL_Sourceobject_ID" type="id_Integer"/>
-<mapperTableEntries expression="Lookup78882.isETL_isManual" name="isETL_isManual" type="id_Short"/>
-<mapperTableEntries expression="Lookup78882.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Short"/>
-<mapperTableEntries expression="Lookup78882.isETL_ExecutionInstanceGUID" name="isETL_ExecutionInstanceGUID" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.BBMJMT" name="BBMJMT" type="id_Integer"/>
-<mapperTableEntries expression="Lookup78882.isETL_DCR" name="isETL_DCR" type="id_Date"/>
-<mapperTableEntries expression="Lookup78882.isETL_isMultiple" name="isETL_isMultiple" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup78882.isETL_isPKNULL" name="isETL_isPKNULL" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup78882.isETL_isValid" name="isETL_isValid" type="id_Boolean"/>
-<mapperTableEntries expression="Lookup78882.BBEANR" name="BBEANR" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.BBEJMT" name="BBEJMT" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.BBEKPN" name="BBEKPN" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.BBKAUF" name="BBKAUF" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.BBMENG" name="BBMENG" type="id_String"/>
-<mapperTableEntries expression="Lookup78882.isETL_ID" name="isETL_ID" type="id_Integer"/>
+<mapperTableEntries expression="String.valueOf(Lookup74023.FK_Tenant_ID)" name="FK_Tenant_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup74023.FK_Waehrung_ID" name="FK_Waehrung_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup74023.FK_Waehrung_BK" name="FK_Waehrung_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.FK_Tenant_BK" name="FK_Tenant_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.FK_Bestellkopf_ID" name="FK_Bestellkopf_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup74023.FK_Date_Bestelldatum_ID" name="FK_Date_Bestelldatum_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup74023.FK_Bestellkopf_BK" name="FK_Bestellkopf_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.FK_Artikel_ID" name="FK_Artikel_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup74023.FK_Artikel_BK" name="FK_Artikel_BK" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.Name" name="Name" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.BK" name="BK" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.isETL_DMR" name="isETL_DMR" type="id_Date"/>
+<mapperTableEntries expression="Lookup74023.isETL_Targetfieldvalue" name="isETL_Targetfieldvalue" type="id_Integer"/>
+<mapperTableEntries expression="Lookup74023.isETL_Sourceobject_ID" name="isETL_Sourceobject_ID" type="id_Integer"/>
+<mapperTableEntries expression="Lookup74023.isETL_isManual" name="isETL_isManual" type="id_Short"/>
+<mapperTableEntries expression="Lookup74023.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Short"/>
+<mapperTableEntries expression="Lookup74023.isETL_ExecutionInstanceGUID" name="isETL_ExecutionInstanceGUID" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.BBMJMT" name="BBMJMT" type="id_Integer"/>
+<mapperTableEntries expression="Lookup74023.isETL_DCR" name="isETL_DCR" type="id_Date"/>
+<mapperTableEntries expression="Lookup74023.isETL_isMultiple" name="isETL_isMultiple" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup74023.isETL_isPKNULL" name="isETL_isPKNULL" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup74023.isETL_isValid" name="isETL_isValid" type="id_Boolean"/>
+<mapperTableEntries expression="Lookup74023.BBEANR" name="BBEANR" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.BBEJMT" name="BBEJMT" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.BBEKPN" name="BBEKPN" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.BBKAUF" name="BBKAUF" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.BBMENG" name="BBMENG" type="id_String"/>
+<mapperTableEntries expression="Lookup74023.isETL_ID" name="isETL_ID" type="id_Integer"/>
 </outputTables>
 </nodeData>
   <metadata connector="FLOW" name="meinOutput">
@@ -5113,7 +5113,7 @@
 <mapperTableEntries name="Waehrungskurs_Fremdwaehrung_in_EUR" type="id_BigDecimal"/>
 <mapperTableEntries expression="meinOutput.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
 </inputTables>
-<outputTables name="Lookup68280" sizeState="INTERMEDIATE">
+<outputTables name="Lookup32831" sizeState="INTERMEDIATE">
 <mapperTableEntries expression="meinOutput.FK_Tenant_ID" name="FK_Tenant_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Waehrung_ID" name="FK_Waehrung_ID" type="id_Integer"/>
 <mapperTableEntries expression="meinOutput.FK_Waehrung_BK" name="FK_Waehrung_BK" type="id_String"/>
@@ -5150,7 +5150,7 @@
 <mapperTableEntries expression="(tMSSqlInput_9.FK_Tenant_ID == null)? ++meinOutput.isETL_ErrorCount : meinOutput.isETL_ErrorCount" name="isETL_ErrorCount" type="id_Integer"/>
 </outputTables>
 </nodeData>
-  <metadata connector="FLOW" name="Lookup68280">
+  <metadata connector="FLOW" name="Lookup32831">
 <column key="false" length="10" name="FK_Waehrungskurs_ID" nullable="false" precision="10" sourceType="INT" type="id_Integer" usefulColumn="true"/>
 <column key="false" length="10" name="Waehrungskurs_EUR_in_Fremdwaehrung" nullable="true" precision="18" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
 <column key="false" length="10" name="Waehrungskurs_Fremdwaehrung_in_EUR" nullable="true" precision="18" sourceType="DECIMAL" type="id_BigDecimal" usefulColumn="true"/>
