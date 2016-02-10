@@ -29,20 +29,20 @@ public class NodeBuilder implements IXmlBuilder {
 	//remove Node
 	public void removeNode(Node node) {
 		if (node == null) {
-			System.err.println("Nothing to remove the node doesn't exist");
+		//	System.err.println("Nothing to remove the node doesn't exist");
 		} else {
 		node.getParentNode().removeChild(node);
-		System.out.println("Removing successful");
+		//.out.println("Removing successful");
 		}
 	}
 	
 	public void removeAllChildNodes(Node node) {
 		if (node == null) {
-			System.err.println("Nothing to remove the node doesn't exist");
+			//System.err.println("Nothing to remove the node doesn't exist");
 		} else {
 			while(node.hasChildNodes()) {
 				removeNode(node.getFirstChild());
-				System.out.println("Removing successful");
+			//	System.out.println("Removing successful");
 			}
 		}
 	}

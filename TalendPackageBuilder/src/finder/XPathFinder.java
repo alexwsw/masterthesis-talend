@@ -21,9 +21,9 @@ public class XPathFinder implements IFinder {
 		Node node = null;
 		try {
 			node = (Node) xpath.compile(String.format(expression.getExpression(),  values)).evaluate(obj, XPathConstants.NODE);
-			System.out.println(String.format(expression.getExpression(), values));
+			//System.out.println(String.format(expression.getExpression(), values));
 		} catch (XPathExpressionException e) {
-			System.out.println("XPathExpression occured");
+			//System.out.println("XPathExpression occured");
 			e.printStackTrace();
 		}
 		return node;
@@ -34,9 +34,9 @@ public class XPathFinder implements IFinder {
 		NodeList nodes = null;
 		try {
 			nodes = (NodeList) xpath.compile(String.format(expression.getExpression(),  values)).evaluate(obj, XPathConstants.NODESET);
-			System.out.println(String.format(expression.getExpression(), values));
+		//	System.out.println(String.format(expression.getExpression(), values));
 		} catch (XPathExpressionException e) {
-			System.out.println("XPathExpression occured");
+		//	System.out.println("XPathExpression occured");
 			e.printStackTrace();
 		}	
 		return nodes;

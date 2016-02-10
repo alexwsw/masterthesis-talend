@@ -25,6 +25,7 @@ public abstract class AbstractObject {
 		return column;
 	}
 	//in case of a column option
+	
 	public final String evaluateColumnOption(String column) {
 		if (column == null) {
 			return null;
@@ -59,7 +60,7 @@ public abstract class AbstractObject {
 		List<String>columns = new ArrayList<String>();
 		String[]split = packageColumns.split(Pattern.quote(","));
 		for(int i = 0; i < split.length; i++) {
-			String a = evaluateColumnOption(split[i]);
+			String a = split[i];
 			a = a.trim();
 			columns.add(a);
 		}	

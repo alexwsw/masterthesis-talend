@@ -46,7 +46,7 @@ public class SQLQueryPerformer implements IQueryPerformer {
 		List<ColumnDTO> dtos = new ArrayList<ColumnDTO>();
 		try {
 			dbd = conn.getMetaData();
-			rs = dbd.getColumns(database, "dwh", tableName, null);
+			rs = dbd.getColumns(database, schema, tableName, null);
 			while (rs.next()) {
 				for (String name : columnNames) {
 					if (rs.getString("COLUMN_NAME").equals(name)) {

@@ -29,9 +29,9 @@ public class PackageObject extends AbstractObject implements IPackageObject {
 			this.DQ2 = p.getDQ2();
 			this.DQ3 = p.getDQ3();
 			this.DBCommand = p.getDBCommand();
-			this.destinationTable = p.getDestinationTable();
-			this.PKColumn = splitPackageColumnsAndEvaluate(p.getPKColumn());
-			this.PKNameColumn = splitPackageColumnsAndEvaluate(p.getPKNameColumn());
+			this.destinationTable = hasDifferentSchema(p.getDestinationTable())? p.getDestinationTable() : String.format("dwh.%s", p.getDestinationTable());
+			this.PKColumn = splitPackageColumns(p.getPKColumn());
+			this.PKNameColumn = splitPackageColumns(p.getPKNameColumn());
 			this.TLInsertPKN = p.getTLInsertPKN();
 			this.TLUpdatePKN = p.getTLUpdatePKN();
 			this.OnErrorHandling = p.getOnErrorHandling();

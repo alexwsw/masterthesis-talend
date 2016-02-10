@@ -4,69 +4,70 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import objects.ColumnObject;
+import objects.IColumnObject;
 
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import abstractNode.AbstractNode;
 import xmlBuilder.IXmlBuilder;
-import creatable.CreatableNode;
+import creatable.Creatable;
 import finder.IFinder;
 import finder.XPathExpressions;
 
-public class MSSqlInput extends CreatableNode implements IDBaseInput {
+public class MSSqlInput extends AbstractNode implements Creatable {
 
-	private IFinder finder;
-	private Document document;
-	private IXmlBuilder builder;
-	private static final String elementName = "tMSSqlInput";
+	public static final String elementName = "tMSSqlInput";
+	private static int number = 0;
+	private Document template;
 	
-	public MSSqlInput(Document document, IFinder finder, IXmlBuilder builder) {
+	public MSSqlInput(Document document, Document template, IFinder finder, IXmlBuilder builder) {
 		this.finder = finder;
 		this.document = document;
 		this.builder = builder;
+		this.template = template;
 	}
 	
-	@Override
+	
 	public Node getElement(Node node, String name) {
 		return finder.getOneNode(node, XPathExpressions.GETVALUEATTRIBUTE, name);
 
 	}
 
-	@Override
+	
 	public void setElement(Node node, String name, String value) {
 		Element n = (Element) finder.getOneNode(node, XPathExpressions.GETNAMEATTRIBUTE, name);
 		n.setAttribute("value", value);
 	}
 
-	@Override
+	
 	public String getUniqueName(Node node) {
 		Element n = (Element) finder.getOneNode(node, XPathExpressions.GETNAMEATTRIBUTE, "UNIQUE_NAME");
 		return n.getAttribute("value");
 	}
 
-	@Override
+	
 	public void setUniquename(Node node, String name) {
 		Element n = (Element) finder.getOneNode(node, XPathExpressions.GETNAMEATTRIBUTE, "UNIQUE_NAME");
 		n.setAttribute("value", name);
 	}
 
-	@Override
+	
 	public String getLabel(Node node) {
 		Element n = (Element) finder.getOneNode(node, XPathExpressions.GETNAMEATTRIBUTE, "LABEL");
 		return n.getAttribute("value");
 	}
 
-	@Override
+	
 	public void setLabel(Node node, String label) {
 		Element n = (Element) finder.getOneNode(node, XPathExpressions.GETNAMEATTRIBUTE, "LABEL");
 		n.setAttribute("value", label);
 	}
 
 
-	@Override
+	
 	public Node getMetadata(Node node) {
 		if(node.getNodeName().equals("metadata")) {
 			return node;
@@ -75,26 +76,26 @@ public class MSSqlInput extends CreatableNode implements IDBaseInput {
 	}
 
 
-	@Override
+	
 	public NodeList getIncomingConnections(Node node) {
 		String n = getUniqueName(node);
 		return finder.getNodeList(document, XPathExpressions.GETINCOMINGCONNECTIONS, n);
 	}
 
-	@Override
+	
 	public NodeList getOutgoingConnections(Node node) {
 		String n = getUniqueName(node);
 		return finder.getNodeList(document, XPathExpressions.GETOUTGOINGCONNECTIONS, n);
 	}
 
-	@Override
+	
 	public Node getConnection(Node node, Node target) {
 		Element n = (Element) getMetadata(node);
 		String name = n.getAttribute("name");
 		return finder.getOneNode(document, XPathExpressions.GETCONNECTION, name);
 	}
 
-	@Override
+	
 	public Node createMetadata(Node node) {
 		Element metaData = null;
 		metaData = document.createElementNS("http://www.talend.org/mapper","metadata");
@@ -106,7 +107,7 @@ public class MSSqlInput extends CreatableNode implements IDBaseInput {
 		return metaData;
 	}
 
-	@Override
+	
 	public Element createMetadataColumnDummy() {
 		Element dummy = null;
 		dummy = document.createElementNS("http://www.talend.org/mapper", "column");
@@ -120,32 +121,23 @@ public class MSSqlInput extends CreatableNode implements IDBaseInput {
 		return dummy;
 	}
 
-	@Override
+	
 	public boolean hasAttribute(Node node, String attName) {
 		if(finder.getOneNode(node, XPathExpressions.FINDATTRIBUTE, attName) == null) {
-			System.out.printf("%s attribute NOT found!%n", attName);
+	//		System.out.printf("%s attribute NOT found!%n", attName);
 			return false;
 		} else {
-			System.out.printf("%s attribute found!%n", attName);
+	//		System.out.printf("%s attribute found!%n", attName);
 			return true;
 		}
 	}
 
-	@Override
-	public void addAttribute(Node node, String name) {
-		if (!(hasAttribute(node, "expression"))) {
-			Attr expression = document.createAttribute("expression");
-			Element e = (Element) node;
-			e.setAttributeNode(expression);
-		} else {
-			System.out.println("Attribute expression already exists");
-		}
-	}
 
-	@Override
-	public Collection<ColumnObject> extractMetadata(Node node) {
+
+	
+	public Collection<IColumnObject> extractMetadata(Node node) {
 		Node metaData = getMetadata(node);
-		Collection<ColumnObject> mDataColumns = new ArrayList<ColumnObject>();
+		Collection<IColumnObject> mDataColumns = new ArrayList<IColumnObject>();
 		Node firstChild = metaData.getFirstChild();
 		while (firstChild != null) {
 			if(firstChild.getNodeType() == Node.TEXT_NODE) {
@@ -169,9 +161,9 @@ public class MSSqlInput extends CreatableNode implements IDBaseInput {
 		return mDataColumns;
 	}
 
-	@Override
+	
 	public Element setMetadataColumnFromObject(
-			ColumnObject column, Node node) {
+			IColumnObject column, Node node) {
 		Node metadata = getMetadata(node);
 		Node firstChild = metadata.getFirstChild();
 		while (firstChild != null) {
@@ -181,7 +173,7 @@ public class MSSqlInput extends CreatableNode implements IDBaseInput {
 			}
 			Element child = (Element) firstChild;
 			if(column.getName().equals(child.getAttribute("name"))) {
-				System.out.printf("Element %s already exists!!!!%n", column.getName());
+	//			System.out.printf("Element %s already exists!!!!%n", column.getName());
 				return null;
 			}
 			firstChild = firstChild.getNextSibling();
@@ -206,40 +198,40 @@ public class MSSqlInput extends CreatableNode implements IDBaseInput {
 		return dummy;
 	}
 
-	@Override
+	
 	public void setTable(Node node, String tableName) {
-		setElement(node, "table", String.format("\"%s\"", tableName));
+		setElement(node, "TABLE", String.format("\"%s\"", tableName));
 	}
 
-	@Override
+	
 	public void setDataBase(Node node, Node database) {
 		String n = getUniqueName(database);
 		setElement(node, "CONNECTION", n); 
 	}
 
-	@Override
+	
 	public void setDataBase(Node node, String dbLabel) {
-		Node database = getElement(this.document, dbLabel);
+		Node database = getElement(document, dbLabel).getParentNode();
 		setDataBase(node, database);
 		
 	}
 
-	@Override
-	public void setWholeMetadataFromObject(Collection<ColumnObject> columns,
+	
+	public void setWholeMetadataFromObject(Collection<IColumnObject> columns,
 			Node node) {
 		Node metadata = getMetadata(node);
-		for (ColumnObject column : columns) {
+		for (IColumnObject column : columns) {
 			setMetadataColumnFromObject(column, metadata);
 		}
 	}
 
-	@Override
+	
 	public void setSQLQuery(Node node, String query, String table) {
 		setElement(node, "QUERY", String.format("\"%s\"",query));
 		
 	}
 
-	@Override
+	
 	public Node newNode(String name) {
 		Node n = finder.getOneNode(template, XPathExpressions.GETBYCOMPONENTSNAME, elementName);
 		//true = all child elements are copied as well
@@ -251,7 +243,7 @@ public class MSSqlInput extends CreatableNode implements IDBaseInput {
 		return copy;
 	}
 
-	@Override
+	
 	public void resetNode(Node node) {
 		setElement(node, "CONNECTION", "");
 		setElement(node, "TABLE", "");
@@ -260,23 +252,72 @@ public class MSSqlInput extends CreatableNode implements IDBaseInput {
 		builder.removeNode(mData);	
 	}
 	
-	public Node createAndSetUp(Document template, String name, Collection<ColumnObject> columns, String dataBase, String table) {
+	public Node createAndSetUp(String name, Collection<IColumnObject> columns, String dataBase, String table) {
 		Node n = createElement(name);
 		setDataBase(n, dataBase);
 		Node mData = createMetadata(n);
 		setWholeMetadataFromObject(columns, mData);
 		String sqlParameters = "";
-		for(ColumnObject column : columns) {
-			sqlParameters += column.getName() + ",";
+		for(IColumnObject column : columns) {
+			sqlParameters = sqlParameters + column.getName() + ",";
 		}
 		setTable(n, table);
 		//remove the last comma
 		sqlParameters = sqlParameters.substring(0, sqlParameters.length()-1);
-		String sqlStatement = String.format("select %s from %s", sqlParameters, table);
+		String sqlStatement = String.format("\"select %s from %s\"", sqlParameters, table);
+		setElement(n, "QUERY", sqlStatement);
 		Element e = (Element) mData;
 		e.setAttribute("name", getUniqueName(n));
 		return n;
 		
+	}
+
+
+	@Override
+	public Node createElement(String name) {
+		Node a = newNode(name);
+		resetNode(a);
+		return a;
+	}
+	
+	public void replaceColumn(
+			IColumnObject column, Node node) {
+		Node metadata = getMetadata(node);
+		Node firstChild = metadata.getFirstChild();
+		while (firstChild != null) {
+			if(firstChild.getNodeType() == Node.TEXT_NODE) {
+				firstChild = firstChild.getNextSibling();
+				continue;
+			}
+			Element child = (Element) firstChild;
+			if(column.getName().equals(child.getAttribute("name"))) {
+				builder.removeNode(firstChild);
+				Element dummy = createMetadataColumnDummy();
+				dummy.setAttribute("key", column.getKey());
+				dummy.setAttribute("length", column.getLength());
+				dummy.setAttribute("name", column.getName());
+				dummy.setAttribute("nullable", column.getNullable());
+				dummy.setAttribute("precision", column.getPrecision());
+				dummy.setAttribute("type", column.getType());
+				dummy.setAttribute("usefulColumn", column.getUsefulColumn());
+				if(column.getSourceType() != null) {
+					dummy.setAttributeNode(document.createAttribute("sourceType"));
+					dummy.setAttribute("sourceType", column.getSourceType());
+				}
+				if(column.getPattern() != null) {
+					dummy.setAttributeNode(document.createAttribute("pattern"));
+					dummy.setAttribute("pattern", column.getPattern());
+				}
+				builder.appendElementToContext(metadata, dummy);
+			}
+			firstChild = firstChild.getNextSibling();
+		}
+	}
+	
+	public void replaceAllColumns(Collection<IColumnObject>columns, Node node){
+		for(IColumnObject o : columns){
+			replaceColumn(o, node);
+		}
 	}
 
 

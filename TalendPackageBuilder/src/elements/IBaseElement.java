@@ -3,6 +3,7 @@ package elements;
 import java.util.Collection;
 
 import objects.ColumnObject;
+import objects.IColumnObject;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -24,8 +25,8 @@ public interface IBaseElement extends INode{
 	public void addAttribute (Node node, String name);
 	
 	
-	public Collection <ColumnObject> extractMetadata (Node metaData);
-	public Element setMetadataColumnFromObject(ColumnObject column, Node metadata);
-	public void setWholeMetadataFromObject (Collection<ColumnObject> columns, Node metadata);
+	public Collection <IColumnObject> extractMetadata (Node metaData);
+	public Element setMetadataColumnFromObject(IColumnObject column, Node metadata);
+	public void setWholeMetadataFromObject (Collection<IColumnObject> columns, Node metadata);
 
 }

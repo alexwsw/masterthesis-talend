@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author becher
- *
- */
-package database;

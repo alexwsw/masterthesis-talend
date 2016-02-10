@@ -44,19 +44,21 @@ public class LookupFactory implements ILookupFactory {
 			List<IColumnObject> lookupColumnDef = null;
 			List<IColumnObject> outputColumnsDef = null;
 			if (hasDifferentSchema(object.getLookupTable())) {
-				lookupColumnDef = performer.getColumnObject(dwhDbase, object.getLookupTable().substring(0, 3), object.getLookupTable().substring(4, object.getLookupTable().length()), object.getLookupColumn());
-				outputColumnsDef = performer.getColumnObject(dwhDbase, object.getLookupTable().substring(0, 3), object.getLookupTable().substring(4, object.getLookupTable().length()), splitString(l.getTableOutputColumn()));
+				String[]split = splitString(object.getLookupTable(), "\\.");
+				lookupColumnDef = performer.getColumnObject(dwhDbase, split[0], split[1], object.getLookupColumn());
+				outputColumnsDef = performer.getColumnObject(dwhDbase, split[0], split[1], splitString(l.getTableOutputColumn(), ","));
 			} else {
 				lookupColumnDef = performer.getColumnObject(dwhDbase, defaultSchema, object.getLookupTable(), object.getLookupColumn());
-				outputColumnsDef = performer.getColumnObject(dwhDbase, defaultSchema, object.getLookupTable(), splitString(l.getTableOutputColumn()));
+				outputColumnsDef = performer.getColumnObject(dwhDbase, defaultSchema, object.getLookupTable(), splitString(l.getTableOutputColumn(), ","));
 			}
 			object.setLookupTableDef(combineLists(lookupColumnDef, outputColumnsDef));
-			object.setPackageReturnColumns(findColumns(pack.getDestinationTableDef(), outputColumnsDef, object.getPackageOutputColumns_ReturnColumns() , splitString(l.getLookupOutputColumns())));
+			object.setPackageReturnColumns(findColumns(pack.getDestinationTableDef(), outputColumnsDef, object.getPackageOutputColumns_ReturnColumns() , splitString(l.getLookupOutputColumns(), ",")));
 			if (object instanceof ILookup2Object) {
 				ILookup2Object temp = (ILookup2Object) object;
 				List<IColumnObject>additionalCols = null;
 				if (hasDifferentSchema(object.getLookupTable())) {
-					additionalCols = performer.getColumnObject(dwhDbase, temp.getLookupTable().substring(0, 3), temp.getLookupTable().substring(4, temp.getLookupTable().length()), temp.getLU2FromColumn(), temp.getLU2ToColumn());
+					String[]split = splitString(object.getLookupTable(), "\\.");
+					additionalCols = performer.getColumnObject(dwhDbase, split[0], split[1], temp.getLU2FromColumn(), temp.getLU2ToColumn());
 				} else {
 					additionalCols = performer.getColumnObject(dwhDbase, defaultSchema, temp.getLookupTable(), temp.getLU2FromColumn(), temp.getLU2ToColumn());
 				}
@@ -115,8 +117,8 @@ public class LookupFactory implements ILookupFactory {
 		}
 	}
 	
-	public String[] splitString (String a) {
-		String[] strings = a.split(",");
+	public String[] splitString (String a, String regex) {
+		String[] strings = a.split(regex);
 		for (int i = 0; i<strings.length; i++) {
 			strings[i] = strings[i].trim();
 		}

@@ -18,7 +18,7 @@ public class AttributeObject extends AbstractObject implements IAttributeObject 
 	
 	public AttributeObject(AttributeDTO a) {
 		this.name = a.getName();
-		this.sourceColumn = (a.getIsExisting() == null)? null : evaluateColumnOption(a.getSourceColumn());
+		this.sourceColumn = (a.getIsExisting() == null)? null : a.getSourceColumn();
 		this.type = a.getType();
 		this.useCColumn = a.getUseCColumn();
 		this.renameOnly = a.getRenameOnly(); 

@@ -53,8 +53,8 @@ public class LookupObject extends AbstractObject implements ILookupObject {
 		//get rid of targetFieldValue if there's one
 		rawPrefix = targetFieldValueHandling(rawPrefix);
 		this.prefix = rawPrefix;
-		this.packageColumns = splitPackageColumnsAndEvaluate(lookup.getPackageColumns());
-		this.lookupTable = lookup.getLookupTable();
+		this.packageColumns = splitPackageColumns(lookup.getPackageColumns());
+		this.lookupTable = hasDifferentSchema(lookup.getLookupTable())? lookup.getLookupTable() : String.format("dwh.%s", lookup.getLookupTable());
 		this.lookupColumn = lookup.getLookupColumn();
 		this.packageOutputColumn_MatchColumn = lookup
 				.getPackageOutputColumn_MatchColumn();

@@ -35,9 +35,10 @@ public class ColumnObject implements IColumnObject {
 		}
 
 		private String evaluateLength(String typeName, int columnSize) {
-			switch (typeName) {
+			switch (typeName.toUpperCase()) {
 			case "NVARCHAR":
 			case "CHAR":
+			case "VARCHAR":
 				return String.valueOf(columnSize);
 			}
 			return "0";

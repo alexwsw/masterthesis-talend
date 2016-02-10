@@ -22,6 +22,7 @@ public class StartPoint {
 	public static void main(String[] args) {
 
 		String host = "SVR-BIDEV02";
+		String host2 = "DESKTOP-O9QJ2RR";
 		String port = "1433";
 		// String schema= "dbo";
 		// String database= "TALEND_TEST";
@@ -32,12 +33,12 @@ public class StartPoint {
 		String password = "v8+RGusCeE5g7aN7EnZnUA==";
 
 		String schema2 = "isETL";
-		String databaseDWH = "Henry_LS_DWH";
+		String databaseDWH = "Henry_LS_DWH_PP";
 		String pass2 = "10Runsql";
 		String databaseSA = "Henry_LS_SA_PP";
 		String databaseSRC = "Henry_LS_SRC_PP";
 
-		String connURL = String.format("jdbc:sqlserver://%s", host);
+		String connURL = String.format("jdbc:sqlserver://%s", host2);
 		String connWinURL = connURL
 				+ ";integratedSecurity=true;authenticationScheme=JavaKerberos";
 		DBConnectionBuilder connection = new DBConnectionBuilder();
@@ -110,20 +111,12 @@ public class StartPoint {
 
 	public static List<IPackageObject> printMenu(List<IPackageObject> p) {
 		List<IPackageObject> object = new ArrayList<IPackageObject>();
-		System.out.println("please select packages to be created: ");
+		System.out.println("please select package to be created: ");
 		System.out.println(p);
 		Scanner input = new Scanner(System.in);
-		while (true) {
-			String choice = input.next();
-			if (choice.equals("n")) {
-				break;
-			}
-			object.add(getPackage(p, choice));
-			p.remove(getPackage(p, choice));
-			System.out.println(p);;
-			System.out
-					.println("please enter the package number for more packages, \"n\" to complete");
-		}
+		String choice = input.next();
+		object.add(getPackage(p, choice));
+		System.out.println(p);
 		input.close();
 		return object;
 	}

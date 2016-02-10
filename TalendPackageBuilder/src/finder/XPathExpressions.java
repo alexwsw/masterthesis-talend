@@ -5,12 +5,12 @@ public enum XPathExpressions {
 	//Any "value" attribute e.g. elementParameter elements
 	GETVALUEATTRIBUTE("//*[@value='%s']"),
 	//Any "name attribute" e.g. name of the metadata or "UNIQUE_NAME" (must be unique for the given context)
-	GETNAMEATTRIBUTE("./*[@name='%s']"),
+	GETNAMEATTRIBUTE(".//*[@name='%s']"),
 	//try to find an attribute within of an element
 	FINDATTRIBUTE("./@*[name()='%s']"),
 	FINDELEMENT(".//*[name()='%s' and @name='%s']"),
 	//for connections
-	GETCONNECTION("//*[@metaname='%s'and @target='%s']"),
+	GETCONNECTION("//*[name()='connection']"),
 	getConnections("/*[name()='connection']"),
 	getFlowConnection("//*[name()='connection' and @connectorName='%s']"),
 	getMetaDataForConnection("//*[name()='metadata' and @name='%s']"),
@@ -19,6 +19,7 @@ public enum XPathExpressions {
 	getIncomingConnection("//*[@target='%s' and @lineStyle='%s']"),
 	//metadata of a certain type (e.g. "FLOW") (type can be stored in an enum)
 	getMetadata("./*[@connector='%s' and @name='%s']"),
+	getwholeMetadata(".//*[name()='metadata']"),
 	//generalized xpath expression suitable for all nodes
 	getByNodeName("./*[name()='%s']"),
 	//the method using this expression must be declared final in the abstract class (due to tMap with multiple metadata nodes)
@@ -27,10 +28,11 @@ public enum XPathExpressions {
 	//only important for metadata mapping stuff
 	getTMapInputTables("./*[name()='inputTables']"),
 	getTMapOutputTables("./*[name()='outputTables']"),
-	
+	getTMapMetadata("./*[name()='metadata' and @connector='FLOW' and @name='%s']"),
+
 	//test
 	GETINCOMINGCONNECTIONS("./*[@target='%s']"),
-	GETOUTGOINGCONNECTIONS("./*[@source='%s']"),
+	GETOUTGOINGCONNECTIONS("//*[@source='%s']"),
 	
 	getOutgoingMainConnections("./*[@source='%s' and @connectorName='FLOW']"),
 	

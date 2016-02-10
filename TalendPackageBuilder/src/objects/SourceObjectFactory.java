@@ -26,26 +26,25 @@ public class SourceObjectFactory implements ISourceObjectFactory {
 	}
 
 	@Override
-	public List<ISourceObject> getSourceTables() {
+	public ISourceObject getSourceTables() {
 		String query = String.format(sqlStatement, dwhDbase, dwhDbase,
 				pack.getID());
 		ResultSet rs = performer.executeQuery(query);
 		List<SourceObjectDTO> l = mapper.mapRersultSetToObject(rs,
 				SourceObjectDTO.class);
-		List<ISourceObject> tables = new ArrayList<ISourceObject>();
+		ISourceObject def = null;
 		for (SourceObjectDTO s : l) {
-			SourceObject t = new SourceObject(s);
-			if (hasDifferentSchema(t.getSourceTable())) {
-				t.setSourceTableDef(performer.getColumnObject(srcDbase, t
-						.getSourceTable().substring(0, 3), t.getSourceTable()
-						.substring(4, t.getSourceTable().length())));
+			def = new SourceObject(s);
+			if (hasDifferentSchema(def.getSourceTable())) {
+				def.setSourceTableDef(performer.getColumnObject(srcDbase, def
+						.getSourceTable().substring(0, 3), def.getSourceTable()
+						.substring(4, def.getSourceTable().length())));
 			} else {
-				t.setSourceTableDef(performer.getColumnObject(srcDbase,
-						defaultSchema, t.getSourceTable()));
-				tables.add(t);
+				def.setSourceTableDef(performer.getColumnObject(srcDbase,
+						defaultSchema, def.getSourceTable()));
 			}
 		}
-		return tables;
+		return def;
 	}
 
 	public boolean hasDifferentSchema(String table) {

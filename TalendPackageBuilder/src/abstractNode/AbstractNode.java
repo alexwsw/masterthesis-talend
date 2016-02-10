@@ -4,122 +4,167 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import objects.ColumnDTO;
-import objects.LookupObject;
+import objects.ColumnObject;
+import objects.IColumnObject;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import connection.Connection;
-import documentParser.DocumentCreator;
-import elements.EConnectionTypes;
-import exception.DummyNotFoundException;
+import finder.IFinder;
 import finder.XPathExpressions;
-import finder.XPathFinder;
-import xmlBuilder.NodeBuilder;
+import xmlBuilder.IXmlBuilder;
 
 public abstract class AbstractNode {
+	
+	protected Document document;
+	protected IFinder finder;
+	protected IXmlBuilder builder;
 
 	// INCOMPLETE (just removing a node would cause a program crash)
 	// before removing connections must be checked, main connections adjusted
 	// and updated, non main nodes must be removed!!!!!
 	//Matter of the manager!!!!!!!!!!!
-	public static void removeNode(Document document, Node node) {
-		NodeList inc = AbstractNode.getIncomingConnections(document, node);
+/*	public void removeNode(Document document, Node node) {
+		NodeList inc = getIncomingConnections(document, node);
 		String source = null;
 		for (int i = 0; i < inc.getLength(); i++) {
 			Element e = (Element) inc.item(i);
 			// "look around" and get the lookups
 			if (e.getAttribute("lineStyle").equals("8")) {
 				// get the lookup node
-				Node lookupNode = AbstractNode.getElementByValue(document, e.getAttribute("source"));
+				Node lookupNode = getElementByValue(document, e.getAttribute("source"));
 				// remove lookup node
-				NodeBuilder.removeNode(lookupNode);
+				builder.removeNode(lookupNode);
 				// remove lookup connection
-				NodeBuilder.removeNode(e);
+				builder.removeNode(e);
 			}
 			if (e.getAttribute("lineStyle").equals("0")) {
 				source = e.getAttribute("source");
 				System.err.println(source);
 			}
 		}
-		NodeList outg = AbstractNode.getOutgoingConnections(document, node);
+		NodeList outg = getOutgoingConnections(document, node);
 		for (int i = 0; i < outg.getLength(); i++) {
 			Element e = (Element) outg.item(i);
 			String target = e.getAttribute("target");
 			System.out.println(target);
 			Element connection = (Element) Connection.findConnection(document,
-					AbstractNode.getElementByValue(document, source), node);
+					getElementByValue(document, source), node);
 			// update connection
 			connection.setAttribute("target", target);
-			System.err.println(DocumentCreator.getStringFromDocument(connection));
 			// remove old connection
-			NodeBuilder.removeNode(e);
+			builder.removeNode(e);
 		}
 
-		NodeBuilder.removeNode(node);
+		builder.removeNode(node);
 	}
-	
+	*/
 	//matter of the manager!!!!
-	public static void removeNode(Document document, String label) {
-		NodeBuilder.removeNode(document, label);
+	public void removeNode(Document document, String label) {
+		Node n = getElementByValue(label);
+		builder.removeNode(n);
 	}
 
 	// Get Node's unique Name (for references) (could be suitable for abstract
 	// class)
-	public static String getUniqueName(Document document, String name) {
-		Element e = (Element) AbstractNode.getElementByValue(document, name);
-		return AbstractNode.getNodesUniqueName(document, e);
+	public String getUniqueName(String name) {
+		Element e = (Element) getElementByValue(name);
+		return getNodesUniqueName(document, e);
 	}
 
-	public static String getComponentName(Document document, String name) {
-		Element e = (Element) AbstractNode.getElementByValue(document, name);
+	public String getComponentName(Document document, String name) {
+		Element e = (Element) getElementByValue(name);
 		return e.getAttribute("componentName");
 	}
 
 	// test of getting the UNIQUE_NAME when the Node is already given (mustn't
 	// be found first)
 	// also testing of xpath query processor
-	public static String getNodesUniqueName(Document document, Node node) {
-		Element e = (Element) XPathFinder.findNode(node, XPathExpressions.GETNAMEATTRIBUTE, "UNIQUE_NAME");
+	public String getNodesUniqueName(Document document, Node node) {
+		Element e = (Element) finder.getOneNode(node, XPathExpressions.GETNAMEATTRIBUTE, "UNIQUE_NAME");
 
 		return e.getAttribute("value");
 
 	}
 
-	public static Node getMetadata(Document document, Node node, String type) {
-		String uniqueName = AbstractNode.getNodesUniqueName(document, node);
-		return XPathFinder.findNode(node, XPathExpressions.getMetadata, type, uniqueName);
+	public Node getMetadata(Node node, String type) {
+		String uniqueName = getNodesUniqueName(document, node);
+		return finder.getOneNode(node, XPathExpressions.getMetadata, type, uniqueName);
 	}
 	
-	public static Node getMetadata(Document document, Node node) {
-		return XPathFinder.findNode(node, XPathExpressions.GETMETADATABYTYPE, "metadata");
+	public Node getMetadata(Document document, Node node) {
+		return finder.getOneNode(node, XPathExpressions.GETMETADATABYTYPE, "metadata");
 	}
 
-	public static Node getMetadata(Document document, String label, String type) {
-		Node node = AbstractNode.getElementByValue(document, label);
-		String uniqueName = AbstractNode.getNodesUniqueName(document, node);
-		return XPathFinder.findNode(node, XPathExpressions.getMetadata, type, uniqueName);
+	public Node getMetadata(String label, String type) {
+		Node node = getElementByValue(label);
+		String uniqueName = getNodesUniqueName(document, node);
+		return finder.getOneNode(node, XPathExpressions.getMetadata, type, uniqueName);
 	}
 
 	// columns from the metadata(needs to be tested)
-	public static NodeList getMetadataColumns(Node metadata) {
+	public NodeList getMetadataColumns(Node metadata) {
 		return metadata.getChildNodes();
 	}
 
 	// the label String must be an ID or unique
-	public static Node getElementByValue(Document document, String label) {
-		Element e = (Element) XPathFinder.findNode(document, XPathExpressions.GETVALUEATTRIBUTE, label);
+	public Node getElementByValue(String label) {
+		Element e = (Element)finder.getOneNode(this.document, XPathExpressions.GETVALUEATTRIBUTE, label);
 		if (e != null) {
 			return e.getParentNode();
 		} else {
 			return null;
 		}
 	}
+	public Node getComponent(String label) {
+		return getElementByValue(label);
+	}
+	//in case of a column option
+	public String evaluateColumnOption(String column) {
+		if (column == null) {
+			return null;
+		}
+		String regex = "@[A-Za-z]+";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(column);
+		if (!matcher.find()) {
+			return column;
+		}
+		column = column.replaceAll(regex, "");
+		String colOpt = matcher.group().substring(1).toLowerCase();
+		switch (colOpt) {
+			case "trim":
+				return String.format("%s.trim()", column.toString());
+			case "lower":
+				return String.format("%s.toLowerCase()", column.toString());
+			case "upper":
+				return String.format("%s.toUpperCase()", column.toString());
+			case "dummy":
+				return "#";
+			default: 
+				return column;
+		}
+	}
+	
+	public String removeColumnOption(String column) {
+		if (column == null) {
+			return null;
+		}
+		String regex = "@[A-Za-z]+";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(column);
+		if (!matcher.find()) {
+			return column;
+		}
+		column = column.replaceAll(regex, "");
+		return column;
+	}
+	
 	/*
 	//in case the node is a DB input
 	//String array must be replaced by a DTO Object
@@ -217,37 +262,37 @@ public abstract class AbstractNode {
 	*/
 
 	// test setter
-	public static void setAttribute(Object obj, String attribute, String value) {
-		Element e = (Element) XPathFinder.findNode(obj, XPathExpressions.GETNAMEATTRIBUTE, attribute);
+	public void setAttribute(Object obj, String attribute, String value) {
+		Element e = (Element) finder.getOneNode(obj, XPathExpressions.GETNAMEATTRIBUTE, attribute);
 		e.setAttribute("value", value);
 	}
 
 	// test getter
-	public static String getAttribute(Object obj, String attribute) {
-		Element e = (Element) XPathFinder.findNode(obj, XPathExpressions.GETNAMEATTRIBUTE, attribute);
+	public String getAttribute(Object obj, String attribute) {
+		Element e = (Element) finder.getOneNode(obj, XPathExpressions.GETNAMEATTRIBUTE, attribute);
 		return e.getAttribute("value");
 	}
 
 	// test incoming/outgoing connections finder
-	public static NodeList getIncomingConnections(Document document, Node node) {
+	public NodeList getIncomingConnections(Document document, Node node) {
 		NodeList conns = null;
 		// connections are children of the root elmt.
 		Node root = document.getDocumentElement();
-		String uName = AbstractNode.getNodesUniqueName(document, node);
-		conns = XPathFinder.findNodeList(root, XPathExpressions.GETINCOMINGCONNECTIONS, uName);
+		String uName = getNodesUniqueName(document, node);
+		conns = finder.getNodeList(root, XPathExpressions.GETINCOMINGCONNECTIONS, uName);
 
 		return conns;
 	}
 
-	public static NodeList getOutgoingConnections(Document document, Node node) {
+	public NodeList getOutgoingConnections(Document document, Node node) {
 		NodeList conns = null;
 		Node root = document.getDocumentElement();
-		String uName = AbstractNode.getNodesUniqueName(document, node);
-		conns = XPathFinder.findNodeList(root, XPathExpressions.GETOUTGOINGCONNECTIONS, uName);
+		String uName = getNodesUniqueName(document, node);
+		conns = finder.getNodeList(root, XPathExpressions.GETOUTGOINGCONNECTIONS, uName);
 		return conns;
 	}
 	//matter of the manager, not the node
-	public static void updateJavaLibraryPath(Document document) {
+	public void updateJavaLibraryPath(Document document) {
 		String path = ".//java";
 		File f = new File(path);
 		String absPath = null;
@@ -258,23 +303,23 @@ public abstract class AbstractNode {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		NodeList nodes = XPathFinder.findNodeList(document.getDocumentElement(), XPathExpressions.getNodes, null);
+		NodeList nodes = finder.getNodeList(document.getDocumentElement(), XPathExpressions.getNodes, null);
 		for (int i = 0; i<nodes.getLength(); i++) {
 			if(nodes.item(i).getNodeType() == Node.TEXT_NODE){
 				continue;
 			}
 			else {
-				AbstractNode.setAttribute(nodes.item(i), "JAVA_LIBRARY_PATH", absPath);
+				setAttribute(nodes.item(i), "JAVA_LIBRARY_PATH", absPath);
 			}
 		}
 		System.out.printf("Java library path updated for %s nodes!%n", nodes.getLength());
 	}
 	
 	//only suitable for NODES (verification according to componentName attribute)
-	public static String verifyNodeType(Node node) {
+	public String verifyNodeType(Node node) {
 		String type = null;
 		Element e = (Element) node;
-		type = e.getAttribute("componentName");		
+		type = e.getAttribute("componentName");	
 		return type;
 	}
 	
@@ -297,12 +342,12 @@ public abstract class AbstractNode {
 //	}
 //	
 	//check whether a given node contains an attribute (before creating a new one)
-	public static boolean hasAttribute(Node node, String attributeName) {
-		if(XPathFinder.findNode(node, XPathExpressions.FINDATTRIBUTE, attributeName) == null) {
-			System.out.printf("%s attribute NOT found!%n", attributeName);
+	public boolean hasAttribute(Node node, String attributeName) {
+		if(finder.getOneNode(node, XPathExpressions.FINDATTRIBUTE, attributeName) == null) {
+	//		System.out.printf("%s attribute NOT found!%n", attributeName);
 			return false;
 		} else {
-			System.out.printf("%s attribute found!%n", attributeName);
+	//		System.out.printf("%s attribute found!%n", attributeName);
 			return true;
 		}
 	}
@@ -311,7 +356,7 @@ public abstract class AbstractNode {
 	//suggest to Andre
 	//single attributes can be held as constant values in an enum!!!!
 	//Marshalling a DTO Object into an Element could be also an idea
-	public static Element createMetadataColumnDummy(Document document) {
+	public Element createMetadataColumnDummy(Document document) {
 		Element dummy = null;
 		dummy = document.createElementNS("http://www.talend.org/mapper", "column");
 		dummy.setAttributeNode(document.createAttribute("key"));
@@ -324,24 +369,24 @@ public abstract class AbstractNode {
 		return dummy;
 	}
 	
-	public static Element createMetadata(Document document, Node node) {
+	public Element createMetadata(Document document, Node node) {
 		Element metaData = null;
 		//Element dummy = (Element)AbstractNode.createMetadataColumnDummy(document);
 		metaData = document.createElementNS("http://www.talend.org/mapper","metadata");
 		metaData.setAttributeNode(document.createAttribute("connector"));
 		metaData.setAttributeNode(document.createAttribute("name"));
 		metaData.setAttribute("connector", "FLOW");
-		metaData.setAttribute("name", AbstractNode.getNodesUniqueName(document, node));
+		metaData.setAttribute("name", getNodesUniqueName(document, node));
 		//NodeBuilder.appendElementToContext(metaData, dummy);
-		NodeBuilder.appendElementToContext(node, metaData);
+		builder.appendElementToContext(node, metaData);
 		
 		
 		return metaData;
 	}
 	
 	//iterate over a Node's metadata and save it within a DT-Object
-	public static Collection <ColumnDTO> extractMetadata (Node metaData) {
-		Collection<ColumnDTO> mDataColumns = new ArrayList<ColumnDTO>();
+	public Collection <IColumnObject> extractMetadata (Node metaData) {
+		Collection<IColumnObject> mDataColumns = new ArrayList<IColumnObject>();
 		Node firstChild = metaData.getFirstChild();
 		while (firstChild != null) {
 			if(firstChild.getNodeType() == Node.TEXT_NODE) {
@@ -356,7 +401,8 @@ public abstract class AbstractNode {
 			String precision = mDataColumn.getAttribute("precision");
 			String type = mDataColumn.getAttribute("type");
 			String usefulColumn = mDataColumn.getAttribute("usefulColumn");
-			ColumnDTO column = new ColumnDTO(isKey, length, name, nullable, precision, null, type, usefulColumn);
+			String pattern = mDataColumn.getAttribute("pattern");
+			IColumnObject column = new ColumnObject(isKey, length, nullable, precision, name, type, null, usefulColumn, pattern);
 			mDataColumns.add(column);
 			firstChild = firstChild.getNextSibling();
 		}
@@ -364,21 +410,26 @@ public abstract class AbstractNode {
 	}
 	
 	//create columns for a metadata Node from a DT-Object
-	public static void setWholeMetadataFromDTO (Document document, Collection<ColumnDTO> columns, Node metadata) {
-		for (ColumnDTO column : columns) {
-			AbstractNode.setMetadataColumnFromDTO(document, column, metadata);
+	public void setWholeMetadataFromDTO (Collection<IColumnObject> columns, Node metadata) {
+		for (IColumnObject column : columns) {
+			setMetadataColumnFromDTO(column, metadata);
 		}
 	}
-	public static Element setMetadataColumnFromDTO(Document document, ColumnDTO column, Node metadata) {
-		Element dummy = AbstractNode.createMetadataColumnDummy(document);
-		dummy.setAttribute("key", String.valueOf(column.isKey()));
+	public Element setMetadataColumnFromDTO(IColumnObject column, Node metadata) {
+		Element dummy = createMetadataColumnDummy(document);
+		dummy.setAttribute("key", String.valueOf(column.getKey()));
 		dummy.setAttribute("length", column.getLength());
 		dummy.setAttribute("name", column.getName());
-		dummy.setAttribute("nullable", column.isNullable());
+		dummy.setAttribute("nullable", column.getNullable());
 		dummy.setAttribute("precision", column.getPrecision());
 		dummy.setAttribute("type", column.getType());
-		dummy.setAttribute("usefulColumn", column.isUsefulColumn());
-		NodeBuilder.appendElementToContext(metadata, dummy);
+		dummy.setAttribute("usefulColumn", column.getUsefulColumn());
+		builder.appendElementToContext(metadata, dummy);
 		return dummy;
+	}
+	
+	public Node getMetadataByName(Node node, String nameMetadata) {
+		return finder.getOneNode(node,
+				XPathExpressions.getTMapMetadata, nameMetadata);
 	}
 }

@@ -57,7 +57,7 @@ public final class Lookup2Object extends LookupObject implements ILookup2Object 
 		if (newColumn == null) {
 			return;
 		}
-		List<String> a = splitPackageColumnsAndEvaluate(newColumn);
+		List<String> a = splitPackageColumns(newColumn);
 		if (this.packageColumns == null) {
 			this.packageColumns = new ArrayList<String>();
 		}
