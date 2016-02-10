@@ -1,0 +1,607 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/13/2010 2:40:58 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="initions AG"
+  DTS:CreatorName="initions AG"
+  DTS:Description="Derive tblsrc_SAP_CSKT_DER_Kostenstelle"
+  DTS:DTSID="{8396C403-F9DE-44DB-A7C1-FDE36531D0CE}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.2344.23"
+  DTS:LocaleID="1031"
+  DTS:ObjectName="Derive tblsrc_SAP_CH_KUNDEN_CH_DER_KATEGORIE"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="911"
+  DTS:VersionGUID="{330A90D8-5F97-47C4-A2C5-3721FE9A05C4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CN_CONFIG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{226AA112-5A21-4E7E-89FB-91AC9F5440AE}"
+      DTS:ObjectName="CN_CONFIG">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=NB-032-DW;Initial Catalog=051_SQL_DWH;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Load tblArtikel-{226AA112-5A21-4E7E-89FB-91AC9F5440AE}is-weber-neu\sql2008r2.ELG_DWH;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CN_OLE_DWH_SRC]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B7947A96-AC25-4CC6-8676-EFBF1B88AD2D}"
+      DTS:ObjectName="CN_OLE_DWH_SRC">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=NB-032-DW;User ID=isETL_User;Initial Catalog=053_SQL_SRC;Provider=SQLNCLI11;Application Name=SSIS-Load tblArtikel-{B7947A96-AC25-4CC6-8676-EFBF1B88AD2D}is-weber-neu\sql2008r2.ELG_DWH_SRC;Auto Translate=False;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"></DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="\\127.0.0.1\initions$\SSIS_CONFIGURATION\CN_CONFIG.dtsConfig"
+      DTS:ConfigurationType="1"
+      DTS:CreationName=""
+      DTS:DTSID="{B0589A47-1641-4D68-894A-1D9254BA1B6A}"
+      DTS:ObjectName="CN_CONFIG" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;CN_CONFIG&quot;;&quot;[isETL].[SSIS_Config]&quot;;&quot;CN_OLE_DWH_SRC&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{6C29E3B6-1B00-424B-B345-5E73F9EE20B4}"
+      DTS:ObjectName="CN_OLE_DWH_SRC" />
+  </DTS:Configurations>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:DTSID="{6D3E5FAE-16BA-43C1-8B0C-39BC0DC2518E}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:DTSID="{99819ECB-8005-4B64-83D9-F88D98B94954}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SEQC Template">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{2C0BF93B-4D74-498E-9ED4-84BA9D044C4C}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL_SET"
+              DTS:ObjectName="SEQC_Destinationtable">
+              <DTS:VariableValue
+                DTS:DataType="8">[dbo].[tblsrc_AS400_MWALZCH_MKA0P]</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{4FA9B57F-6576-4A0F-80D4-C450D32737F6}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL_SET"
+              DTS:ObjectName="SEQC_DFT_Name">
+              <DTS:VariableValue
+                DTS:DataType="8">Template</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{B586002A-CAEE-47D3-A5A3-E662DC12AE82}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="isETL_SET"
+              DTS:ObjectName="SEQC_DFT_SRC_strSQL">
+              <DTS:VariableValue
+                DTS:DataType="8">select distinct KAKNR from tblsrc_AS400_MWALZCH_MKA0P</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT"
+              DTS:CreationName="Microsoft.Pipeline"
+              DTS:Description="Datenflusstask"
+              DTS:DTSID="{B87FE77B-A2AC-4C2C-B101-43979C507BE5}"
+              DTS:ExecutableType="Microsoft.Pipeline"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="DFT"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST"
+                      componentClassID="Microsoft.OLEDBDestination"
+                      contactInfo="OLE DB-Ziel;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB-Ziel"
+                      name="OLE_DST"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert '0' zeigt einen unendlichen Timeoutwert an."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                          name="OpenRowset">[dbo].[tblsrc_AS400_MWALZCH_MKA0P_DER_KAPLZ]</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                          name="OpenRowsetVariable">isETL_SET::SEQC_Destinationtable</property>
+                        <property
+                          dataType="System.String"
+                          description="Der auszuführende SQL-Befehl."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                          name="AccessMode"
+                          typeConverter="AccessMode">4</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Zeigt an, ob die für Identitätsspalten übergebenen Werte zum Ziel kopiert werden. Bei 'False' werden die Werte für Identitätsspalten am Ziel automatisch generiert. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Zeigt an, ob für Spalten, die NULL enthalten, NULL am Ziel eingefügt wird. Bei 'False' werden für Spalten, die NULL enthalten, am Ziel die Standardwerte eingefügt. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt die für die Option 'Schnelles Laden' zu verwendenden Optionen an. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt an, wann beim Einfügen von Daten Commits ausgegeben werden. Der Wert '0' gibt an, dass ein Commit am Ende des Einfügens von Daten ausgegeben wird. Trifft nur zu, wenn die Option 'Schnelles Laden' aktiviert ist."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[CN_OLE_DWH_SRC]"
+                          connectionManagerRefId="Package.ConnectionManagers[CN_OLE_DWH_SRC]"
+                          description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels]"
+                          errorOrTruncationOperation="Einfügen"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="Eingabe des OLE DB-Ziels">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].Columns[KAKNR]"
+                              cachedDataType="wstr"
+                              cachedLength="255"
+                              cachedName="KAKNR"
+                              externalMetadataColumnId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[KAKNR]"
+                              lineageId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[KAKNR]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_ID]"
+                              dataType="i4"
+                              name="isETL_ID" />
+                            <externalMetadataColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_isPKNULL]"
+                              dataType="bool"
+                              name="isETL_isPKNULL" />
+                            <externalMetadataColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_isMultiple]"
+                              dataType="bool"
+                              name="isETL_isMultiple" />
+                            <externalMetadataColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_isValid]"
+                              dataType="bool"
+                              name="isETL_isValid" />
+                            <externalMetadataColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[isETL_DCR]"
+                              dataType="dbTimeStamp"
+                              name="isETL_DCR" />
+                            <externalMetadataColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[KAKNR]"
+                              dataType="wstr"
+                              length="255"
+                              name="KAKNR" />
+                            <externalMetadataColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[KABEZ]"
+                              dataType="wstr"
+                              length="255"
+                              name="KABEZ" />
+                            <externalMetadataColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels].ExternalColumns[Test]"
+                              dataType="wstr"
+                              length="255"
+                              name="Test" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="Fehlerausgabe des OLE DB-Ziels"
+                          synchronousInputId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Outputs[Fehlerausgabe des OLE DB-Ziels].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC"
+                      componentClassID="Microsoft.OLEDBSource"
+                      contactInfo="OLE DB-Quelle;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Alle Rechte vorbehalten; http://www.microsoft.com/sql/support;7"
+                      description="OLE DB-Quelle"
+                      name="OLE_SRC"
+                      usesDispositions="true"
+                      version="7">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Die Anzahl der Sekunden für das Timeout eines Befehls. Der Wert '0' zeigt einen unendlichen Timeoutwert an."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts an."
+                          name="OpenRowset"></property>
+                        <property
+                          dataType="System.String"
+                          description="Gibt die Variable an, die den Namen des zum Öffnen eines Rowsets verwendeten Datenbankobjekts enthält."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="Der auszuführende SQL-Befehl."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select distinct KAPLZ from tblsrc_AS400_MWALZCH_MKA0P</property>
+                        <property
+                          dataType="System.String"
+                          description="Die Variable, die den auszuführenden SQL-Befehl enthält."
+                          name="SqlCommandVariable">isETL_SET::SEQC_DFT_SRC_strSQL</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt die zu verwendende Spaltencodepage an, wenn keine Codepageinformationen von der Datenquelle verfügbar sind."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Erzwingt die Verwendung des DefaultCodePage-Eigenschaftswerts beim Beschreiben von Zeichendaten."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Gibt den zum Zugreifen auf die Datenbank verwendeten Modus an."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.String"
+                          description="Die Zuordnungen zwischen den Parametern im SQL-Befehl und den Variablen."
+                          name="ParameterMapping"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Connections[OleDbConnection]"
+                          connectionManagerID="Package.ConnectionManagers[CN_OLE_DWH_SRC]"
+                          connectionManagerRefId="Package.ConnectionManagers[CN_OLE_DWH_SRC]"
+                          description="Die für den Zugriff auf die Datenbank verwendete OLE DB-Laufzeitverbindung."
+                          name="OleDbConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle]"
+                          name="Ausgabe der OLE DB-Quelle">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[KAKNR]"
+                              dataType="wstr"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[KAKNR]"
+                              length="255"
+                              lineageId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].Columns[KAKNR]"
+                              name="KAKNR"
+                              truncationRowDisposition="FailComponent" />
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle].ExternalColumns[KAKNR]"
+                              dataType="wstr"
+                              length="255"
+                              name="KAKNR" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle]"
+                          isErrorOut="true"
+                          name="Fehlerausgabe der OLE DB-Quelle">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[KAKNR]"
+                              dataType="wstr"
+                              length="255"
+                              lineageId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[KAKNR]"
+                              name="KAKNR" />
+                            <outputColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Fehlerausgabe der OLE DB-Quelle].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT.Paths[Ausgabe der OLE DB-Quelle]"
+                      endId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST.Inputs[Eingabe des OLE DB-Ziels]"
+                      name="Ausgabe der OLE DB-Quelle"
+                      startId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC.Outputs[Ausgabe der OLE DB-Quelle]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\LOG Item Begin"
+              DTS:CreationName="Isag.Log.LOG, Isag.LOG3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a4e053840a8eff7"
+              DTS:Description="LOG2"
+              DTS:DTSID="{FBF1C020-9D7B-4B54-B13E-1ACC6B505BDA}"
+              DTS:ExecutableType="Isag.Log.LOG, Isag.LOG3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a4e053840a8eff7"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="LOG Item Begin"
+              DTS:TaskContact="initions AG"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <InnerObject>
+                  <ComponentType
+                    Type="3"
+                    Value="5" />
+                  <MessageText
+                    Type="8"
+                    Value="@(isETL_SET::SEQC_DFT_Name)" />
+                </InnerObject>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\LOG Item End"
+              DTS:CreationName="Isag.Log.LOG, Isag.LOG3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a4e053840a8eff7"
+              DTS:Description="LOG2"
+              DTS:DTSID="{E2E80939-F533-4799-9C8B-B13954430944}"
+              DTS:ExecutableType="Isag.Log.LOG, Isag.LOG3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a4e053840a8eff7"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="LOG Item End"
+              DTS:TaskContact="initions AG"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <InnerObject>
+                  <ComponentType
+                    Type="3"
+                    Value="6" />
+                  <MessageText
+                    Type="8"
+                    Value="@(isETL_SET::SEQC_DFT_Name)" />
+                </InnerObject>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template.PrecedenceConstraints[Einschränkung]"
+              DTS:CreationName=""
+              DTS:DTSID="{1BBBF08E-188C-416D-89A7-8248ED752DE0}"
+              DTS:From="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\LOG Item Begin"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Einschränkung"
+              DTS:To="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template.PrecedenceConstraints[Einschränkung 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{2308028E-601A-487F-9F6F-F2B5AB470E83}"
+              DTS:From="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Einschränkung 1"
+              DTS:To="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\LOG Item End" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT"
+          TopLeft="103.5,130.5" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\LOG Item Begin"
+          TopLeft="103.5,28.5" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\LOG Item End"
+          TopLeft="103.5,232.5" />
+        <EdgeLayout
+          Id="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template.PrecedenceConstraints[Einschränkung]"
+          TopLeft="181.5,70.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template.PrecedenceConstraints[Einschränkung 1]"
+          TopLeft="181.5,172.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="369,330"
+          Size="369,372"
+          Id="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template"
+          TopLeft="51.5,6.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="477,434"
+          Size="477,476"
+          Id="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ"
+          TopLeft="5.50000000000006,7.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="125,42"
+          Id="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC"
+          TopLeft="36.5,5.5" />
+        <NodeLayout
+          Size="125,42"
+          Id="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST"
+          TopLeft="5.50000000000003,107.5" />
+        <EdgeLayout
+          Id="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT.Paths[Ausgabe der OLE DB-Quelle]"
+          TopLeft="99,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-31,60"
+              Start="0,0"
+              End="-31,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-27,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-27,30"
+                    Point2="-31,30"
+                    Point3="-31,34" />
+                  <mssgle:LineSegment
+                    End="-31,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_DST">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DerivePackage tblsrc_AS400_xxx_MKA0P_DER_KAPLZ\SEQC Template\DFT\OLE_SRC">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
